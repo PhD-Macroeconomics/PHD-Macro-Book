@@ -1,0 +1,544 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\title[Chapter6]{Chapter 6 Welfare}
+
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{The First Welfare Theorem}
+% ============================================================
+
+\begin{frame}{Motivation}
+	Chapter 5 showed examples where the competitive equilibrium coincides with the planner's solution. The \textbf{First Welfare Theorem} (FWT) establishes this as a general result.
+	
+	\bigskip
+	Under conditions of the FWT, decentralized decisions by self-interested agents, coordinated only through prices, produce a Pareto-optimal outcome. This is Adam Smith's invisible hand.
+	
+	\bigskip
+	Pareto optimality is a minimal welfare criterion: silent on distribution. An allocation with extreme inequality can still be Pareto optimal.
+	
+	\bigskip
+	When the FWT fails---due to taxes, externalities, missing markets, or market power---understanding the nature of the failure is essential for evaluating policy.
+\end{frame}
+
+\begin{frame}{Abstract Setup}
+	Finite set $I$ of consumers, finite set $J$ of firms. Vectors of goods $x$, $y$, $\omega$.
+	
+
+	Resource constraint:
+	\[
+	\sum_{i \in I} x_i \leq \sum_{j \in J} y_j + \sum_{i \in I} \omega_i
+	\]
+	\vspace{-18pt}
+	\begin{itemize}
+		\item $X_i$: consumption possibility set for consumer $i$
+		\item $Y_j$: production possibility set for firm $j$
+		\item $\succsim_i$: preference ordering for consumer $i$
+		\item $\theta_{i,j}$: consumer $i$'s ownership share of firm $j$, with $\sum_{i} \theta_{i,j} = 1$ for all $j$
+		\item $p$: price vector
+	\end{itemize}
+	
+
+	\textbf{Key assumption}: Local non-satiation (LNS)---each consumer can always be made better off by an infinitesimal change in consumption.
+\end{frame}
+
+\begin{frame}{Competitive Equilibrium (Abstract)}
+	A competitive equilibrium is a consumption allocation $\{x_i^*\}_{\forall i}$, a production allocation $\{y_j^*\}_{\forall j}$, and a price system $p^*$ such that
+	
+	\begin{enumerate}
+		\item for each $i \in I$, $x_i^*$ is in $X_i$ and there is no $x \in X_i$ such that $x \succ_i x_i^*$ and
+		\[
+		px \leq px_i^* = p\omega_i + \sum_{j} \theta_{i,j} p y_j
+		\]
+		
+		\item for each $j \in J$, $y_j^* \in Y_j$ and there is no $y \in Y_j$ such that $py > py_j^*$
+		
+		\item market clearing: the resource constraint holds with equality
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Theorem 6.1 (First Welfare Theorem)}
+	\textbf{Theorem 6.1.} An allocation that is part of a competitive equilibrium is Pareto optimal.
+
+	\textbf{Proof} (by contradiction). Suppose $\{\tilde{x}_i\}_{\forall i}$, $\{\tilde{y}_j\}_{\forall j}$ is feasible and Pareto dominates the equilibrium:
+	\[
+	\forall i \in I: \tilde{x}_i \succsim_i x_i^*, \qquad \exists \tilde{i} \in I: \tilde{x}_{\tilde{i}} \succ_{\tilde{i}} x_{\tilde{i}}^*
+	\]
+	
+	\vspace{-10pt}
+	From consumer optimization $+$ LNS: $p\tilde{x}_i \geq px_i^*$ for all $i$, with strict inequality for $\tilde{i}$.
+	
+			\vspace{-4pt}
+	Summing household budgets:
+	\[
+	\sum_{i \in I} p\tilde{x}_i > p\omega + \sum_{j \in J} py_j^*
+	\]
+	
+		\vspace{-8pt}
+	From profit maximization: $p\tilde{y}_j \leq py_j^*$ for all $j$. Therefore:
+	\[
+	\sum_{i \in I} p\tilde{x}_i > p\omega + \sum_{j \in J} p\tilde{y}_j
+	\]
+	
+		\vspace{-8pt}
+	But feasibility requires $\sum_i p\tilde{x}_i \leq p\omega + \sum_j p\tilde{y}_j$. Contradiction. $\square$
+\end{frame}
+
+\begin{frame}{Mapping to Macroeconomic Models}
+	\textbf{Static model}: One consumer with endowments $(k, 1)$, one firm with CRS production.
+	\[
+	x \in \mathbb{R}_+^3, \quad y = (y, -k, -\ell) \in \mathbb{R}_+ \times \mathbb{R}_-^2, \quad \omega = (0, k, 1), \quad p = (1, r, w)
+	\]
+	
+	\textbf{Dynamic model with $T < \infty$}: Goods at different dates are additional market goods. Vectors become $T$ times longer.
+	
+	\bigskip
+	\textbf{Infinite horizon}: Vectors are infinite-dimensional. The proof carries through provided total expenditures are finite:
+	\[
+	\sum_{t=0}^{\infty} p_t c_{i,t} < \infty
+	\]
+	Typically satisfied in dynastic models ($p_t$ falls at rate $\beta < 1$). Can fail in OLG models.
+\end{frame}
+
+\begin{frame}{Intuition: Edgeworth Box}
+	 Endowment economy with two goods and two consumers
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{FigsChapter6/Edgeworth_1}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{FigsChapter6/Edgeworth_2}
+		\end{column}
+	\end{columns}
+
+	
+	\textbf{Panel (a)} (efficient equilibrium): Both consumers face the same prices. Indifference curves tangent to the budget line and to each other $\Rightarrow$ no Pareto improvement possible.\\
+	\textbf{Panel (b)} (distorted market): Consumers face different (after-tax) prices. Indifference curves intersect $\Rightarrow$ shaded region represents Pareto-improving reallocations.
+
+\end{frame}
+
+% ============================================================
+\section{Tracing Out the Pareto Frontier}
+% ============================================================
+
+\begin{frame}{The Social Planner's Problem}
+	A social planner maximizes a weighted sum of utilities:
+	\[
+	\max_{\{c_{i,t}\}} \sum_{i \in I} \mu_i U_i, \qquad U_i = \sum_{t=0}^{\infty} \beta^t u(c_{i,t})
+	\]
+	subject to the resource constraint $\sum_{i \in I} c_{i,t} \leq \sum_{i \in I} \omega_{i,t}$ for all $t$.
+	
+	\bigskip
+	The weights $\mu_i$ are called \textbf{Negishi weights} (or Pareto weights).
+	
+	\bigskip
+	Any solution to this problem must be Pareto optimal: if it were not, the planner could increase the objective.
+\end{frame}
+
+\begin{frame}{Negishi Weights and Competitive Equilibrium}
+	Planner's FOC:
+	\[
+	c_{i,t} = (u')^{-1}\!\left(\beta^{-t} \frac{1}{\mu_i} \psi_t\right)
+	\]
+	where $\psi_t$ is the multiplier on the resource constraint at $t$.
+	
+	\bigskip
+	Competitive equilibrium FOC (from Chapter 5):
+	\[
+	c_{i,t} = (u')^{-1}\!\left(\beta^{-t} \lambda_i p_t\right)
+	\]
+	
+	Setting $\mu_i = 1/\lambda_i$ and $\psi_t = p_t$: the two allocations coincide.
+	
+	\textbf{Implication}: The CE is optimal for a planner who assigns higher weight to agents with higher date-0 wealth ($\lambda_i$ lower $\Rightarrow$ $\mu_i$ higher).
+	
+
+	By varying $\{\mu_i\}$, we trace the \textbf{Pareto frontier}. The \textbf{Second Welfare Theorem} gives conditions (convexity) under which any Pareto-optimal allocation can be supported as a CE with appropriate lump-sum transfers.
+\end{frame}
+
+% ============================================================
+\section{Inefficient Market Outcomes}
+% ============================================================
+
+\begin{frame}{Taxes}
+	\textbf{Lump-sum taxes}: Do not affect any marginal conditions $\Rightarrow$ act as redistribution along the Pareto frontier. FWT holds.
+	
+
+	\textbf{Proportional labor tax $\tau_\ell$}: With valued leisure, the after-tax wage is $w_t(1-\tau_\ell)$. MRS between consumption and leisure $\neq$ MRT $\Rightarrow$ FWT fails.
+	\begin{itemize}
+		\item Exception: If leisure is not valued (inelastic labor), the tax is non-distortionary
+	\end{itemize}
+	
+
+	\textbf{Capital income tax $\tau_k$}: After-tax return $r_t(1-\tau_k)$ enters the Euler equation. MRS between $t$ and $t+1$ goods $\neq$ MRT $\Rightarrow$ FWT fails.
+	
+
+	In both cases, consumers and firms face different effective prices $\Rightarrow$ the step $\sum_i p\tilde{x}_i > p\omega + \sum_j py_j^*$ may not hold.
+\end{frame}
+
+\begin{frame}{Externalities}
+	An externality arises when one agent's activity has payoff relevance to others, not reflected in prices.
+	
+	\textbf{Example}: Firm $j$ produces $A(\bar{y}) k_j^\alpha \ell_j^{1-\alpha}$, where $A$ is decreasing in average output $\bar{y}$.
+	
+	\textbf{Equilibrium hours} (log utility, labor supply with income/substitution cancellation):
+	\[
+	1 - \alpha = B \ell^{1+1/\theta}
+	\]
+	
+	\textbf{Efficient hours} (planner internalizes the externality):
+	\[
+	\frac{1 - \alpha}{1 - A'(y) k^\alpha \ell^{1-\alpha}} = B \ell^{1+1/\theta}
+	\]
+	
+	The equilibrium is inefficient unless $A'(y) = 0$. The proof of the FWT fails because firms' production possibility sets $Y_j$ are endogenous and interdependent.
+\end{frame}
+
+\begin{frame}{Missing Markets: Borrowing Constraints}
+	Two-agent dynastic endowment economy. Endowments alternate: agent 1 has $2\omega/3$ in odd periods, $\omega/3$ in even periods; agent 2 reversed.
+	
+
+	\textbf{Unrestricted equilibrium}: Full consumption smoothing, $c_{1,t} = c_1$ and $c_{2,t} = c_2$ for all $t$. Gross interest rate $= 1/\beta$.
+	
+
+	\textbf{With borrowing constraint $a_{t+1} \geq 0$}: Euler equation becomes an inequality:
+	\[
+	q_t u'(c_t) \geq \beta u'(c_{t+1})
+	\]
+	
+	Result: autarky. No smoothing. Clearly not Pareto optimal.
+	
+	\bigskip
+	Equilibrium bond price: $q_t = 2\beta$ (gross interest rate $= 1/(2\beta)$, can be negative if $\beta > 0.5$). The unconstrained agent sets the price; the constrained agent would like to borrow but cannot.
+\end{frame}
+
+\begin{frame}{Lack of Commitment}
+	When agents can default on debt without punishment: leads to de-facto borrowing constraints (rational lenders refuse to lend).
+	
+	\bigskip
+	With punishment: intertemporal trade occurs, but the punishment mechanism itself must be committed to.
+	
+	\bigskip
+	Examples studied later:
+	\begin{itemize}
+		\item Government cannot commit to future tax policy (Chapter 15)
+		\item Sovereign debt default (Chapter 24)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Monopolistic Competition: Setup}
+	Consumer with CES preferences over a continuum of goods:
+	\[
+	U\!\left(\{c(i)\}_{i=0}^1, L\right) = u\!\left(\left(\int_0^1 c(i)^{1-\frac{1}{\varepsilon}} di\right)^{\frac{\varepsilon}{\varepsilon-1}}\right) - v(L)
+	\]
+	where $\varepsilon > 1$ is the elasticity of substitution.
+	
+	
+	Consumer budget: 
+	$$
+	\int_0^1 p(i) c(i) \, di = y
+	$$
+	
+
+	\textbf{CES price index} (unit cost of composite $C$):
+	\[
+	P = \left(\int_0^1 p(i)^{1-\varepsilon} \, di\right)^{\frac{1}{1-\varepsilon}}
+	\]
+	
+	\textbf{Demand for variety $i$}:
+	\[
+	c(i) = C \left(\frac{p(i)}{P}\right)^{-\varepsilon}
+	\]
+\end{frame}
+
+\begin{frame}{Monopolistic Competition: Equilibrium}
+	Each firm produces $c(i) = A\ell(i)$ and sets price facing the demand curve. Total labor supply $L = 1$ (inelastic).
+	
+
+	\textbf{Firm's problem}: $\max_{p,c,\ell} pc - w\ell$ subject to $c = A\ell$ and $p = P(c/C)^{-1/\varepsilon}$.
+	
+
+	\textbf{Optimal price} (constant markup $\mu = \varepsilon/(\varepsilon-1) > 1$):
+	\[
+	p = \frac{\varepsilon}{\varepsilon - 1} \cdot \frac{w}{A}
+	\]
+	
+	\textbf{Equilibrium wage}: $w = A(1 - 1/\varepsilon)$ (below marginal product).
+	
+
+	\textbf{Equilibrium output} (with $u = \log$, $P = 1$):
+	\[
+	A(1 - 1/\varepsilon) = C v'(C/A)
+	\]
+	
+	\textbf{Planner's optimum}: $A = C v'(C/A)$. Output and hours are \textbf{too low} in equilibrium.
+\end{frame}
+
+\begin{frame}{Quantifying Welfare Losses}
+	Compare two allocations: $(c_l, \ell_l)$ under lump-sum taxes vs.\ $(c_d, \ell_d)$ under distortionary taxes. Define the \textbf{consumption-equivalent welfare loss} $\Delta > 0$:
+	\[
+	u(c_l(1 - \Delta), \ell_l) = u(c_d, \ell_d)
+	\]
+	
+	$\Delta$ is the percentage reduction in consumption (at fixed hours) that makes the better allocation as good as the worse one.
+	
+	\bigskip
+	\begin{itemize}
+		\item Has a real interpretation (unlike ``utils'')
+		\item In dynamic models: $\Delta$ applies uniformly across all periods
+		\item Alternative: $\Delta$ as a percentage \emph{increase} in the worse allocation (gives a different number)
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Overlapping Generations: Efficiency}
+% ============================================================
+
+\begin{frame}{OLG Endowment Economy: Setup}
+	Representative consumer per cohort, two-period lives, $u_t(c_y, c_o) = \log c_y + \log c_o$. Stationary endowments $(\omega_y, \omega_o)$.
+	
+	\bigskip
+	Competitive equilibrium: sequential trading, no borrowing constraints.
+	
+	\bigskip
+	Consumer born at $t$ solves:
+	\[
+	\max_{c_y, c_o} \log c_y + \log c_o \quad \text{s.t.} \quad c_y + q_t c_o = \omega_y + q_t \omega_o
+	\]
+	
+	\textbf{Equilibrium}: autarky, $c_{y,t} = \omega_y$, $c_{o,t} = \omega_o$, bond price $q_t = \omega_y/\omega_o$.
+\end{frame}
+
+\begin{frame}{OLG Endowment Economy: Is the Equilibrium Efficient?}
+	\textbf{Case 1}: $\omega_y = 3$, $\omega_o = 1$. Bond price $q = 3$ (gross interest rate $1/3$).
+	
+	Alternative allocation: $\tilde{c}_{y,t} = \tilde{c}_{o,t} = 2$ for all $t$ (transfer 1 from young to old each period).
+	\begin{itemize}
+		\item Initial old: strictly better ($2 > 1$)
+		\item All subsequent generations: $\log 2 + \log 2 = \log 4 > \log 3 + \log 1 = \log 3$ $\Rightarrow$ strictly better
+	\end{itemize}
+	$\Rightarrow$ Equilibrium is \textbf{not} Pareto optimal.
+	
+
+	\textbf{Case 2}: $\omega_y = 1$, $\omega_o = 3$. Bond price $q = 1/3$ (gross interest rate $3$).
+	
+	The $(2, 2)$ alternative improves all generations born at $t \geq 0$ but makes the initial old \textbf{worse off} ($2 < 3$). No other allocation can Pareto dominate $\Rightarrow$ equilibrium \textbf{is} Pareto optimal.
+	
+	\bigskip
+	\textbf{Case 3}: $\omega_y = \omega_o = 2$. Bond price $q = 1$ (gross interest rate $1$). Equilibrium \textbf{is} Pareto optimal.
+\end{frame}
+
+\begin{frame}{Why the FWT Can Fail in OLG}
+	In the proof of the FWT, we sum budget constraints over all agents. With OLG:
+	\begin{itemize}
+		\item $I$ is infinite (infinitely many cohorts)
+		\item Present value of total expenditures can be infinite
+	\end{itemize}
+	
+	$q_t = 3$ for all $t$: $\sum_{t=0}^{\infty} 1/p_t = \sum_{t=0}^{\infty} 3^{-t} = 3/2$ (finite) $\Rightarrow$ proof fails.
+	
+	$q_t = 1/3$ for all $t$: $\sum_{t=0}^{\infty} 1/p_t = \sum_{t=0}^{\infty} 3^t = \infty$ $\Rightarrow$ proof goes through.
+	
+	\bigskip
+	The combination of (i) infinite time and (ii) infinitely many finitely-lived consumers can cause markets to fail, even without any frictions.
+\end{frame}
+
+\begin{frame}{Pareto Optimality and Intergenerational Transfers}
+	Pareto optimality of the $(2,2)$ allocation
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter6/chart0701}
+	\end{figure}
+
+
+	No stationary allocation Pareto dominates $(2,2)$. What about non-stationary allocations?
+\end{frame}
+\begin{frame}{Pareto Optimality and Intergenerational Transfers}
+	$(2,2)$ cannot be improved upon
+	
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter6/chart0702}
+\end{figure}
+
+	Transfer $\varepsilon_1$ from young to old at $t$ requires compensation $\varepsilon_2 > \varepsilon_1$ at $t+1$ (convexity of indifference curves). Required transfers grow without bound $\Rightarrow$ infeasible.
+
+\end{frame}
+
+\begin{frame}{The Balasko-Shell Theorem (Endowment Economy)}
+	\textbf{Theorem} (Balasko and Shell, 1980): A competitive equilibrium in an OLG endowment economy is Pareto optimal if and only if
+	\[
+	\sum_{t=0}^{\infty} \frac{1}{p_t} = \infty
+	\]
+	where $p_t = \prod_{\tau=0}^{t-1} q_\tau$ is the Arrow-Debreu price of consumption at $t$.
+	
+
+	\textbf{Implication}: When the gross real interest rate converges, the equilibrium is efficient if and only if the \textbf{limit net real interest rate is non-negative}.
+	
+
+	With growth at rate $g$: efficient if and only if the limit interest rate $\geq g$.
+	
+
+	When the equilibrium is inefficient, a PAYG transfer scheme (young $\to$ old) makes all generations better off. But this requires government commitment to an infinite sequence of transfers.
+\end{frame}
+
+\begin{frame}{Dynamic Efficiency with Production}
+	Neoclassical production economy with OLG. Agent's budget:
+	\[
+	c_y + s = \omega_y w_t, \qquad c_o = s(1-\delta+r_{t+1}) + \omega_o w_{t+1}
+	\]
+	
+	Asset market clearing: $s_t = k_{t+1}$. Competitive pricing: $r_t = F_1(k_t, \omega_y + \omega_o)$, $w_t = F_2(k_t, \omega_y + \omega_o)$.
+	
+	\bigskip
+	\textbf{Theorem 6.2.} Define $R_t = 1-\delta+F_1(k_t, \omega_t)$. Then $\{k_t\}_{t=0}^{\infty}$ is dynamically efficient if and only if
+	\[
+	\sum_{t=0}^{\infty} \prod_{s=1}^{t} R_s(k_s) = \infty
+	\]
+	
+	\textbf{Steady state}: efficient iff $R = F_1(k_{ss}, \omega) + 1 - \delta \geq 1$, i.e., the net interest rate is non-negative.
+\end{frame}
+
+\begin{frame}{Dynamic Inefficiency: Intuition}
+	\textbf{When $R < 1$ at steady state}: Reduce saving by $\varepsilon$ at $t$. Resources freed at $t$. At $t+1$, production falls by less than $\varepsilon$ (since marginal return $< 1$). Reduce saving by $\varepsilon$ again at $t+1$: net resources freed. Repeat forever $\Rightarrow$ \textbf{free lunch} at all dates.
+	
+
+	\textbf{When $R \geq 1$}: Reducing saving by $\varepsilon$ at $t$ reduces resources at $t+1$ by \emph{more} than $\varepsilon$. Future reductions grow and eventually become infeasible.
+	
+
+	\textbf{Oversaving}: In OLG models, equilibrium savings can be ``too high'' because each generation saves for retirement without regard for the aggregate capital stock. Fundamentally different from the dynastic model, where the TVC prevents over-accumulation.
+	
+
+	The warm-glow model (Chapter 5) can also generate dynamic inefficiency: when $v(b) = Ab$ (linear), convergence to a steady state with $r - \delta < 0$.
+\end{frame}
+
+% ============================================================
+\section{Optimal Government Policy}
+% ============================================================
+
+\begin{frame}{Correcting Market Failures}
+	\textbf{Externalities} (Pigou, 1920): A tax equal to the marginal external damage, evaluated at the efficient allocation, restores optimality. An alternative: assign property rights (Coase) and let the market internalize the externality. Not always feasible.
+	
+	\textbf{Monopoly}: Subsidize production at a per-unit rate to counteract under-production. Alternatively, anti-trust regulation. But monopoly power can incentivize innovation through patents $\Rightarrow$ trade-off (Chapter 13).
+	
+	\textbf{Distortionary taxes}: Compare alternative feasible tax systems (Ramsey analysis, Chapter 15). Which tax base is least distortionary?
+	
+	\textbf{Missing markets}: Beware the ``chicken model''---if a market is missing, it is usually missing for a reason (moral hazard, adverse selection). Mirrlees (1971) approach: model the friction explicitly.
+\end{frame}
+
+\begin{frame}{Redistribution}
+	A separate aim from efficiency: achieving a more equitable distribution, even if some agents are made worse off.
+	
+	Common approach: \textbf{utilitarian social welfare function} with equal weights:
+	\[
+	\max \sum_{i} \pi_i u(c_i) \quad \text{s.t.} \quad \sum_{i} \pi_i c_i = \sum_{i} \pi_i \omega_i
+	\]
+	where $\pi_i$ is the fraction of type-$i$ agents.
+
+	With non-distortionary redistribution: equal weights $\Rightarrow$ equal consumption. With distortionary taxes: optimal redistribution is partial.
+	
+
+	\textbf{Behind the veil of ignorance}: Before knowing one's type, an agent would choose the utilitarian optimum as an insurance scheme. Cannot be offered by markets (agents not yet born), but government can implement it.
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{First Welfare Theorem}: Under LNS, a competitive equilibrium is Pareto optimal. Proof: the alternative allocation must be more expensive (consumer optimization) but cannot be (profit maximization $+$ feasibility). Contradiction.
+		
+		\item \textbf{Negishi weights}: CE is optimal for a planner with $\mu_i = 1/\lambda_i$. Varying weights traces the Pareto frontier. Second Welfare Theorem: any Pareto optimum can be decentralized with lump-sum transfers (under convexity).
+		
+		\item \textbf{Market failures}: Distortionary taxes (consumers and firms face different prices), externalities (possibility sets interdependent), missing markets (additional constraints, pecuniary externalities), lack of commitment, monopoly power (price-setting, not price-taking).
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item \textbf{OLG efficiency}: Even without frictions, OLG equilibria can be Pareto inefficient. Balasko-Shell: efficient iff $\sum 1/p_t = \infty$, i.e., the asymptotic net interest rate $\geq 0$ (or $\geq g$ with growth). Dynamic inefficiency $=$ oversaving.
+		
+		\item \textbf{Welfare measurement}: Consumption-equivalent $\Delta$ --- the percentage reduction in consumption that equates utility across allocations.
+		
+		\item \textbf{CES and monopolistic competition}: Markup $\mu = \varepsilon/(\varepsilon-1)$; CES price index $P = (\int p(i)^{1-\varepsilon} di)^{1/(1-\varepsilon)}$; equilibrium under-produces relative to planner.
+		
+		\item \textbf{Policy}: Pigou taxes for externalities, Ramsey analysis for tax design, Mirrlees for informational frictions. Beware the ``chicken model.''
+	\end{enumerate}
+\end{frame}
+
+\end{document}
+

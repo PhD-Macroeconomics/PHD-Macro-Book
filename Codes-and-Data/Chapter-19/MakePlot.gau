@@ -1,0 +1,244 @@
+new;library pgraph;
+format /rd 8,4;
+
+load Parameters[5,1]=Parameters.agl;
+Nz=Parameters[1];
+Nq=Parameters[2];
+nGrid=Parameters[3];
+nPreSim=Parameters[4];
+nSim=Parameters[5];
+
+load kVec[nGrid,1]=kVec.agl;
+load bkVec[nGrid,1]=bkVec.agl;
+
+load Borrowing[Nz*Nq*nGrid,nGrid]=Borrowing.agl;
+Borrowing11=Borrowing[1:nGrid,.];
+Borrowing12=Borrowing[nGrid+1:2*nGrid,.];
+Borrowing13=Borrowing[2*nGrid+1:3*nGrid,.];
+Borrowing21=Borrowing[3*nGrid+1:4*nGrid,.];
+Borrowing22=Borrowing[4*nGrid+1:5*nGrid,.];
+Borrowing23=Borrowing[5*nGrid+1:6*nGrid,.];
+Borrowing31=Borrowing[6*nGrid+1:7*nGrid,.];
+Borrowing32=Borrowing[7*nGrid+1:8*nGrid,.];
+Borrowing33=Borrowing[8*nGrid+1:9*nGrid,.];
+
+load Borrowing_Limit[Nz*Nq*nGrid,nGrid]=Borrowing_Limit.agl;
+Borrowing11_Limit=Borrowing_Limit[1:nGrid,.];
+Borrowing12_Limit=Borrowing_Limit[nGrid+1:2*nGrid,.];
+Borrowing13_Limit=Borrowing_Limit[2*nGrid+1:3*nGrid,.];
+Borrowing21_Limit=Borrowing_Limit[3*nGrid+1:4*nGrid,.];
+Borrowing22_Limit=Borrowing_Limit[4*nGrid+1:5*nGrid,.];
+Borrowing23_Limit=Borrowing_Limit[5*nGrid+1:6*nGrid,.];
+Borrowing31_Limit=Borrowing_Limit[6*nGrid+1:7*nGrid,.];
+Borrowing32_Limit=Borrowing_Limit[7*nGrid+1:8*nGrid,.];
+Borrowing33_Limit=Borrowing_Limit[8*nGrid+1:9*nGrid,.];
+
+load CreditExpansion[nSim,5]=CreditExpansion.agl;
+load CreditContraction[nSim,5]=CreditContraction.agl;
+CreditExpansion=CreditExpansion[nPreSim-10:nSim,.];
+CreditContraction=CreditContraction[nPreSim-10:nSim,.];
+xVec=CreditContraction[.,1]-nPreSim-1;
+
+load ProductExpansion[nSim,5]=ProductExpansion.agl;
+load ProductContraction[nSim,5]=ProductContraction.agl;
+ProductExpansion=ProductExpansion[nPreSim-10:nSim,.];
+ProductContraction=ProductContraction[nPreSim-10:nSim,.];
+
+
+//******************************************************************************************************
+//******************************************************************************************************
+// GRAPH 
+//******************************************************************************************************
+//******************************************************************************************************
+
+
+//Set sizes for canvas
+hsize=300;
+vsize=200;
+
+//Set up canvas
+plotCanvasSize("mm", hsize|vsize);
+
+// Set up control structure with defaults
+struct plotControl myPlot;
+
+myPlot = plotGetDefaults("xy");
+
+
+//Declare plotControl structure 
+struct plotControl myPlot;
+
+
+// Set color map
+plotSetColormap(&myPlot, "plasma");
+
+//Set the text interpteter as Latex
+plotSetTextInterpreter(&myPlot, "latex", "title" $| "axes" $| "legend");
+
+//Set legend font
+plotSetLegendFont(&myPlot, "Verdana", 10, "black");
+plotSetLegendBorder(&myPlot, "off");
+plotSetLegendBkd(&myPlot, 0, "grey");
+
+//Set title font
+plotSetTitle(&myPlot, "", "Verdana", 14);
+
+//Set the Y axis label font
+plotSetYLabel(&myPlot, "", "Verdana", 12);
+
+
+//Turn off the grid 
+plotSetGrid(&myPlot, "major");
+
+// Set labels, location, and orientation of legend
+label = "\\text{Credit expansion}"$|"\\text{Credit contraction}";
+location = "top left";
+orientation = 1;
+plotSetLegend(&myPlot, label, location, orientation);
+
+//Set the X axis label
+plotSetXLabel(&myPlot, "{\\bf \\text{Quarter}}");
+
+
+//Set the Z axis label
+plotSetZLabel(&myPlot, "New borrowing");
+
+//Set X range
+plotSetXRange(&myPlot,-4,8);
+
+
+//======================================================================
+
+
+//Set line color, style and thickness
+plotSetLineColor(&myPlot, "blue"$|"red"$|"green"$|"magenta"$|"light green");
+plotSetLineStyle(&myPlot, 1|2|3|4|5);
+plotSetLineThickness(&myPlot,3|3|3|3|3);
+
+
+plotLayout(2, 2, 1);
+plotSetTitle(&myPlot, "{\\bf \\text{(a) Debt}} ");
+plotSetYRange(&myPlot,0.42,0.58);
+plotXY(myplot,xVec,CreditExpansion[.,4]~CreditContraction[.,4]);
+
+
+plotLayout(2, 2, 2);
+plotSetLegend(&myPlot, "off");
+plotSetTitle(&myPlot, "{\\bf \\text{(b) Output}} ");
+plotSetYRange(&myPlot,0.09,0.101);
+plotXY(myplot,xVec,CreditExpansion[.,5]~CreditContraction[.,5]);
+
+
+//Set line color, style and thickness
+plotSetLineColor(&myPlot, "blue"$|"red"$|"green"$|"magenta"$|"light green");
+plotSetLineStyle(&myPlot, 1|2|3|4|5);
+plotSetLineThickness(&myPlot,3|4|3|3|3);
+
+
+
+plotCustomLayout(0.25, 0.0, 0.50, 0.5);
+plotSetTitle(&myPlot, "{\\bf \\text{(C) Borrowing constraint multiplier, $\\mu$}} ");
+plotSetYRange(&myPlot,-0.02,0.06);
+plotXY(myplot,xVec,CreditExpansion[.,3]~CreditContraction[.,3]);
+
+
+
+//===========//
+// Save plot //
+//===========//
+
+//plotSave("Figures\\IR_FinancialShock.pdf", hsize|vsize, "mm");
+
+
+//======================================================================
+
+
+//Set line color, style and thickness
+plotSetLineColor(&myPlot, "blue"$|"red"$|"green"$|"magenta"$|"light green");
+plotSetLineStyle(&myPlot, 1|2|3|4|5);
+plotSetLineThickness(&myPlot,3|3|3|3|3);
+
+label = "\\text{Productivity expansion}"$|"\\text{Productivity contraction}";
+plotSetLegend(&myPlot, label, location, orientation);
+
+plotLayout(2, 2, 1);
+plotSetTitle(&myPlot, "{\\bf \\text{(a) Debt}} ");
+label = "\\text{Productivity expansion}"$|"\\text{Productivity contraction}";
+plotSetYRange(&myPlot,0.42,0.58);
+plotXY(myplot,xVec,ProductExpansion[.,4]~ProductContraction[.,4]);
+
+
+plotLayout(2, 2, 2);
+plotSetLegend(&myPlot, "off");
+plotSetTitle(&myPlot, "{\\bf \\text{(b) Output}} ");
+plotSetYRange(&myPlot,0.09,0.101);
+plotXY(myplot,xVec,ProductExpansion[.,5]~ProductContraction[.,5]);
+
+
+
+//Set line color, style and thickness
+plotSetLineColor(&myPlot, "blue"$|"red"$|"green"$|"magenta"$|"light green");
+plotSetLineStyle(&myPlot, 1|2|3|4|5);
+plotSetLineThickness(&myPlot,3|3|3|3|3);
+
+
+plotCustomLayout(0.25, 0.0, 0.50, 0.5);
+plotSetTitle(&myPlot, "{\\bf \\text{(C) Borrowing constraint multiplier, $\\mu$}} ");
+plotSetYRange(&myPlot,-0.02,0.06);
+plotXY(myplot,xVec,ProductExpansion[.,3]~ProductContraction[.,3]);
+
+
+
+
+
+
+xVec~ProductExpansion[.,4]~ProductContraction[.,4];
+xVec~ProductExpansion[.,5]~ProductContraction[.,5];
+xVec~ProductExpansion[.,3]~ProductContraction[.,3];
+
+
+
+//===========//
+// Save plot //
+//===========//
+
+//plotSave("Figures\\IR_ProductivityShock.pdf", hsize|vsize, "mm");
+
+
+
+
+//Plot graph 1
+
+/*
+plotLayout(3, 3, 1);
+plotSurface(myplot,kVec',bkVec,Borrowing11');
+
+plotLayout(3, 3, 2);
+plotSurface(myplot,kVec',bkVec,Borrowing12');
+
+plotLayout(3, 3, 3);
+plotSurface(myplot,kVec',bkVec,Borrowing13');
+
+plotLayout(3, 3, 4);
+plotSurface(myplot,kVec',bkVec,Borrowing21');
+
+plotLayout(3, 3, 5);
+plotSurface(myplot,kVec',bkVec,Borrowing22');
+
+plotLayout(3, 3, 6);
+plotSurface(myplot,kVec',bkVec,Borrowing23');
+
+plotLayout(3, 3, 7);
+plotSurface(myplot,kVec',bkVec,Borrowing31');
+
+plotLayout(3, 3, 8);
+plotSurface(myplot,kVec',bkVec,Borrowing32');
+
+plotLayout(3, 3, 9);
+plotSurface(myplot,kVec',bkVec,Borrowing33');
+*/
+
+
+
+
+

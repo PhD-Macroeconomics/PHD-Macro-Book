@@ -1,0 +1,1215 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter10]{Chapter 10: Computational Tools}
+\author[]{}
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Motivation}
+	\textbf{Lucas (1980)}: ``Our task as I see it\ldots is to write a FORTRAN program that will accept specific economic policy rules as `input' and will generate as `output' statistics describing the operating characteristics of time series we care about, which are predicted to result from these policies.''
+
+	Why computational tools?
+	\begin{itemize}
+		\item Many macroeconomic models do \textbf{not} have analytical solutions
+		\item To compute equilibria and simulate time series
+	\end{itemize}
+	\textbf{This chapter's toolkit}:
+	\begin{itemize}
+		\item Function approximation, root finding, optimization
+		\item Discretization of stochastic processes
+		\item Dynamic programming via value function iteration
+		\item Linearization/log-linearization of rational expectations models
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{How the Tools Fit Together}
+	\begin{itemize}
+		\item Sections 10.1--10.4 are \textbf{building blocks}
+		\item Section 10.5 combines them to solve a dynamic programming problem via value function iteration
+		\item Section 10.6 presents a separate local (perturbation) method
+	\end{itemize}
+	
+	\bigskip
+	\textbf{In practice}, off-the-shelf software performs these routines (one rarely codes them from scratch). But understanding \emph{how} the methods work is crucial for:
+	\begin{itemize}
+		\item Choosing the right method for a given problem
+		\item Diagnosing problems when an algorithm fails
+	\end{itemize}
+	
+
+\end{frame}
+
+% ============================================================
+\section{Approximating a Function}
+% ============================================================
+
+\begin{frame}{The Problem}
+	We often need to store a function in the computer.
+	\begin{itemize}
+		\item Easy cases: $f(x) = ax^2 + bx + c$ summarized by 3 numbers
+		\item Hard cases: value functions and policy functions from Bellman equations rarely have analytical expressions
+		\item Storing $f$ at each point on $[\underline{x}, \overline{x}]$ would in principle require infinite numbers
+	\end{itemize}
+	$\Rightarrow$ Need \textbf{approximation methods} to store an approximate version with finite memory.
+	
+	
+	Two popular approaches:
+	\begin{enumerate}
+		\item \textbf{Interpolation}: store values on grid points and interpolate between them
+		\item \textbf{Approximation by known functions}: weighted sums of basis functions
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Linear Interpolation}
+	
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{FigsChapter10/linintfig}
+\end{figure}
+\vspace{-15pt}
+	
+	Set grid points $\{x_1, x_2, \ldots, x_n\}$ with $x_1 = \underline{x}$ and $x_n = \overline{x}$. Store values $f(x_i)$.
+	
+\end{frame}
+
+\begin{frame}{Linear Interpolation}
+	
+	\textbf{To approximate $f(x)$}:
+	\begin{enumerate}
+		\item Find $i$ such that $x \in [x_i, x_{i+1})$
+		\item Compute
+		\[
+		\hat{f}(x) = f(x_i) + \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}(x - x_i)
+		\]
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Advantage}: uses only local information, robust to behavior elsewhere.
+	
+	\bigskip
+	\textbf{Disadvantages}:
+	\begin{itemize}
+		\item Large error if $f$ is highly nonlinear
+		\item Approximated function is not differentiable at grid points
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Cubic Spline Interpolation}
+	Interpolate with a cubic function instead of linear.
+	
+
+	Between $x_i$ and $x_{i+1}$: interpolate by cubic function with the information of $f(x_i)$, $f(x_{i+1})$, $f''(x_i)$, $f''(x_{i+1})$ 
+	
+	\bigskip
+	\textbf{Key properties}:
+
+	\begin{itemize}
+		\item Second derivatives computed automatically from continuity conditions + boundary conditions
+		\item Still only need to store $\{f(x_i)\}$
+		\item Approximated function is \textbf{twice continuously differentiable} (important in economics)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Downside vs.\ linear interpolation}: computing $f''(x_i)$ uses information from \emph{all} $f(x_j)$. So in principle, $f(x_j)$ can affect the approximation in $[x_i, x_{i+1})$ even when $x_j$ is far from $x_i$.
+\end{frame}
+
+\begin{frame}{Approximation by Known Functions}
+	Approximate with a weighted sum of basis functions:
+	\[
+	\hat{f}(x) = \sum_{i=1}^n a_i \phi_i(x)
+	\]
+	\vspace{-15pt}
+	\begin{itemize}
+		\item Choose $n$ basis functions $\phi_i(x)$ (polynomials, logs, trig functions, \ldots)
+		\item Evaluate $f$ at $m$ points $\{x_1, \ldots, x_m\}$ and solve/fit for $a_i$
+		\item $m = n$: unique solution (generically)
+		\item $m > n$: cannot solve exactly; use as a regression
+	\end{itemize}
+	
+	\textbf{Popular choice}: \textbf{Chebyshev polynomials}
+	\vspace{-5pt}
+	\begin{itemize}
+		\item Efficient representation of $f$
+		\item Well-established methods for choosing evaluation points
+	\end{itemize}
+	\textbf{Downside}: global information. Approximation in one region affected by behavior of $f$ and $\phi_i$ in other regions.
+\end{frame}
+
+
+% ============================================================
+\section{Root Finding}
+% ============================================================
+
+\begin{frame}{The Problem}
+	Find a scalar $x$ satisfying:
+	\[
+	f(x) = 0
+	\]
+	
+	\bigskip
+	Multi-dimensional cases are harder, but typically rely on similar principles.
+	
+	\bigskip
+	\textbf{Brute-force grid search}: Create $\{x_1, \ldots, x_n\}$ between $x$ and $\overline{x}$, evaluate $f(x_i)$, pick the $x_i$ with $f(x_i)$ closest to zero.
+	\begin{itemize}
+		\item Always works for large $n$
+		\item But extremely slow $\Rightarrow$ rarely the best choice
+	\end{itemize}
+	
+	\bigskip
+	Two smarter methods: \textbf{bisection} and \textbf{Newton--Raphson}.
+\end{frame}
+
+
+\begin{frame}{Bisection Method}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter10/bisectionfig}
+\end{figure}
+\vspace{-10pt}
+	
+	\textbf{Steps}:
+	\begin{enumerate}
+		\item \textbf{Bracketing}: Find $a$ and $b > a$ with $\text{sign}(f(a)) \neq \text{sign}(f(b))$.
+		\begin{itemize}
+			\item If $f$ is continuous, a solution exists in $[a, b]$
+		\end{itemize}
+		\item Let $c = (a+b)/2$. Evaluate $f(c)$:
+		\begin{itemize}
+			\item If $\text{sign}(f(c)) = \text{sign}(f(a))$: solution in $[c, b]$, update $a = c$
+			\item Otherwise: solution in $[a, c]$, update $b = c$
+		\end{itemize}
+		\item Repeat until $b - a < \varepsilon$ (tolerance), check $f(a) \approx 0$, return $a$
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Bisection: Properties}
+	\textbf{Benefits}:
+	\begin{itemize}
+		\item Does \textbf{not} require differentiability of $f$
+		\item Always finds \emph{one} solution if $f$ is continuous (even if multiple roots)
+		\item Always terminates in a finite number of steps
+		\item Each iteration halves the interval $\Rightarrow$ predictable speed
+		\item Even terminates when no solution exists (but then $f(a) \not\approx 0$)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Speed comparison} (solve $f(x) = 0$ on $[0, 1]$ with accuracy $10^{-3}$):
+	\begin{itemize}
+		\item Brute-force grid search: $\approx 1000$ evaluations
+		\item Bisection: only $\approx 10$ evaluations (since $(1/2)^{10} = 1/1024$)
+	\end{itemize}
+	
+	\bigskip
+	Robust and useful despite simplicity.
+\end{frame}
+
+\begin{frame}{Newton-Raphson Method}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter10/newtonfig}
+\end{figure}
+\vspace{-10pt}
+	\textbf{Idea}: Approximate $f$ locally by its tangent line 
+	\[
+	f(x) \approx f(x_0) + f'(x_0)(x - x_0)
+	\]
+	Setting the RHS to zero:
+	\[
+	\hat{x} = x_0 - \frac{f(x_0)}{f'(x_0)}
+	\]
+	If $f$ is linear, $\hat{x}$ delivers the solution in one step.
+\end{frame}
+
+\begin{frame}{Newton-Raphson: Algorithm and Trade-offs}
+\textbf{Procedure}:
+\vspace{-6pt}
+\begin{enumerate}
+	\item Initial guess $x_0$
+	\item Update: $x_1 = x_0 - f(x_0)/f'(x_0)$
+	\item Check $|f(x_1)| < \varepsilon$. If not, iterate until $|f(x_i)| < \varepsilon$
+\end{enumerate}
+\textbf{Benefits}: Much faster than bisection when $f$ is close to linear or $x_0$ is close to the true solution.
+
+\textbf{Downsides}:
+\vspace{-6pt}
+\begin{itemize}
+	\item Requires differentiability: need $f'(x)$ analytically or numerically
+	\item May fail to find the solution if $f$ is not well-behaved
+\end{itemize}
+\textbf{Numerical derivative} (central difference):
+\[
+f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}
+\]
+Choose $h \approx 10^{-5}$ (not too small---machine epsilon $\approx 10^{-16}$).
+\end{frame}
+
+% ============================================================
+\section{Optimization}
+% ============================================================
+
+\begin{frame}{The Problem}
+	Maximize a function $F(x)$. Similarly to root finding, grid search works but is slow.
+	
+	\bigskip
+	Focus on the \textbf{one-dimensional case}. For multi-dimensional, there are various specialized methods. One can also optimize one variable at a time:
+	
+	\textbf{Example}: $\max F(x, y)$
+	\begin{itemize}
+		\item Fix $x$, maximize over $y$: get $y^*(x)$
+		\item Maximize $F(x, y^*(x))$ over $x$ (one-dimensional)
+	\end{itemize}
+	
+	\bigskip
+	Two methods below:
+	\begin{itemize}
+		\item \textbf{Golden-section search}: derivative-free
+		\item \textbf{Newton's method}: uses first and second derivatives
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Golden-Section Search}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter10/goldensectionfig}
+\end{figure}
+\vspace{-23pt}
+	\textbf{Steps}:
+	\vspace{-7pt}
+	\begin{enumerate}
+		\item Find $a < b < c$ with $F(a) < F(b)$ and $F(c) < F(b)$
+		\begin{itemize}
+			\item A (local) maximum exists in $[a, c]$
+			\item If this fails, likely a corner solution
+		\end{itemize}
+		\item Take the longer segment (say $[a, b]$) and place $x \in [a, b]$ with $(b-x)/(b-a) = \omega^*$, where $\omega^* = (3 - \sqrt{5})/2 \approx 0.38197$
+		\begin{itemize}
+			\item If $F(x) > F(b)$: new bracket $(a, x, b)$
+			\item Else: new bracket $(x, b, c)$
+		\end{itemize}
+		\item Repeat until bracket size $< \varepsilon$
+	\end{enumerate}
+
+\end{frame}
+\begin{frame}{Golden-Section Search: Properties}
+		The constant $\omega^* = (3 - \sqrt{5})/2 \approx 0.38197$. The ratio $(1 - \omega^*)/\omega^* \approx 1.61803$ is the \textbf{golden ratio}.
+	
+
+	\textbf{Why this $\omega^*$?} Starting from $(c-b)/(c-a) = \omega^*$ and following the procedure, each iteration removes an $\omega^*$ fraction of the segment.
+	
+	\bigskip
+	
+	After $n$ iterations, remaining bracket length is $(1 - \omega^*)^n (c - b)$.
+	
+\bigskip
+	\textbf{Benefits}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Does not require differentiability of $F$
+		\item Terminates in pre-set number of iterations (like bisection)
+
+	\end{itemize}
+	
+
+	Removes $\sim$1/3 of the interval per iteration (less efficient than bisection's 1/2), but robust.
+\end{frame}
+
+
+\begin{frame}{Newton's Method for Optimization}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter10/newfig}
+\end{figure}
+\vspace{-15pt}
+	
+	\textbf{Idea}: Approximate $F$ with a quadratic near $x_0$:
+	\[
+	F(x) \approx F(x_0) + F'(x_0)(x - x_0) + \tfrac{1}{2} F''(x_0)(x - x_0)^2
+	\]
+	Take the FOC of the RHS and set equal to zero:
+	\[
+	\hat{x} = x_0 - \frac{F'(x_0)}{F''(x_0)}
+	\]
+	If $F$ is quadratic, $\hat{x}$ delivers the solution in one step.
+\end{frame}
+
+
+\begin{frame}{Newton's Method: Algorithm and Properties}
+	\textbf{Procedure}:
+	\begin{enumerate}
+		\item Initial guess $x_0$
+		\item Update: $x_1 = x_0 - F'(x_0)/F''(x_0)$
+		\item If $|x_1 - x_0| < \varepsilon$, stop; otherwise iterate
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Benefits}: Much faster than golden-section search if $F$ is close to quadratic.
+	
+	\bigskip
+	\textbf{Downsides}:
+	\begin{itemize}
+		\item Requires $F'$ and $F''$
+		\item Not guaranteed to find the maximum (good starting guess helps)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Connection: Root Finding and Optimization}
+	Maximizing $F$ typically requires solving the FOC $F'(x) = 0$, so optimization is equivalent to finding the root of $F'$.
+	
+		\vspace{-4pt}
+	\textbf{Newton for optimization}:
+	\[
+	x_{i+1} = x_i - \frac{F'(x_i)}{F''(x_i)}
+	\]
+	\textbf{Newton--Raphson applied to $F'(x) = 0$}: same iteration!
+	
+	\textbf{Golden-section vs.\ bisection on FOC}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Golden-section removes $\sim$1/3 of interval; bisection removes 1/2
+		\item Golden-section benefits:
+		\begin{itemize}
+			\item Does not require $F$ to be differentiable
+			\item Each step aims at maximization (not minimum)
+		\end{itemize}
+	\end{itemize}
+	\textbf{Practice}: Use Newton when $F$ is smooth and derivatives are available. Use golden-section when robustness is more important.
+\end{frame}
+
+\begin{frame}{Example 1: Labor-Leisure Choice}
+	Consumer solves:
+	\[
+	\max_{c, \ell} u(c, \ell) \quad \text{subject to} \quad c = f(\ell) + x
+	\]
+	
+	with $u(c, \ell) = \ln(c) - \omega \ell^\gamma/\gamma$, $\omega > 0$, $\gamma > 0$, and $f(\ell) = \ell^\alpha$, $\alpha \in (0, 1)$.
+	
+
+	Problem reduces to maximizing
+	\[
+	\ln(\ell^\alpha + x) - \frac{\omega}{\gamma} \ell^\gamma
+	\]
+	or solving the FOC
+	\[
+	\frac{\alpha \ell^{\alpha - 1}}{\ell^\alpha + x} - \omega \ell^{\gamma - 1} = 0
+	\]
+	Parameters: $\alpha = 1/3$, $x = 0.5$, $\omega = 1$, $\gamma = 2$.
+	
+	Three MATLAB codes: \texttt{Ex1\_bisection.m}, \texttt{Ex1\_newton.m}, \texttt{Ex1\_GS.m}.
+\end{frame}
+
+
+% ============================================================
+\section{Discretizing an AR(1) Process}
+% ============================================================
+
+\begin{frame}{The Problem}
+	Many macro models use an AR(1) shock:
+	\[
+	z_{t+1} = \rho z_t + \varepsilon_{t+1}, \qquad \rho \in (0, 1)
+	\]
+	with $\E_t[\varepsilon_{t+1}] = 0$, $\text{Var}[\varepsilon_{t+1}] = \sigma_\varepsilon^2$, and $\Pr[\varepsilon \leq u] = F(u/\sigma_\varepsilon)$.
+	
+	\bigskip
+	Unconditional variance:
+	\[
+	\sigma_z^2 = \frac{1}{1 - \rho^2} \sigma_\varepsilon^2
+	\]
+	
+	\bigskip
+	\textbf{Goal}: Approximate $\{z_t\}$ by a Markov chain with:
+	\begin{itemize}
+		\item A finite set of grid points $\{\bar{z}^1, \ldots, \bar{z}^N\}$
+		\item Transition matrix with elements $\pi_{ij}$ (probability of $i \to j$)
+	\end{itemize}
+	
+	\bigskip
+	Two popular methods: \textbf{Tauchen method} and \textbf{Rouwenhorst method}.
+\end{frame}
+
+
+\begin{frame}{The Tauchen Method}
+	\textbf{Tauchen (1986)}:
+	\begin{enumerate}
+		\item Create equally spaced grid $\{\bar{z}^1, \ldots, \bar{z}^N\}$ with distance $\omega$
+		\begin{itemize}
+			\item Common choice: $\bar{z}^1 = -m \sigma_z$, $\bar{z}^N = m \sigma_z$
+			\item $m$ controls how wide the grid is (e.g., $m = 3$ covers 3 SDs)
+		\end{itemize}
+		\item Set probabilities
+	\[
+	\hspace{-25pt}\pi_{ij} = \begin{cases}
+		F\!\left(\dfrac{\bar{z}^1 - \rho \bar{z}^i + \omega/2}{\sigma_\varepsilon}\right) & j = 1 \\[10pt]
+		F\!\left(\dfrac{\bar{z}^j - \rho \bar{z}^i + \omega/2}{\sigma_\varepsilon}\right) - F\!\left(\dfrac{\bar{z}^j - \rho \bar{z}^i - \omega/2}{\sigma_\varepsilon}\right) & j = 2, \ldots, N-1 \\[10pt]
+		1 - F\!\left(\dfrac{\bar{z}^N - \rho \bar{z}^i - \omega/2}{\sigma_\varepsilon}\right) & j = N
+	\end{cases}
+	\]
+		\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tauchen: Intuition}
+	For $i \in \{1, \ldots, N\}$ and $j \in \{2, \ldots, N-1\}$:
+	\begin{itemize}
+		\item Start at $\bar{z}^i$
+		\item Compute the probability that the AR(1) next-period value falls in $[\bar{z}^j - \omega/2, \bar{z}^j + \omega/2]$
+		\item Assign this probability to $\pi_{ij}$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{End points} ($j = 1$ and $j = N$): similar logic, but account for the support of $z$ extending beyond the grid.
+	
+	\bigskip
+	\textbf{Concern}: Tauchen can be inaccurate when $\rho$ is close to 1. A problem because many macro processes (income, productivity) are very persistent.
+\end{frame}
+
+\begin{frame}{The Rouwenhorst Method}
+	\textbf{Rouwenhorst (1995)}: better approximation for high persistence.
+
+	Equally spaced grid, with $\bar{z}^1 = -m \sigma_z$, $\bar{z}^N = m \sigma_z$, $m = \sqrt{N-1}$.
+
+	Construct Markov matrix $\Pi_N$ \textbf{recursively}:
+	\textbf{For $N = 2$}:
+	\[
+	\Pi_2 = \begin{pmatrix} p & 1-p \\ 1-p & p \end{pmatrix}
+	\]
+	\medskip
+	\textbf{For $N \geq 3$}: construct the $N \times N$ matrix ($\mathbf{0}$ is $(N-1)\times 1$ zero matrix)
+	\[
+	\begin{array}{l}
+    \Pi_N = p \begin{pmatrix} \Pi_{N-1} & \mathbf{0} \\ \mathbf{0'} & 0 \end{pmatrix} + (1-p) \begin{pmatrix} \mathbf{0} & \Pi_{N-1} \\ 0 & \mathbf{0'} \end{pmatrix} \\
+    \quad\quad \quad+ p \begin{pmatrix} \mathbf{0'} & 0 \\ \Pi_{N-1} & \mathbf{0} \end{pmatrix} + (1-p) \begin{pmatrix} 0 & \mathbf{0'} \\ \mathbf{0} & \Pi_{N-1} \end{pmatrix}
+    \end{array}
+	\]
+	Then divide all but the top and bottom rows by two (so each row sums to 1).
+\end{frame}
+
+\begin{frame}{Rouwenhorst: Properties}
+	Set $p = (1 + \rho)/2$ and $m = \sqrt{N - 1}$. Then:
+	
+	\begin{itemize}
+		\item Unconditional mean and variance of the Markov chain match those of the original AR(1)
+		\item Uses only information about mean and variance
+		\item Invariant distribution converges to a normal distribution as $N \to \infty$
+		\item Especially recommended when $\varepsilon_{t+1}$ is normal
+		\item \textbf{Particularly powerful when $\rho$ is close to 1}
+	\end{itemize}
+	
+	\bigskip
+	See Kopecky and Suen (2010) for further exposition and characterizations.
+\end{frame}
+
+\begin{frame}{Example 2: Approximating an AR(1)}
+	Consider the AR(1):
+	\[
+	y_{t+1} = 0.95\, y_t + \varepsilon_{t+1}
+	\]
+	where $\varepsilon_{t+1} \sim N(0, \sigma^2)$ with $\sigma = 0.2$.
+	
+	\bigskip
+	\textbf{MATLAB codes}:
+	\begin{itemize}
+		\item \texttt{Ex2\_tauchen.m}: approximates using 10-state Markov chain via Tauchen
+		\item \texttt{Ex2\_rouwenhorst.m}: same task via Rouwenhorst
+	\end{itemize}
+	
+	\bigskip
+	With $\rho = 0.95$ (highly persistent), Rouwenhorst is expected to perform better.
+\end{frame}
+
+% ============================================================
+\section{Dynamic Programming via Value Function Iteration}
+% ============================================================
+
+\begin{frame}{The Bellman Equation}
+	Consider a Bellman equation of the form
+	\[
+	V(k) = \max_{k'}\; \{F(k, k') + \beta V(k')\}
+	\]
+	
+	\begin{itemize}
+		\item $k$: state variable; $k'$: next-period state
+		\item $F(k, k')$: return function for the current period
+		\item $\beta \in (0, 1)$: discount factor
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Define the mapping $T$}:
+	\[
+	T V_i(k) = \max_{k'}\; \{F(k, k') + \beta V_i(k')\}
+	\]
+	
+	Given a function $V_i$, $T V_i$ is a new function.
+\end{frame}
+
+
+\begin{frame}{Value Function Iteration: Algorithm}
+	\textbf{Contraction mapping theorem} (Chapter 4): starting from any $V_0$ and iterating $V_{i+1} = T V_i$, $V_i \to V$ (the true value function) as $i \to \infty$.
+	
+	\textbf{Algorithm}:
+	\begin{enumerate}
+		\item Fix a grid on values of $k$
+		\item Start from an arbitrary $V_0(k)$ represented on the grid
+		\item For each $k$ on the grid, solve $\max_{k'} F(k, k') + \beta V_0(k')$
+		\begin{itemize}
+			\item May involve interpolating $V_0$ off the grid
+		\end{itemize}
+		\item Let $V_1(k)$ be the maximized value. Repeat using $V_1, V_2, \ldots$ until $V_i \approx V_{i+1}$
+	\end{enumerate}
+	
+	\textbf{Pros}: Extremely robust. The theorem guarantees convergence.
+	
+	\textbf{Cons}: Can be slow, especially when $\beta$ is close to 1. Other (faster) methods exist.
+\end{frame}
+
+\begin{frame}{Deterministic Case: Cake-Eating Problem}
+	Infinitely lived consumer with initial cake size $a_0$:
+	\[
+	\max \sum_{t=0}^\infty \beta^t \sqrt{c_t} \quad \text{subject to} \quad a_{t+1} = a_t - c_t
+	\]
+	
+	\bigskip
+	\textbf{Bellman equation}:
+	\[
+	V(a) = \max_{a'}\; \sqrt{a - a'} + \beta V(a')
+	\]
+	
+	\bigskip
+	\begin{itemize}
+		\item Natural grid: $[0, a_0]$
+		\item $a_1 = 0$, $a_N = a_0$, $N$ grid points
+		\item Initial guess: $V_0(a^j) = 0$ for all $j$ (zero vector)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Cake-Eating: Algorithm Details}
+	\textbf{Step 3 (the maximization)}: Two options.
+
+	\textbf{Option A (grid search)}: Restrict $a'$ to grid points.
+	\begin{itemize}
+		\item Pick the grid point $a^n$ (with $a^n \leq a^j$) that maximizes $\sqrt{a^j - a^n} + \beta V_0(a^n)$
+		\item Simple but coarse
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Option B (off-grid optimization)}: Allow $a'$ anywhere in $[0, a^j]$.
+	\begin{itemize}
+		\item Evaluate $V_0(a')$ via interpolation 
+		\item If $V_0$ is differentiable: use FOC + root finding 
+		\item Or use golden-section search
+		\item The contraction mapping guarantees concavity here $\Rightarrow$ FOC works
+	\end{itemize}
+
+\bigskip
+	\textbf{Termination}: Stop when $\max_j |V_{i+1}(a^j) - V_i(a^j)| < \varepsilon$.
+\end{frame}
+
+
+\begin{frame}{Example 3: Deterministic DP}
+	Cake-eating problem with $\beta = 0.98$ and $a_0 = 10$.
+	
+	\bigskip
+	\textbf{Provided codes} conduct VFI and simulate the first 100 periods to plot:
+	\begin{itemize}
+		\item Time series of leftover cake $a_t$
+		\item Time series of consumption $c_t$
+		\item Value function $V(a)$
+		\item Policy function $a'(a)$
+	\end{itemize}
+	
+	\bigskip
+	\begin{itemize}
+		\item \texttt{Ex3\_gridsearch.m}: restricts $a'$ to grid points
+		\item \texttt{Ex3\_GS.m}: allows $a'$ off the grid (golden-section search + interpolation)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Stochastic Case: Cake-Eating with Shocks}
+	At the beginning of each period, an additional cake $z$ arrives (``high'' $z_H$ or ``low'' $z_L$), following a Markov chain with $\pi_{z z'}$.
+	
+	\bigskip
+	Consumer maximizes:
+	\[
+	\E_0\!\left[\sum_{t=0}^\infty \beta^t \sqrt{c_t}\right] \quad \text{subject to} \quad a_{t+1} = a_t - c_t + z_t
+	\]
+	
+	\bigskip
+	\textbf{Bellman equation}:
+	\[
+	V(a, z) = \max_{a'}\; \sqrt{a - a' + z} + \beta[\pi_{zH} V(a', H) + (1 - \pi_{zH}) V(a', L)]
+	\]
+	
+	\bigskip
+	\textbf{Differences from deterministic case}:
+	\begin{itemize}
+		\item Natural upper bound of grid is \emph{not} $a_0$ (cake can grow)
+		\item Work with two vectors $V_i(a^j, H)$ and $V_i(a^j, L)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Stochastic Neoclassical Growth Model: Setup}
+	Representative consumer's utility:
+	\[
+	\E_0\!\left[\sum_{t=0}^\infty \beta^t \bigl((1 - \phi) \log(C_t) + \phi \log(1 - H_t)\bigr)\right]
+	\]
+	
+	\textbf{Resource constraint}:
+	\[
+	K_{t+1} + C_t = \exp(z_t) K_t^\alpha H_t^{1-\alpha} + (1 - \delta) K_t
+	\]
+	
+	\textbf{Productivity shock}:
+	\[
+	z_{t+1} = \rho z_t + \varepsilon_{t+1}, \qquad \varepsilon_{t+1} \sim \text{i.i.d.}, \;\; \E[\varepsilon] = 0, \;\; \text{SD} = \sigma
+	\]
+	
+	\begin{itemize}
+		\item $K_t$: predetermined
+		\item $C_t$, $H_t$: non-predetermined (chosen within period)
+		\item $\beta, \phi, \alpha, \delta, \rho \in (0, 1)$, $\sigma > 0$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Stochastic NGM: Bellman Equation}
+	\vspace{-20pt}
+	\[
+	\begin{array}{l}
+	V(K, z)\\ \quad\displaystyle= \max_{K', H}\; (1-\phi) \log\!\bigl(\exp(z) K^\alpha H^{1-\alpha} + (1-\delta)K - K'\bigr)\\
+	 \quad\quad\quad\quad\quad \displaystyle+ \phi \log(1 - H) + \beta \E[V(K', z') | z]
+	\end{array}
+	\]
+	\textbf{Two differences from cake-eating}:
+	\begin{enumerate}
+		\item Domain of $z$ is a real line $\Rightarrow$ discretize $z_t$ using Tauchen or Rouwenhorst
+		\item Planner chooses a second variable $H$
+	\end{enumerate}
+	\textbf{Strategy for $H$}: Solve the inner problem first.
+	\[
+	\max_{H}\; (1-\phi) \log\!\bigl(\exp(z) K^\alpha H^{1-\alpha} + (1-\delta)K - K'\bigr) + \phi \log(1-H)
+	\]
+	gives $H(z, K, K')$ (numerical, not analytical).
+	
+	Plug $H(z, K, K')$ back into the Bellman equation and proceed as in the cake-eating problem.
+\end{frame}
+
+\begin{frame}{Example 4: Stochastic NGM (Brock-Mirman)}
+	\textbf{Calibration}: two-state Markov for $Z_t = \exp(z_t)$
+	\begin{itemize}
+		\item $Z \in \{0.985, 1.015\}$; $\pi_{HH} = \pi_{LL} = 0.95$, $\pi_{LH} = \pi_{HL} = 0.05$
+		\item $\beta = 0.99$, $\alpha = 0.36$, $\delta = 0.025$
+		\item $\phi$ chosen so that steady-state $H = 1/3$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Codes}:
+	\begin{itemize}
+		\item \texttt{Ex4\_gridsearch.m}: restricts $K'$ to grid; uses bisection for inner $H$
+		\item \texttt{Ex4\_GS.m}: $K'$ off grid (uses subroutines \texttt{Ex4\_location.m}, \texttt{Ex4\_labor.m})
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Simulation}: 3000 periods for $Y_t$, $C_t$, $H_t$, $I_t = K_{t+1} - (1-\delta) K_t$, $Z_t$. After dropping first 100: log, HP-filter, compute standard deviations and correlations with $Y_t$.
+\end{frame}
+
+
+% ============================================================
+\section{Solving Dynamic Models by Linearization}
+% ============================================================
+
+\begin{frame}{Global vs.\ Local Methods}
+	\textbf{Global methods} (previous section):
+	\begin{itemize}
+		\item Construct grid covering the relevant state space
+		\item Approximate the solution at all grid points
+	\end{itemize}
+	
+	\textbf{Local methods} (this section):
+	\begin{itemize}
+		\item Choose one point (typically the deterministic steady state)
+		\item Examine how the solution changes \emph{locally} around that point
+		\item \textbf{Perturbation method}: approximate with simple functions (polynomials)
+		\item This chapter: \textbf{linear} (log-linear) approximation only
+	\end{itemize}
+	
+	\bigskip
+	\textbf{When is the local approximation valid?}
+	\begin{itemize}
+		\item Small deviations from steady state
+		\item E.g., small AR(1) shocks around a long-run steady state
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why Use Linearization?}
+	\textbf{Speed}: Much faster than global methods, especially with many variables.
+	
+	\bigskip
+	\textbf{Curse of dimensionality}: Global methods (Example 4) become infeasible when the number of endogenous state variables is large.
+	
+	\bigskip
+	\textbf{Matrix algebra}: Well-established methods for solving large linear systems.
+	
+	\bigskip
+	\textbf{Certainty-equivalence} (affine property of expectations operator):
+	\begin{itemize}
+		\item Can solve the stochastic model as if it were deterministic with expected values
+		\item Dynamics are effectively the same whether shocks are stochastic or deterministic
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Software}: Methods (and advanced variants) are implemented in popular packages such as \textbf{Dynare} (\url{https://www.dynare.org/}).
+\end{frame}
+
+
+\begin{frame}{Predetermined vs.\ Non-Predetermined Variables}
+	When the model is nonlinear, first \textbf{log-linearize}. Then work with a system of linear equations in log-deviations from the steady state.
+	
+	\bigskip
+	\textbf{Predetermined variables}: values already determined when entering period $t$.
+	\begin{itemize}
+		\item Example: capital stock $K_t$ in the growth model
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Non-predetermined (jump) variables}: values determined within period $t$.
+	\begin{itemize}
+		\item Example: consumption $C_t$ in the growth model
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Goal of ``solving the model''}: Express non-predetermined and future predetermined variables as explicit functions of current predetermined variables and exogenous shocks.
+\end{frame}
+
+
+
+\begin{frame}{Log-Linearizing the Stochastic NGM}
+	Euler equation:
+	\[
+	\frac{1}{C_t} = \E_t\!\left[\beta\bigl(1 + \alpha \exp(z_{t+1}) K_{t+1}^{\alpha-1} H_{t+1}^{1-\alpha} - \delta\bigr) \frac{1}{C_{t+1}}\right]
+	\]
+	
+	\bigskip
+	Labor-supply condition:
+	\[
+	\frac{1-\phi}{C_t}(1-\alpha) \exp(z_t) K_t^\alpha H_t^{-\alpha} = \frac{\phi}{1 - H_t}
+	\]
+	
+	\bigskip
+	\textbf{Notation}: Lower-case letter is log-deviation from steady state:
+	\[
+	x_t \equiv \log(X_t / \bar{X})
+	\]
+	
+	where $\bar{X}$ is the steady-state value.
+\end{frame}
+
+\begin{frame}{Log-Linearized System}
+	\small
+	Resource constraint:
+	\[
+	\bar{K} k_{t+1} + \bar{C} c_t = \bar{K}^\alpha \bar{H}^{1-\alpha}(z_t + \alpha k_t + (1-\alpha) h_t) + (1-\delta) \bar{K} k_t
+	\]
+	
+	\bigskip
+	Euler equation:
+	\[
+	-c_t = \E_t\!\bigl[\beta \alpha \bar{K}^{\alpha-1} \bar{H}^{1-\alpha}(z_{t+1} + (\alpha-1) k_{t+1} + (1-\alpha) h_{t+1}) - c_{t+1}\bigr]
+	\]
+	
+	\bigskip
+	Labor supply:
+	\[
+	h_t = \theta(z_t + \alpha k_t - c_t), \qquad \theta \equiv \frac{1 - \bar{H}}{\bar{H}(1 - \alpha) + \alpha}
+	\]
+	
+	\bigskip
+	\textbf{Strategy}: Use the labor supply equation to eliminate $h_t$ from the other two equations.
+\end{frame}
+
+
+\begin{frame}{Eliminating $h_t$}
+	\small
+	After substitution, the system becomes
+	\[
+	\begin{array}{l}
+	\bar{K} k_{t+1} = \bar{K}^\alpha \bar{H}^{1-\alpha}(1 + \theta(1-\alpha)) z_t \\
+	\quad\quad\quad\quad\quad + \bigl(\bar{K}^\alpha \bar{H}^{1-\alpha} \alpha(1+\theta(1-\alpha)) + (1-\delta) \bar{K}\bigr) k_t\\
+	 \quad\quad\quad\quad\quad- \bigl(\bar{K}^\alpha \bar{H}^{1-\alpha} \theta(1-\alpha) + \bar{C}\bigr) c_t
+	\end{array}
+	\]
+	
+	\medskip
+	and (using $\E_t[z_{t+1}] = \rho z_t$):
+	\[
+	\begin{array}{l}
+	\beta \alpha \bar{K}^{\alpha-1} \bar{H}^{1-\alpha}(1-\alpha)(1-\theta\alpha) k_{t+1} + \bigl(\beta \alpha \theta(1-\alpha) \bar{K}^{\alpha-1} \bar{H}^{1-\alpha} + 1\bigr) \E_t[c_{t+1}]\\
+	\quad\quad\quad\quad\quad= \beta(1 + \theta(1-\alpha)) \bar{K}^{\alpha-1} \bar{H}^{1-\alpha} \rho z_t + c_t
+	\end{array}
+	\]
+	
+	\medskip
+	\normalsize
+	This is a system of linear equations in $(k_t, c_t, k_{t+1}, \E_t[c_{t+1}], z_t)$.
+\end{frame}
+
+\begin{frame}{The Blanchard-Kahn Condition}
+	\textbf{Blanchard and Kahn (1980)}: Derived a condition for the uniqueness of the equilibrium in linear rational expectations models.
+	
+	\bigskip
+	\textbf{Purpose}:
+	\begin{itemize}
+		\item Determines when a unique equilibrium exists
+		\item Helps construct the solution
+	\end{itemize}
+	
+	\bigskip
+	Before the general result, fix ideas with simple examples.
+\end{frame}
+
+
+
+\begin{frame}{Example: One Non-Predetermined Variable}
+	Consider
+	\[
+	y_t = \phi y_{t+1}, \qquad \phi > 0
+	\]
+	Rewrite as
+	\[
+	y_{t+1} = \lambda y_t, \qquad \lambda = 1/\phi
+	\]
+	
+	Equilibrium condition: $\lim_{T \to \infty} y_{t+T}$ finite.
+	
+	
+	Applying repeatedly: $y_{t+T} = \lambda^T y_t$.
+	
+	
+	\begin{itemize}
+		\item \textbf{If $\lambda > 1$}: only $y_t = 0$ is consistent with finite limit. \textbf{Unique equilibrium}.
+		\item \textbf{If $\lambda \leq 1$}: any $y_t$ works. \textbf{Indeterminacy}.
+	\end{itemize}
+	
+	
+	\textbf{Logic}: To guarantee uniqueness, $\lambda$ must be such that ``wrong'' $y_t$ makes the economy blow up. Then the unique ``right'' $y_t$ is the solution.
+\end{frame}
+
+
+\begin{frame}{Example: Adding an Exogenous Shock}
+	Now add an AR(1) shock:
+	\[
+	\E_t[y_{t+1}] = \lambda y_t + z_t, \qquad z_{t+1} = \rho z_t + \varepsilon_{t+1}, \quad \rho \in (0, 1)
+	\]
+	
+	\bigskip
+	Iterating forward (assuming $\lambda \neq \rho$):
+	\[
+	\E_t[y_{t+T}] = \lambda^T \left[y_t + \frac{1 - (\rho/\lambda)^T}{\lambda - \rho} z_t\right]
+	\]
+	
+	\bigskip
+	\textbf{If $\lambda > 1$}: the only $y_t$ that makes $\lim_{T\rightarrow \infty} \E_t[y_{t+T}]$ finite is
+	\[
+	y_t = -\frac{1}{\lambda - \rho} z_t
+	\]
+	
+	\textbf{If $\lambda \leq 1$}: indeterminacy.
+\end{frame}
+
+
+\begin{frame}{``Guess and Verify'' Method}
+	If uniqueness holds, one can also use the \textbf{method of undetermined coefficients}.
+	
+	\bigskip
+	\textbf{Guess}: $y_t = \mathcal{A} z_t$ for unknown constant $\mathcal{A}$.
+	
+	\bigskip
+	Plug into $\E_t[y_{t+1}] = \lambda y_t + z_t$:
+	\[
+	 \E_t[\mathcal{A}z_{t+1}] = \lambda \mathcal{A}z_t + z_t
+	\]
+	
+	\bigskip
+	Using $\E_t[z_{t+1}] = \rho z_t$:
+	\[
+	(\mathcal{A}\rho - \mathcal{A}\lambda - 1) z_t = 0
+	\]
+	
+	\bigskip
+	Must hold for all $z_t$ $\Rightarrow$
+	\[
+	\mathcal{A} = -\frac{1}{\lambda - \rho}
+	\]
+	
+	which matches the forward-iteration solution. \textbf{Verified}.
+\end{frame}
+
+\begin{frame}{General Setup}
+	Model with $m$ non-predetermined variables and $n + k$ predetermined variables:
+	\begin{itemize}
+		\item $x_t$: $n \times 1$ vector of endogenous predetermined variables
+		\item $y_t$: $m \times 1$ vector of non-predetermined variables
+		\item $a_t$: $k \times 1$ vector of exogenous predetermined variables
+	\end{itemize}
+	
+	System form:
+	\[
+	B \begin{pmatrix} x_{t+1} \\ \E_t[y_{t+1}] \end{pmatrix} = A \begin{pmatrix} x_t \\ y_t \end{pmatrix} + E a_t
+	\]
+		where $B$ and $A$ are $(n+m) \times (n+m)$ matrices, and $E$ is $(n+m) \times k$.
+	
+
+	Each element of $a_t$ follows an AR(1) process:
+	\[
+	a^i_{t+1} = \rho a^i_t + \varepsilon^i_{t+1}
+	\]
+\end{frame}
+
+
+\begin{frame}{Stochastic NGM in Matrix Form}
+	\small
+	With $x_t = k_t$, $y_t = c_t$, $a_t = z_t$:
+	\[
+	B \begin{pmatrix} k_{t+1} \\ \E_t[c_{t+1}] \end{pmatrix} = A \begin{pmatrix} k_t \\ c_t \end{pmatrix} + E z_t
+	\]
+	
+	where
+	\[
+	B = \begin{pmatrix} \bar{K} & 0 \\ \beta \alpha \bar{K}^{\alpha-1} \bar{H}^{1-\alpha}(1-\alpha)(1-\theta\alpha) & \beta \alpha \theta(1-\alpha) \bar{K}^{\alpha-1} \bar{H}^{1-\alpha} + 1 \end{pmatrix}
+	\]
+	
+	\[
+	A = \begin{pmatrix} \bar{K}^\alpha \bar{H}^{1-\alpha} \alpha(1+\theta(1-\alpha)) + (1-\delta)\bar{K} & -(\bar{K}^\alpha \bar{H}^{1-\alpha}\theta(1-\alpha) + \bar{C}) \\ 0 & 1 \end{pmatrix}
+	\]
+	
+	\[
+	E = \begin{pmatrix} \bar{K}^\alpha \bar{H}^{1-\alpha}(1 + \theta(1-\alpha)) \\ \beta(1 + \theta(1-\alpha)) \bar{K}^{\alpha-1} \bar{H}^{1-\alpha} \rho \end{pmatrix}
+	\]
+\end{frame}
+
+\begin{frame}{Jordan Decomposition}
+	Suppose $B$ is invertible. Then rewrite:
+	\[
+	\begin{pmatrix} x_{t+1} \\ \E_t[y_{t+1}] \end{pmatrix} = F \begin{pmatrix} x_t \\ y_t \end{pmatrix} + G a_t, \qquad F = B^{-1} A, \;\; G = B^{-1} E
+	\]
+
+	\textbf{Jordan decomposition}: $F = H J H^{-1}$, where $J$ is diagonal with eigenvalues of $F$, and $H$ has corresponding eigenvectors.
+
+	Order eigenvalues in ascending absolute value: $|\lambda_1| < |\lambda_2| < \cdots < |\lambda_{n+m}|$.
+	
+
+	Let $h$ = number of eigenvalues with $|\lambda_i| > 1$.
+	
+
+	\textbf{Blanchard-Kahn condition}: The equilibrium is unique iff
+	\[
+	h = m
+	\]
+	That is, the number of eigenvalues outside the unit circle equals the number of non-predetermined variables.
+\end{frame}
+
+\begin{frame}{Intuition for Blanchard-Kahn}
+	Matrix multiplication combines \textbf{expansion/contraction} and \textbf{rotation}.
+	
+	Eigenvalues tell us whether the multiplication expands ($|\lambda_i| > 1$) or contracts ($|\lambda_i| < 1$) in the direction of the corresponding eigenvector.
+	
+	\textbf{When $h = m$}: We can choose a unique set of non-predetermined variables such that $(x_t', y_t')'$ has zero component in every ``expanding'' direction.
+	\begin{itemize}
+		\item Any other choice would cause the system to diverge
+		\item So the unique non-exploding choice is the solution
+	\end{itemize}
+	
+	\textbf{When $h < m$}: indeterminacy (multiple non-exploding paths).
+	
+	\textbf{When $h > m$}: no solution (cannot eliminate all exploding directions with $m$ free jump variables).
+\end{frame}
+
+
+\begin{frame}{Constructing the Solution}
+	Using the Jordan decomposition:
+	\[
+	H^{-1} \begin{pmatrix} x_{t+1} \\ \E_t[y_{t+1}] \end{pmatrix} = J H^{-1} \begin{pmatrix} x_t \\ y_t \end{pmatrix} + H^{-1} G a_t
+	\]
+
+	Partition with $n$ and $m$ rows/columns:
+	\[
+	H^{-1} = \begin{pmatrix} \tilde{H}_{11} & \tilde{H}_{12} \\ \tilde{H}_{21} & \tilde{H}_{22} \end{pmatrix}, \qquad J = \begin{pmatrix} J_1 & 0 \\ 0 & J_2 \end{pmatrix}, \qquad H^{-1} G = \begin{pmatrix} \Gamma_1 \\ \Gamma_2 \end{pmatrix}
+	\]
+
+	Define transformed variables:
+	\[
+	\begin{pmatrix} \tilde{x}_t \\ \tilde{y}_t \end{pmatrix} = H^{-1} \begin{pmatrix} x_t \\ y_t \end{pmatrix}
+	\]
+	
+	Then:
+	\[
+	\begin{pmatrix} \tilde{x}_{t+1} \\ \E_t[\tilde{y}_{t+1}] \end{pmatrix} = \begin{pmatrix} J_1 & 0 \\ 0 & J_2 \end{pmatrix} \begin{pmatrix} \tilde{x}_t \\ \tilde{y}_t \end{pmatrix} + \begin{pmatrix} \Gamma_1 \\ \Gamma_2 \end{pmatrix} a_t
+	\]
+\end{frame}
+
+\begin{frame}{Solving the Transformed System}
+	The last $m$ rows are:
+	\[
+	\E_t[\tilde{y}_{t+1}] = J_2 \tilde{y}_t + \Gamma_2 a_t
+	\]
+	
+	\bigskip
+	$J_2$ is diagonal with eigenvalues $|\lambda_i| > 1$. Apply the one-dimensional argument to each element:
+	\[
+	\tilde{y}_t = \Lambda \Gamma_2 a_t
+	\]
+	
+	where $\Lambda$ is $m \times m$ diagonal with elements $-1/(\lambda_i - \rho)$ for $i = n+1, \ldots, n+m$.
+	
+	\bigskip
+	From the definition of $\tilde{y}_t$:
+	\[
+	\Lambda \Gamma_2 a_t = \tilde{y}_t=\tilde{H}_{21} x_t + \tilde{H}_{22} y_t
+	\]
+\end{frame}
+
+\begin{frame}{The Final Solution}
+	Solve for $y_t$:
+	\[
+	y_t = -\tilde{H}_{22}^{-1} \tilde{H}_{21} x_t + \tilde{H}_{22}^{-1} \Lambda \Gamma_2 a_t
+	\]
+	
+
+	From the original system with $F = \begin{pmatrix} F_{11} & F_{12} \\ F_{21} & F_{22} \end{pmatrix}$:
+	\[
+	\begin{array}{ll}
+	x_{t+1} &= F_{11} x_t + F_{12} y_t + G_1 a_t\\& = (F_{11} - F_{12} \tilde{H}_{22}^{-1} \tilde{H}_{21}) x_t + (G_1 + F_{12} \tilde{H}_{22}^{-1} \Lambda \Gamma_2) a_t
+	\end{array}
+	\]
+	
+
+	\textbf{Done}: $y_t$ and $x_{t+1}$ are both expressed as explicit linear functions of the predetermined state $x_t$ and exogenous shock $a_t$.
+\end{frame}
+
+\begin{frame}{Example 5: Solving Log-Linearized NGM}
+	Stochastic neoclassical growth model with same parameters as Example 4, plus $\rho = 0.95$.
+	
+
+	\textbf{MATLAB code} \texttt{Ex5\_BK.m}:
+	\begin{itemize}
+		\item $J(1,1) = 0.9537$, $J(2,2) = 1.0592$
+		\item Blanchard-Kahn satisfied ($h = 1$ eigenvalue outside unit circle; $m = 1$ jump variable)
+	\end{itemize}
+	
+
+	\textbf{Solution}:
+	\[
+	c_t = 0.5691\, k_t + 0.3920\, z_t
+	\]
+	\[
+	k_{t+1} = 0.9537\, k_t + 0.1132\, z_t
+	\]
+	\[
+	h_t = -0.2431\, k_t + 0.7070\, z_t
+	\]
+	
+	\bigskip
+	The code also plots log-linearized impulse response functions and computes HP-filtered statistics as in Example 4, with $\sigma = 0.007$.
+\end{frame}
+
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways}
+	\begin{enumerate}
+		\item \textbf{Function approximation}: Linear interpolation; cubic spline; Chebyshev polynomials
+		
+		\item \textbf{Root finding}: Bisection; Newton-Raphson 
+		
+		\item \textbf{Optimization}: Golden-section search; Newton's method
+		
+		\item \textbf{Root finding and optimization are connected}: optimizing $F$ $\equiv$ finding roots of $F'$
+		
+		\item \textbf{Discretizing AR(1)}: Tauchen method; Rouwenhorst method
+		
+		\item \textbf{Value function iteration}: relies on contraction mapping theorem; robust but can be slow
+		
+		\item \textbf{Linearization}: fast local solution; certainty equivalence; uses matrix algebra 
+		
+		\item \textbf{Blanchard--Kahn condition}: unique equilibrium iff number of eigenvalues outside unit circle = number of non-predetermined variables
+	\end{enumerate}
+\end{frame}
+\end{document}
+

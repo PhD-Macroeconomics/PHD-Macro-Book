@@ -1,0 +1,1260 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter22]{Chapter 22: Heterogeneous Firms}
+\author[Toshihiko Mukoyama]{Chapter author: Toshihiko Mukoyama}
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Motivation}
+	Standard macroeconomic models assume an \textbf{aggregate production function}:
+	\[
+	Y = F(K, L)
+	\]
+	\begin{itemize}
+		\item Justified if all firms have homogeneous production functions
+		\item In reality, firms are heterogeneous in many dimensions:
+		\begin{itemize}
+			\item Large vs.\ small
+			\item Young vs.\ old
+			\item Growing vs.\ contracting
+			\item Productive vs.\ unproductive
+			\item Differentiated products
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Does Firm Heterogeneity Matter?}
+	Key policy and research questions that require explicit firm heterogeneity:
+	\begin{itemize}
+		\item How should we encourage (or discourage) the \textbf{entry of new firms}?
+		\item Should we support \textbf{growing firms}, and if so how?
+		\item Should we be concerned about the growing prominence of \textbf{``mega-firms''}?
+		\item What are the causes and consequences of the recent \textbf{decline in business dynamism}?
+		\item Does the representative-firm assumption give \textbf{misleading answers} to standard policy questions?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Chapter Roadmap}
+	\begin{enumerate}
+		\item A simple model showing how heterogeneity affects aggregation
+		\item Empirical facts on U.S.\ firm heterogeneity
+		\item Reallocation and misallocation
+		\item General equilibrium: Hopenhayn-Rogerson (1993) framework
+		\item Alternative market arrangements (monopolistic competition, oligopoly)
+		\item Business cycles and heterogeneous firms
+		\item Endogenous productivity: Klette-Kortum (2004) model
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{A Simple Model}
+% ============================================================
+
+\begin{frame}{Setup}
+	\begin{itemize}
+		\item Unit mass of firms, $i \in [0,1]$
+		\item Homogeneous good, perfect competition
+		\item Production function of firm $i$:
+		\[
+		y_i = a_i F(\mathbf{x}_i)^\gamma, \qquad \gamma \in (0,1)
+		\]
+		\item $a_i$: firm-specific productivity (heterogeneous across firms)
+		\item $\mathbf{x}_i$: input vector for firm $i$
+		\item $F(\mathbf{x}_i)$: constant returns to scale
+		\item Overall production: \textbf{decreasing returns to scale} (because $\gamma < 1$)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Decreasing Returns?}
+	\textbf{Key modeling assumption}: $\gamma < 1$ ensures DRS at the firm level
+	\medskip
+	
+	With constant returns ($\gamma = 1$):
+	\begin{itemize}
+		\item The most productive firm(s) take over the entire economy
+		\item Either: monopoly/oligopoly $\Rightarrow$ contradicts perfect competition
+		\item Or: only the most efficient firms operate $\Rightarrow$ replicates homogeneous case
+	\end{itemize}
+	\medskip
+	With $\gamma < 1$:
+	\begin{itemize}
+		\item Firms of different productivities can coexist
+		\item Each firm has an optimal finite scale
+		\item Richer implications for aggregation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Two-Step Optimization}
+	\textbf{Step 1}: Cost minimization (common across firms)
+	\[
+	\min_{\mathbf{x}} \; \mathbf{px} \quad \text{s.t.} \quad F(\mathbf{x}) = 1
+	\]
+	Let $\mathbf{x}^*$ be the solution, $c \equiv \mathbf{px}^*$ the unit cost.
+	
+	\bigskip
+	\textbf{Step 2}: Optimal scale for firm $i$
+	
+	Let $m_i = F(\mathbf{x}_i)$ be combined input. Then:
+	\[
+	\max_{m_i} \; a_i m_i^\gamma - c m_i
+	\]
+	
+	First-order condition:
+	\[
+	a_i m_i^{\gamma - 1} = \frac{c}{\gamma}
+	\]
+\end{frame}
+
+\begin{frame}{Aggregation}
+	From the FOC: $y_i = (c/\gamma) m_i$ for all $i$. Summing:
+	\[
+	Y = \frac{c}{\gamma} M
+	\]
+	where $Y = \int y_i \, di$ is total output and $M = \int m_i \, di = F(\mathbf{X})$.
+	
+	\bigskip
+	Define \textbf{aggregate productivity}:
+	\[
+	A \equiv \left( \int a_i^{\frac{1}{1-\gamma}} \, di \right)^{1-\gamma}
+	\]
+	
+	Then the \textbf{aggregate production function} is:
+	\[
+	Y = A F(\mathbf{X})^\gamma
+	\]
+	Heterogeneity matters through $A$---the distribution of $a_i$ shapes aggregate output.
+\end{frame}
+
+\begin{frame}{Lognormal Example}
+	Suppose $\log(a_i) \sim N(\nu - \sigma^2/2, \; \sigma^2)$
+	
+	\begin{itemize}
+		\item Average productivity: $\int a_i \, di = \exp(\nu)$
+		\item Aggregate productivity:
+	\end{itemize}
+	\[
+	{A = \exp\left( \nu + \frac{\gamma}{1-\gamma} \frac{1}{2} \sigma^2 \right)}
+	\]
+	
+	\bigskip
+	\textbf{Key insight}: Even holding the average of $a_i$ fixed, a higher dispersion $\sigma$ raises $A$.
+	
+	\bigskip
+	\textbf{Intuition}: Productive resources are endogenously allocated---productive firms use more input and have a greater presence in aggregate production. More dispersion $\Rightarrow$ more room to allocate to productive firms in the right tail.
+\end{frame}
+
+\begin{frame}{Two Fundamental Questions}
+	Throughout this chapter, we keep two questions in mind:
+	
+	\bigskip
+	\begin{enumerate}
+		\item \textbf{How is the distribution of $a_i$ determined?}
+		\begin{itemize}
+			\item Exogenous vs.\ endogenous productivity
+			\item Entry, exit, and innovation
+		\end{itemize}
+		
+		\bigskip
+		\item \textbf{How does the economy allocate resources to different firms?}
+		\begin{itemize}
+			\item Efficient allocation vs.\ misallocation
+			\item Frictions, distortions, and policy
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+% ============================================================
+\section{Firm Heterogeneity in the Data}
+% ============================================================
+
+\begin{frame}{Data Source}
+	\begin{itemize}
+		\item All figures from the U.S.\ Census Bureau's \textbf{Business Dynamics Statistics (BDS)}
+		\item Covers the universe of U.S.\ employer establishments and firms
+		\item Key distinction:
+		\begin{itemize}
+			\item \textbf{Establishment}: a fixed physical location of economic activity
+			\item \textbf{Firm}: a collection of establishments under common ownership
+		\end{itemize}
+		\item Over 5 million firms and 7 million establishments in the U.S.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Firm Size Distribution}
+	
+	Distribution of firm size in 2022
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{FigsChapter22/fig1_firm_size_dist}
+	\end{figure}
+\vspace{-20pt}
+	\begin{itemize}
+		\item Highly dispersed distribution
+		\item Majority are very small firms (1--4 employees)
+		\item Over 10,000 firms with 1,000+ employees
+		\item Over 1,000 firms with 10,000+ employees
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Employment Shares}
+	Employment share of each size category in 2022
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{FigsChapter22/fig2_emp_share_firm_size_dist}
+\end{figure}
+\vspace{-20pt}
+	\begin{itemize}
+		\item Small firms are numerous but large firms employ most workers
+		\item $\approx 50\%$ of employees work at firms with $1{,}000+$ employees
+		\item $\approx 30\%$ work at very large firms ($10{,}000+$ employees)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Establishment Size Distribution}
+	
+	Distribution of establishment size in 2022
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{FigsChapter22/fig3_estab_size_dist}
+\end{figure}
+\vspace{-20pt}
+	\begin{itemize}
+		\item $\approx 50\%$ are very small (1--4 employees)
+
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Firm Size and Establishment Share}
+	Fraction of establishments owned by each firm size category in 2022
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{FigsChapter22/fig4_estabs_share_firm_size_dist}
+	\end{figure}
+	\vspace{-20pt}
+	\begin{itemize}
+
+		\item Large firms own many establishments
+		\item Firms with $1{,}000+$ employees own avg $\approx 100$ establishments 
+		\item Firms with $10{,}000+$ employees own avg $\approx 600$ establishments
+	\end{itemize}
+\end{frame}
+\begin{frame}{Job Creation and Destruction}
+	\textbf{Definitions}: Let $\ell_{it}$ be employment of establishment $i$ at year $t$
+	\[
+	JC_t \equiv \frac{\sum_{i:\ell_{it}>\ell_{i,t-1}} (\ell_{it} - \ell_{i,t-1})}{\bar{L}_t}, \qquad
+	JD_t \equiv \frac{\sum_{i:\ell_{it}<\ell_{i,t-1}} (\ell_{i,t-1} - \ell_{it})}{\bar{L}_t}
+	\]
+	where $\bar{L}_t = (L_t + L_{t-1})/2$.
+	
+	\bigskip
+	Annual job creation and destruction rates (establishment level)
+	\vspace{-10pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.32]{FigsChapter22/fig5_JCrate_JDrate}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}{Properties of Job Flows}
+	Three notable properties:
+	
+	\bigskip
+	\begin{enumerate}
+		\item \textbf{Large magnitudes}: Both JC and JD rates exceed 10\% in any given year
+		
+		\bigskip
+		\item \textbf{Cyclical}: In recessions, JC declines and JD increases
+		
+		\bigskip
+		\item \textbf{Declining trend}: Both rates have declined over time $\Rightarrow$ \textbf{``declining business dynamism''}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Entry and Exit Rates}
+	Annual establishment entry and exit rates
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter22/fig6_estab_entry_exit_rates}
+\end{figure}
+\vspace{-10pt}	
+	Similar properties as JC/JD:
+	\begin{itemize}
+		\item Large rates (entry $\approx 10$--$14\%$, exit $\approx 8$--$11\%$)
+		\item Cyclical patterns
+		\item Declining trend over recent decades
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rise of Large Firms}
+	Fraction of employees working in firms with 10,000+ employees
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter22/fig7_emp_share_10000+}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Steady increase since early 1990s
+		\item Large firms are increasingly dominating the U.S.\ economy
+		\item Raises concerns about \textbf{market power}
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Rising Markups}
+	Markup of U.S.\ public firms
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter22/fig8_markup}
+\end{figure}
+\vspace{-15pt}
+	\begin{itemize}
+		\item Average markup (price/marginal cost) of U.S.\ public firms
+		\item Increasing trend since the 1980s
+		\item Consistent with rising dominance of large firms
+		\item Active research area; see Miller (2025) and Syverson (2025) for surveys
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Reallocation and Misallocation}
+% ============================================================
+
+\begin{frame}{How Much Does Reallocation Matter?}
+	\textbf{Foster, Haltiwanger, and Krizan (2001)} decomposition:
+	
+	\medskip
+	Define output-weighted average productivity: $\bar{A}_t \equiv \sum_i s_{it} a_{it}$
+	
+	where $s_{it}$ is the output share of establishment $i$.
+	
+	\bigskip
+	\[
+	\Delta \bar{A}_t = \underbrace{\sum_{i \in C} s_{i,t-1} \Delta a_{it}}_{\text{within}} + \underbrace{\sum_{i \in C} (a_{i,t-1} - \bar{A}_{t-1}) \Delta s_{it}}_{\text{between}} + \underbrace{\sum_{i \in C} \Delta a_{it} \Delta s_{it}}_{\text{cross}}
+	\]
+	\[
+	+ \underbrace{\sum_{i \in N} s_{it}(a_{it} - \bar{A}_{t-1})}_{\text{entry}} - \underbrace{\sum_{i \in X} s_{i,t-1}(a_{i,t-1} - \bar{A}_{t-1})}_{\text{exit}}
+	\]
+	
+	\medskip
+	$C$: continuing, $N$: new entrants, $X$: exiting establishments.
+\end{frame}
+
+\begin{frame}{Decomposition Results}
+	Five sources of aggregate productivity growth:
+	\begin{enumerate}
+		\item \textbf{Within}: each establishment raises its own productivity
+		\item \textbf{Between}: high-productivity establishments gain market share
+		\item \textbf{Cross}: interaction of productivity growth and share changes
+		\item \textbf{Entry}: entrants are above average
+		\item \textbf{Exit}: exiting establishments are below average
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Key finding} (U.S.\ manufacturing, 1977--1987):
+	\begin{itemize}
+		\item Only ${45\%}$ from the within effect
+		\item The remaining ${55\%}$ from reallocation (between, cross, entry, exit)
+	\end{itemize}
+	
+	$\Rightarrow$ \textbf{Reallocation is crucial for aggregate productivity growth}
+\end{frame}
+\begin{frame}{Misallocation: Setup}
+	\textbf{Restuccia and Rogerson (2008), Hsieh and Klenow (2009)}: firm-specific distortions cause misallocation.
+	
+	\bigskip
+	Add firm-specific output tax $\tau_i$ to the simple model:
+	\[
+	\max_{m_i} \; (1-\tau_i) a_i m_i^\gamma - c m_i
+	\]
+	
+	\medskip
+	GDP is still $Y = \int y_i  di$. Aggregate production function: $Y = A F(\mathbf{X})^\gamma$
+	
+	\medskip
+	But now:
+	\[
+	A = \frac{\left[ \int a_i^{\frac{1}{1-\gamma}} (1-\tau_i)^{\frac{\gamma}{1-\gamma}} \, di \right]^{1-\gamma}}{\left[ \int a_i^{\frac{1}{1-\gamma}} (1-\tau_i)^{\frac{1}{1-\gamma}} \, di \right]^{\gamma}}
+	\]
+	
+	Reduces to the undistorted $A$ when $\tau_i = 0$ for all $i$.
+\end{frame}
+
+\begin{frame}{Misallocation: Lognormal Case}
+	Assume $(a_i, 1-\tau_i)$ are bivariate lognormal:
+	\[
+	(\log a_i, \log(1-\tau_i)) \sim N(\mu, \Sigma)
+	\]
+	with $\mu = (\nu_a - \sigma_a^2/2, \; \nu_\tau - \sigma_\tau^2/2)$ and $\text{Var}(\log(1-\tau_i)) = \sigma_\tau^2$.
+	
+	\bigskip
+	\textbf{Result}:
+	\[
+	{A = \exp\left( \nu_a + \frac{\gamma}{1-\gamma} \frac{1}{2}(\sigma_a^2 - \sigma_\tau^2) \right)}
+	\]
+	
+	\bigskip
+	\textbf{Key insights}:
+	\begin{itemize}
+		\item Higher dispersion in taxes $\sigma_\tau$ \textbf{reduces} aggregate productivity
+		\item Productive firms may not expand if $(1-\tau_i) a_i$ is low
+		\item Unproductive firms may over-expand if $(1-\tau_i) a_i$ is high
+		\item The {level} of the tax $\nu_\tau$ does not affect $A$ (no distortion in allocation)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sources of Misallocation}
+	\textbf{Specific policies and institutions} that cause misallocation:
+	\begin{itemize}
+		\item Size-specific taxes and regulations
+		\item Entry regulations and barriers
+		\item Regulations governing hiring and firing
+		\item Financial frictions (credit constraints)
+		\item Trade barriers
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Quantitative importance}: Hsieh and Klenow (2009) estimate that reallocating resources to equalize marginal products would raise manufacturing TFP by:
+	\begin{itemize}
+		\item 30--50\% in China
+		\item 40--60\% in India
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Firm Heterogeneity in General Equilibrium}
+% ============================================================
+
+\begin{frame}{The Hopenhayn-Rogerson (1993) Framework}
+	\textbf{Goal}: Analyze reallocation frictions in general equilibrium with forward-looking firms.
+	
+	\bigskip
+	\textbf{Key features}:
+	\begin{itemize}
+		\item Continuum of firms with idiosyncratic productivity shocks
+		\item Endogenous entry and exit
+		\item Labor as the only input
+		\item Free entry condition
+		\item Representative consumer
+		\item Focus on steady state
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Experiments}: firing taxes and entry barriers (Moscoso Boedo and Mukoyama, 2012).
+\end{frame}
+
+\begin{frame}{Production and Profits}
+	\begin{itemize}
+		\item Production function: $y_t = a_t \ell_t^\gamma$
+		\item $a_t$: idiosyncratic productivity (stochastic)
+		\item Firms pay:
+		\begin{itemize}
+			\item Wages: $w_t \ell_t$
+			\item Fixed operation cost: $c_f$ (units of goods, per period)
+			\item Firing taxes: $\tau \max(0, \ell_{t-1} - \ell_t)$
+		\end{itemize}
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Flow profit}:
+	\[
+	\pi(\ell_{t-1}, \ell_t, a_t) = a_t \ell_t^\gamma - w_t \ell_t - c_f - \tau \max(0, \ell_{t-1} - \ell_t)
+	\]
+	
+	\begin{itemize}
+		\item Output price normalized to 1
+		\item Firing taxes transferred back to consumers
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Timing and Productivity Process}
+	\textbf{Within-period timing}:
+	\begin{enumerate}
+		\item Incumbent decides whether to \textbf{exit}
+		\begin{itemize}
+			\item If exit: pay firing cost $\tau \ell_{t-1}$
+		\end{itemize}
+		\item If stay: receive current $a_t$ from
+		\[
+		\log(a_t) = \alpha + \rho \log(a_{t-1}) + \varepsilon_t, \qquad \varepsilon_t \sim N(0, \sigma^2)
+		\]
+		\item Choose employment $\ell_t$, produce
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Dynamic element}: With $\tau > 0$, hiring is dynamic---firm foresees future firing costs $\Rightarrow$ reluctance to hire even with positive shocks.
+\end{frame}
+
+\begin{frame}{Firm's Dynamic Program}
+	\[
+	W(a, \ell_{-1}) = \max_{\ell} \; \pi(\ell_{-1}, \ell, a) + \beta \max\left\{ \E[W(a', \ell) \mid a], \; -\tau \ell \right\}
+	\]
+	
+	\begin{itemize}
+		\item $\beta \in (0,1)$: consumer's discount factor
+		\item Inner $\max$: \textbf{exit decision}
+		\begin{itemize}
+			\item Continue: get $\E[W(a', \ell) \mid a]$
+			\item Exit: pay firing cost $-\tau \ell$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Entry and Consumer}
+	\textbf{Free entry}:
+	\[
+	W^e = c_e + \kappa
+	\]
+	where $c_e$ = technological entry cost, $\kappa$ = policy-related entry barriers.
+	\[
+	W^e = \int (W(a, 0) + c_f) \, d\nu(a)
+	\]
+	$\nu(a)$: exogenous distribution for entrant productivity.
+	
+	\bigskip
+	\textbf{Representative consumer}:
+	\[
+	\sum_{t=0}^\infty \beta^t [u(C_t) - \chi L_t^s]
+	\]
+	\textbf{Steady-state FOC}: $w u'(wL^s + \Pi + R) = \chi$
+	
+	\medskip
+	where $\Pi$ = total firm profits, $R$ = total transfers.
+\end{frame}
+
+\begin{frame}{Block-Recursive Structure}
+	\textbf{Key computational insight} (Kaas, 2021):
+	
+	\bigskip
+	\begin{enumerate}
+		\item Solve $W(a, \ell_{-1})$ as function of $w$ ($\Rightarrow$ get $W^e(w)$)
+		\item Free entry pins down $w^*$ ($\Rightarrow$ $W^e(w^*) = c_e + \kappa$)
+		\item Given $w^*$ and entry mass $M$: compute stationary distribution
+		\item Compute $L^d(M)$, $\Pi(M)$, $R(M)$
+		\item Labor market clearing $L^d(M) = L^s(\Pi(M), R(M))$ pins down $M$
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Advantage}: No need to track firm distribution to solve for prices (``block recursive structure")
+	
+	\medskip
+	$\Rightarrow$ Much easier computationally than heterogeneous-consumer models. (Lee and Mukoyama, 2018)
+\end{frame}
+
+\begin{frame}{Calibration}
+	\begin{itemize}
+		\item One period = 5 years
+		\item $u(c) = \log(c)$
+		\item $\beta = 0.8$ (4\% annual discount rate)
+		\item $\gamma = 0.64$ (labor share)
+		\item Baseline: $(\tau, \kappa) = (0, 0)$ calibrated to the US economy
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Targets}:
+	\begin{itemize}
+		\item $\alpha = 0.076$: average firm size $\approx 62$ employees
+		\item $\rho = 0.93$: autocorrelation of $\log(\ell)$ is 0.93
+		\item $\sigma = 0.253$: variance of employment growth is 0.53
+		\item $c_f = 18.0$: exit rate $\approx 37\%$ (over 5 years)
+		\item $c_e = 9.04$: free entry holds with $w = 1$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Effects of Firing Taxes}
+	\begin{table}
+		\centering
+		\begin{tabular}{lccc}
+			\toprule
+			& $\tau = 0$ & $\tau = 0.1$ & $\tau = 0.2$ \\
+			\midrule
+			Wage & 1.000 & 0.977 & 0.957 \\
+			Total output & 100 & 97.7 & 95.7 \\
+			Total employment & 100 & 98.3 & 97.4 \\
+			Labor productivity & 100 & 99.4 & 98.3 \\
+			JC (= JD) rate & 0.28 & 0.25 & 0.21 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Model results with firing taxes ($\kappa = 0$).}
+	\end{table}
+	
+	\begin{itemize}
+		\item $\tau = 0.1$ $\approx$ 6 months' salary
+		\item $\tau = 0.2$ $\approx$ 1 year's salary
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Interpreting the Firing Tax Results}
+	\begin{enumerate}
+		\item \textbf{Employment declines}: Hiring effect dominates firing effect
+		\begin{itemize}
+			\item Firms fire less $\Rightarrow$ pushes $L$ up
+			\item Firms hire less (foresee future firing costs) $\Rightarrow$ pushes $L$ down
+			\item Net: employment falls
+		\end{itemize}
+		
+		\bigskip
+		\item \textbf{Labor productivity ($Y/L$) declines}: Misallocation
+		\begin{itemize}
+			\item Good-$a$ firms don't expand enough
+			\item Bad-$a$ firms don't contract enough
+			\item Marginal products of labor become dispersed
+		\end{itemize}
+		
+		\bigskip
+		\item \textbf{JC rate declines}: Less reallocation
+		\begin{itemize}
+			\item Reluctance to hire and fire
+			\item Closely linked to productivity loss from misallocation
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Effects of Entry Barriers}
+	\begin{table}
+		\centering
+		\begin{tabular}{lccc}
+			\toprule
+			& $\kappa = 0$ & $\kappa = 0.5$ & $\kappa = 5.0$ \\
+			\midrule
+			Wage & 1.000 & 0.986 & 0.879 \\
+			Total output & 100 & 98.6 & 87.9 \\
+			Total employment & 100 & 99.5 & 96.2 \\
+			Labor productivity & 100 & 99.1 & 91.4 \\
+			JC (= JD) rate & 0.28 & 0.28 & 0.28 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Model results with entry barriers ($\tau = 0$).}
+	\end{table}
+	
+	\begin{itemize}
+		\item $\kappa = 5.0$: comparable to low-income country entry costs 
+		\item Substantial output and productivity losses
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Interpreting the Entry Barrier Results}
+	\textbf{Mechanism}: Higher $\kappa$ $\Rightarrow$ higher firm value in equilibrium $\Rightarrow$ lower wage
+	
+	\bigskip
+	Three channels through which low wage affects productivity:
+	\begin{enumerate}
+		\item Low-productivity firms \textbf{less likely to exit} $\Rightarrow$ drags down $A$ \quad {\color{red}$\downarrow$}
+		\item Low exit rate $\Rightarrow$ low entry rate $\Rightarrow$ fewer (less productive) entrants $\Rightarrow$ raises $A$ \quad {\color{blue}$\uparrow$}
+		\item Larger incumbent size $\Rightarrow$ DRS $\Rightarrow$ lower productivity \quad {\color{red}$\downarrow$}
+	\end{enumerate}
+	
+	\bigskip
+	Net effect: productivity \textbf{declines} (channels 1 \& 3 dominate).
+	
+	\bigskip
+	\textbf{Political economy}: Entry barriers \textbf{harm entrants} but \textbf{benefit incumbents} $\Rightarrow$ conflict of interest (Mukoyama and Popov, 2014).
+\end{frame}
+
+% ============================================================
+\section{Alternative Market Arrangements}
+% ============================================================
+
+\begin{frame}{Moving Beyond Perfect Competition}
+	\textbf{Two takeaways}:
+	\begin{enumerate}
+		\item Misallocation insights carry over with minor modifications
+		\item Market power enables analysis of firm heterogeneity and \textbf{markups}
+	\end{enumerate}
+	
+	\bigskip
+	We consider two alternatives:
+	\begin{itemize}
+		\item \textbf{Monopolistic competition} (constant markups)
+		\item \textbf{Oligopoly} (endogenous markups) --- Atkeson and Burstein (2008)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Monopolistic Competition: Setup}
+	\textbf{Final good} (CES aggregation / Dixit--Stiglitz):
+	\[
+	Y = \left( \int y_i^{\frac{\sigma-1}{\sigma}} \, di \right)^{\frac{\sigma}{\sigma-1}}, \qquad \sigma > 1
+	\]
+	
+	\begin{itemize}
+		\item Each intermediate good $i$ produced by a monopolist
+		\item Same input structure as the simple model
+		\item Input markets: perfectly competitive
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Inverse demand} for good $i$:
+	\[
+	p_i = y_i^{-1/\sigma} Y^{1/\sigma}
+	\]
+\end{frame}
+
+\begin{frame}{Monopolistic Competition: Firm Problem}
+	Producer $i$ solves:
+	\[
+	\max_{m_i} \; (a_i m_i^\gamma)^{-1/\sigma} Y^{1/\sigma} \cdot a_i m_i^\gamma - c m_i
+	\]
+	taking $Y$ as given (firm is small relative to aggregate).
+	
+	\bigskip
+	\textbf{Key result} --- Constant markup pricing:
+	\[
+	{p_i = \frac{\sigma}{\sigma - 1} \cdot \mathcal{M}}
+	\]
+	where $\mathcal{M}$ is marginal cost. The markup $\sigma/(\sigma-1)$ is \textbf{constant}.
+	
+	\bigskip
+	\textbf{Aggregate production function}: $Y = A F(\mathbf{X})^\gamma$ with modified $A$:
+	\[
+	A \equiv \left( \int a_i^{\frac{\sigma}{\sigma-1} - \gamma} \, di \right)^{\frac{\sigma-1}{\sigma-1-\gamma}}
+	\]
+\end{frame}
+
+\begin{frame}{Monopolistic Competition: Key Properties}
+	\begin{itemize}
+		\item Aggregate production function same form as before
+		\item Aggregation uses $\sigma/(\sigma-1)$ instead of $1/(1-\gamma)$
+		\item \textbf{Advantage}: Can accommodate \textbf{constant} or even some \textbf{increasing} returns to scale
+		\begin{itemize}
+			\item Monopoly power provides another force limiting firm size
+		\end{itemize}
+		\item \textbf{Limitation}: Constant markup $\Rightarrow$ cannot analyze endogenous markup changes
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Oligopoly: Atkeson-Burstein (2008)}
+	\textbf{Motivation}: Need endogenous markups to study:
+	\begin{itemize}
+		\item Rising markups since the 1980s
+		\item How changes in competition affect markups
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Structure}: Two layers of aggregation
+	\begin{enumerate}
+		\item \textbf{Across sectors}: CES with elasticity $\sigma$ (same as before)
+		\[
+		Y = \left( \int y_i^{\frac{\sigma-1}{\sigma}} \, di \right)^{\frac{\sigma}{\sigma-1}}
+		\]
+		\item \textbf{Within sector $i$}: $J$ firms (``brands'') with elasticity $\eta$
+		\[
+		y_i = \left( \sum_{j=1}^J q_{ij}^{\frac{\eta-1}{\eta}} \right)^{\frac{\eta}{\eta-1}}
+		\]
+	\end{enumerate}
+	
+	\textbf{Assumption}: $\eta > \sigma > 1$ (brands more substitutable than sectors).
+\end{frame}
+
+\begin{frame}{Endogenous Markup Formula}
+	\textbf{Pricing rule} (Cournot competition):
+	\[
+	\hat{p}_{ij} = \frac{\varepsilon(s_{ij})}{\varepsilon(s_{ij}) - 1} \cdot \mathcal{M}
+	\]
+	where $s_{ij}$ is the \textbf{sales share} of firm $j$ in sector $i$:
+	\[
+	s_{ij} = \frac{\hat{p}_{ij} q_{ij}}{\sum_h \hat{p}_{ih} q_{ih}}
+	\]
+	and the effective elasticity is:
+	\[
+	\varepsilon(s_{ij}) = \left( \frac{1-s_{ij}}{\eta} + \frac{s_{ij}}{\sigma} \right)^{-1}
+	\]
+	
+	\begin{itemize}
+		\item $\varepsilon = \eta$ when $s_{ij} = 0$ (small firm $\Rightarrow$ low markup)
+		\item $\varepsilon = \sigma$ when $s_{ij} = 1$ (monopoly $\Rightarrow$ high markup)
+		\item Monotonically decreasing in $s_{ij}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Endogenous Markups: Properties}
+	\textbf{Symmetric firms}: $s_{ij} = 1/J$
+	\[
+	\varepsilon = \left( \frac{1}{\eta} \cdot \frac{J-1}{J} + \frac{1}{\sigma} \cdot \frac{1}{J} \right)^{-1}
+	\]
+	
+	\begin{itemize}
+		\item $J = 1$ (monopoly): $\varepsilon = \sigma$ $\Rightarrow$ same as monopolistic competition
+		\item $J \to \infty$: $\varepsilon \to \eta$ $\Rightarrow$ most competitive case
+		\item \textbf{Fewer firms $\Rightarrow$ higher markups}
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Asymmetric firms}: firm heterogeneity in $a_{ij}$ feeds into markup heterogeneity through sales shares.
+	
+	\bigskip
+	\textbf{Bertrand competition}: Same formula but with
+	\[
+	\varepsilon(s_{ij}) = \eta(1-s_{ij}) + \sigma s_{ij}
+	\]
+\end{frame}
+
+% ============================================================
+\section{Business Cycles and Heterogeneous Firms}
+% ============================================================
+
+\begin{frame}{Do Idiosyncratic Shocks Wash Out?}
+	\textbf{Law of Large Numbers argument}:
+	
+	Let GDP $Y_t = \sum_{i=1}^N y_{it}$, with i.i.d.\ growth rates: $(y_{i,t+1} - y_{it})/y_{it} = \sigma \varepsilon_{i,t+1}$
+	
+	\bigskip
+	Standard deviation of GDP growth:
+	\[
+	\sigma_Y = \sigma \sqrt{\sum_{i=1}^N \left(\frac{y_{it}}{Y_t}\right)^2}
+	\]
+	
+	\bigskip
+	\textbf{Equal-size firms}: $y_{it}/Y_t = 1/N$
+	\[
+	\sigma_Y = \frac{\sigma}{\sqrt{N}}
+	\]
+	
+	With $N = 5{,}000{,}000$ and $\sigma \approx 15\%$: $\sigma_Y \approx 0.00007$ $\Rightarrow$ \textbf{negligible}!
+\end{frame}
+
+\begin{frame}{Aggregate Shocks and Firm Dynamics}
+	\textbf{Standard approach}: Accept LLN, add aggregate shock $z_t$:
+	\[
+	y_{it} = z_t \, s_{it} \, \ell_{it}^\gamma
+	\]
+	where $z_t$ = aggregate productivity (as in RBC models).
+	
+	\bigskip
+	\textbf{Results}:
+	\begin{itemize}
+		\item Modified Hopenhayn-Rogerson model replicates well:
+		\begin{itemize}
+			\item Cyclical JC and JD rates
+			\item Cyclical entry and exit rates
+		\end{itemize}
+		\item Block-recursive structure $\Rightarrow$ computationally tractable
+		\item Some firm-level statistics harder to match (Lee and Mukoyama, 2018)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Idiosyncratic Productivity and Aggregate: Hulten's Theorem}
+	\textbf{Setup}: $N$ sectors, sector $i$ produces $y_i = a_i F(k_i, \ell_i, x_{i1}, \ldots, x_{iN})$
+	
+	where $x_{ij}$ = intermediate input from sector $j$.
+	
+	\bigskip
+	\textbf{Theorem (Hulten, 1978)}: The first-order output effect of productivity changes:
+	\[
+\frac{dY}{Y} = \sum_i D_i \frac{da_i}{a_i}
+	\]
+	where $D_i$ is the \textbf{Domar weight}:
+	\[
+	D_i = \frac{p_i y_i}{\sum_i p_i c_i} = \frac{\text{Sales of sector } i}{\text{GDP (value added)}}
+	\]
+	
+	\bigskip
+	\textbf{Note}: Domar weights use \emph{sales} (not value added) $\Rightarrow$ can exceed 1!
+	
+	$\Rightarrow$ Downstream firms have amplified impact through input-output linkages.
+\end{frame}
+
+\begin{frame}{Hulten's Theorem: Intuition}
+	\textbf{Two key intuitions}:
+	
+	\bigskip
+	\begin{enumerate}
+		\item \textbf{Why only $a_i$ matters} (not inputs)?
+		\begin{itemize}
+			\item Envelope theorem: in efficient economy, input adjustments have no first-order welfare effect
+		\end{itemize}
+		
+		\bigskip
+		\item \textbf{Why sales (not value added)?}
+		\begin{itemize}
+			\item With input-output networks, TFP improvement in a downstream firm also raises the value of intermediate inputs
+		\end{itemize}
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Limitations} (relaxed by Baqaee and Farhi, 2019, 2020):
+	\begin{itemize}
+		\item Requires efficient economy (no misallocation)
+		\item First-order approximation only
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hulten's Theorem: Simple Example}
+	Two sectors:
+	\begin{itemize}
+		\item Sector 1 (consumption): $y_1 = a_1 x^{1-\gamma} \ell^\gamma$
+		\item Sector 2 (intermediate): $y_2 = a_2 k$
+	\end{itemize}
+	Fixed $K$, $L$. Competitive equilibrium: $x = y_2$
+	
+	\[
+	Y = a_1 (a_2 K)^{1-\gamma} L^\gamma
+	\]
+	\[
+	\frac{dY}{Y} = \underbrace{1}_{D_1} \cdot \frac{da_1}{a_1} + \underbrace{(1-\gamma)}_{D_2} \cdot \frac{da_2}{a_2}
+	\]
+	
+	\begin{itemize}
+		\item $D_1 = 1$ (sales = GDP for downstream sector)
+		\item $D_2 = 1 - \gamma$ (value added share of upstream sector)
+		\item Domar weights sum to $1 + (1-\gamma) > 1$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Large Firms and ``Granular'' Fluctuations}
+	\textbf{Gabaix (2011)}: Fat-tailed firm size distribution changes the LLN result.
+	
+	\medskip
+	If firm sizes follow a \textbf{Pareto distribution}: $\Pr[y_i > x] = \chi x^{-\zeta}$ (the US data: $\zeta \approx 1$, called the Zipf's law)
+
+	\medskip
+	\textbf{Result}: Instead of $\sigma_Y \propto \sigma / \sqrt{N}$:
+	\[
+	\sigma_Y \sim \frac{v_\zeta \, \sigma}{\log(N)}
+	\]
+	\vspace{-20pt}
+	\begin{itemize}
+		\item $1/\log(1{,}000{,}000) \approx 0.072$ vs.\ $1/\sqrt{1{,}000{,}000} = 0.001$
+		\item \textbf{Two orders of magnitude larger!}
+		\item Idiosyncratic shocks to large firms can generate aggregate-scale fluctuations
+	\end{itemize}
+	
+	\medskip
+	Carvalho \& Grassi (2019): quantitative business cycle model driven by idiosyncratic shocks to large firms.
+\end{frame}
+
+\begin{frame}{Production Networks}
+	\textbf{Additional amplification}: Domar weights $D_i = p_i y_i / \text{GDP}$
+	
+	\begin{itemize}
+		\item Large downstream firms (Walmart, Amazon, GM): sales $\gg$ value added
+		\item Their Domar weights can be much larger than their GDP share
+		\item $\Rightarrow$ Idiosyncratic shocks amplified through input-output linkages
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Beyond Hulten's theorem}:
+	\begin{itemize}
+		\item \textbf{Baqaee \& Farhi (2019)}: Second-order effects can be quantitatively important
+		\item \textbf{Baqaee \& Farhi (2020)}: With distortions, network structure matters for first-order effects; decompose Solow residual into misallocation changes + ``pure'' technology growth
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Endogenous Productivity: Klette-Kortum (2004)}
+% ============================================================
+
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item Previous sections: productivity $a_i$ is \textbf{exogenous}
+		\item Natural question: What determines $a_i$?
+		\item \textbf{Klette \& Kortum (2004)}: Endogenous productivity from \textbf{innovation}
+		\item Combines:
+		\begin{itemize}
+			\item Quality-ladder growth models (Ch.\ 13)
+			\item Firm dynamics (entry, exit, expansion, contraction)
+		\end{itemize}
+		\item Major strength: clear definition of a ``firm'' and its dynamics
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Preferences}
+	\textbf{Representative consumer}:
+	\[
+	\sum_{t=0}^\infty \beta^t \log(C_t)
+	\]
+	
+	\textbf{Consumption aggregator} (unit elasticity of substitution):
+	\[
+	C_t = \exp\left( \int_0^1 \log\left( \sum_{k=-1}^{J_t(j)} q_t(j,k) \, c_t(j,k) \right) dj \right)
+	\]
+	
+	\begin{itemize}
+		\item $j \in [0,1]$: product index
+		\item $k$: generation (quality rung), $J_t(j)$ = cutting-edge generation
+		\item $q_t(j,k)$: quality of product $(j,k)$
+		\item $c_t(j,k)$: consumption of product $(j,k)$
+		\item Different generations are \textbf{perfect substitutes} (quality-adjusted)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Intratemporal Problem}
+	\textbf{Equal expenditure shares} (unit elasticity):
+	\[
+	c_t(j,k) = \frac{E_t}{p_t(j,k)}
+	\]
+	for each $j$, consumer buys only the generation with lowest quality-adjusted price.
+	
+	\bigskip
+	\textbf{Price index}: $P_t = \exp\left( \int_0^1 [\log p_t(j,k) - \log q_t(j,k)] \, dj \right)$
+	
+	Normalize $P_t = 1$.
+	
+	\bigskip
+	\textbf{Intertemporal Euler equation} (balanced growth path):
+	\[
+	\frac{1}{C_t}=\beta(1+r)\frac{1}{C_{t+1}}\quad\Rightarrow\quad \frac{1}{1+r} = \frac{\beta}{1+\gamma}
+	\]
+	where $\gamma$ is the consumption growth rate.
+\end{frame}
+
+\begin{frame}{Production and Pricing}
+	\textbf{Production}: 1 unit of labor $\Rightarrow$ 1 unit of any product.
+	\begin{itemize}
+		\item Unit cost = $w_t$ for all products
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Limit pricing}: The cutting-edge producer sets:
+	\[
+	p_t(j, J_t(j)) = \lambda w_t
+	\]
+	where $\lambda > 1$ is the \textbf{quality step} (also the markup).
+	
+	\bigskip
+	\textbf{Period profit per product line}:
+	\[
+	\pi_t = \left(1 - \frac{1}{\lambda}\right) C_t
+	\]
+	\begin{itemize}
+		\item All product lines earn the same profit.
+		\item Firm size = number of product lines owned
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Innovation}
+	\textbf{Innovation intensity}: $\eta$ per product line
+	\begin{itemize}
+		\item Cost: $w_t R(\eta)$ units of labor, $R(\cdot)$ increasing and convex
+		\item Success probability: $\eta$
+		\item If successful: gain a random product line (quality $\lambda$ times the current best of that line)
+		\item Fixed total number of products $\rightarrow$ New product always taken from another firm (creative destruction)
+	\end{itemize}
+	
+	\medskip
+	Let $\mu$ = probability of \textbf{losing} a product line to another innovator.
+	
+	\medskip
+	\textbf{Bellman equation} (per product line):
+	\[
+	V_t = \max_\eta \; \pi_t - w_t R(\eta) + \frac{1}{1+r}(1 + \eta - \mu) V_{t+1}
+	\]
+	Expected continuation: $(1+\eta - \mu)V_{t+1}$ (gain with prob $\eta$, lose with prob $\mu$).
+\end{frame}
+
+\begin{frame}{Balanced Growth Path}
+	Divide both sides by $(1+\gamma)^t$, use $\beta/(1+\gamma) = 1/(1+r)$ and call $v\equiv V_t/(1+\gamma)^t$:
+	\[
+	v = \max_\eta \; \left(1 - \frac{1}{\lambda}\right) C_0 - R(\eta) + \beta(1 + \eta - \mu) v,
+	\]
+	
+	\textbf{FOC}: $R'(\eta) = \beta v$
+	
+	\medskip
+	\textbf{Free entry}: An entrant pays $c_e$ units of labor, gets one product line:
+	\[
+	v = c_e
+	\]
+	
+	\textbf{Creative destruction}: $\mu = \eta + \nu$ \quad (incumbent innovation + entry rate)
+	
+	\medskip
+	\textbf{Labor market clearing}:
+	\[
+	\frac{C_0}{\lambda} + R(\eta) + \nu c_e = L
+	\]
+\end{frame}
+
+\begin{frame}{Equilibrium}
+	\textbf{Four unknowns}: $v$, $\eta$, $C_0$, $\mu$
+	
+	\textbf{Four equations}:
+	\begin{align*}
+		v &= \left(1 - \frac{1}{\lambda}\right) C_0 - R(\eta) + \beta(1 + \eta - \mu) v \\
+		R'(\eta) &= \beta v \\
+		v &= c_e \\
+		\frac{C_0}{\lambda} + R(\eta) + \nu c_e &= L \qquad (\nu = \mu-\eta)
+	\end{align*}
+	
+	\bigskip
+	\textbf{Growth rate}: $\gamma = \mu \log(\lambda)$
+	
+	\begin{itemize}
+		\item Growth driven by creative destruction rate $\mu$ and innovation step $\lambda$
+		\item Both incumbent innovation $\eta$ and entry $\nu$ contribute to growth
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Firm Dynamics and Gibrat's Law}
+	\textbf{Firm size} = number of product lines
+	
+	\bigskip
+	\textbf{Average growth rate of the firm size (number of product lines per firm)}: $\eta - \mu = -\nu < 0$
+	\begin{itemize}
+		\item Net growth rate is \textbf{negative} (because entry displaces incumbents)
+		\item Same for all firms regardless of size $\Rightarrow$ \textbf{Gibrat's Law}
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Advantage over exogenous-shock models}:
+	\begin{itemize}
+		\item Policies affect the productivity process itself
+		\item Can analyze how innovation incentives shape firm dynamics
+		\item Clear firm definition through product lines
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Generating a Pareto Firm-Size Distribution}
+	\textbf{Problem}: Basic Klette--Kortum doesn't produce a Pareto tail (average growth is negative).
+	
+	\bigskip
+	\textbf{Fix}: Suppose large firms have positive constant growth rate $g > 0$, with exit probability $\delta$. When the density at size $n$ is $h(n)$,
+	
+	\medskip
+	Stationarity requires: $(1+g) h((1+g)n) = (1-\delta) h(n)$
+	
+	\medskip
+	Guess Pareto distribution: $h(n) = F n^{-(\zeta + 1)}$ $\Rightarrow$
+	\[
+ {\zeta = -\frac{\log(1-\delta)}{\log(1+g)}}
+	\]
+	
+	\begin{itemize}
+		\item $\zeta$ small (thick tail) when $\delta$ small or $g$ large
+		\item \textbf{Modification of the Klette-Kortum model to have $g>0$}: Allow some innovation to create \textbf{new} products.
+		\item If new product creation $\xi$ is large enough: $g=\eta - \mu = \xi - \nu > 0$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Counterfactual Predictions and Extensions}
+	\textbf{Limitations of the basic model}:
+	\begin{enumerate}
+		\item All product lines earn equal profits
+		\begin{itemize}
+			\item Unit elasticity $\Rightarrow$ revenue independent of quality
+			\item Fix: higher substitutability ($\sigma > 1$)
+		\end{itemize}
+		
+		\bigskip
+		\item No cumulative innovation advantage for incumbents
+		\begin{itemize}
+			\item Any firm can innovate at the same cost
+			\item Fix: allow incumbents to improve own products
+		\end{itemize}
+		
+		\bigskip
+		\item No Pareto tail in firm-size distribution
+		\begin{itemize}
+			\item Fix: allow new product creation alongside creative destruction
+			\item Luttmer (2011) discusses related insights
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways}
+	\begin{enumerate}
+		\item \textbf{Aggregation matters}: Firm heterogeneity affects aggregate productivity through endogenous resource allocation
+		
+		\item \textbf{Data}: U.S.\ shows dispersed firm sizes, large reallocation, declining dynamism, rising concentration and markups
+		
+		\item \textbf{Misallocation}: Firm-specific distortions reduce aggregate TFP; dispersion in distortions (not level) is what matters
+		
+		\item \textbf{General equilibrium}: Firing taxes and entry barriers have substantial effects on output, productivity, and reallocation
+		
+		\item \textbf{Market power}: Monopolistic competition gives constant markups; oligopoly (Atkeson-Burstein) generates endogenous markups linked to market shares
+		
+		\item \textbf{Business cycles}: Fat tails and production networks can amplify firm-level shocks to aggregate fluctuations
+		
+		\item \textbf{Endogenous productivity}: Klette-Kortum links innovation, creative destruction, and firm dynamics
+	\end{enumerate}
+\end{frame}
+
+
+
+
+\end{document}
+

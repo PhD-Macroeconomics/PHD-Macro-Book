@@ -1,0 +1,559 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter14]{Chapter 14: Real Business Cycles}
+\author[Kurt Mitman]{Chapter author: Kurt Mitman}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+%
+% ============================================================
+\section{Introduction and Historical Overview}
+% ============================================================
+
+\begin{frame}{Introduction}
+	\textbf{Business cycles}: fluctuations of the economy around its long-run trend. The model is ``real'' because it has no money or nominal variables.
+	
+	\textbf{Impulse vs.\ propagation} (Wicksell's rocking horse): shocks are the impulse; the economic structure determines how they propagate.
+	
+	\textbf{Intellectual history}:
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Schumpeter: innovations as impulses 
+		\item Keynes: insufficient aggregate demand 
+		\item 1970s stagflation $\Rightarrow$ Lucas Critique $\Rightarrow$ microfounded models
+		\item Lucas and Rapping: intertemporal substitution of labor supply
+		\item \textbf{Kydland and Prescott (1982)}: operationalized microfounded business cycle analysis $\Rightarrow$ real business cycle (RBC) theory
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{A First Look at the Data}
+% ============================================================
+
+\begin{frame}{US Real GDP and Recessions}
+	US Real GDP and NBER Recessions, 1949--2022
+			\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter14/fig1}
+\end{figure}
+\vspace{-13pt}	
+	Strong upward trend; short-run fluctuations barely visible at this scale.
+\end{frame}
+\begin{frame}{US Real GDP and Recessions}
+Stylized representation of business cycles
+			\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.08]{FigsChapter14/Fig2.png}
+\end{figure}
+\vspace{-13pt}	
+	 \textbf{Goal}: decompose into trend $\tau_t$ and cycle $Y_{c,t}$ with $Y_t = \tau_t + Y_{c,t}$.
+\end{frame}
+
+\begin{frame}{The Hodrick-Prescott Filter}
+	Given $\{Y_t\}_{t=1}^{T}$, extract trend $\{\tau_t\}$ by solving:
+	\[
+	\min_{\{\tau_t\}} \sum_{t=1}^{T} (Y_t - \tau_t)^2 + \lambda \sum_{t=2}^{T-1} [(\tau_{t+1} - \tau_t) - (\tau_t - \tau_{t-1})]^2
+	\]
+	
+	$\lambda$ controls smoothness: $\lambda \to \infty$ yields a linear trend; $\lambda = 0$ yields $\tau_t = Y_t$.
+	
+	\bigskip
+	Standard values: $\lambda = 1{,}600$ (quarterly), $\lambda = 6.25$ (annual) --- Ravn and Uhlig (2002): scale by $(1/4)^4$.
+	
+	\bigskip
+	Matrix form: $\tau = (I + \lambda A)^{-1} Y$, where $A$ is a pentadiagonal matrix.
+	
+\end{frame}
+
+\begin{frame}{The Hodrick-Prescott Filter}
+	Log US GDP: data and HP trend. HP filter with $\lambda = 1{,}600$
+		\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter14/fig3}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Band-Pass Filter}
+	Any stationary process can be represented in the frequency domain:
+	\[
+	Y_t = \int_0^{\pi} A(\omega) \cos(\omega t) \, d\omega + \int_0^{\pi} B(\omega) \sin(\omega t) \, d\omega
+	\]
+	
+	\textbf{Band-pass filter}: removes frequencies outside a specified range (e.g., 5--10 years for business cycles). Isolates cyclical component directly by frequency.
+	
+	\bigskip
+	Complements the HP filter; results are similar for standard choices.
+\end{frame}
+
+\begin{frame}{Data and Trends}
+	Actual and HP trends of logs of US aggregates
+		\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.42]{FigsChapter14/fig4}
+	\end{figure}
+	\vspace{-13pt}	
+	All variables are per capita, in logs, quarterly, HP-filtered with $\lambda = 1{,}600$.
+\end{frame}
+
+\begin{frame}{Stylized Business Cycle Facts}
+Business cycle moments, US data 1949--2022
+	\begin{center}
+		
+		\begin{tabular}{lcccc}
+			\toprule
+			Variable $x$ & $\sigma_x$ (\%) & $\sigma_x/\sigma_y$ & Autocorr. & Corr$(x,y)$ \\
+			\midrule
+			Output & 1.63 & 1.00 & 0.78 & 1.00 \\
+			Consumption & 1.07 & 0.65 & 0.64 & 0.75 \\
+			Investment & 4.37 & 2.68 & 0.86 & 0.77 \\
+			Hours & 2.11 & 1.29 & 0.80 & 0.86 \\
+			TFP & 0.90 & 0.55 & 0.75 & 0.51 \\
+			Unemployment & 15.63 & 9.57 & 0.80 & $-0.83$ \\
+			\bottomrule
+		\end{tabular}
+		
+		\medskip
+		\small Source: BEA, BLS, FRED. HP-filtered.
+	\end{center}
+\end{frame}
+
+\begin{frame}{Six Stylized Facts}
+	\begin{enumerate}
+		\item \textbf{Consumption smoothing}: $\sigma_c/\sigma_y \approx 0.65$
+		\item \textbf{Investment volatility}: $\sigma_i/\sigma_y \approx 2.7$
+		\item \textbf{Labor market}: Hours $\approx$ same volatility as output; unemployment highly volatile and strongly countercyclical
+		\item \textbf{Cyclicality}: $C$, $I$, hours, productivity all procyclical; unemployment countercyclical and lagging
+		\item \textbf{Prices and wages}: Much less volatile and less cyclical than quantities
+		\item \textbf{Persistence}: All aggregates highly serially correlated
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Deviations from Trend}
+	Deviations from trend of US aggregates (dashed: GDP)
+	\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter14/fig5}
+\end{figure}
+\vspace{-13pt}	
+	Post-1985: TFP and GDP appear less correlated $\Rightarrow$ investigate sub-sample stability.
+\end{frame}
+
+\begin{frame}{Changing Nature of Business Cycles}
+Business cycle moments, US 1985--2022
+	\begin{center}
+		
+		\begin{tabular}{lccc}
+			\toprule
+			Variable & $\sigma_x$ (\%) & $\sigma_x/\sigma_y$ & Corr$(x,y)$ \\
+			\midrule
+			Output & 1.24 & 1.00 & 1.00 \\
+			Consumption & 1.20 & 0.97 & 0.86 \\
+			Investment & 3.64 & 2.94 & 0.79 \\
+			Hours & 2.19 & 1.77 & 0.88 \\
+			TFP & 0.73 & 0.59 & $-0.03$ \\
+			Lab.\ Productivity & 1.09 & 0.88 & $-0.29$ \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	
+	\normalsize
+	\begin{itemize}
+		\item \textbf{Great Moderation}: $\sigma_y$ falls from 1.97\% to 1.24\%
+		\item TFP and labor productivity switch from procyclical to acyclical/countercyclical
+		\item ``Jobless recoveries'' post-1991
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Conditional Moments: Estimated IRFs}
+
+	IRFs to TFP shock estimated with structural VAR (Recursive identification; TFP ordered first)
+	\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter14/fig6}
+\end{figure}
+\vspace{-13pt}	
+\end{frame}
+
+\begin{frame}{Conditional Moments: Estimated IRFs}
+	IRFs to TFP shock estimated with local projections
+\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter14/fig7}
+\end{figure}
+\vspace{-13pt}	
+\end{frame}
+
+% ============================================================
+\section{The Simple RBC Model (No Capital)}
+% ============================================================
+
+\begin{frame}{Setup}
+	Preferences: 
+	$$\E_0 \sum_{t=0}^{\infty} \beta^t [\log(c_t) + \phi \log(1-\ell_t)]
+	$$
+	
+	Production: (linear, no capital)
+	$$
+	Y_t = z_t \ell_t
+	$$ 
+	
+	
+	TFP: 
+	$$
+	\log z_t = \rho \log z_{t-1} + \sigma \varepsilon_t
+	$$
+	
+	Budget: $c_t + B_t = w_t \ell_t + R_t B_{t-1}$, bonds in zero net supply.
+	
+	\bigskip
+	\textbf{Intratemporal FOC}: $w_t / c_t = \phi/(1-\ell_t)$
+	
+	\textbf{Euler equation}: $1/c_t = \beta \E_t[R_{t+1}/c_{t+1}]$
+\end{frame}
+
+\begin{frame}{Constant Labor Supply}
+	In equilibrium $B_t = 0$ and $c_t = w_t \ell_t = z_t \ell_t$. Substituting into the intratemporal FOC:
+	\[
+	\frac{w_t}{w_t \ell_t} = \frac{1}{\ell_t} = \frac{\phi}{1-\ell_t} \quad \Rightarrow \quad \ell_t = \frac{1}{1+\phi} \quad \text{(constant)}
+	\]
+	
+	Output, consumption, and TFP are perfectly correlated; hours do not fluctuate.
+	
+	\bigskip
+	\textbf{Why?} Income and substitution effects from balanced-growth preferences exactly cancel. Without savings, the interest rate adjusts to make intertemporal substitution zero.
+	
+	\bigskip
+	\textbf{Lesson}: TFP shocks + elastic labor supply alone are not sufficient for business cycles. Need capital accumulation.
+\end{frame}
+
+% ============================================================
+\section{The Core RBC Model}
+% ============================================================
+
+\begin{frame}{Setup}
+	Preferences: 
+	$$
+	\E_0 \sum_{t=0}^{\infty} \beta^t U(c_t, 1-\ell_t)
+	$$
+	Production: (CRS, neoclassical)
+	$$
+	Y_t = z_t F(k_t, \ell_t)
+	$$  
+	TFP: 
+	$$
+	\log z_t = \rho_z \log z_{t-1} + \sigma_z \varepsilon_t
+	$$
+	
+	Capital accumulation: $k_{t+1} = (1-\delta) k_t + i_t$
+	
+	Resource constraint: $c_t + i_t = Y_t$
+	
+	\bigskip
+	\textbf{Planning problem} (recursive, CE is efficient):
+	\[
+	V(k, z) = \max_{k', \ell} \left\{ U(zF(k, \ell) + (1-\delta)k - k', 1-\ell) + \beta \E[V(k', z') | z] \right\}
+	\]
+\end{frame}
+
+\begin{frame}{Key Optimality Conditions}
+	\textbf{Intratemporal} (labor-leisure):
+	\[
+	z F_2(k, \ell) = \frac{U_2(c, 1-\ell)}{U_1(c, 1-\ell)}
+	\]
+	
+	\textbf{Intertemporal} (Euler equation):
+	\[
+	U_1(c, 1-\ell) = \beta \E\left[(z' F_1(k', \ell') + 1-\delta) U_1(c', 1-\ell') \,\big|\, z\right]
+	\]
+	
+	\begin{itemize}
+		\item Positive TFP shock $\Rightarrow$ MPL rises $\Rightarrow$ labor supply increases (Frisch elasticity)
+		\item Persistent shock $\Rightarrow$ MPK rises tomorrow $\Rightarrow$ investment increases (EIS)
+		\item Capital accumulation breaks the perfect consumption-output correlation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Calibration (Kydland-Prescott Blueprint)}
+	\textbf{Functional forms}: $U = (1-\phi)\log c + \phi \log(1-\ell)$, $F = k^\alpha \ell^{1-\alpha}$
+	
+	\bigskip
+	\textbf{Parameters}:
+	\begin{itemize}
+		\item $\alpha = 0.36$ (capital share from NIPA)
+		\item $\delta = 0.025$ (quarterly depreciation from perpetual inventory)
+		\item $\beta = 0.99$ (4\% annual discount rate, from $\sigma = 1$ and steady-state Euler)
+		\item $\phi = 0.6325$ (targets $\bar{\ell} = 1/3$ using intratemporal FOC and $\bar{y}/\bar{c}$)
+		\item $\rho_z = 0.95$, $\sigma_z = 0.007$ (estimated from Solow residual)
+	\end{itemize}
+	
+	\bigskip
+	TFP measured via growth accounting: $\log z_t = \log y_t - \alpha \log k_t - (1-\alpha) \log \ell_t$.
+\end{frame}
+
+\begin{frame}{Model vs.\ Data}
+Business cycle moments in core RBC model
+
+		\begin{tabular}{lcccc}
+			\toprule
+			Variable & $\sigma_x$ (\%) & $\sigma_x/\sigma_y$ & Autocorr. & Corr$(x,y)$ \\
+			\midrule
+			Output & 1.33 & 1.00 & 0.73 & 1.00 \\
+			Consumption & 0.42 & 0.32 & 0.81 & 0.90 \\
+			Investment & 4.13 & 3.10 & 0.72 & 0.99 \\
+			Hours & 0.64 & 0.48 & 0.72 & 0.98 \\
+			TFP & 0.92 & 0.69 & 0.43 & 0.99 \\
+			\bottomrule
+		\end{tabular}
+
+	\medskip
+	\textbf{Successes}: $C$ smooth, $I$ volatile, all variables procyclical.
+	
+	\textbf{Shortcomings}: Output volatility too low (1.33 vs.\ 1.97); hours too smooth ($\sigma_h/\sigma_y = 0.48$ vs.\ 1.29); correlations too high (single shock).
+\end{frame}
+
+\begin{frame}{Impulse Response Functions}
+	TFP shock in RBC model. $\rho_z = 0.95$
+\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter14/fig8}
+\end{figure}
+\vspace{-13pt}
+	
+	\begin{itemize}
+		\item On impact: $y$ jumps (TFP + $\uparrow \ell$); $c$ rises less ($\Rightarrow$ saving); $i$ overshoots
+		\item $k$ builds up gradually, peaks after TFP has largely faded
+		\item \textbf{Amplification}: $\sigma_y > \sigma_z$ (hours amplify output response)
+		\item \textbf{Propagation}: Limited; output persistence $\approx$ TFP persistence
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sensitivity to Persistence}
+	Sensitivity to TFP shock persistence ($\rho = 0, 0.5, 0.95$)
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.3]{FigsChapter14/fig9}
+	\end{figure}
+	\vspace{-13pt}
+	\begin{itemize}
+		\item Less persistent shocks: \textbf{more} impact amplification (households willing to substitute more intertemporally)
+		\item Output persistence tracks TFP persistence closely
+		\item The model does not generate endogenous propagation beyond TFP itself
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sensitivity to EIS and Frisch Elasticity}
+	Sensitivity to EIS ($1/\sigma$) and Frisch elasticity
+	\begin{columns}
+	\begin{column}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{FigsChapter14/fig9}
+	\end{column}
+	
+	\begin{column}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{FigsChapter14/fig9}
+	\end{column}
+	
+	\end{columns}
+	\begin{itemize}
+		\item Higher Frisch $\Rightarrow$ more amplification (hours respond more), but investment becomes too volatile
+		\item Higher EIS $\Rightarrow$ more amplification; consumption response non-monotonic on impact
+		\item Trade-off: improving hours volatility worsens investment volatility
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Extensions}
+% ============================================================
+
+\begin{frame}{Indivisible Labor}
+	Hansen (1985), Rogerson (1988): Workers either work $\bar{\ell}$ or zero (extensive margin).
+	
+	\bigskip
+	With lotteries to convexify: aggregate Frisch elasticity becomes \textbf{infinite} (linear disutility), resolving the low micro-Frisch elasticity problem.
+	
+	\bigskip
+	Generates larger fluctuations in employment, consistent with the data showing most hours variation occurs at the extensive margin.
+\end{frame}
+
+\begin{frame}{Capital Adjustment Costs}
+	Investment adjustment cost modifies capital accumulation:
+	\[
+	k_{t+1} = (1-\delta) k_t + i_t - \frac{\psi}{2}\left(\frac{i_t}{k_t} - \delta\right)^2 k_t
+	\]
+	
+	Shadow price of installed capital (Tobin's $q$):
+	\[
+	q_t = 1 + \psi\left(\frac{i_t}{k_t} - \delta\right)
+	\]
+	
+	Firms spread investment over time $\Rightarrow$ dampens $\sigma_i$, increases persistence. Also used in New Keynesian models.
+\end{frame}
+
+\begin{frame}{Variable Capacity Utilization}
+	Greenwood, Hercowitz, and Huffman (1988): Effective capital $= u_t k_t$, with higher utilization causing faster depreciation:
+	\[
+	k_{t+1} = (1-\delta(u_t)) k_t + i_t
+	\]
+	
+	Additional adjustment margin $\Rightarrow$ more amplification. But Solow residual must be corrected for variable utilization.
+\end{frame}
+
+\begin{frame}{Additional Shocks}
+	\textbf{Investment-specific technology shocks} (Greenwood, Hercowitz, Krusell, 1997):
+	\[
+	k_{t+1} = (1-\delta) k_t + q_t i_t
+	\]
+	Account for $\sim$30\% of business cycle fluctuations. Break the strong $c$-$i$ correlation.
+	
+	\bigskip
+	\textbf{Government spending shocks}: $c_t + i_t + g_t = y_t$. Negative income effect from $g$ $\Rightarrow$ increases labor supply. Breaks the high hours-wage correlation.
+\end{frame}
+
+% ============================================================
+\section{Business Cycle Accounting}
+% ============================================================
+
+\begin{frame}{The BCA Framework}
+	Chari, Kehoe, and McGrattan (2007): Introduce four \textbf{wedges} into the RBC model, measured as deviations from first-best conditions:
+	
+	\bigskip
+	\begin{enumerate}
+		\item \textbf{Efficiency wedge} ($z_t$): TFP in $Y_t = z_t F(k_t, \ell_t)$
+		\item \textbf{Labor wedge} ($1-\tau_t^\ell$): $(1-\tau_t^\ell) z_t F_2(k_t, \ell_t) = U_2/U_1$
+		\item \textbf{Investment wedge} ($1/(1+\tau_t^i)$): modifies the Euler equation
+		\item \textbf{Government spending wedge} ($g_t$): $c_t + i_t + g_t = Y_t$
+	\end{enumerate}
+	
+	\bigskip
+	Estimate AR(1) processes for wedges via maximum likelihood on $(y_t, \ell_t, i_t, g_t)$, then simulate each wedge in isolation.
+\end{frame}
+
+\begin{frame}{BCA Results}
+	The estimated labor wedge from BCA
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.33]{FigsChapter14/fig11}
+	\end{figure}
+	\vspace{-13pt}
+		\begin{itemize}
+		\item Efficiency wedge: $\sim$70\% of output variance
+		\item Labor wedge: $\sim$25\% of output variance; explains $\sim$75\% of hours variance
+		\item Investment and government wedges: minor
+		\item Labor wedge highly procyclical
+		\item Secular improvement in labor wedge coincides with changing business cycle patterns post-1985
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Business cycle facts}: $C$ smooth, $I$ volatile, hours procyclical, unemployment countercyclical. All aggregates highly persistent. Post-1985: Great Moderation, TFP becomes acyclical, jobless recoveries.
+		
+		\item \textbf{HP filter}: $\min \sum (Y_t - \tau_t)^2 + \lambda \sum [(\tau_{t+1}-\tau_t) - (\tau_t-\tau_{t-1})]^2$; $\lambda = 1{,}600$ quarterly.
+		
+		\item \textbf{Simple model} (no capital): Balanced-growth preferences $\Rightarrow$ constant hours. Income and substitution effects cancel. Capital accumulation is essential.
+		
+		\item \textbf{Core RBC}: Stochastic NGM; intratemporal FOC (MPL $=$ MRS) and Euler equation. Capital provides savings channel $\Rightarrow$ hours fluctuate.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{4}
+		\item \textbf{Calibration}: $\alpha, \delta, \beta$ from long-run data; $\phi$ targets $\bar{\ell} = 1/3$; $(\rho_z, \sigma_z)$ from Solow residual. Model explains $\sim$70\% of output variance.
+		
+		\item \textbf{Shortcomings}: Hours too smooth; correlations too high (single shock); limited endogenous propagation.
+		
+		\item \textbf{Extensions}: Indivisible labor (infinite aggregate Frisch), adjustment costs (dampen $\sigma_i$, Tobin's $q$), variable utilization (more amplification), additional shocks (IST, government).
+		
+		\item \textbf{Business cycle accounting}: Efficiency wedge ($\sim$70\%) and labor wedge ($\sim$25\%) dominate. Labor wedge points toward frictional labor markets (Chapter 20) and heterogeneity (Chapter 21).
+	\end{enumerate}
+\end{frame}
+	
+\end{document}
+

@@ -1,0 +1,846 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter9]{Chapter 9: Continuous-Time Analytical Techniques}
+\author[]{}
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Why Continuous Time?}
+	Most of this textbook uses discrete time. Discrete time is:
+	\begin{itemize}
+		\item Intuitive and aligns well with how data are measured
+		\item Convenient for computation and numerical methods 
+	\end{itemize}
+	
+	\bigskip
+	But continuous time offers particular advantages:
+	\begin{itemize}
+		\item Certain problems become \textbf{mathematically more tractable}
+		\item Key relationships involving differential equations derived more transparently with ``paper and pencil'' techniques
+		\item Especially helpful when variables evolve \textbf{smoothly} over time
+	\end{itemize}
+	
+	\bigskip
+	This chapter introduces the \textbf{core analytical techniques} specific to continuous-time models.
+\end{frame}
+
+\begin{frame}{Discrete vs.\ Continuous Time: Intuition}
+	\textbf{Discrete time}: Track variables at specific intervals (monthly, quarterly, yearly)
+	\begin{itemize}
+		\item Change is modeled from one period to the next
+		\item Dynamics described by \textbf{difference equations}
+		\item Solutions are \textbf{sequences} of values at discrete points
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Continuous time}: Time is a continuous flow
+	\begin{itemize}
+		\item Variables evolve smoothly at every instant
+		\item Dynamics described by \textbf{differential equations}
+		\item Solutions are \textbf{continuous functions} of time
+		\item More precise depiction of gradual economic adjustments
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Basic Tools and Notation}
+% ============================================================
+
+\begin{frame}{Notation}
+	\textbf{Discrete time}: subscripts $X_t$ for $t = 0, 1, 2, \ldots$
+	
+	\textbf{Continuous time}: functions of time $X(t)$ where $t \in \mathbb{R}_+$
+	
+	\bigskip
+	\textbf{Key mathematical concept}: the \textbf{time derivative}
+	\[
+	\frac{dX(t)}{dt} \equiv \dot{X}(t)
+	\]
+	
+	``Dot notation'' (Newton notation): $\dot{X}(t)$ measures the \textbf{instantaneous rate of change}.
+\end{frame}
+
+\begin{frame}{Growth Rates: Discrete vs.\ Continuous}
+	\textbf{Discrete time}: If $X_t$ grows at constant rate $\gamma$:
+	\[
+	\frac{X_{t+1} - X_t}{X_t} = \gamma
+	\]
+	\textbf{Solution} (difference equation):
+	\[
+	X_t = (1+\gamma)^t X_0
+	\]
+	
+	\bigskip
+	\textbf{Continuous time}: If instantaneous growth rate is $\gamma$:
+	\[
+	\frac{\dot{X}(t)}{X(t)} = \gamma
+	\]
+	\textbf{Solution} (differential equation):
+	\[
+	X(t) = e^{\gamma t} X(0)
+	\]
+	
+	\textbf{Verification}: Differentiate: $\dot{X}(t) = \gamma e^{\gamma t} X(0) = \gamma X(t)$
+\end{frame}
+
+\begin{frame}{The Log-Derivative Trick}
+	A particularly useful property in continuous time:
+	\[
+	{\frac{\dot{X}(t)}{X(t)} = \frac{d}{dt}\log(X(t))}
+	\]
+	
+	\textbf{Interpretation}: The derivative of the log of a variable gives its \textbf{instantaneous growth rate}.
+	
+	\bigskip
+	\textbf{Implication}: If a variable grows at a constant rate, its logarithm traces a \textbf{straight line} over time. This is why economists plot time series on a log scale.
+\end{frame}
+
+\begin{frame}{Application: Growth Accounting}
+	Consider the Cobb-Douglas production function:
+	\[
+	Y(t) = z(t)\, K(t)^\alpha\, L(t)^{1-\alpha}
+	\]
+	
+	Taking logs:
+	\[
+	\log Y(t) = \log z(t) + \alpha \log K(t) + (1-\alpha)\log L(t)
+	\]
+	
+	Taking the time derivative and applying the log-derivative trick:
+	\[
+	\frac{\dot{Y}(t)}{Y(t)} = \frac{\dot{z}(t)}{z(t)} + \alpha\, \frac{\dot{K}(t)}{K(t)} + (1-\alpha)\, \frac{\dot{L}(t)}{L(t)}
+	\]
+	
+	This is the growth accounting equation. The continuous-time derivation is particularly clean and transparent.
+	
+	\bigskip
+	\textbf{More generally}: The log-derivative trick is powerful for products, quotients, and powers---all common in macroeconomics.
+\end{frame}
+
+\begin{frame}{Connecting Discrete and Continuous Time}
+	\textbf{Discrete}: $X_t = (1+\gamma)^t X_0$. Taking logs and differences:
+	\[
+	\log X_{t+1} - \log X_t = \log(1+\gamma) \approx \gamma \quad \text{(for small $\gamma$)}
+	\]
+	
+	\textbf{Continuous}: $X(t) = e^{\gamma t} X(0)$. Taking logs and differentiating:
+	\[
+	\frac{d}{dt}\log X(t) = \gamma \quad \text{(exact)}
+	\]
+	
+	\bigskip
+	The key connection: $\log(1+\gamma) \approx \gamma$ for small $\gamma$, so discrete-time log-differences approximate continuous-time growth rates.
+	
+	\bigskip
+	The exponential $e^{\gamma t}$ in continuous time plays the role of $(1+\gamma)^t$ in discrete time.
+\end{frame}
+
+% ============================================================
+\section{Optimization: The Maximum Principle}
+% ============================================================
+
+\begin{frame}{Finite-Horizon Consumption-Saving Problem (Discrete Time)}
+	Consumer solves:
+	\[
+	\max_{\{c_t, a_{t+1}\}_{t=0}^T} \sum_{t=0}^T \beta^t u(c_t)
+	\]
+	subject to
+	\begin{align*}
+		a_{t+1} &= w + (1+r)a_t - c_t, \quad a_0 \text{ given} \\
+		a_{T+1} &\geq 0
+	\end{align*}
+	
+	\begin{itemize}
+		\item $\beta \in (0,1)$: discount factor; $u(\cdot)$: strictly increasing, strictly concave
+		\item $c_t$: consumption; $a_t$: assets; $w$, $r$: exogenous
+		\item \textbf{Control variable}: $c_t$ (chosen at $t$)
+		\item \textbf{State variable}: $a_t$ (carries over from previous choices)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Discrete-Time Hamiltonian}
+	Rewrite the budget constraint in difference form:
+	\[
+	a_{t+1} - a_t = ra_t + w - c_t
+	\]
+	
+	Define the \textbf{discrete-time Hamiltonian}:
+	\[
+	H_t \equiv \beta^t u(c_t) + \mu_t(ra_t + w - c_t)
+	\]
+	where $\mu_t$ is the costate variable (Lagrange multiplier).
+	
+	\bigskip
+	The Lagrangian becomes:
+	\[
+	{L} = \sum_{t=0}^T H_t - \sum_{t=0}^T \mu_t(a_{t+1} - a_t) + \lambda a_{T+1}
+	\]
+\end{frame}
+
+\begin{frame}{First-Order Conditions (Discrete Time)}
+	\textbf{FOC for control} $c_t$ ($t = 0, 1, \ldots, T$):
+	\[
+	\frac{\partial H_t}{\partial c_t} = 0
+	\]
+	
+	\textbf{FOC for state} $a_{t+1}$ ($t = 0, 1, \ldots, T-1$):
+	\[
+	\frac{\partial H_{t+1}}{\partial a_{t+1}} + \mu_{t+1} - \mu_t = 0
+	\]
+	
+	Note the extra term $\mu_{t+1} - \mu_t$: the costate variable can change over time, and this must be accounted for.
+	
+	\bigskip
+	\textbf{Terminal condition}: $-\mu_T + \lambda = 0$
+	
+	\textbf{Kuhn-Tucker}: $\lambda \geq 0$, $a_{T+1} \geq 0$, $\lambda a_{T+1} = 0$
+\end{frame}
+
+\begin{frame}{Euler Equation and Transversality Condition (Discrete Time)}
+	From the control FOC: $\beta^t u'(c_t) = \mu_t$
+	
+	From the state FOC: $\mu_t = (1+r)\mu_{t+1}$
+	
+	\bigskip
+	Combining:
+	\[
+	{u'(c_t) = \beta(1+r)\, u'(c_{t+1})}
+	\]
+	
+	This is the standard \textbf{discrete-time Euler equation}.
+	
+	\bigskip
+	\textbf{Transversality condition} (combining terminal and KT conditions):
+	\[
+	\beta^T u'(c_T)\, a_{T+1} = 0
+	\]
+	
+	Equivalently: $a_{T+1}/(1+r)^T = 0$.
+	
+	In the finite-horizon case: $a_{T+1} = 0$ (consume everything by the end).
+\end{frame}
+
+
+\begin{frame}{Infinite Horizon (Discrete Time)}
+	For $T \to \infty$: same Euler equation, with the \textbf{no-Ponzi game condition}:
+	\[
+	\lim_{T\to\infty} \frac{a_{T+1}}{(1+r)^T} \geq 0
+	\]
+	and the \textbf{transversality condition} becomes:
+	\[
+	\lim_{T\to\infty} \beta^T u'(c_T)\, a_{T+1} = 0
+	\]
+	
+	\bigskip
+	\textbf{Note}: The nPg condition $\lim_{T\to\infty} a_{T+1}/(1+r)^T \geq 0$ is \emph{not} the same as $\lim_{T\to\infty} a_{T+1} \geq 0$. It restricts the \emph{present value} of terminal assets. (Consider $a_t = a > 0$ for all $t$: satisfies the former but not the latter.) 
+\end{frame}
+
+\begin{frame}{The Continuous-Time Problem}
+	\[
+	\max_{c(t), a(t)} \int_0^\infty e^{-\rho t}\, u(c(t))\, dt
+	\]
+	subject to
+	\begin{align*}
+		\dot{a}(t) &= w + r\, a(t) - c(t), \quad a(0) \text{ given} \\
+		\lim_{T\to\infty} e^{-rT}\, a(T) &\geq 0
+	\end{align*}
+	
+	\textbf{Key differences from discrete time}:
+	\begin{itemize}
+		\item Sum $\to$ integral: $\sum_{t=0}^\infty \beta^t u(c_t) \to \int_0^\infty e^{-\rho t} u(c(t))\, dt$
+		\item Difference $\to$ derivative: $a_{t+1} - a_t \to \dot{a}(t)$
+		\item Discount factor $\to$ discount rate: $\beta^t \to e^{-\rho t}$
+		\item No-Ponzi game: $1/(1+r)^T \to e^{-rT}$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Note: Connecting $\beta$ and $\rho$}
+	In discrete time: discount factor $\beta = 1/(1+\rho)$.
+	
+	\bigskip
+	Divide one period into subperiods of length $\Delta$, discounting each by rate $\rho\Delta$. Discounting $t$ periods ($= t/\Delta$ subperiods):
+	\[
+	f(\Delta, t) = \left(\frac{1}{1+\rho\Delta}\right)^{t/\Delta}
+	\]
+	
+	Taking $\Delta \to 0$:
+	\[
+	\lim_{\Delta\to 0} f(\Delta, t) = \lim_{\Delta\to 0} \left[(1+\rho\Delta)^{1/(\rho\Delta)}\right]^{-\rho t} = e^{-\rho t}
+	\]
+	using $e = \lim_{x\to 0}(1+x)^{1/x}$.
+	
+	\bigskip
+	$\Rightarrow$ The continuous-time $e^{-\rho t}$ is the limit of discrete-time $\beta^t = [1/(1+\rho)]^t$ as the period length goes to zero. Larger $\rho$ $\Leftrightarrow$ smaller $\beta$ $\Leftrightarrow$ less patient.
+\end{frame}
+
+
+\begin{frame}{The Present-Value Hamiltonian}
+	Define the \textbf{present-value Hamiltonian}:
+	\[
+	H(t) \equiv e^{-\rho t}u(c(t)) + \mu(t)\bigl(r a(t) + w - c(t)\bigr)
+	\]
+	where $\mu(t)$ is the costate variable.
+	
+	\bigskip
+	\textbf{First-order conditions}:
+	
+	\textbf{Control} $c(t)$:
+	\[
+	\frac{\partial H(t)}{\partial c(t)} = 0
+	\]
+	
+	\textbf{State} $a(t)$:
+	\[
+	\frac{\partial H(t)}{\partial a(t)} + \dot{\mu}(t) = 0
+	\]
+	
+	\textbf{Transversality condition}:
+	\[
+	\lim_{T\to\infty} e^{-\rho T}\, u'(c(T))\, a(T) = 0
+	\]
+\end{frame}
+
+
+\begin{frame}{Differences from Discrete Time}
+	Three key differences in the continuous-time FOCs:
+	
+	\begin{enumerate}
+		\item Change in $\mu$ is $\dot{\mu}(t)$ instead of $\mu_{t+1} - \mu_t$
+		\item The relevant derivative is $\partial H(t)/\partial a(t)$ instead of $\partial H_{t+1}/\partial a_{t+1}$
+		\begin{itemize}
+			\item No ``next period'' in continuous time
+		\end{itemize}
+		\item Discounting in TVC is $e^{-\rho T}$ instead of $\beta^T$
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Heuristic derivation}: Construct Lagrangian
+	\[
+	{L} = \int_0^\infty H(t) dt - \int_0^\infty \mu(t)\dot{a}(t)dt
+	\]
+	Apply integration by parts to the second term:
+	\[
+	{L} = \int_0^\infty H(t) dt - \bigl[\lim_{T\to\infty}\mu(T)a(T) - \mu(0)a(0)\bigr] + \int_0^\infty \dot{\mu}(t)a(t) dt
+	\]
+	Taking FOCs on $c(t)$ and $a(t)$ yields the above conditions.
+\end{frame}
+
+
+\begin{frame}{Present-Value vs.\ Current-Value Hamiltonians}
+	The \textbf{present-value Hamiltonian} includes the discount factor $e^{-\rho t}$.
+	
+	\bigskip
+	The \textbf{current-value Hamiltonian} evaluates utility at current value:
+	\[
+	\hat{H}(t) \equiv u(c(t)) + \hat{\mu}(t)\bigl(ra(t) + w - c(t)\bigr)
+	\]
+	
+	\textbf{Modified FOCs}:
+	\begin{align*}
+		\frac{\partial\hat{H}(t)}{\partial c(t)} &= 0 \\[4pt]
+		\frac{\partial\hat{H}(t)}{\partial a(t)} + \dot{\hat{\mu}}(t) - \rho \hat{\mu}(t) &= 0
+	\end{align*}
+	
+	\textbf{Relationship}: $\mu(t) = e^{-\rho t} \hat{\mu}(t)$
+	
+	\medskip
+	The extra $-\rho\hat{\mu}(t)$ term accounts for discounting that was removed from the Hamiltonian.
+\end{frame}
+
+\begin{frame}{Deriving the Continuous-Time Euler Equation}
+	From the control FOC:
+	\[
+	e^{-\rho t} u'(c(t)) = \mu(t)
+	\]
+	
+	From the state FOC:
+	\[
+	r \mu(t) + \dot{\mu}(t) = 0 \qquad \Rightarrow \qquad \frac{\dot{\mu}(t)}{\mu(t)} = -r
+	\]
+	
+	Apply the log-derivative trick to $e^{-\rho t} u'(c(t)) = \mu(t)$:
+	\[
+	-\rho + \frac{u''(c(t))}{u'(c(t))} \dot{c}(t) = \frac{\dot{\mu}(t)}{\mu(t)} = -r
+	\]
+	
+	Rearranging:
+	\[
+	{-\frac{u''(c(t)) c(t)}{u'(c(t))} \frac{\dot{c}(t)}{c(t)} = r - \rho}
+	\]
+	
+	This is the \textbf{continuous-time Euler equation}.
+\end{frame}
+
+\begin{frame}{Interpreting the Continuous-Time Euler Equation}
+	\[
+	-\frac{u''(c(t)) c(t)}{u'(c(t))} \frac{\dot{c(t)}}{c(t)} = r - \rho
+	\]
+	
+	\begin{itemize}
+		\item $-u''(c)c/u'(c)$: \textbf{coefficient of relative risk aversion}
+		\item With CRRA utility $u(c) = (c^{1-\sigma}-1)/(1-\sigma)$: coefficient $= \sigma$
+		\item $\dot{c}/c$: consumption growth rate
+		\item $r$: benefit of saving (interest rate)
+		\item $\rho$: desire to consume sooner (discount rate)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Implications}: Consumption growth $= (r - \rho)/\sigma$
+	\begin{itemize}
+		\item $\rho$ large (impatient) $\Rightarrow$ low or negative consumption growth
+		\item $\rho$ small (patient) $\Rightarrow$ faster consumption growth
+		\item $r$ large (high return to saving) $\Rightarrow$ faster consumption growth
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Connecting Discrete and Continuous Euler Equations}
+	\textbf{Discrete}: $u'(c_t) = \beta(1+r)\, u'(c_{t+1})$
+	
+	\textbf{Continuous}: $-\frac{u''(c(t))c(t)}{u'(c(t))} \cdot \frac{\dot{c(t)}}{c(t)} = r - \rho$
+	
+	\bigskip
+	To see the connection, take a first-order Taylor expansion of $u'(c_{t+1})$:
+	\[
+	u'(c_{t+1}) \approx u'(c_t) + u''(c_t)(c_{t+1} - c_t)
+	\]
+	
+	Substitute into the discrete Euler equation with $\beta = 1/(1+\rho)$:
+	\[
+	-\frac{u''(c_t)\, c_t}{u'(c_t)} \cdot \frac{c_{t+1} - c_t}{c_t} = \frac{r - \rho}{1+r}
+	\]
+	
+	This closely parallels the continuous-time Euler equation. Despite different notations, \textbf{both capture the same trade-off} between impatience ($\rho$) and the rewards to saving ($r$).
+\end{frame}
+
+% ============================================================
+\section{Continuous-Time Growth Models}
+% ============================================================
+
+\begin{frame}{Revisiting Growth Models in Continuous Time}
+	In Chapters 3 and 4: Solow model and neoclassical growth model in discrete time.
+	
+	\bigskip
+	\textbf{Purpose of this section}:
+	\begin{enumerate}
+		\item Show how the same economic mechanisms are formulated using \textbf{differential equations}
+		\item Provide hands-on examples of the tools developed earlier
+		\item Continuous-time approach: more streamlined characterization of \textbf{transition dynamics} and \textbf{steady states}
+		\item Clarify connections and distinctions between discrete- and continuous-time techniques
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Solow Model: Setup}
+	Aggregate production function:
+	\[
+	Y(t) = F(K(t), A(t)L(t))
+	\]
+	
+	Labor and technology grow at constant rates:
+	\[
+	\frac{\dot{L}(t)}{L(t)} = n, \qquad \frac{\dot{A}(t)}{A(t)} = \gamma
+	\]
+	
+	Capital accumulates via:
+	\[
+	\dot{K}(t) = I(t) - \delta\, K(t)
+	\]
+	
+	Constant saving rate:
+	\[
+	I(t) = s F(K(t),A(t)L(t)), \qquad s \in (0,1)
+	\]
+\end{frame}
+
+
+\begin{frame}{Solow Model: Capital Per Effective Worker}
+	Define $\tilde{k}(t) \equiv K(t)/(A(t)L(t))$. Using the log-derivative trick:
+	\[
+	\frac{\dot{\tilde{k}}(t)}{\tilde{k}(t)} = \frac{\dot{K}(t)}{K(t)} - \frac{\dot{A}(t)}{A(t)} - \frac{\dot{L}(t)}{L(t)}
+	\]
+	
+	Substituting the laws of motion and using CRS ($F(K, AL)/AL = f(\tilde{k})$):
+	\[
+	\frac{\dot{\tilde{k}}}{\tilde{k}} = \frac{sf(\tilde{k})}{\tilde{k}} - (\delta + \gamma + n)
+	\]
+	
+	Multiplying by $\tilde{k}$:
+	\[
+	{\dot{\tilde{k}}(t) = sf(\tilde{k}(t)) - (\delta + \gamma + n)\, \tilde{k}(t)}
+	\]
+	
+\end{frame}
+
+
+\begin{frame}{Solow Model: Phase Diagram and Convergence}
+	Solow model in continuous time
+	\vspace{-10pt}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter9/cont_solow}
+\end{figure}
+\vspace{-20pt}
+
+	\begin{itemize}
+		\item Curve: RHS of the law of motion. Crosses zero at $\bar{\tilde{k}}$.
+		\item $\tilde{k} < \bar{\tilde{k}}$: $\dot{\tilde{k}} > 0$ $\Rightarrow$ capital per effective worker \textbf{increases} 
+		\item $\tilde{k} > \bar{\tilde{k}}$: $\dot{\tilde{k}} < 0$ $\Rightarrow$ capital per effective worker \textbf{decreases} 
+		\item \textbf{Convergence}: regardless of $\tilde{k}(0)$, economy approaches $\bar{\tilde{k}}$
+	\end{itemize}
+	
+	\textbf{Balanced growth path}: at $\bar{\tilde{k}}$, per-capita GDP $Y/L = f(\tilde{k})A(t)$ grows at rate $\gamma$.
+\end{frame}
+
+\begin{frame}{Neoclassical Growth (Ramsey) Model: Planner's Problem}
+	No population growth or technological progress (can be added). The planner solves:
+	\[
+	\max_{c(t), k(t)} \int_0^\infty e^{-\rho t}\, u(c(t))\, dt
+	\]
+	subject to
+	\[
+	\dot{k}(t) = f(k(t)) - \delta\, k(t) - c(t)
+	\]
+	and $c(t), k(t) \geq 0$ for all $t$, $k(0)$ given.
+	
+	\bigskip
+	No need for explicit no-Ponzi game condition (closed economy: planner cannot borrow against the future).
+\end{frame}
+
+\begin{frame}{Neoclassical Growth Model: Hamiltonian and FOCs}
+	\textbf{Hamiltonian}:
+	\[
+	H(t) = e^{-\rho t}\, u(c(t)) + \mu(t)\bigl(f(k(t)) - \delta\, k(t) - c(t)\bigr)
+	\]
+	
+	\textbf{FOCs}:
+	\begin{align*}
+		\frac{\partial H}{\partial c(t)} &= 0 \quad \Rightarrow \quad e^{-\rho t} u'(c(t)) = \mu(t) \\[4pt]
+		\frac{\partial H}{\partial k(t)} + \dot{\mu}(t) &= 0 \quad \Rightarrow \quad \mu(t)(f'(k(t)) - \delta) + \dot{\mu}(t) = 0
+	\end{align*}
+	
+	\textbf{Transversality condition}:
+	\[
+	\lim_{T\to\infty} e^{-\rho T}\, u'(c(T))\, k(T) = 0
+	\]
+\end{frame}
+
+\begin{frame}{Neoclassical Model: Euler Equation}
+	With CRRA utility $u(c) = (c^{1-\sigma}-1)/(1-\sigma)$, following the same derivation steps:
+	
+	\[
+	{\frac{\dot{c}(t)}{c(t)} = \frac{1}{\sigma}\bigl(f'(k(t)) - (\delta + \rho)\bigr)}
+	\]
+	
+	The economy is governed by the system of \textbf{two differential equations}:
+	\begin{itemize}
+		\item Law of motion for capital: $\dot{k}(t) = f(k(t)) - \delta k(t) - c(t)$
+		\item Euler equation for consumption: $\dot{c}(t)/c(t) = (f'(k(t)) - \delta - \rho)/\sigma$
+	\end{itemize}
+	
+	Together with initial condition $k(0)$ and the TVC, these determine the dynamic paths of $k(t)$ and $c(t)$.
+\end{frame}
+
+
+\begin{frame}{Phase Diagram}
+	
+	Phase diagram for Ramsey model in continuous time
+	\vspace{-10pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.42]{FigsChapter9/cont_ramsey}
+\end{figure}
+\vspace{-20pt}
+	
+	\textbf{From the capital equation}: $\dot{k}(t) = 0$ locus is the dash-dot curve $c(t) = f(k(t)) - \delta k(t)$
+
+	\textbf{From the Euler equation}: $\dot{c}(t) = 0$ locus is the vertical dotted line at $k^{**}$ where $f'(k^{**}) = \delta + \rho$
+
+	
+	$k^{**}$: the \textbf{modified golden rule} capital stock.
+\end{frame}
+
+\begin{frame}{Saddle Path and Convergence}
+	\begin{itemize}
+		\item Starting from $k(0)$, the planner chooses $c(0)$ on the \textbf{saddle path} (solid gray line in the Figure)
+		\item On the saddle path: $(k(t), c(t))$ gradually approaches the steady state $(\bar{k}, \bar{c})$ where $\bar{k} = k^{**}$
+		\item This path satisfies the TVC because $k(t)$ and $c(t)$ become constant in the long run
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Why other paths fail}:
+	\begin{itemize}
+		\item $c(0)$ too high: $(k(t), c(t))$ eventually reaches $k(t) = 0$ --- economy cannot produce, path infeasible
+		\item $c(0)$ too low: $k(t)$ grows large, $c(t) \to 0$ --- over-accumulation of capital, violates TVC 
+	\end{itemize}
+	
+	$\Rightarrow$ The Ramsey model exhibits \textbf{convergence} to the steady state.
+\end{frame}
+
+
+\begin{frame}{Golden Rule vs.\ Modified Golden Rule}
+	\textbf{Golden rule}: $f'(k^{GR}) = \delta$ --- maximizes steady-state consumption $c = f(k) - \delta k$
+	
+	\bigskip
+	\textbf{Modified golden rule}: $f'(k^{**}) = \delta + \rho$ --- steady state of the Ramsey model
+	
+	\bigskip
+	Because $\rho > 0$: $k^{**} < k^{GR}$
+	
+	\bigskip
+	\textbf{Intuition}: Consumers' impatience ($\rho > 0$) leads to less capital accumulation in steady state than what would maximize long-run consumption. They prefer consuming more today rather than waiting for the Golden Rule level of capital.
+\end{frame}
+
+\begin{frame}{Market Equilibrium in Continuous Time}
+	Continuum of identical households $i \in [0,1]$:
+	\[
+	\max_{c_i(t), k_i(t)} \int_0^\infty e^{-\rho t}\, u(c_i(t))\, dt
+	\]
+	subject to
+	\[
+	\dot{k}_i(t) = r(t)\, k_i(t) + w(t) - \delta\, k_i(t) - c_i(t)
+	\]
+	
+	Household Euler equation:
+	\[
+	\frac{\dot{c}_i(t)}{c_i(t)} = \frac{1}{\sigma}\bigl(r(t) - (\delta + \rho)\bigr)
+	\]
+	
+	Representative firm: 
+	$$
+	\max_{K,L}\; F(K,L) - rK - wL
+	$$
+	
+	FOCs: $r(t) = F_1(K,L) = f'(k)$ and $w(t) = F_2(K,L) = f(k) - kf'(k)$.
+\end{frame}
+
+
+\begin{frame}{Market Equilibrium = Planner's Solution}
+	\textbf{Equilibrium prices}:
+	\[
+	r(t) = f'(k(t)), \qquad w(t) = f(k(t)) - k(t)\, f'(k(t))
+	\]
+	
+	Substituting into the household problem and using symmetry ($c_i = c$, $k_i = k$):
+	\begin{align*}
+		\dot{k}(t) &= f(k(t)) - \delta\, k(t) - c(t) \\
+		\frac{\dot{c}(t)}{c(t)} &= \frac{1}{\sigma}\bigl(f'(k(t)) - (\delta + \rho)\bigr)
+	\end{align*}
+	
+	These are \textbf{identical} to the planner's equations.
+	
+	\bigskip
+	$\Rightarrow$ \textbf{First and Second Welfare Theorems hold}: the competitive equilibrium is Pareto optimal.
+\end{frame}
+
+
+% ============================================================
+\section{Uncertainty: The Poisson Process}
+% ============================================================
+
+\begin{frame}{Motivation: Uncertainty in Continuous Time}
+
+	\textbf{Discrete time}: natural to introduce ``a shock each period.''
+	
+	\textbf{Continuous time}: no natural unit of time. How to represent randomness?
+	
+
+	\textbf{Two broad approaches}:
+	\begin{enumerate}
+		\item \textbf{Diffusion process} (Brownian motion): constant flow of small, frequent shocks
+		\begin{itemize}
+			\item Central in finance and asset pricing
+			\item Requires stochastic calculus (beyond scope of the book)
+		\end{itemize}
+		\item \textbf{Jump process} (Poisson process): rare but discrete changes at random times
+		\begin{itemize}
+			\item Mathematically accessible
+			\item Models: job loss, innovation, firm entry/exit
+		
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{From Bernoulli Trials to the Poisson Distribution}
+	\textbf{Start in discrete time}: Bernoulli trial with success probability $\lambda \in [0,1]$ per year.
+	
+	\bigskip
+	Divide the year into $n$ subperiods, each with success probability $\lambda/n$:
+	\begin{itemize}
+		\item Expected successes in one year: still $\lambda$
+		\item Distribution: Binomial with $n$ trials, probability $\lambda/n$
+	\end{itemize}
+	\[
+	b(k, n) = \binom{n}{k} \left(\frac{\lambda}{n}\right)^k \left(1-\frac{\lambda}{n}\right)^{n-k}
+	\]
+	
+	\textbf{Key cases}:
+	\[
+	b(0, n) = \left(1-\frac{\lambda}{n}\right)^n 
+	\]
+	\[\frac{b(k,n)}{b(k-1,n)} = \frac{n-(k-1)}{k} \frac{\lambda/n}{1-\lambda/n} = \frac{\lambda-(k-1)\lambda/n}{k-\lambda k/n}
+	\]
+\end{frame}
+
+\begin{frame}{Taking $n \to \infty$: The Poisson Distribution}
+	As $n \to \infty$ (subperiod length $\to 0$):
+	
+	\[
+	p(0) \equiv \lim_{n\to\infty} b(0,n) = e^{-\lambda}
+	\]
+	
+	\[
+	\lim_{n\to\infty} \frac{b(k,n)}{b(k-1,n)} = \frac{\lambda}{k}
+	\]
+	
+	\bigskip
+	Applying recursively for $k = 1, 2, 3, \ldots$:
+	\[
+	{p(k) = e^{-\lambda} \frac{\lambda^k}{k!}}
+	\]
+	
+	This is the \textbf{Poisson distribution}: probability of $k$ successes when the number of trials $\to \infty$ and probability per trial $\to 0$, while expected successes remain $\lambda$.
+\end{frame}
+
+\begin{frame}{The Poisson Process}
+	\textbf{Definition}: A stochastic process where the number of successes in any interval $(t, t+T]$ follows a Poisson distribution:
+	\[
+	p(k) = e^{-\lambda T} \frac{(\lambda T)^k}{k!}
+	\]
+	
+	\begin{itemize}
+		\item Expected successes in $(t, t+T]$: $\lambda T$
+		\item As earlier, this is the limit of repeated independent trials in subintervals $\Delta = T/n$ with success prob $\lambda\Delta$, as $\Delta \to 0$
+	\end{itemize}
+	
+\medskip
+	\textbf{Key properties}:
+	\begin{itemize}
+		\item \textbf{Memoryless}: outcomes in disjoint intervals are independent
+		\item No need to assume $\lambda \leq 1$ (just start from small enough $\Delta$)
+		\item Probability of no success in $(t, t+T]$: $e^{-\lambda T}$
+		\item When $\lambda(s)$ is time-varying: probability of no success is $e^{-\int_t^{t+T} \lambda(s) ds}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Application: Employment and Unemployment Dynamics}
+	A group of $N$ workers. Let $e(t)$ = employed, $u(t)$ = unemployed, $e(t) + u(t) = N$.
+	
+	\begin{itemize}
+		\item Job separation: Poisson process with rate $\sigma > 0$
+		\begin{itemize}
+			\item Probability of keeping job for $t$ periods: $e^{-\sigma t}$
+			\item Expected job duration: $1/\sigma$
+		\end{itemize}
+		\item Job finding: unemployed worker finds job with probability $\lambda\, dt$ during interval $dt$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Law of motion} (using LLN): $\dot{u}(t) = (N - u(t))\sigma - u(t) \lambda$
+	
+	\textbf{Steady state} ($\dot{u} = 0$):
+	\[
+	\bar{u} = \frac{\sigma N}{\sigma + \lambda}, \qquad \text{unemployment rate: } \frac{\bar{u}}{N} = \frac{\sigma}{\sigma + \lambda}
+	\]
+	
+	Unemployment rate: increasing in $\sigma$, decreasing in $\lambda$. Convergence from any initial condition. 
+\end{frame}
+
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways}
+	\begin{enumerate}
+		\item \textbf{Notation}: $X(t)$ instead of $X_t$; $\dot{X}(t)$ for instantaneous rate of change; $e^{-\rho t}$ for discounting
+		
+		\item \textbf{Log-derivative trick}: $\dot{X}/X = d\log X/dt$ --- growth rates from logs
+		
+		\item \textbf{Hamiltonian method}: Control $\Rightarrow$ $\partial H/\partial c = 0$; State $\Rightarrow$ $\partial H/\partial a + \dot{\mu} = 0$
+		
+		\item \textbf{Continuous-time Euler}: $-\frac{u''c}{u'} \cdot \frac{\dot{c}}{c} = r - \rho$
+		
+		\item \textbf{Solow model}: $\dot{\tilde{k}} = sf(\tilde{k}) - (\delta+\gamma+n)\tilde{k}$ --- convergence
+		
+		\item \textbf{Neoclassical model}: saddle path; modified golden rule $f'(k^{**}) = \delta + \rho$; market equilibrium = planner
+		
+		\item \textbf{Poisson process}: limit of Bernoulli trials; memoryless; $p(k) = e^{-\lambda T}(\lambda T)^k/k!$
+	\end{enumerate}
+\end{frame}
+
+\end{document}
+

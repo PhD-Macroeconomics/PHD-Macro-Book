@@ -1,0 +1,1155 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\setbeamertemplate{section in toc}{%
+	\vskip0pt
+	\inserttocsectionnumber.~\inserttocsection
+}
+
+\setbeamertemplate{subsection in toc}{%
+	\vskip-0.5em
+	\hspace{1.5em}\inserttocsectionnumber.\inserttocsubsectionnumber~\inserttocsubsection
+}
+
+
+\title[Ch.\ 15: Government \& Public Policy]{Chapter 15: Government and Public Policies}
+\author[Azzimonti, Heathcote \& Storesletten]{Chapter authors: Marina Azzimonti, Jonathan Heathcote, and Kjetil Storesletten}
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\vspace{10pt}
+	\tableofcontents
+\end{frame}
+
+
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Why Does the Government Intervene?}
+	Under the First Welfare Theorem (complete, competitive markets, no externalities): competitive equilibrium allocations are Pareto optimal.
+	
+	\bigskip
+	Three main rationales for government intervention:
+	\begin{enumerate}
+		\item \textbf{Public goods \& externalities}
+		\begin{itemize}
+			\item National defense: no way to restrict enjoyment
+			\item Education, healthcare: large positive externalities 
+		\end{itemize}
+		\item \textbf{Incomplete markets \& private information frictions}
+		\begin{itemize}
+			\item Hard to buy private unemployment insurance
+			\item Financial crises: government bailouts, tax cuts
+		\end{itemize}
+		\item \textbf{Redistribution}
+		\begin{itemize}
+			\item Market economies generate substantial inequality
+			\item Taxing the rich, transferring to the poor
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{The Fundamental Trade-off}
+	Government spending (avg.\ 2010--2019), \% of GDP
+	\vspace{-20pt}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter15/fig1}
+\end{figure}
+\vspace{-15pt}
+	\begin{itemize}
+		\item High public consumption/transfers necessitates \textbf{high taxes}
+		\item High taxes $\Rightarrow$ distortions to private choices $\Rightarrow$ lower efficiency
+		\item Societies differ in how they view the trade-off between:
+		\begin{itemize}
+			\item Benefits of equity / public good provision
+			\item Efficiency costs of distortionary taxes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Public Finance: Data Overview}
+% ============================================================
+
+\begin{frame}{The Government Budget Constraint}
+	\[
+	\underbrace{G_t + T_t + i_t B_{t-1}}_{\text{Expenditures}} = \underbrace{Rev_t + B_t - B_{t-1}}_{\text{Revenue + Borrowing}}
+	\]
+	
+	\begin{itemize}
+		\item $G_t$: government consumption and investment (education, defense, parks)
+		\item $T_t$: transfers to individuals and corporations (food stamps, agricultural subsidies, Social Security)
+		\item $i_t B_{t-1}$: interest payments on outstanding debt
+		\item $Rev_t$: tax revenues (income, payroll, sales, excise, corporate, property)
+		\item $B_t - B_{t-1}$: net borrowing
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Deficit}: expenditures (incl.\ interest) $>$ revenues $\Rightarrow$ debt rises.
+	
+	\textbf{Surplus}: expenditures $<$ revenues $\Rightarrow$ debt falls.
+\end{frame}
+
+
+\begin{frame}{US Revenues and Expenditures}
+	
+	Revenues and outlays, as percentages of GDP, 1929--2021
+	\vspace{-10pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter15/fig2}
+\end{figure}
+\vspace{-15pt}
+	\begin{enumerate}
+		\item Both revenue and spending exhibit \textbf{upward trends} (1929--1970), then stabilize
+		\item Expenditures tend to exceed revenues: typically runs deficits
+		\begin{itemize}
+			\item 1970--2021 avg: expenditures $\approx 34\%$, revenues $\approx 28\%$ 
+		\end{itemize}
+		\item Expenditures \textbf{jump} during wars and recessions (WWII, Great Recession, COVID-19), while revenues typically fall
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Sources of Tax Revenue}
+	Taxes by category, as percentages of GDP, 1929--2021
+	\vspace{-10pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.28]{FigsChapter15/fig3}
+\end{figure}
+\vspace{-15pt}	
+	
+	\begin{itemize}
+		\item \textbf{Income taxes}: rose significantly, now $\approx 11\%$ of GDP
+		\item \textbf{Social insurance taxes}: rose significantly, now $\approx 7\%$ of GDP
+		\item \textbf{Sales and import taxes}: relatively constant at $\approx 8\%$
+		\item \textbf{Corporate taxes}: declined substantially, now $< 2\%$ of GDP
+	\end{itemize}
+	\vspace{-5pt}	
+	\textbf{Important}: The theoretical distinction (labor income tax, capital income tax, etc) does not map cleanly into empirical categories. 
+\end{frame}
+
+
+\begin{frame}{Deficits, Interest Payments, and Debt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.24]{FigsChapter15/fig4Left}
+	\end{figure}
+	\vspace{-15pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.24]{FigsChapter15/fig4Right}
+	\end{figure}
+		\vspace{-15pt}
+	\begin{itemize}
+		\item U.S.\ borrowed heavily during wars (WWII) and recessions 
+		\item \textbf{Tax smoothing} visible: revenues stable, spending volatile
+		\item Persistent deficits even outside of recessions
+		\item Most U.S.\ debt issued by Federal government (states have balanced budget rules)
+		\item Debt/GDP $\approx 100\%$ as of 2023
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Debt Sustainability}
+	Debt-to-GDP ratio evolves as:
+	\[
+	b_t = b_{t-1} \frac{1+r_t}{1+\gamma_t} + d_t
+	\]
+	where $b_t$ = debt/GDP, $r_t$ = real interest rate, $\gamma_t$ = real GDP growth, $d_t$ = primary deficit/GDP.
+	
+	\bigskip
+	\textbf{Debt rises} if and only if:
+	\[
+	d_t > \frac{\gamma_t - r_t}{1+\gamma_t}\, b_{t-1}
+	\]
+	
+	\begin{itemize}
+		\item When $r_t > \gamma_t$ and primary deficit $= 0$: debt/GDP rises on its own
+		\item When $r_t < \gamma_t$: debt/GDP falls even with moderate deficits
+		\item The value of $r$ relative to $\gamma$ is critical for public finance dynamics
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Is US Debt Sustainable?}
+	\textbf{US in 2023}: $b \approx 1.0$, $\gamma \approx 0.03$, $r \approx 0.02$
+	
+	\bigskip
+	\begin{itemize}
+		\item Maximum primary deficit consistent with stable debt: $\frac{0.03-0.02}{1.03} \times 1.0 \approx 1\%$ of GDP
+		\item Actual primary federal deficit: $\approx 3\%$ of GDP (CBO projects $\sim$3\% over next decade)
+		\item $\Rightarrow$ Debt-to-GDP ratio will \textbf{continue to rise}
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Will debt explode?} With constant $r < \gamma$, any size primary deficit is consistent with \emph{some} stable debt ratio. E.g., $d = 0.03$ is consistent with $b = 309\%$ of GDP.
+	
+	\bigskip
+	\textbf{But}: As debt rises, equilibrium $r$ is likely to \textbf{rise} (investors demand higher returns). Once $r > \gamma$, stabilization requires primary \emph{surpluses}. 
+\end{frame}
+
+
+\begin{frame}{Composition of Expenditures: By Category}
+
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter15/fig5Left}
+\end{figure}
+\vspace{-15pt}
+	\begin{itemize}
+		\item Early in sample: government consumption \& investment is the largest component and drives the trend
+		\item Over time: \textbf{transfers expand significantly}, overtaking $G$ during COVID-19
+		\item Transfers include both redistributive and insurance programs
+		\item Interest payments variable over time
+	\end{itemize}
+	
+	Growth in government size coincides with creation of Social Security, unemployment insurance (Great Depression), and increased public investment (post-WWII).
+\end{frame}
+
+
+\begin{frame}{Composition of Expenditures: By Function}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter15/fig5Right}
+\end{figure}
+\vspace{-15pt}
+	
+	\begin{itemize}
+		\item \textbf{Defense}: peaked at 8\% of GDP in 1959, now $\approx 3\%$
+		\item \textbf{Health} (Medicare, Medicaid): steady rise, now exceeds $8\%$
+		\item \textbf{Income security} (unemployment insurance, retirement, disability, welfare): fluctuates $\approx 7\%$
+		\begin{itemize}
+			\item Rises in recessions, falls in booms $\Rightarrow$ \textbf{``automatic stabilizer''}
+		\end{itemize}
+		\item \textbf{Education}: relatively constant at $\approx 5\%$
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Effects of Distortionary Taxes}
+% ============================================================
+
+\begin{frame}{Neoclassical Growth Model with Taxes: Setup}
+	\begin{itemize}
+		\item \textbf{Households}: infinitely-lived, discount factor $\beta$, utility $u(c_t, \ell_t)$, save in capital
+		\item \textbf{Firms}: CRS production $y_t = f(k_t, \ell_t)$, competitive
+		\item \textbf{Government}: finances $G_t$ and transfers $T_t$ using proportional taxes
+		\begin{itemize}
+			\item $\tau_{c,t}$: consumption tax
+			\item $\tau_{\ell,t}$: labor income tax
+			\item $\tau_{k,t}$: capital income tax (net of depreciation)
+		\end{itemize}
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Resource constraint}:
+	\[
+	C_t + G_t + K_{t+1} = f(K_t, L_t) + (1-\delta)K_t
+	\]
+\end{frame}
+
+
+\begin{frame}{Budget Constraints}
+\textbf{Government budget constraint}:
+\[
+G_t + T_t = \tau_{c,t} C_t + \tau_{\ell,t} w_t L_t + \tau_{k,t}(r_t - \delta) K_t
+\]
+
+\textbf{Household budget constraint}:
+\[
+(1+\tau_{c,t}) c_t + k_{t+1} = (1-\tau_{\ell,t}) w_t \ell_t + k_t + (1-\tau_{k,t})(r_t - \delta) k_t + T_t
+\]
+
+	
+	\bigskip
+	A government policy is a sequence $\{\tau_{c,t}, \tau_{k,t}, \tau_{\ell,t}, G_t, T_t\}_{t=0}^\infty$.
+	
+	\bigskip
+	No government debt for now (introduced later).
+\end{frame}
+
+\begin{frame}{Competitive Equilibrium: Definition}
+	\textbf{Definition 15.1}: A competitive equilibrium given policy $\{\tau_{c,t}, \tau_{k,t}, \tau_{\ell,t}, G_t, T_t\}_{t=0}^\infty$ is allocations $\{C_t, L_t, K_{t+1}\}$ and prices $\{w_t, r_t\}$ such that:
+	
+	\bigskip
+	\begin{enumerate}
+		\item[(i)] $\{C_t, L_t, K_{t+1}\}$ maximizes $\sum_{t=0}^\infty \beta^t u(c_t, \ell_t)$ subject to 	
+		\[
+		(1+\tau_{c,t})c_t + k_{t+1} = (1-\tau_{\ell,t}) w_t\ell_t + k_t + (1-\tau_{k,t})(r_t - \delta) k_t + T_t,
+		\] 
+		$k_0 = K_0$, and $k_{t+1} \geq 0$
+		\item[(ii)] $\{L_t, K_t\}$ solves firm profit maximization:
+		\[
+		\max_{k_t, \ell_t}\ \{f(k_t, \ell_t) - w_t \ell_t - r_t k_t\}
+		\]
+		with $\ell_t = L_t$ and $k_t = K_t$ in equilibrium
+		\item[(iii)] Government budget constraint 
+		\[
+		G_t + T_t = \tau_{c,t} C_t + \tau_{\ell,t} w_t L_t + \tau_{k,t}(r_t - \delta) K_t
+		\]
+		is satisfied at each date $t$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Household First-Order Conditions}
+	\textbf{Optimal saving (Euler equation)}:
+	\[
+	\frac{1+\tau_{c,t+1}}{1+\tau_{c,t}} \frac{u_1(c_t, \ell_t)}{u_1(c_{t+1}, \ell_{t+1})} = \beta\bigl[1 + (1-\tau_{k,t+1})(r_{t+1} - \delta)\bigr]
+	\]
+	
+	\textbf{Optimal labor supply}:
+	\[
+	-u_2(c_t, \ell_t) = \frac{1-\tau_{\ell,t}}{1+\tau_{c,t}} \cdot w_t \cdot u_1(c_t, \ell_t)
+	\]
+	
+	\textbf{Firm FOCs}: $w_t = f_2(k_t, \ell_t)$ and $r_t = f_1(k_t, \ell_t)$
+\end{frame}
+
+\begin{frame}{How Taxes Distort Decisions}
+	\textbf{Planner's FOCs} (maximize utility s.t.\ resource constraint):
+	\[
+	\frac{u_1(C_t, L_t)}{u_1(C_{t+1}, L_{t+1})} = \beta\bigl[1 + f_1(K_{t+1}, L_{t+1}) - \delta\bigr]
+	\]
+	\[
+	-u_2(C_t, L_t) = f_2(K_t, L_t) \cdot u_1(C_t, L_t)
+	\]
+	
+	\textbf{Comparing with household FOCs}:
+	\vspace{-7pt}
+	\begin{itemize}
+		\item $\tau_k$ {depresses after-tax return to saving}: 
+		$$
+		1 + (1-\tau_k)(r-\delta) < 1 + (r-\delta)
+		$$
+		\item Rising $\tau_c$ ($\tau_{c,t+1} > \tau_{c,t}$) works in the same direction as $\tau_k$
+		\item $\tau_\ell$ {depresses return to working}: $$
+		\frac{1-\tau_\ell}{1+\tau_c} w < w
+		$$
+		\item $\tau_c$ also depresses the return to working
+		\item All three taxes reduce capital, labor supply, and output vs.\ first best
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Long-Run Distortions}
+
+\begin{frame}{Steady-State: Capital-Labor Ratio}
+	In steady state with constant tax rates and Cobb-Douglas $f(k,\ell) = k^\alpha \ell^{1-\alpha}$:
+	
+	\textbf{From Euler equation}:
+	\[
+	1 = \beta\bigl[1 + (1-\tau_k)(r-\delta)\bigr]
+	\]
+	
+	Since $r = f_1 = \alpha(k/\ell)^{\alpha-1}$:
+	\[
+	{\frac{k}{\ell} = \left(\frac{\alpha(1-\tau_k)}{\rho + \delta(1-\tau_k)}\right)^{\!\frac{1}{1-\alpha}}}
+	\]
+	where $\rho = (1-\beta)/\beta$ is the rate of time preference.
+	
+	\bigskip
+	\begin{itemize}
+		\item Higher $\tau_k$ $\Rightarrow$ lower $k/\ell$ $\Rightarrow$ higher $r$, lower $w$
+		\item $\tau_\ell$ and $\tau_c$ have \textbf{no impact} on $k/\ell$ or pre-tax prices $r$, $w$ in steady state
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Steady-State: Labor Supply (GHH Preferences)}
+	\textbf{Greenwood-Hercowitz-Huffman (GHH) utility}:
+	\[
+	u(c, \ell) = \log\!\left(c - \frac{\ell^{1+1/\phi}}{1+1/\phi}\right)
+	\]
+	
+	\textbf{Key property}: consumption drops out of labor FOC $\Rightarrow$ \textbf{no income effects} on labor supply.
+	
+	\textbf{Steady-state labor supply}:
+	\[
+	\ell = \left(\frac{1-\tau_\ell}{1+\tau_c}\right)^{\!\phi} w^\phi
+	\]
+	
+	\vspace{-6pt}
+	\begin{itemize}
+		\item $\phi$: elasticity of hours to after-tax wages
+		\item Higher $\tau_\ell$ or $\tau_c$ $\Rightarrow$ lower $\ell$
+		\item Higher $\tau_k$ $\Rightarrow$ lower $w$ (via lower $k/\ell$) $\Rightarrow$ also lower $\ell$
+	\end{itemize}
+	
+	\textbf{Note}: With income effects (e.g., separable utility), the effect of $\tau_\ell$ on $\ell$ is \textbf{ambiguous} (substitution vs.\ income effect).
+\end{frame}
+
+\begin{frame}{Steady-State Output}
+	With GHH preferences, we can solve for hours worked as a function of $k/\ell$ because $w=f_2=(1-\alpha)(k/\ell)^\alpha$. With 
+	$$
+	{\frac{k}{\ell} = \left(\frac{\alpha(1-\tau_k)}{\rho + \delta(1-\tau_k)}\right)^{\!\frac{1}{1-\alpha}}}
+	$$ 
+	we can solve for the steady-state output
+	\[
+	{y = \ell\left(\frac{k}{\ell}\right)^\alpha= \left(\frac{1-\tau_\ell}{1+\tau_c}\right)^{\!\phi} (1-\alpha)^\phi \left(\frac{\alpha(1-\tau_k)}{\rho + \delta(1-\tau_k)}\right)^{\!\frac{\alpha(1+\phi)}{1-\alpha}}}
+	\]
+	
+	\begin{itemize}
+		\item \textbf{All three tax rates} reduce steady-state output
+		\item Output is decreasing in each tax rate
+		\item $\tau_k$ has an \textbf{amplified effect}: depresses $k/\ell$ directly, which lowers $w$, which in turn depresses $\ell$
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Tax Incidence}
+
+\begin{frame}{Tax Incidence: Worker--Capitalist Framework}
+	With GHH preferences, the representative agent steady state is \textbf{identical} at the aggregate level to a two-type economy:
+	\vspace{-7pt}
+	\begin{itemize}
+		\item \textbf{Workers}: rent labor, own no capital
+		\item \textbf{Capitalists}: own and rent capital, do not work
+	\end{itemize}
+	\vspace{-7pt}
+	(consumption appears in neither the SS saving FOC nor the SS labor FOC.)
+	
+
+	With no transfer ($T = 0$):
+	
+		\vspace{-6pt}
+	\quad \textbf{Worker consumption}: 
+	$$
+	c_w =\frac{1-\tau_\ell}{1+\tau_c}w\ell= \frac{1-\tau_\ell}{1+\tau_c}(1-\alpha) y
+	$$
+	\quad \textbf{Capitalist consumption}: 
+	$$
+	c_k = \frac{1-\tau_k}{1+\tau_c}(r-\delta)k=\frac{1-\tau_k}{1+\tau_c} \cdot \frac{\alpha\rho}{\rho + (1-\tau_k)\delta} y
+	$$
+	$\tau_\ell$ directly depresses $c_w$; $\tau_k$ directly depresses $c_k$; $\tau_c$ hits both. All taxes indirectly depress both via lower $y$.
+\end{frame}
+
+\begin{frame}{Budget-Balancing Tax Pairs}
+	With $T = 0$ and $G = gY$, the government budget constraint gives the locus of budget-balancing pairs $(\tau_\ell, \tau_k)$:
+	\[
+	\tau_\ell = \frac{1}{1-\alpha}\left(g - \tau_k \rho \frac{\alpha}{\rho + (1-\tau_k)\delta}\right)
+	\]
+	
+		\vspace{-5pt}
+		\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{FigsChapter15/fig6A}
+	\end{figure}
+	\vspace{-10pt}
+	
+	\begin{itemize}
+		\item As $\tau_k$ rises, the required $\tau_\ell$ falls (substituting capital for labor taxation)
+		\item As $\tau_k \to 1$, output collapses and both consumptions go to zero
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Excess Cost of Taxation}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.32\textwidth]{FigsChapter15/fig6B}
+	\hfill
+	\includegraphics[width=0.32\textwidth]{FigsChapter15/fig6C}
+	\hfill
+	\includegraphics[width=0.32\textwidth]{FigsChapter15/fig6D}
+\end{figure}
+		\vspace{-10pt}
+	\textbf{Excess cost} (per dollar of $G$) is defined as how much total consumption is reduced by taxes, net of public consumption financed:
+	\[
+	\text{Excess Cost} = \frac{(c_{w,\tau=0} - c_w)/(1+\phi) + c_{k,\tau=0} - c_k - gy}{gy}
+	\]
+	($c_{w,\tau=0} - c_w$ is divided by $1+\phi$ to account for the utility from leisure)
+		
+	\begin{itemize}
+		\item Always \textbf{positive} (taxes are distortionary)
+		\item \textbf{Increasing and convex} in $\tau_k$
+	
+		\item Minimized at $\tau_k = 0$
+	\end{itemize}
+\end{frame}
+
+
+
+\subsection{Tax Reform}
+
+\begin{frame}{Tax Reform: Eliminating Capital Income Taxes}
+	\begin{itemize}
+		\item Initial steady state: $\tau_k = 0.25$, $\tau_\ell = 0.2529$
+		\item At period 11: unexpected, permanent switch to $\tau_k = 0$, $\tau_\ell = 0.2985$
+		\item $G_t$ varies during transition to balance budget date-by-date 
+	\end{itemize}
+			\vspace{-5pt}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.45\textwidth]{FigsChapter15/fig7Left}
+		\hfill
+		\includegraphics[width=0.45\textwidth]{FigsChapter15/fig7Right}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Tax Reform: Interpreting the Transition}
+	\begin{itemize}
+		\item \textbf{Capital}: accumulates slowly toward new (higher) steady state
+		\item \textbf{Labor supply}: drops on impact (higher $\tau_\ell$), gradually recovers as rising capital raises wages
+		\item \textbf{Output}: falls short-run (labor drop), recovers long-run (capital accumulation)
+		\item \textbf{Consumption}: falls initially (more saving + lower output), then recovers
+	\end{itemize}
+	
+
+	\textbf{Distributional implications}:
+	\vspace{-5pt}
+	\begin{itemize}
+		\item \textbf{Capitalists}: always better off (capital income grows)
+		\item \textbf{Workers}: may be \emph{significantly} worse off (higher $\tau_\ell$)
+		\item Whether reform is beneficial depends on weights
+		\item More desirable if agents derive utility from $G$ 
+	\end{itemize}
+	
+
+	\textbf{Lesson}: Steady-state analysis alone is \textbf{insufficient}; transitions can be painful.
+\end{frame}
+
+
+
+\subsection{The Laffer Curve}
+
+\begin{frame}{The Laffer Curve}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{FigsChapter15/fig8}
+\end{figure}
+\vspace{-10pt}
+	\textbf{Revenue-maximizing tax rates} (with $\tau_k, \tau_\ell \geq 0$):
+	\[
+	{\tau_\ell^* = \frac{1}{1+\phi}, \qquad \tau_k^* = 0}
+	\]
+\vspace{-18pt}	
+	\begin{itemize}
+		\item At $\tau_\ell = 0$: no taxes levied $\Rightarrow$ no revenue
+		\item At $\tau_\ell = 1$: no one works $\Rightarrow$ nothing to tax $\Rightarrow$ no revenue
+		\item Higher Frisch elasticity $\phi$ $\Rightarrow$ lower revenue-maximizing $\tau_\ell$
+		\item Revenue is declining in $\tau_k$ at $\tau_k = 0$ $\Rightarrow$ $\tau_k = 0$ is revenue-maximizing
+		\item Above $\tau_\ell^*$: ``wrong side of the Laffer curve''
+	\end{itemize}
+\end{frame}
+
+\subsection{Theories of Government Spending}
+
+\begin{frame}{Theories of $G$: Public Goods}
+	So far, $G$ generated no benefits---revenues ``thrown into the ocean.'' Two theories:
+	
+	\bigskip
+	\textbf{1.\ Public goods}: Government produces goods valued by society (defense, parks, sanitation).
+	\[
+	u(c, g), \qquad u_2(c,g) > 0, \quad u_{22}(c,g) \leq 0
+	\]
+	
+	\begin{itemize}
+		\item \textbf{First best} (lump-sum taxes): equate marginal utilities: $u_1(c,g) = u_2(c,g)$
+		\item With distortionary taxes: also account for deadweight losses
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Theories of $G$: Public Capital}
+	\textbf{2.\ Public infrastructure}: roads, bridges, schools.
+	\[
+	f(k, k_g, \ell) = A k^\alpha \ell^{1-\alpha} k_g^\theta
+	\]
+	
+	Law of motion: $k_{g,t+1} = i_{g,t} + (1-\delta_g) k_{g,t}$
+	
+	\begin{itemize}
+		\item $k_g$: public capital; $\theta$: elasticity of output w.r.t.\ public capital
+		\item $\theta > 0$ $\Rightarrow$ increasing returns to scale
+		\item Estimates of $\theta$ vary widely:
+		\begin{itemize}
+			\item Low: 0.05 (Leeper, Walker, and Yang, 2010)
+			\item High: 0.39 (Aschauer, 1989)
+		\end{itemize}
+		\item With non-distortionary revenue: optimal to equate marginal products:
+		\[
+		f_{k,t+1} - \delta = f_{g,t+1} - \delta_g
+		\]
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Government Debt and Ricardian Equivalence}
+% ============================================================
+
+\begin{frame}{Setup: Two-Period Model with Lump-Sum Taxes}
+	Add government debt. Abstract from capital to simplify.
+	
+	\bigskip
+	Government: transfer $T_0$ in period 0, financed by debt $B_0$, repaid by lump-sum tax $\tau_1$ in period 1.
+	
+	\bigskip
+	\textbf{Household budget constraints}:
+	\begin{align*}
+		c_0 + b_0 &= w_0 \ell_0 + T_0 \\
+		c_1 &= w_1 \ell_1 + (1+r_1) b_0 - \tau_1
+	\end{align*}
+	
+	$b_0$: household bond purchases. Wages $w_0, w_1$ and return $r_0$ exogenous.
+\end{frame}
+
+\begin{frame}{Ricardian Equivalence: Proof}
+	Combine budget constraints in present value:
+	\[
+	c_0 + \frac{c_1}{1+r_1} = w_0 \ell_0 + \frac{w_1 \ell_1}{1+r_1} + \underbrace{T_0 - \frac{\tau_1}{1+r_1}}_{= 0}
+	\]
+		\vspace{-10pt}
+		
+	Since $\tau_1 = (1+r_1) T_0$ (government must repay): the tax and transfer terms \textbf{cancel exactly}.
+	
+	\textbf{Result}: Lifetime budget constraint is \textbf{unaffected} by the size of $T_0$.
+	\vspace{-20pt}
+	\begin{itemize}
+		\item Optimal allocation of consumption and hours: \textbf{identical} to zero-tax case
+		\item Household saves exactly $T_0$ more $\Rightarrow$ absorbs extra government bonds
+		\item Extra savings provide exactly enough income to pay $\tau_1$
+	\end{itemize}
+	This is \textbf{Ricardian Equivalence}: the timing of lump-sum taxes is irrelevant. Result extends to infinite-horizon economies.
+\end{frame}
+
+\begin{frame}{Ricardian Equivalence: Assumptions}
+	The result hinges on:
+	\begin{enumerate}
+		\item Taxes are \textbf{lump-sum} (not distortionary)
+		\item Households face \textbf{no credit constraints}
+		\item The households who get the transfers are the \textbf{same ones} who must repay the debt
+	\end{enumerate}
+	
+	\bigskip
+	Does \textbf{not} hinge on there being no capital.
+	
+	\bigskip
+	\textbf{Key question}: What happens when taxes are \emph{distortionary}? Then timing matters---some tax paths are better than others. This motivates the \textbf{Ramsey problem}.
+\end{frame}
+% ============================================================
+\section{Ramsey Taxation}
+% ============================================================
+
+\begin{frame}{Why Not Lump-Sum Taxes?}
+	In a representative agent economy: lump-sum taxes are distortion-free.
+	
+
+	\textbf{But in practice}:
+	\begin{itemize}
+		\item Households differ widely in income
+		\item Some too poor to afford a moderate lump-sum tax
+		\item Many view it as \textbf{unfair} if the poor pay the same as the rich
+	\end{itemize}
+	
+	$\Rightarrow$ Literature focuses on \textbf{proportional taxes} \
+	
+	\bigskip
+	Even with proportional taxes, different types of income can be taxed at different rates, and rates can vary over time. Government can save or borrow using debt.
+
+	\textbf{The Ramsey problem}: Maximize welfare by choosing optimal tax rates and debt, with \textbf{commitment} at $t = 0$.
+\end{frame}
+
+\begin{frame}{Two-Period Ramsey Model: Setup}
+	\textbf{Household}: $u(c_0, \ell_0) + \beta u(c_1, \ell_1)$
+	
+	\textbf{Production}: $y_t = A_t \ell_t$ (no capital). Competitive $\Rightarrow$ $w_t = A_t$ 
+	
+	\textbf{Storage technology}: 1 unit at $t=0$ $\to$ $1+r$ units at $t=1$ ($r$ exogenous)
+	
+	\bigskip
+	\textbf{Tax instruments}: $\tau_0, \tau_1$ on labor income; $\tau_{b,1}$ on wealth income at $t=1$.
+	
+	\bigskip
+	\textbf{Household budget constraints}:
+	\begin{align*}
+		c_0 &= (1-\tau_0) w_0 \ell_0 - b_0 \\
+		c_1 &= (1-\tau_1) w_1 \ell_1 + (1+r(1-\tau_{b,1})) b_0
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Household Optimality Conditions}
+	\textbf{First-order conditions for the household}:
+$$
+		u_{c,0} w_0 (1-\tau_0) = -u_{\ell,0} 
+		$$
+		$$
+		u_{c,1} w_1 (1-\tau_1) = -u_{\ell,1} 
+		$$
+		$$
+		u_{c,0} = \beta(1+r(1-\tau_{b,1})) u_{c,1}
+$$
+	
+	\bigskip
+	\textbf{Resource feasibility} (single equation):
+	\[
+	c_0 + g_0 + \frac{c_1 + g_1}{1+r} = A_0 \ell_0 + \frac{A_1 \ell_1}{1+r}
+	\]
+\end{frame}
+
+\begin{frame}{The Primal Approach: Implementability Constraint}
+	\textbf{Key idea}: Substitute household FOCs into the lifetime budget constraint to eliminate prices and taxes.
+	$$
+	 (1-\tau_t)w_t = -u_{\ell,t}/u_{c,t}
+	 $$
+	$$
+	1+r(1-\tau_{b,1}) = u_{c,0}/(\beta u_{c,1})
+	$$
+	After substitution and simplification using the household budget constraint:
+	\[
+	{u_{c,0} c_0 + \beta u_{c,1} c_1 = -u_{\ell,0} \ell_0 - \beta u_{\ell,1} \ell_1}
+	\]
+	This is the \textbf{implementability constraint}. It embeds household optimality \emph{and} budget constraint. Government budget is automatically satisfied by Walras' Law.
+
+	\textbf{Result}: Any allocation satisfying the resource feasibility and the implementability condition can be implemented by some feasible tax plan.
+\end{frame}
+
+
+\begin{frame}{The Ramsey Problem}
+	Maximize household welfare subject to resource and implementability constraints:
+	\[
+	\max_{c_0, c_1, \ell_0, \ell_1}\; u(c_0, \ell_0) + \beta u(c_1, \ell_1) + \lambda[\text{RC}] + \mu[\text{IC}]
+	\]
+	
+	\textbf{Four FOCs}:
+$$
+		u_{c,0} - \lambda + \mu u_{c,0} + \mu u_{cc,0} c_0 + \mu u_{\ell c,0} \ell_0 = 0 
+		$$
+		$$
+		u_{\ell,0} + \lambda A_0 + \mu u_{\ell,0} + \mu u_{c\ell,0} c_0 + \mu u_{\ell\ell,0} \ell_0 = 0 
+		$$
+		$$
+		\beta u_{c,1} - \tfrac{\lambda}{1+r} + \beta\mu u_{c,1} + \beta\mu u_{cc,1} c_1 + \beta\mu u_{\ell c,1} \ell_1 = 0 
+		$$
+		$$
+		\beta u_{\ell,1} + \tfrac{\lambda A_1}{1+r} + \beta\mu u_{\ell,1} + \beta\mu u_{c\ell,1} c_1 + \beta\mu u_{\ell\ell,1} \ell_1 = 0
+		$$
+		
+	Four FOCs + RC + IC = 6 equations, 6 unknowns ($c_0, c_1, \ell_0, \ell_1, \lambda, \mu$).
+\end{frame}
+
+\begin{frame}{Separable Utility: Simplification}
+	With 
+	$$
+	u(c,\ell) = \frac{c^{1-\sigma}}{1-\sigma} - \frac{\ell^{1+1/\phi}}{1+1/\phi}
+	$$
+	
+	Cross-derivatives vanish. Second derivatives simplify: $u_{cc} c = -\sigma u_c$ and $u_{\ell\ell} \ell = u_\ell / \phi$.
+	
+	\bigskip
+	The four FOCs become:
+$$
+		u_{c,0}(1+\mu - \mu\sigma) = \lambda 
+		$$
+			$$
+		u_{\ell,0}(1+\mu + \mu/\phi) = -\lambda A_0 
+		$$
+		$$
+		\beta u_{c,1}(1+\mu - \mu\sigma) = \lambda/(1+r) 
+		$$
+		$$
+		\beta u_{\ell,1}(1+\mu + \mu/\phi) = -\lambda A_1/(1+r)
+	$$
+\end{frame}
+
+\begin{frame}{Ramsey Result 1: Zero Capital Income Tax}
+	\textbf{Comparing the Euler equations} (1st and 3rd FOCs):
+	\[
+{\beta(1+r) u_{c,1} = u_{c,0}}
+	\]
+	
+	$\Rightarrow$ No intertemporal wedge. Comparing with household Euler equation:
+	
+	\[
+{\tau_{b,1} = 0}
+	\]
+	
+	\textbf{Result} (Chamley-Judd): The government should commit to \textbf{neither tax nor subsidize} income from savings.
+\end{frame}
+
+\begin{frame}{Ramsey Result 2: Tax Smoothing}
+	\textbf{Comparing labor and consumption FOCs}:
+	\[
+	u_{c,t} A_t \frac{1+\mu-\mu\sigma}{1+\mu+\mu/\phi} = -u_{\ell,t}, \quad t = 0, 1
+	\]
+	
+	Matching with household FOCs using $w_t = A_t$:
+	
+	\textbf{Result} (Barro, Lucas-Stokey):
+	\[
+	{\tau_0 = \tau_1 = \frac{\mu(\sigma + 1/\phi)}{1+\mu+\mu/\phi}}
+	\]
+	
+	Labor tax rate should be \textbf{constant} over time; positive when $g_0$ or $g_1 > 0$. 
+	
+	\textbf{Intuition}: Distortions from taxation are \textbf{convex} in the tax rate
+\end{frame}
+
+\subsection{Time Consistency}
+
+\begin{frame}{Time Consistency}
+	Assume the Ramsey plan has $b_0 > 0$ (household saves in period 0).
+	
+	\bigskip
+	\textbf{At $t = 1$}: household wealth $b_1$ is already determined.
+	
+	$\Rightarrow$ Taxing wealth income is effectively a \textbf{lump-sum tax}!
+	
+	\bigskip
+	A benevolent planner \emph{at $t=1$} would deviate from the Ramsey plan:
+	\begin{itemize}
+		\item Set $\tau_1 = 0$ (avoid distorting labor)
+		\item Fund all spending from $\tau_{b,1}$ (non-distortionary at that point)
+	\end{itemize}
+	
+	$\Rightarrow$ The Ramsey plan is \textbf{time inconsistent} (Kydland and Prescott, 1977).
+\end{frame}
+
+\begin{frame}{Time Consistency: Implications}
+	\begin{itemize}
+		\item The Ramsey plan is still useful: tells us what's optimal \emph{with commitment}
+		\item \textbf{Institutions} can provide commitment:
+		\begin{itemize}
+			\item Constitutional limits on tax changes
+			\item Independent fiscal authorities
+		\end{itemize}
+		\item Large literature characterizing best \textbf{time-consistent} policies
+		\item Time inconsistency arises in many settings:
+		\begin{itemize}
+			\item Sovereign debt default
+			\item Political economy: changing coalitions, redistribution motives depress investment 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Debt and Pensions with Overlapping Generations}
+% ============================================================
+
+\begin{frame}{OLG Model: Setup}
+	Return to two-period OLG endowment economy, extended with government debt and pensions. Small open economy with exogenous $r$.
+	
+	\begin{itemize}
+		\item Population growth at rate $n$: $N_t = (1+n)^t$
+		\item Young share: $(1+n)/(2+n)$
+		\item Only the young work; labor income: $y_t = (1+\gamma)^t \omega$
+		\item Aggregate labor income: $Y_t = (1+n)^t(1+\gamma)^t \omega$
+	\end{itemize}
+	
+	\textbf{PAYG pension}: pays $p_t$ to every old individual, financed by tax $\tau_p$:
+	\[
+	p_t = (1+n) \tau_p y_t
+	\]
+	
+	\textbf{Government}: spends $G_t = gY_t$, taxes labor at $\tau_t$, issues debt $B_t$.
+\end{frame}
+
+\begin{frame}{OLG: Government and Household Budget}
+	\textbf{Government budget} (in GDP ratios, pension self-financing):
+	$$
+	G_t+p_tN_{t-1}+(1+r)B_{t-1}=(\tau_p+\tau_t)Y_t+B_t
+	$$
+	\[
+	\Rightarrow\quad g + \frac{1+r}{(1+n)(1+\gamma)} b_{t-1} = \tau_t + b_t
+	\]
+	\textbf{Household budget constraints}:
+	$$
+		c_{y,t} + a_t= (1-\tau_t - \tau_p) y_t 
+		$$
+		$$
+		c_{o,t+1}=(1+r) a_t + p_{t+1}
+	$$
+	\textbf{Euler equation}:
+	\[
+	u'(c_{o,t+1}) = (1+r) \beta u'(c_{y,t})
+	\]
+	\textbf{Lifetime budget}:
+	\[
+	c_{y,t} + \frac{c_{o,t+1}}{1+r} = \left(1 - \tau_t - \tau_p + \frac{(1+n)(1+\gamma)}{1+r}\tau_p\right) y_t
+	\]
+\end{frame}
+
+
+\begin{frame}{PAYG Pension $=$ Forced Government Saving}
+	Consider a individual who is forced to purchase $b_{p,t} = \tau_p y_t$ government bonds at return $r_p$:
+	$$
+		c_{y,t} + a_t + b_{p,t} = (1-\tau_t) y_t 
+		$$
+		$$
+		c_{o,t+1} = (1+r) a_t + (1+r_p) b_{p,t}
+	$$
+	
+	Setting $1+r_p = (1+n)(1+\gamma) \approx 1+n+\gamma$, these budget constraints are \textbf{identical} to the ones under PAYG pension.
+	
+	\textbf{Return on PAYG pension} $=$ growth rate of output.
+	\begin{itemize}
+		\item If $n + \gamma > r$: pension \textbf{increases} lifetime income for the young $\Rightarrow$ Pareto improving (dynamic inefficiency)
+		\item If $n + \gamma < r$ (``normal'' case): pension is effectively a \textbf{tax on the young}
+		\item Initial old generation always gains (receives benefits without contributing)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Ricardian Equivalence Breaks Down in OLG}
+	\textbf{Experiment}: one-time tax holiday at $t$ in economy with zero initial debt.
+	\begin{itemize}
+		\item $\tau_t = 0$, $B_t = gY_t$
+		\item Repay by raising $\tau_{t+1}$, no further debt
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Generation $t$}: gains
+	
+	\textbf{Generation $t+1$}: loses (higher present-value taxes)
+	
+	\bigskip
+	$\Rightarrow$ Aggregate consumption rises at $t$, falls at $t+2$.
+	
+	$\Rightarrow$ \textbf{Ricardian equivalence fails}.
+	
+	\bigskip
+	\textbf{Why}: Debt reshuffles the tax burden \textbf{across generations} (not just across time for the same agent). 
+\end{frame}
+
+
+\begin{frame}{Pension Promises as Implicit Debt}
+	\textbf{Total effective US\ government debt}:
+	
+	\begin{itemize}
+		\item \textbf{Narrow definition} (bonds outstanding): federal debt held by public $\approx 94\%$ of GDP (Q2 2023)
+		\item \textbf{Broad definition} (includes implicit pension debt): present value of future federal pension promises $= \$65.9$ trillion, or $\approx 245\%$ of GDP
+		\item \textbf{Total}: $94 + 245 = \mathbf{339\%}$ of GDP
+		\item This excludes future Medicare costs!
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Key difference}: Nominal debt default ruled out by US\ Constitution (though inflation can erode it). Pension promises have \textbf{no constitutional protection}---government can reduce benefits or raise eligibility age.
+\end{frame}
+\begin{frame}{Strain on Pension Systems}
+	Two factors straining OECD pension systems:
+	
+	\begin{enumerate}
+		\item \textbf{Population aging}: lower mortality + lower fertility $\Rightarrow$ more retirees per worker (lower $n$ in the model)
+		\item \textbf{Secular stagnation}: US\ GDP per capita growth fell from 2.3\% (1950--2000) to 1.2\% (2000--2020) (lower $\gamma$)
+	\end{enumerate}
+	
+	\bigskip
+	Both reduce the PAYG return $(1+n)(1+\gamma)$ relative to $1+r$.
+	
+	\bigskip
+	\begin{itemize}
+		\item US\ Social Security Trust Fund scheduled to deplete by \textbf{2033}
+		\item Real-world pension funds are not purely PAYG, but public pension savings are relatively small
+		\item Options: reduce benefits, raise retirement age, increase $\tau_p$
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Taxes and Transfers as Redistribution}
+% ============================================================
+
+\begin{frame}{The US\ Tax and Transfer System: Data}
+	Log pre-government income vs.\ log post-government income
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{FigsChapter15/fig9Left}
+\end{figure}
+\vspace{-10pt}
+	
+	Relationship approximately linear in logs, except at lowest income percentiles.
+\end{frame}
+
+\begin{frame}{The US\ Tax and Transfer System: Data}
+	Average net tax rates by household income
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{FigsChapter15/fig9Right}
+\end{figure}
+\vspace{-10pt}
+	Average net tax rate is \textbf{increasing} with income $\Rightarrow$ US\ system is \textbf{progressive}.
+\end{frame}
+\begin{frame}{Log-Linear Tax Function}
+	The US\ tax-and-transfer system is well approximated by:
+	\[
+	{y - T(y) = \lambda y^{1-\tau}}
+	\]
+	
+	\begin{itemize}
+		\item $y$: pre-government household income
+		\item $T(y)$: taxes minus transfers
+		\item $y - T(y)$: disposable income
+		\item $\lambda$: controls the level of taxation
+		\item $\tau$: \textbf{progressivity parameter}
+	\end{itemize}
+	
+	\bigskip
+	\begin{itemize}
+		\item $\tau > 0$: \textbf{progressive} (marginal rate $T'(y)$ exceeds average rate $T(y)/y$)
+		\item $\tau = 0$: flat tax ($T'(y) = T(y)/y = 1-\lambda$)
+		\item $\tau < 0$: regressive
+	\end{itemize}
+\end{frame}
+
+
+\subsection{A Macro Model of Progressivity}
+
+\begin{frame}{Model Setup}
+	A static model. Unit continuum of individuals indexed by $i$, with heterogeneous productivity $w_i$:
+	\[
+	u(c_i, \ell_i, G) = \log c_i - \frac{\ell_i^{1+1/\phi}}{1+1/\phi}
+	\]
+	
+	Tax system: 
+	$$
+	c_i = \lambda(w_i \ell_i)^{1-\tau}
+	$$
+	
+	Government budget must balance: 
+	$$
+	\int c_i di + G = Y = \int w_i \ell_i di
+	$$
+	
+	\bigskip
+	\textbf{Balanced-growth class} utility: tractable closed-form solution.
+\end{frame}
+
+
+\begin{frame}{Equilibrium: Hours and Consumption}
+	\textbf{FOC for hours}:
+	\[
+	\log \ell_i = \frac{\log(1-\tau)}{1+1/\phi}
+	\]
+	\begin{itemize}
+		\item Hours are \textbf{falling in $\tau$}: progressivity discourages work (higher marginal rate)
+		\item Hours are \textbf{independent of $w_i$}: balanced growth class utility
+		\item As $\tau \to 1$: disposable income becomes $\lambda$ regardless of hours $\Rightarrow$ $\ell \to 0$
+	\end{itemize}
+
+	\textbf{Consumption}:
+	\[
+	\log c_i = \log\lambda + (1-\tau)\frac{\log(1-\tau)}{1+1/\phi} + (1-\tau)\log w_i
+	\]
+	Consumption is increasing in $w_i$, but the pass-through is dampened: a 1\% increase in $w_i$ translates to only a $(1-\tau)\%$ increase in $c_i$.
+\end{frame}
+\begin{frame}{Consumption Inequality and the Equity--Efficiency Trade-off}
+	\textbf{Pre-government earnings inequality}: $\text{Var}(\log(w\ell)) = \text{Var}(\log w)$	
+	\textbf{Consumption inequality}:
+	\[
+	\text{Var}(\log c) = (1-\tau)^2 \text{Var}(\log w)
+	\]
+		Higher $\tau$ $\Rightarrow$ lower consumption inequality.
+	
+
+	\textbf{Consumption-equivalent flow utility} (in equilibrium):
+	\[
+	c_w - \frac{\ell^{1+1/\phi}}{1+1/\phi} = \frac{1}{1+\phi} c_w
+	\]
+	
+	\textbf{The fundamental trade-off}:
+	\begin{itemize}
+		\item Higher progressivity ($\tau$) = more redistribution = less consumption inequality
+		\item Higher progressivity ($\tau$) = more distortion = less hours worked = less output
+	\end{itemize}
+
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Data}: US\ spending $\approx 34\%$ GDP; transfers growing; persistent deficits; debt/GDP $\approx 100\%$
+		
+		\item \textbf{Distortionary taxes}: All three types ($\tau_c, \tau_\ell, \tau_k$) reduce output; $\tau_k$ is especially costly (convex excess cost; amplification through wages)
+		
+		\item \textbf{Tax reform}: Eliminating $\tau_k$ improves long-run efficiency but creates painful transitions and distributional tensions
+		
+		\item \textbf{Laffer curve}: Revenue-maximizing rates: $\tau_\ell^* = 1/(1+\phi)$, $\tau_k^* = 0$
+		
+		\item \textbf{Ricardian equivalence}: Holds with lump-sum taxes and infinitely-lived agents; \textbf{fails} in OLG (debt shifts burden across generations)
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item \textbf{Ramsey taxation}: Optimal $\tau_k = 0$; smooth $\tau_\ell$ over time; use debt to absorb temporary shocks
+		
+		\item \textbf{Time consistency}: Optimal plans not credible ex post; institutions needed for commitment
+		
+		\item \textbf{OLG pensions}: PAYG $=$ implicit debt with return $n+\gamma$; aging and slower growth strain systems
+		
+		\item \textbf{Redistribution}: Progressive $\tau$ reduces inequality but distorts labor supply --- fundamental equity-efficiency trade-off
+	\end{enumerate}
+\end{frame}
+
+\end{document}
+

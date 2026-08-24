@@ -1,0 +1,1314 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+\title[Ch.\ 20: Frictional Labor Markets]{Chapter 20: Frictional Labor Markets}
+\author[Mukoyama \& \c{S}ahin]{Chapter authors: Toshihiko Mukoyama and Ay\c{s}eg\"ul \c{S}ahin}
+
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Motivation}
+	Early real business cycle models assumed a \textbf{frictionless labor market}:
+	\begin{itemize}
+		\item All firms find workers; all workers find jobs
+		\item Equilibrium wage equates labor demand and supply
+		\item No role for unemployment
+	\end{itemize}
+	
+	\bigskip
+	But unemployment is a central feature of the business cycle:
+	\begin{itemize}
+		\item Unemployment rate rises sharply in recessions
+		\item Elevated unemployment is among the most important social costs of recessions
+		\item Policies (UI, job training) aim to reduce unemployment
+		\item Need a formal framework where unemployment arises \textbf{endogenously}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Search Frictions?}
+	Several theories of unemployment exist. This chapter focuses on \textbf{search frictions}.
+	
+	\textbf{Other theories}:
+	\vspace{-5pt}
+	\begin{itemize}
+		\item Wage rigidity (minimum wages, unions)
+		\item Efficiency wages (high wages to induce effort)
+	\end{itemize}
+	
+	\textbf{Search frictions}: It takes time, effort, and resources for workers and firms to find each other.
+		\vspace{-5pt}
+	\begin{itemize}
+		\item Workers and jobs are heterogeneous in many dimensions
+		\item Finding a good match is hard
+		\item Some models: explicit matching of heterogeneous workers and jobs
+		\item Other models: matching as a ``black box'' (reduced-form matching function) --- Leading example: \textbf{Diamond--Mortensen--Pissarides (DMP) model}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Chapter Roadmap}
+	\begin{enumerate}
+		\item Labor market facts: unemployment, vacancies, Beveridge curve
+		\item A simple two-state model of unemployment
+		\item The DMP model: matching, equilibrium, efficiency (Hosios condition)
+		\item Gross flows across three labor market states
+		\item The unemployment volatility puzzle (Shimer puzzle)
+		\item Endogenous separations
+		\item DMP + neoclassical growth model (consumption, capital)
+		\item Search with heterogeneous job offers (McCall model)
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{Labor Market Facts}
+% ============================================================
+
+\begin{frame}{The US Unemployment Rate}
+
+
+The unemployment rate in the United States
+	\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.31]{FigsChapter20/fig1_unemployment_rate}
+\end{figure}
+\vspace{-15pt}	
+	\begin{itemize}
+		\item US civilian non-institutional population (16+) divided into $E$ (employment), $U$ (unemployment), and $N$ (out of labor force)
+		\item Unemployment: searching for a job or on temporary layoff
+		\item Unemployment rate = $U / (E + U)$
+		\item Strongly countercyclical: rises in recessions, falls in expansions
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Unemployment and Vacancies}
+	Unemployment and vacancy rates in the United States
+	\vspace{-8pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter20/fig2_beveridge_curve}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Vacancies are strongly \textbf{procyclical} (opposite of unemployment)
+		\item Suggests labor \textbf{demand} shifts drive much of cyclical unemployment
+		\item Motivates models that emphasize firms' recruiting decisions
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{A Simple Model of Unemployment}
+% ============================================================
+
+\begin{frame}{Setup: Two States}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.6]{FigsChapter20/EUflowfig}
+	\end{figure}
+	\vspace{-15pt}	
+	\bigskip
+	\begin{itemize}
+		\item Workers are either employed ($E$) or unemployed ($U$)
+		\item Normalize labor force to 1: $e_t + u_t = 1$
+		\item Ignore flows in/out of labor force
+		\item Unemployment rate equals $u_t$ (since labor force = 1)
+		\item $\lambda$: job-finding probability ($U$ to $E$)
+		\item $\sigma$: separation probability ($E$ to $U$)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Law of Motion and Steady State}
+	Unemployment evolves as:
+	\[
+	u_{t+1} = (1 - \lambda) u_t + \sigma (1 - u_t)
+	\]
+	
+	\bigskip
+	\textbf{Steady state} ($u_{t+1} = u_t = \bar{u}$):
+	\[
+	{\bar{u} = \frac{\sigma}{\lambda + \sigma}}
+	\]
+	
+	\begin{itemize}
+		\item Decreasing in $\lambda$ (job finding)
+		\item Increasing in $\sigma$ (separation)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Convergence}:
+	\[
+	u_{t+1} - \bar{u} = (1 - \lambda - \sigma)(u_t - \bar{u})
+	\]
+	$|1 - \lambda - \sigma| \in (0,1)$ $\Rightarrow$ convergence to $\bar{u}$.
+\end{frame}
+
+\begin{frame}{Quantitative Example and Duration}
+	\textbf{Calibration}: $\lambda = 0.45$, $\sigma = 0.034$ (monthly)
+	\begin{itemize}
+		\item $1 - \lambda - \sigma \approx 0.5$: fast convergence
+		\item $\bar{u} \approx 7.0\%$
+		\item From $u_0 = 15\%$: after 6 months, $u \approx 7.2\%$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Average unemployment duration}:
+	\[
+	D = \lambda \cdot 1 + (1-\lambda)\lambda \cdot 2 + (1-\lambda)^2 \lambda \cdot 3 + \cdots = \frac{1}{\lambda}
+	\]
+	
+	\bigskip
+	\textbf{Recursive derivation}:
+	\[
+	D_t = \lambda \cdot 1 + (1 - \lambda)(1 + D_{t+1})
+	\]
+	With $D_t = D_{t+1} = D$: $D = 1/\lambda$.
+\end{frame}
+
+% ============================================================
+\section{The DMP Model}
+% ============================================================
+
+\begin{frame}{The Diamond--Mortensen--Pissarides Model}
+	A \textbf{search and matching} model (here, a discrete-time version of Pissarides, 1985):
+	\begin{itemize}
+		\item Workers and firms search for each other
+		\item Matching process summarized by a \textbf{matching function}
+		\item Firms post \textbf{vacancies} at a cost (costly search, investment)
+		\item Firm and worker split the match surplus via \textbf{Nash bargaining}
+		\item Free entry of firms
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Key features}:
+	\begin{itemize}
+		\item Only firms engage in costly search (demand side focus)
+		\item Bilateral monopoly once matched $\Rightarrow$ bargaining needed
+		\item Equilibrium may \textbf{not} be Pareto efficient (externalities)
+		\item Endogenizes $\lambda$ from the simple model
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Matching Function}
+	Matches created in period $t+1$:
+	\[
+	\mathcal{M}_{t+1} = M(u_t, v_t)
+	\]
+	
+	\begin{itemize}
+		\item Increasing in both arguments, constant returns to scale
+		\item $M(u, v) \leq u$ and $M(u, v) \leq v$
+		\item Random search: all vacancies and workers have equal chance
+	\end{itemize}
+
+	\textbf{Labor market tightness}: $\theta_t \equiv v_t / u_t$
+	
+	\textbf{Job-finding probability} (workers): $M(u_t,v_t)/u_t=M(1,\theta_t)$
+	\[
+	\lambda_w(\theta_t) \equiv M(1, \theta_t), \qquad \text{increasing in } \theta
+	\]
+	
+	\textbf{Vacancy-filling probability} (firms):    $M(u_t,v_t)/v_t=M(1/\theta_t,1)$
+	\[
+	\lambda_f(\theta_t) \equiv M(1/\theta_t, 1), \qquad \text{decreasing in } \theta
+	\]
+	
+	Note: $\lambda_w(\theta_t) = \theta_t \lambda_f(\theta_t)$
+\end{frame}
+
+\begin{frame}{Unemployment Dynamics and Steady State}
+	Dynamics of unemployment:
+	\[
+	u_{t+1} = (1 - \lambda_w(\theta_t)) u_t + \sigma(1 - u_t)
+	\]
+	
+	\bigskip
+	\textbf{Steady-state} $u_t$ with constant $v$ (call it $\bar{u}$) satisfies:
+	\[
+	\bar{u} = \frac{\sigma}{\lambda_w(v/\bar{u}) + \sigma}
+	\]
+	
+	Equivalently:
+	\[
+	{M(v, \bar{u}) + \sigma \bar{u} = \sigma}
+	\]
+	\begin{itemize}
+		\item Unique solution for $\bar{u}$ (RHS constant, LHS increasing)
+		\item Describes a \textbf{negative relationship} between $v$ and $\bar{u}$ (LHS increasing in both $v$ and $\bar{u}$) --- this is the \textbf{Beveridge curve} relationship.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Beveridge Curve in the Data}
+	Beveridge curve in the United States
+	
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter20/fig4_beveridge_curve}
+\end{figure}
+\vspace{-15pt}	
+	\begin{itemize}
+		\item Clear \textbf{negative relationship} between unemployment and vacancy rates
+		\item Consistent with the Beveridge curve relationship derived above
+		\item Strong procyclical movement of vacancies supports the demand-side focus
+		\item Provides empirical support for the DMP framework
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Firm Side: Bellman Equations}
+	Production: one firm + one worker produces $z_t$ units. $z_t$ follows a Markov process.
+	
+	\textbf{Matched firm} ($w(z)$: wages):
+	\[
+	J(z) = z - w(z) + \beta \E[(1 - \sigma) J(z') + \sigma V(z')]
+	\]
+
+	\textbf{Vacant firm} ($\kappa$: vacancy cost):
+	\[
+	V(z) = -\kappa + \beta \E[\lambda_f(\theta) J(z') + (1 - \lambda_f(\theta)) V(z')]
+	\]
+
+	\textbf{Free entry}: $V(z) = 0$ $\Rightarrow$
+	\[
+	{\frac{\kappa}{\lambda_f(\theta)} = \beta \E[J(z')]}
+	\]
+
+	\textbf{Intuition}: Cost of creating a vacancy (per match) equals expected discounted value of a filled job.
+\end{frame}
+
+\begin{frame}{Worker Side: Bellman Equations}
+	Workers are infinitely lived, risk-neutral, discount factor $\beta$:
+	\[
+	\E_0 \left[ \sum_{t=0}^\infty \beta^t c_t \right]
+	\]
+	
+	\textbf{Employed worker}:
+	\[
+	W(z) = w(z) + \beta \E[(1 - \sigma) W(z') + \sigma U(z')]
+	\]
+	
+	\textbf{Unemployed worker} (receives $b < z$):
+	\[
+	U(z) = b + \beta \E[\lambda_w(\theta) W(z') + (1 - \lambda_w(\theta)) U(z')]
+	\]
+	$b$: home production or unemployment insurance.
+\end{frame}
+
+\begin{frame}{Generalized Nash Bargaining}
+	Once matched: \textbf{bilateral monopoly}. Cannot use the marginal principle.
+	
+	\textbf{Flow surplus}: $z - b$ (match produces $z$; if separate, worker gets $b$, firm nothing). The bargaining below splits the total present value.
+	
+	\textbf{Generalized Nash bargaining}: split the surplus to maximize weighted product.
+	\[
+	\max_w \; (\tilde{W}(w, z) - U(z))^\gamma (\tilde{J}(w, z) - V(z))^{1-\gamma}
+	\]
+	
+	\begin{itemize}
+		\item $\gamma \in (0, 1)$: worker's bargaining power
+		\item $\tilde{W}(w, z), \tilde{J}(w, z)$: values as function of arbitrary wage $w$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{First-order condition} on $w$ (surplus sharing rule):
+	\[
+{(1 - \gamma)(W(z) - U(z)) = \gamma(J(z) - V(z))}
+	\]
+\end{frame}
+
+\begin{frame}{Equilibrium: Difference Equation in $\theta_t$}
+	Combining the six equilibrium conditions and rearranging:
+	\[
+	\frac{\kappa}{(1 - \gamma) \lambda_f(\theta_t)} = \beta \E\!\left[z_{t+1} - b + \frac{\kappa}{1-\gamma}\! \left(\frac{1 - \sigma - \gamma \lambda_w(\theta_{t+1})}{\lambda_f(\theta_{t+1})}\right)\right]
+	\]
+	
+	\bigskip
+	\textbf{Steady state} with constant $z$ (denote $\bar\theta$):
+	\[
+	\frac{\kappa}{(1 - \gamma) \lambda_f(\bar\theta)} = \beta \left[z - b + \frac{\kappa}{1-\gamma}\!\left(\frac{1 - \sigma - \gamma \lambda_w(\bar\theta)}{\lambda_f(\bar\theta)}\right)\right]
+	\]
+	
+	\bigskip
+	\begin{itemize}
+		\item This is the \textbf{job creation condition}
+		\item RHS decreasing in $\bar\theta$ $\Rightarrow$ unique solution
+		\item Together with Beveridge curve: pins down $\bar{v}$ and $\bar{u}$
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Steady State Determination}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter20/DMP1}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item \textbf{BC curve}: negative relationship from the Beveridge curve
+		\item \textbf{JC line}: straight line through origin with slope $\bar\theta = v/u$
+		\item Intersection determines steady state $(\bar{u}, \bar{v})$
+		\item When $z \downarrow$ (recession): $\bar\theta \downarrow$, $JC$ rotates down $\Rightarrow$ $\bar{v} \downarrow$, $\bar{u} \uparrow$ 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Transition Dynamics}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter20/DMP2}
+\end{figure}
+\vspace{-10pt}
+	Unanticipated, one-time permanent decline in $z$:
+	\vspace{-5pt}
+	\begin{itemize}
+		\item New steady-state $\bar\theta$ solves the new job creation equation
+		\item $JC$ rotates from $JC1$ to $JC2$
+		\item Under a mild condition, $\theta_t$ \textbf{immediately jumps} to new $\bar\theta$ 
+		\item Since $u$ cannot jump, $v$ drops instantly so that $v/u = \bar\theta_{new}$
+		\item Economy then converges gradually along $JC2$ to $SS2$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Efficiency: Private vs.\ Social Returns}
+	Is the DMP equilibrium efficient? Reduce the equilibrium to two equations.
+
+	Define expected match surplus:
+	\[
+	S_t \equiv \E_t[W(z_{t+1}) - U(z_{t+1}) + J(z_{t+1}) - V(z_{t+1})]
+	\]
+	In the two-period model, $S_t=\E_t z_{t+1}-b$
+	
+	\textbf{Private vacancy posting incentive}:
+	\[
+	\kappa = \lambda_f(\theta_t)(1 - \gamma) \beta S_t
+	\]
+    \textbf{Social planner's first-order condition in two-period case}:
+    $$
+    	\kappa=M_2(u_t,v_t)\beta( \E_t z_{t+1}-b)
+    $$
+	Thus, for efficiency,
+	\[
+	M_2(u_t, v_t) = \frac{M(u_t, v_t)}{v_t}(1 - \gamma)
+	\]
+
+
+\end{frame}
+
+\begin{frame}{Two Externalities and the Hosios Condition}
+	Condition for efficiency (two-period version):
+	\[
+	M_2(u_t, v_t) = \frac{M(u_t, v_t)}{v_t}(1 - \gamma)
+	\]
+	Two externalities offset:
+	\begin{itemize}
+	\item \textbf{Congestion externality (vacancies)}: Adding a vacancy reduces the chance that other vacancies meet a worker.
+	
+	\item \textbf{Bargaining inefficiency}: Firms capture only fraction $1 - \gamma$ of the surplus.
+	\end{itemize}
+	The condition can be rewritten as the \textbf{Hosios condition}
+	$$
+	\eta(u_t,v_t)=\gamma,
+	$$
+    where
+    $$
+    1-\eta(u_t,v_t)\equiv \frac{M_2(u_t,v_t)v_t}{M(u_t,v_t)}
+    $$     
+    $\eta$ is called the elasticity of matching function.
+\end{frame}
+
+\begin{frame}{Infinite Horizon}
+In the infinite-horizon case (or any model with more than three periods), matching takes away the future opportunity for unemployed workers. This process involves new inefficiencies (at period $t+1$ and beyond):
+\begin{itemize}
+\item \textbf{Opportunity cost externality for workers}: A matched worker can no longer search, but also reduces congestion for other workers. 
+\item \textbf{Bargaining inefficiency for workers}: Only $\gamma$ fraction of the worker's opportunity cost is valued in the market.
+\end{itemize}
+These factors imply \textbf{the market surplus $S_{t}$ may now be different from the social value}. Analogous condition for efficiency
+\[
+\frac{M_1(u_{t+1}, v_{t+1}) u_{t+1}}{M(u_{t+1}, v_{t+1})} = \gamma
+\]
+turns out to be identical to the Hosios condition.
+\end{frame}
+
+% ============================================================
+\section{Gross Flows in the Labor Market}
+% ============================================================
+
+\begin{frame}{Three-State Framework}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{FigsChapter20/EUNflowfig}
+\end{figure}
+\vspace{-10pt}
+	\bigskip
+	\begin{itemize}
+		\item Previous sections: only $E$ and $U$
+		\item With three states, there are six gross flows: $EU$, $EN$, $UE$, $UN$, $NE$, $NU$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Flow Rates Out of Employment}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.33]{FigsChapter20/fig8_flow_rates_out_E}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item $E$-to-$U$ flow rate: \textbf{strongly countercyclical} (rises in recessions)
+		\item $E$-to-$N$ flow rate: more stable
+		\item Countercyclical $EU$ flow: inconsistent with \textbf{constant $\sigma$} assumption.  Motivates endogenous separations 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Flow Rates Out of Unemployment}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.33]{FigsChapter20/fig9_flow_rates_out_U}
+\end{figure}
+	\begin{itemize}
+		\item $U$-to-$E$ is strongly \textbf{procyclical}: consistent with DMP model
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Flow Rates Out of Out of the Labor Force}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.33]{FigsChapter20/fig10_flow_rates_out_N}
+	\end{figure}
+	\begin{itemize}
+		\item $U$ increases in recessions because inflows up ($EU$, $NU$) and outflows down ($UE$, $UN$)
+	\end{itemize}
+	
+\end{frame}
+
+
+% ============================================================
+\section{The Unemployment Volatility Puzzle}
+% ============================================================
+
+\begin{frame}{Functional Forms}
+	Evaluate the quantitative performance of the DMP model.
+	
+	\bigskip
+	\textbf{Cobb-Douglas matching function}:
+	\[
+	M(u, v) = \chi u^\eta v^{1-\eta}, \qquad \eta \in (0, 1)
+	\]
+	Then $\lambda_w(\theta) = \chi \theta^{1-\eta}$ and $\lambda_f(\theta) = \chi \theta^{-\eta}$.
+	
+	\bigskip
+	\textbf{Productivity process} (log-deviation $\hat{z}_t = \log z_t - \log \bar{z}$):
+	\[
+	\hat{z}_{t+1} = \rho \hat{z}_t + \varepsilon_{t+1}, \qquad \varepsilon_{t+1} \sim N(0, \sigma_\varepsilon^2)
+	\]
+	
+	\begin{itemize}
+		\item $\rho$: persistence
+		\item $\sigma_\varepsilon$: innovation standard deviation
+		\item $\log \bar{z}$ normalized to zero
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Log-Linearized Solution}
+	Log-linearizing the equilibrium condition around steady state:
+	\[
+	\mathcal{A}\hat\theta_t = \E[\bar{z} \hat{z}_{t+1} + \mathcal{B} \hat\theta_{t+1}]
+	\]
+	
+	\bigskip
+	where
+	\[
+	\mathcal{A} = \frac{\kappa \bar\theta^\eta \eta}{(1 - \gamma) \beta \chi}, \qquad \mathcal{B}= \frac{1 - \sigma}{1 - \gamma} \frac{\kappa \bar\theta^\eta \eta}{\chi} + \frac{\gamma \kappa \bar\theta}{1 - \gamma}
+	\]
+	
+	\bigskip
+	Using method of undetermined coefficients with guess $\hat\theta_t = \mathcal{C} \hat{z}_t$:
+	\[
+	{\hat\theta_t = (1 - \gamma) \left(\frac{\kappa \bar\theta^\eta \eta}{\chi}\right) \! \left[\frac{1}{\rho \beta} - (1 - \sigma) + \kappa \gamma \bar\theta \right]^{-1} \!\hat{z}_t}
+	\]
+	
+	\bigskip
+	Smaller $\kappa$, $\gamma$, $\eta$, larger $\chi$, $\rho$, $\beta$, or smaller $\sigma$ $\Rightarrow$ larger response of $\theta$.
+\end{frame}
+
+
+\begin{frame}{Calibration (Monthly)}
+	\begin{table}
+		\centering
+		\begin{tabular}{lc}
+			\toprule
+			Parameter & Value \\
+			\midrule
+			$\beta$ (discount factor) & 0.996 \\
+			$\rho$ (persistence) & 0.949 \\
+			$\sigma_\varepsilon$ (shock SD) & 0.0065 \\
+			$\sigma$ (separation rate) & 0.034 \\
+			$\chi$ (matching efficiency) & 0.45 \\
+			$b$ (home production) & 0.4 \\
+			$\gamma$ (worker bargaining power) & 0.72 \\
+			$\eta$ (matching elasticity) & 0.72 \\
+			\bottomrule
+		\end{tabular}
+		
+		{Parameter values. One period = one month.}
+	\end{table}
+	
+	\small
+	$\beta = 0.947^{1/12}$ (Cooley and Prescott, 1995); $\rho, \sigma_\varepsilon$ from Hagedorn and Manovskii (2008); $b, \eta, \gamma, \chi, \sigma$ from Shimer (2005) with $\eta = \gamma$ imposing Hosios; $\kappa$ calibrated so job creation condition holds at $\bar\theta = 1$.
+\end{frame}
+
+\begin{frame}{US Data: Summary Statistics}
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.125 & 0.139 & 0.259 & 0.013 \\
+			Quarterly autocorrelation & 0.870 & 0.904 & 0.896 & 0.765 \\
+			\midrule
+			\multicolumn{5}{l}{\textit{Correlation matrix}} \\
+			$u$ & 1 & $-0.919$ & $-0.977$ & $-0.732$ \\
+			$v$ & --- & 1 & 0.982 & 0.460 \\
+			$v/u$ & --- & --- & 1 & 0.967 \\
+			$z$ & --- & --- & --- & 1 \\
+			\bottomrule
+		\end{tabular}
+		
+		 Summary statistics for quarterly US data.\\ Monthly data aggregated to quarterly, logged, HP-filtered ($\lambda = 1600$).\\ Source: Hagedorn and Manovskii (2008).
+	\end{table}
+\end{frame}
+
+
+\begin{frame}{Model Results and the Shimer Puzzle}
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.005 & 0.016 & 0.020 & 0.013 \\
+			Quarterly autocorrelation & 0.826 & 0.700 & 0.764 & 0.765 \\
+			\midrule
+			\multicolumn{5}{l}{\textit{Correlation matrix}} \\
+			$u$ & 1 & $-0.839$ & $-0.904$ & $-0.804$ \\
+			$v$ & --- & 1 & 0.991 & 0.972 \\
+			$v/u$ & --- & --- & 1 & 0.961 \\
+			$z$ & --- & --- & --- & 1 \\
+			\bottomrule
+		\end{tabular}
+		
+		Model statistics.
+	\end{table}
+	
+	\begin{itemize}
+		\item \textbf{Correlations: right sign and magnitude}
+		\item \textbf{Volatility of $u$, $v$, $\theta$: far too small} compared to data
+		\item Known as the \textbf{unemployment volatility puzzle} or \textbf{Shimer (2005) puzzle}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why the Response Is So Small}
+	Two intuitive reasons for the small quantitative response:
+	
+	\bigskip
+	\textbf{1. Benefit of hiring is not very procyclical}
+	\begin{itemize}
+		\item Wage rises in booms
+		\item Dampens the response of profit to a productivity shock
+		\item Nash bargaining shares productivity gains between firm and worker
+	\end{itemize}
+	
+	\bigskip
+	\textbf{2. Cost of hiring moves with $\theta$}
+	\begin{itemize}
+		\item Cost per hire is $\kappa / \lambda_f(\theta)$
+		\item In booms, $\theta$ rises $\Rightarrow$ $\lambda_f(\theta)$ falls $\Rightarrow$ cost per hire rises
+		\item Dampens the firm's response to a positive productivity shock
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rigid Wages: Model}
+	Many ``solutions'' to the puzzle have been proposed. Here: \textbf{rigid wages} (Hall, 2005; Shimer, 2005) as an example.
+	
+	\medskip
+	Replace Nash bargaining with fixed wage $w = \bar{w}$ (steady-state value). Combining the firm's Bellman equation with free entry:
+	\[
+	\frac{\kappa}{\lambda_f(\theta_t)} = \beta \E\!\left[z_{t+1} - \bar{w} + \frac{(1 - \sigma) \kappa}{\lambda_f(\theta_{t+1})}\right]
+	\]
+	
+	Log-linearizing:
+	\[
+	{\hat\theta_t = \left(\frac{\kappa \bar\theta^\eta \eta}{\chi}\right)\! \left[\frac{1}{\rho \beta} - (1 - \sigma)\right]^{-1} \!\hat{z}_t}
+	\]
+	
+	\medskip
+	Two differences vs.\ Nash case:
+	\begin{itemize}
+		\item No $(1 - \gamma)$ multiplier (firm keeps full gain)
+		\item No $\kappa \gamma \bar\theta$ term (no worker outside-option feedback)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rigid Wages: Results}
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.115 & 0.329 & 0.425 & 0.013 \\
+			Quarterly autocorrelation & 0.825 & 0.693 & 0.763 & 0.765 \\
+			\midrule
+			\multicolumn{5}{l}{\textit{Correlation matrix}} \\
+			$u$ & 1 & $-0.791$ & $-0.881$ & $-0.784$ \\
+			$v$ & --- & 1 & 0.986 & 0.969 \\
+			$v/u$ & --- & --- & 1 & 0.961 \\
+			$z$ & --- & --- & --- & 1 \\
+			\bottomrule
+		\end{tabular}
+		
+		 Model statistics with fixed wages.
+	\end{table}
+	
+	\begin{itemize}
+		\item Unemployment volatility now \textbf{matches the data}
+		\item Wage rigidity substantially amplifies labor market fluctuations
+		\item Sources and magnitude of wage rigidity remain an active research area
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Endogenous Separations}
+% ============================================================
+
+\begin{frame}{Motivation and Setup}
+	Recall: $EU$ flow rate is \textbf{strongly countercyclical} in the data. Inconsistent with constant $\sigma$.
+	
+	\bigskip
+	Extend the model: firm chooses separation probability $\sigma$, subject to a cost $c(\sigma)$ with $c'(\sigma) < 0$ (more costly to maintain match at lower $\sigma$).
+	
+	\bigskip
+	\textbf{Matched firm's Bellman equation}:
+	\[
+	J(z) = \max_\sigma \; z - w(z) - c(\sigma) + \beta \E[(1 - \sigma) J(z') + \sigma V(z')]
+	\]
+	
+	\bigskip
+	\textbf{FOC for $\sigma$}, using $V = 0$ and free entry:
+	\[
+{-c'(\sigma) = \frac{\kappa}{\lambda_f(\theta)}}
+	\]
+	
+	Optimal $\sigma$ is a function of $z$: $\sigma(z)$.
+\end{frame}
+
+
+\begin{frame}{Job Creation with Endogenous Separations}
+	Unemployment dynamics:
+	\[
+	u_{t+1} = (1 - \lambda_w(\theta_t(z_t))) u_t + \sigma(z_t)(1 - u_t)
+	\]
+	
+	\bigskip
+	\textbf{Job creation condition}:
+	\[
+	\begin{array}{l}
+	\displaystyle \frac{\kappa}{(1 - \gamma) \lambda_f(\theta_t)} =\\ 
+	\quad\quad\displaystyle\beta \E\!\left[z_{t+1} - b - c(\sigma(z_{t+1})) + \frac{\kappa}{1-\gamma}\!\left(\frac{1 - \sigma(z_{t+1}) - \gamma \lambda_w(\theta_{t+1})}{\lambda_f(\theta_{t+1})}\right)\right]
+	\end{array}
+	\]
+	
+	\bigskip
+	\begin{itemize}
+		\item $\sigma(z)$ is determined in equilibrium by the FOC
+		\item This equation determines the dynamics of $\theta_t$
+		\item Since $\theta$ depends on $z$, $\sigma$ is also a function of $z$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Log-Linearized System}
+	\textbf{Maintenance cost}: $c(\sigma) = \phi \sigma^{-\xi}$ with $\phi, \xi > 0$. Guess $\hat\theta_t = \mathcal{G} \hat{z}_t$.
+	
+	\medskip
+	FOC and cost log-linearize to:
+	\[
+	\hat\sigma(z_t) = -\frac{\eta}{\xi + 1}\mathcal{G} \hat{z}_t, \qquad \hat{c}(z_t) = \frac{\xi \eta}{\xi + 1} \mathcal{G} \hat{z}_t
+	\]
+	
+	\medskip
+	After substitution, $G = \Theta / \Gamma$ where
+	\[
+	\Theta = (1 - \gamma)\!\left(\!\frac{\kappa \bar\theta^\eta \eta}{\chi}\!\right)\!\!\left[\frac{1}{\rho \beta} - (1 - \bar\sigma) + \kappa \gamma \bar\theta\right]^{-1}\! \bar{z}
+	\]
+	\[
+	\Gamma = 1 + (1 - \gamma)\!\left(\!\frac{\kappa \bar\theta^\eta \eta}{\chi}\!\right)\!\!\left[\frac{1}{\rho \beta} - (1 - \bar\sigma) + \kappa \gamma \bar\theta\right]^{-1}\!\!\left(\!\frac{\xi \eta}{\xi + 1}\!\right)\!\!\left(\!1 - \frac{1}{1 - \gamma}\!\right)\! \bar{c}
+	\]
+\end{frame}
+
+\begin{frame}{Results with Endogenous $\sigma$}
+	\textbf{Calibration}: $\sigma, \rho, \sigma_\varepsilon, \chi, b, \gamma, \eta$ as before. Set $\bar\sigma = 0.034$.
+	
+	\bigskip
+	Using $\text{std}(\hat\lambda_w) / \text{std}(\hat\sigma) = (1 - \eta)(1 + \xi)/\eta \approx 1$ (Krusell et al., 2017), and $\eta = 0.72$: $\xi = 1.6$.
+	
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.010 & 0.011 & 0.021 & 0.013 \\
+			Quarterly autocorrelation & 0.862 & 0.623 & 0.764 & 0.765 \\
+			\bottomrule
+		\end{tabular}
+		
+		Model statistics with endogenous $\sigma$.
+	\end{table}
+	
+	\begin{itemize}
+		\item Volatility of $u$ slightly larger than constant-$\sigma$ case
+		\item Far too small fluctuations in $u$ and $v$ compared to data
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Endogenous $\sigma$ + Rigid Wages}
+	With rigid wages, equilibrium condition becomes:
+	\[
+	\frac{\kappa}{\lambda_f(\theta_t)} = \beta \E\!\left[z_{t+1} - \bar{w} - c(z_{t+1}) + \frac{(1 - \sigma(z_{t+1})) \kappa}{\lambda_f(\theta_{t+1})}\right]
+	\]
+	
+	Log-linearization: endogenous $c$ and $\sigma$ terms \textbf{exactly cancel}. Result identical to constant-$\sigma$ fixed-wage case.
+	
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.217 & 0.232 & 0.433 & 0.013 \\
+			Quarterly autocorrelation & 0.852 & 0.609 & 0.763 & 0.765 \\
+			\bottomrule
+		\end{tabular}
+		
+		Model statistics with endogenous $\sigma$ and fixed wages.
+	\end{table}
+	\begin{itemize}
+		\item Volatility of $u$ even \textbf{larger than data}
+		\item Less extreme wage rigidity would still generate substantial fluctuations
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{DMP in the Neoclassical Growth Model}
+% ============================================================
+
+\begin{frame}{Motivation: Connecting to the Workhorse Model}
+	Connect DMP to the \textbf{neoclassical growth model}. Two important changes:
+	\begin{enumerate}
+		\item Concave utility with explicit consumption-saving decision
+		\item Capital as input in production (in addition to labor)
+	\end{enumerate}
+	
+	\bigskip
+	Closed economy: profit income from firm ownership is made explicit.
+	
+	\bigskip
+	Follows Krusell, Mukoyama, and \c{S}ahin (2010). Earlier work: Merz (1995), Andolfatto (1996).
+\end{frame}
+
+\begin{frame}{Family Structure}
+	\begin{itemize}
+		\item Unit square of consumers indexed by $(i, j)$
+		\item $i$: family index; $j$: member index within family
+		\item Families are identical $\Rightarrow$ use the representative family
+		\item \textbf{Full insurance within family}: income pooled, all members consume same amount
+		\item Some members employed, others unemployed---doesn't matter for individual consumption
+	\end{itemize}
+	\textbf{Utility of representative member}:
+	\[
+	\E_0 \!\left[\sum_{t=0}^\infty \mathbf{U}(c_t)\right]
+	\]
+	with $\mathbf{U}'(\cdot) > 0$, $\mathbf{U}''(\cdot) < 0$.
+
+	\textbf{Family budget constraint} ($d_t$: dividend):
+	\[
+	c_t + k_{t+1} = (1 + r_t - \delta) k_t + (1 - u_t) w_t + u_t b + d_t
+	\]
+\end{frame}
+
+\begin{frame}{Production and Capital}
+	Each match uses capital $k_f$ and one unit of labor to produce $z_t k_f^\alpha$, $\alpha \in (0, 1)$.
+	
+	\bigskip
+	Firms rent capital each period from families:
+	\[
+	\max_{k_f} \; z_t k_f^\alpha - r_t k_f \quad \Rightarrow \quad \alpha z_t k_f^{\alpha-1} = r_t
+	\]
+	
+	\bigskip
+	In equilibrium, $1 - u_t$ matches divide the aggregate capital $K_t$:
+	\[
+	r(z_t, K_t, u_t) = \alpha z_t \!\left(\frac{K_t}{1 - u_t}\right)^{\!\alpha-1}
+	\]
+	
+	\bigskip
+	Let $X_t \equiv (z_t, K_t, u_t)$. Surplus per match:
+	\[
+	y(X_t) = (1 - \alpha) z_t \!\left(\frac{K_t}{1 - u_t}\right)^{\!\alpha}
+	\]
+\end{frame}
+
+
+\begin{frame}{Consumption-Saving Block}
+	Family's Bellman equation:
+	\[
+	\mathbf{V}(k, X) = \max_{c, k'} \; \mathbf{U}(c) + \beta \E[\mathbf{V}(k', X') | z]
+	\]
+	subject to
+	\[
+	c + k' = (1 + r(X) - \delta) k + (1 - u) w(X) + u b + d(X)
+	\]
+	\[
+	K' = \Omega(X), \qquad u' = (1 - \lambda_w(\theta(X))) u + \sigma(1 - u)
+	\]
+	
+	\bigskip
+	Family takes $r(X), w(X), d(X), \Omega(X), \theta(X)$ as given.
+	
+	\bigskip
+	From decision rules: aggregate consumption $C(X) = c(K, X)$; next-period capital $\Omega(X) = k'(K, X)$.
+\end{frame}
+
+\begin{frame}{The State Price}
+	With concave utility, the discount factor is not constant. The state price (price of Arrow security) is:
+	\[
+	Q(z', X) = \beta f(z' | z) \frac{\mathbf{U}'(C(z', \Omega(X), u'(X)))}{\mathbf{U}'(C(X))}
+	\]
+	
+	\bigskip
+	\begin{itemize}
+		\item $f(z' | z)$: transition density
+		\item Discounting future payoffs: use $Q(z', X)$ instead of $\beta$
+		\item Firms value future profits according to the stochastic discount factor
+	\end{itemize}
+	
+%	\bigskip
+	%\textbf{Equilibrium fixed point}: Given $w(X), d(X), \theta(X)$, solve family problem to get $Q(z', X), \Omega(X)$. Then solve the labor market block to update $w(X), d(X), \theta(X)$. Iterate.
+\end{frame}
+
+
+
+\begin{frame}{Labor Market Block}
+	\textbf{Matched firm}:
+	\[
+	J(X) = y(X) - w(X) + \int Q(z', X)[(1 - \sigma) J(X') + \sigma V(X')] dz'
+	\]
+	
+	\bigskip
+	\textbf{Vacant firm} (with free entry $V(X) = 0$):
+	\[
+	\frac{\kappa}{\lambda_f(\theta(X))} = \int Q(z', X) J(X') dz'
+	\]
+	
+	\bigskip
+	\textbf{Employed and unemployed worker values}:
+	\[
+	W(X) = w(X) + \int Q(z', X)[(1 - \sigma) W(X') + \sigma U(X')] dz'
+	\]
+	\[
+	U(X) = b + \int Q(z', X)[\lambda_w(\theta(X)) W(X') + (1 - \lambda_w(\theta(X))) U(X')] dz'
+	\]
+	
+	\bigskip
+	\textbf{Nash bargaining}: $(1 - \gamma)(W(X) - U(X)) = \gamma(J(X) - V(X))$
+\end{frame}
+
+\begin{frame}{Job Creation Condition, Wage, and Dividend}
+	\textbf{Job creation condition}:
+	\[
+	\begin{array}{l}
+	\displaystyle\frac{\kappa}{(1 - \gamma) \lambda_f(\theta(X))} =\\
+	\quad\quad\displaystyle \int Q(z', X)\!\left[y(X') - b + \frac{\kappa}{1-\gamma}\!\left(\frac{1 - \sigma - \gamma \lambda_w(\theta(X'))}{\lambda_f(\theta(X'))}\right)\right] dz'
+	\end{array}
+	\]
+	
+
+	\textbf{Wage} (from Nash bargaining):
+	\[
+	{w(X) = \gamma(y(X) - b) + b + \gamma \theta(X) \kappa}
+	\]
+	
+
+	\textbf{Dividend} (all firms' profits minus vacancy cost):
+	\[
+	d(X) = (1 - u)(y(X) - w(X)) - \kappa \theta(X) u
+	\]
+	
+	\bigskip
+	\textbf{Algorithm}: [Alternative 1]: log-linearize. [Alternative 2] guess $Q$, solve labor block for $\theta, w, d$, solve consumption-saving block, update $Q$, iterate.
+\end{frame}
+
+\begin{frame}{Calibration and Labor Market Results}
+	\textbf{Calibration}:
+	\begin{itemize}
+		\item $\mathbf{U}(c) = \log(c)$
+		\item $\alpha = 0.4$ (Cooley and Prescott, 1995)
+		\item $\delta = 0.004$ monthly (= 0.012 quarterly)
+		\item $b$ adjusted to $0.4$ times steady-state $y(X)$
+	\end{itemize}
+	
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& $u$ & $v$ & $v/u$ & $z$ \\
+			\midrule
+			Standard deviation & 0.005 & 0.017 & 0.022 & 0.015 \\
+			Quarterly autocorrelation & 0.819 & 0.688 & 0.755 & 0.763 \\
+			$\text{corr}(\cdot, z)$ & 0.089 & $-0.071$ & $-0.078$ & 1 \\
+			\bottomrule
+		\end{tabular}
+		
+		Model statistics with generalized Nash bargaining: labor market.
+	\end{table}
+	
+	
+	\begin{itemize}
+		\item The Shimer puzzle remains
+		\item Correlations of $u$, $v$, and $v/u$ with $z$ near zero: $y(X)$ depends on $K$ and $u$ too, not only $z$
+	\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Business Cycle Statistics}
+		\begin{table}
+			\centering
+			\small
+			\begin{tabular}{lccccc}
+				\toprule
+				& $Y$ & $C$ & $I$ & $L$ & $Y/L$ \\
+				\midrule
+				Standard deviation & 0.014 & 0.003 & 0.059 & 0.0004 & 0.014 \\
+				Correlation with $Y$ & 1 & 0.875 & 0.991 & 0.902 & 0.99992 \\
+				\bottomrule
+			\end{tabular}
+			
+		Business cycle statistics with generalized Nash bargaining.
+		\end{table}
+		
+		\bigskip
+		\begin{itemize}
+			\item Standard RBC-like pattern: $C, I, L, Y/L$ procyclical
+			\item $I$ more volatile than $Y$
+			\item $C$ less volatile than $Y$
+			\item $L$ fluctuates \textbf{much less} than $Y$: reflects unemployment volatility puzzle
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Rigid Wages with Capital}
+		Assume wage is rigid but bounded below by flow output:
+		\[
+		\tilde{w}(X) = \max\{\bar{w}, y(X)\}
+		\]
+		Max is needed because $y(X)$ moves with $K$ and $u$, so profit could otherwise go negative. In most periods, $\tilde{w}(X) = \bar{w}$.
+		
+		\bigskip
+		\textbf{Job creation condition}:
+		\[
+		\frac{\kappa}{\lambda_f(\theta(X))} = \int Q(z', X) \!\left[y(X') - \tilde{w}(X') + \frac{(1 - \sigma) \kappa}{\lambda_f(\theta(X'))}\right] dz'
+		\]
+		
+		\bigskip
+		\textbf{Dividend}: $d(X) = (1 - u)(y(X) - \tilde{w}(X)) - \kappa \theta(X) u$
+	\end{frame}
+	
+	\begin{frame}{Rigid Wages: Results}
+		\begin{table}
+			\centering
+			\small
+			\begin{tabular}{lcccc}
+				\toprule
+				& $u$ & $v$ & $v/u$ & $z$ \\
+				\midrule
+				Standard deviation & 0.083 & 0.269 & 0.339 & 0.015 \\
+				Quarterly autocorrelation & 0.818 & 0.671 & 0.744 & 0.763 \\
+				\bottomrule
+			\end{tabular}
+			
+			 Model statistics with rigid wages: labor market.
+		\end{table}
+		
+		\begin{table}
+			\centering
+			\small
+			\begin{tabular}{lccccc}
+				\toprule
+				& $Y$ & $C$ & $I$ & $L$ & $Y/L$ \\
+				\midrule
+				Standard deviation & 0.017 & 0.003 & 0.060 & 0.007 & 0.011 \\
+				Correlation with $Y$ & 1 & 0.792 & 0.989 & 0.898 & 0.964 \\
+				\bottomrule
+			\end{tabular}
+			
+			 Business cycle statistics with rigid wages.
+		\end{table}
+		
+		\begin{itemize}
+			\item Much larger response of $v$ and $u$ to shocks
+			\item $L$ standard deviation one order of magnitude larger than Nash case
+		\end{itemize}
+	\end{frame}
+	
+	% ============================================================
+	\section{Heterogeneous Jobs and the McCall Search Model}
+	% ============================================================
+	
+	\begin{frame}{Motivation: Wage Dispersion}
+		Previously: homogeneous jobs, all matches accepted. Now: heterogeneous job offers.
+		
+		\textbf{Diamond paradox} (Diamond, 1971): In a search model with homogeneous firms, costly search, and on-the-job search unavailable, all firms offer the \textbf{worker's reservation wage} (the minimum wage acceptable).
+		\begin{itemize}
+			\item Nash equilibrium even with tiny search costs
+			\item Unique: any firm with higher wage would want to cut
+		\end{itemize}
+		\textbf{A workaround} (there can be other ways): Assume \textbf{exogenous} heterogeneity in wage offers. Can be justified by heterogeneous jobs or on-the-job search.
+		
+		\bigskip
+		This is the \textbf{McCall (1970) search model}: worker chooses whether to accept or keep searching.
+	\end{frame}
+	
+	\begin{frame}{McCall Model: Setup}
+		Focus on the worker side. Worker is infinitely lived, risk-neutral:
+		\[
+		\E_0 \!\left[\sum_{t=0}^\infty \beta^t c_t\right]
+		\]
+		\begin{itemize}
+			\item Unemployed worker earns $b > 0$ (home production/UI)
+			\item Each period: receives a wage offer $w \sim F(w)$, support $[0, w_u]$
+			\item Employed worker faces separation probability $\sigma \in (0, 1)$
+		\end{itemize}
+		
+		\textbf{Bellman equation (unemployed)}:
+		\[
+		U = b + \beta \int_0^{w_u} \max\{W(w), U\} dF(w)
+		\]
+		\textbf{Bellman equation (employed at wage $w$)}:
+		\[
+		W(w) = w + \beta[(1 - \sigma) W(w) + \sigma U]
+		\]
+	\end{frame}
+	\begin{frame}{The Reservation Wage}
+		Solving the employed worker's equation:
+		\[
+		W(w) = \frac{w + \beta \sigma U}{1 - \beta(1 - \sigma)}
+		\]
+		$W(w)$ increasing in $w$. There exists a \textbf{reservation wage} $w^*$ such that:
+		\[
+		W(w^*) = U
+		\]
+		Worker accepts if and only if $w \geq w^*$.
+		
+		\bigskip
+		Since $W(w^*) = U$, the expression $(1 - \beta) U = w^*$ follows, and:
+		\[
+		{w^* = b + \frac{\beta}{1 - \beta(1 - \sigma)} \int_{w^*}^{w_u} (w - w^*) dF(w)}
+		\]
+	
+		\textbf{Job-finding probability}: $\lambda = 1 - F(w^*)$ (decreasing in $w^*$; choosier $\Rightarrow$ less frequent).
+	\end{frame}
+	
+	\begin{frame}{Comparative Statics}
+		Rewrite equation as $\mathbf{G}(w^*, \beta, \sigma, b) = 0$ where
+		\[
+		\mathbf{G}(w^*, \beta, \sigma, b) = w^* - b - \frac{\beta}{1 - \beta(1 - \sigma)} \int_{w^*}^{w_u} (w - w^*) dF(w)
+		\]
+		
+		\bigskip
+		\textbf{Partial derivatives}: $\partial \mathbf{G} / \partial \beta < 0$, $\partial \mathbf{G} / \partial \sigma > 0$, $\partial \mathbf{G} / \partial b < 0$, $\partial \mathbf{G} / \partial w^* > 0$.
+		
+		\bigskip
+		By the implicit function theorem, $w^*$ is:
+		\begin{itemize}
+			\item \textbf{Increasing in $\beta$}: more patient $\Rightarrow$ higher weight on future gains
+			\item \textbf{Increasing in $b$}: better outside option $\Rightarrow$ choosier
+			\item \textbf{Decreasing in $\sigma$}: short match duration $\Rightarrow$ less worth waiting
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}{Effect of a Change in the Average Wage}
+		Replace wage offer $w$ with $w + \varepsilon$. How does $w^*$ change with $\varepsilon$ (at $\varepsilon = 0$)?
+		
+		Define 
+		$$\mathbf{G}(w^*, \varepsilon) \equiv w^* + \varepsilon - b - \frac{\beta}{1 - \beta(1 - \sigma)} \int_{w^*}^{w_u} [(w + \varepsilon) - (w^* + \varepsilon)] dF(w)
+		$$
+		
+		After computing partial derivatives (Leibniz's rule):
+		\[
+		\frac{d(w^* + \varepsilon)}{d\varepsilon} = \frac{\beta [1 - F(w^*)]}{1 - \beta(1 - \sigma) + \beta [1 - F(w^*)]} \in (0, 1)
+		\]
+		
+		\bigskip
+		\textbf{Interpretation}:
+		\begin{itemize}
+			\item Average wage up by \$1 $\Rightarrow$ reservation wage up by \emph{less} than \$1
+			\item Because $b$ is fixed, unemployment becomes relatively less attractive
+			\item Workers become \textbf{less choosy} in relative terms
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Mean-Preserving Spreads}
+		How does an increase in \textbf{dispersion} of wage offers affect $w^*$?
+		
+		\bigskip
+		\textbf{Mean-preserving spread}:
+		\begin{itemize}
+			\item Given $x$ with distribution $F$, construct $\tilde{x} = x + z$ where $\E[z] = 0$
+			\item The new distribution $G(\cdot)$ is a mean-preserving spread of $F(\cdot)$
+		\end{itemize}
+		
+		Equivalent characterization: $G$ is a mean-preserving spread of $F$ iff
+		\[
+		\int_0^x G(t) dt \geq \int_0^x F(t) dt \quad \text{for all } x
+		\]
+		
+		\textbf{Result}: An increase in wage dispersion \textbf{raises $w^*$}.
+		\begin{itemize}
+			\item More dispersion $\Rightarrow$ higher option value of waiting
+			\item Workers reject more offers hoping for a better one
+			\item Classic result in the search literature
+		\end{itemize}
+	\end{frame}
+	
+		\begin{frame}{Frictional Wage Dispersion}
+		Without search frictions, all workers work with $w^u$. With search frictions, there is some \textbf{frictional wage dispersion}
+	
+	Define the mean wage as $w^M\equiv [\int^{w^u}_{w^*}wF(w)]/(1-F(w^*))$ and the replacement rate as $
+	\rho\equiv b/{w^M}$
+	
+	Also define the \textbf{mean-min ratio} of the accepted wage as
+	$$
+	Mm\equiv \frac{w^M}{w^*}
+	$$
+	
+	It  can be shown that, in the above McCall model,
+	$$
+	Mm=\frac{1+\beta\lambda/(1-\beta(1-\sigma))}{\rho+\beta\lambda/(1-\beta(1-\sigma))}
+	$$
+	With a reasonable calibration, $Mm$ is very close to 1 (when $\beta=0.996$, $\sigma=0.034$, $\lambda=0.45$, and $b=0.4$, $Mm=1.031$). This is called the \textbf{frictional wage dispersion puzzle}. Potential solutions: high cost of unemployment, on-the-job search
+	\end{frame}
+	
+	% ============================================================
+	\section{Summary}
+	% ============================================================
+	
+	\begin{frame}{Key Takeaways (I)}
+		\begin{enumerate}
+			\item \textbf{Labor market facts}: unemployment countercyclical, vacancies procyclical, Beveridge curve, large gross flows
+			
+			\item \textbf{Simple model}: $\bar{u} = \sigma/(\lambda + \sigma)$; average duration = $1/\lambda$
+			
+			\item \textbf{DMP model}: matching function, Nash bargaining, free entry; Beveridge curve + job creation condition
+			
+			\item \textbf{Efficiency}: Hosios condition $\eta = \gamma$ makes equilibrium efficient (congestion externalities offset by bargaining inefficiency)
+			
+
+		\end{enumerate}
+	\end{frame}
+		\begin{frame}{Key Takeaways (II)}
+		\begin{enumerate}
+		\setcounter{enumi}{4}
+			
+			\item \textbf{Shimer puzzle}: Standard DMP generates too little unemployment volatility relative to data
+			
+			\item \textbf{Rigid wages} (Hall, 2005; Shimer, 2005): substantially amplify labor market fluctuations
+			
+			\item \textbf{Endogenous separations}: capture countercyclical $EU$ flow; with rigid wages, match data
+			
+			\item \textbf{DMP + NGM}: stochastic discount factor, closed economy; puzzle persists under Nash, resolved by rigid wages
+			
+			\item \textbf{McCall model}: reservation wage $w^*$; increasing in $b, \beta$, decreasing in $\sigma$; dispersion $\uparrow$ raises $w^*$; analysis of frictional wage dispersion
+		\end{enumerate}
+	\end{frame}
+\end{document}
+

@@ -1,0 +1,762 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\title[Chapter5]{Chapter 5 Dynamic Competitive Equilibrium}
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{What Is a Competitive Equilibrium?}
+	Two conditions must hold simultaneously:
+	\begin{enumerate}
+		\item Agents maximize their objectives subject to constraints, taking prices as given
+		\item Markets clear: demand equals supply for all traded goods
+	\end{enumerate}
+	
+	\bigskip
+	Three formulations:
+	\begin{enumerate}
+		\item \textbf{Arrow-Debreu}: all trades at date 0; prices $\{p_t\}_{t=0}^{\infty}$
+		\item \textbf{Sequential}: trades period by period; bond price $q_t$ each period
+		\item \textbf{Recursive}: prices and policies as functions of state variables
+	\end{enumerate}
+	
+	\bigskip
+	For many economies, all three yield the \textbf{same allocations}. The first two express equilibria as sequences; the third as functions.
+\end{frame}
+
+% ============================================================
+\section{Arrow-Debreu Equilibrium}
+% ============================================================
+
+\begin{frame}{Endowment Economy: Primitives}
+	\begin{itemize}
+		\item Continuum of consumers $i \in [0,1]$; each produces $y_{i,t} \in \mathbb{R}_+$ of a single non-storable good
+		\item Common preferences: 
+		$$
+		\sum_{t=0}^{\infty} \beta^t u(c_{i,t}),
+		$$
+		with $u$ strictly increasing and strictly concave
+		\item Price $p_t$: price of time-$t$ good in terms of time-0 good; normalize $p_0 = 1$
+		\item Budget constraint (equality since $u$ strictly increasing):
+		\[
+		\sum_{t=0}^{\infty} p_t c_{i,t} = \sum_{t=0}^{\infty} p_t y_{i,t}
+		\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 1}
+	An Arrow-Debreu competitive equilibrium is a set of sequences $\{c_{i,t}^*\}_{t=0}^{\infty}$, for each $i \in [0,1]$, and $\{p_t\}_{t=0}^{\infty}$ such that
+	
+	\medskip
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*\}_{t=0}^{\infty}$ solves
+		\[
+		\max_{\{c_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t) \quad \text{s.t.} \quad \sum_{t=0}^{\infty} p_t c_t = \sum_{t=0}^{\infty} p_t y_{i,t}
+		\]
+		
+		\item for each $t$,
+		\[
+		\int_0^1 c_{i,t}^* \, di = \int_0^1 y_{i,t} \, di
+		\]
+	\end{enumerate}
+	
+	\medskip
+	Point 1: optimization. Point 2: goods market clearing.
+\end{frame}
+
+\begin{frame}{Characterization: Prices}
+	FOC from the Lagrangian on the lifetime budget:
+	\[
+	\beta^t u'(c_{i,t}) = \lambda_i p_t
+	\]
+	where $\lambda_i$ is the multiplier on the lifetime budget constraint. It does not depend on $t$.
+	
+	\bigskip
+	Eliminating $\lambda_i$ between $t = 0$ and a generic $t$:
+	\[
+	p_t = \beta^t \frac{u'(c_{i,t})}{u'(c_{i,0})}
+	\]
+	
+	Since $p_t$ is common to all agents: the ratio of marginal utilities at different dates is \textbf{equalized across all consumers}.
+\end{frame}
+
+\begin{frame}{Log Utility: Prices and Consumption Growth}
+	With $u(\cdot) = \log(\cdot)$: $p_t = \beta^t c_{i,0}/c_{i,t}$. Multiply by $c_{i,t}$, integrate over $i$, use market clearing ($\int_0^1 c_{i,t} \, di = Y_t$):
+	\[
+	p_t = \beta^t \frac{Y_0}{Y_t}
+	\]
+	
+	All consumers share the same consumption growth:
+	\[
+	\frac{c_{i,t+1}}{c_{i,t}} = \frac{Y_{t+1}}{Y_t} = \beta \frac{p_t}{p_{t+1}} \quad \text{for all } i
+	\]
+	
+	If $Y_t = \bar{Y}$ constant: $c_{i,t}$ is constant for all $i$ and $t$ (\textbf{perfect consumption smoothing}).
+\end{frame}
+
+\begin{frame}{Consumption Levels and Shares}
+	From the Euler equations and the budget constraint:
+	\[
+	c_{i,0} = (1-\beta) Y_0 \sum_{t=0}^{\infty} \beta^t \frac{y_{i,t}}{Y_t}
+	\]
+	
+	Individual $i$'s share of aggregate consumption is constant over time:
+	\[
+	c_{i,t} = \theta_i Y_t, \qquad \theta_i = (1-\beta) \sum_{t=0}^{\infty} \beta^t \frac{y_{i,t}}{Y_t}
+	\]
+	
+	Endowments in periods with high $Y_t$ receive lower weight (marginal utility is lower). Two consumers with the same average endowments can have different wealth.
+	
+	\bigskip
+	\textbf{General CRRA}: $p_t = \beta^t (Y_0/Y_t)^\sigma$. Higher $\sigma$ $\Rightarrow$ resources more valuable in low-endowment periods.
+\end{frame}
+
+\begin{frame}{Definition 2 (Representative Agent)}
+	When all agents have equal endowments and $u$ is strictly concave, all consumption choices are identical:
+	
+	\bigskip
+	An AD CE is $\{c_t^*\}_{t=0}^{\infty}$ and $\{p_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item $\{c_t^*\}_{t=0}^{\infty}$ solves
+		\[
+		\max_{\{c_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t) \quad \text{s.t.} \quad \sum_{t=0}^{\infty} p_t c_t = \sum_{t=0}^{\infty} p_t y_t
+		\]
+		
+		\item $c_t^* = y_t$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Production Economy with Labor: Primitives}
+	\begin{itemize}
+		\item Household $i$: efficiency units $e_i$, hours $\ell_{i,t}$, utility 
+		$$
+		\sum_{t=0}^{\infty} \beta^t [u(c_{i,t}) - v(\ell_{i,t})],
+		$$ 
+		with $v$ increasing and convex
+		\item Firm: $Y_t = A_t L_t$ (CRS), hires labor at wage $w_t$ per efficiency unit
+		\item Firm profit max: 
+		$$
+		\max_{\{L_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \{ p_t A_t L_t - p_t w_t L_t \}
+		$$
+		\item Household budget: 
+		$$
+		\sum_{t=0}^{\infty} p_t c_{i,t} = \sum_{t=0}^{\infty} p_t w_t e_i \ell_{i,t}
+		$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 3}
+	\small
+	An AD CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$, $\{\ell_{i,t}^*\}_{t=0}^{\infty}$ for each $i \in [0,1]$, $\{L_t^*\}_{t=0}^{\infty}$, $\{p_t\}_{t=0}^{\infty}$, $\{w_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*\}_{t=0}^{\infty}$ and $\{\ell_{i,t}^*\}_{t=0}^{\infty}$ solve
+		\[
+		\max_{\{c_t, \ell_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t [u(c_t) - v(\ell_t)] \quad \text{s.t.} \quad \sum_{t=0}^{\infty} p_t c_t = \sum_{t=0}^{\infty} p_t w_t e_i \ell_t
+		\]
+		
+		\item $\{L_t^*\}_{t=0}^{\infty}$ solves
+		\[
+		\max_{\{L_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \left\{ p_t A_t L_t - p_t w_t L_t \right\}
+		\]
+		
+		\item for each $t$, 
+		$$
+		\int_0^1 e_i \ell_{i,t}^* \, di = L_t^*
+		$$
+		and 
+		$$
+		\int_0^1 c_{i,t}^* \, di = A_t L_t^*
+		$$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Characterization of Definition 3}
+	\textbf{Household FOCs}:
+	\[
+	\beta^t u'(c_{i,t}) = \lambda_i p_t, \qquad v'(\ell_{i,t}) = e_i w_t u'(c_{i,t})
+	\]
+	
+	\textbf{Firm FOC}: For an interior solution with CRS, $w_t = A_t$. If $A_t > w_t$: no finite optimum. If $A_t < w_t$: firm shuts down.
+	
+	\bigskip
+	With log utility and $w_t = A_t$: the intratemporal FOC becomes $v'(\ell_{i,t}) c_{i,t} = e_i A_t$. With $c_{i,t} = \theta_i Y_t$ and conjecturing $\theta_i = e_i$: all agents supply the same labor $\ell_{i,t} = L_t$. Income and substitution effects exactly cancel.
+	
+	\bigskip
+	With heterogeneous initial assets: labor supply depends on wealth nonlinearly $\Rightarrow$ aggregate output depends on the distribution of assets.
+\end{frame}
+
+\begin{frame}{Neoclassical Growth Economy: Primitives}
+	\begin{itemize}
+		\item Production: 
+		$$
+		Y_t = A_t K_t^{\alpha} L_t^{1-\alpha}
+		$$
+		\item Capital: 
+		$$
+		k_{i,t+1} = (1-\delta) k_{i,t} + \iota_{i,t}
+		$$
+		\item Firm: 
+		$$
+		\max_{\{K_t, L_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \{ p_t A_t K_t^{\alpha} L_t^{1-\alpha} - p_t r_t K_t - p_t w_t L_t \}
+		$$
+		\item Household budget: 
+		$$
+		\sum_{t=0}^{\infty} p_t(c_{i,t} + \iota_{i,t}) = \sum_{t=0}^{\infty} p_t(r_t k_{i,t} + w_t e_i \ell_{i,t})
+		$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 4}
+	\small
+	An AD CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$, $\{\iota_{i,t}^*\}_{t=0}^{\infty}$, $\{\ell_{i,t}^*\}_{t=0}^{\infty}$ for each $i$, $\{L_t^*\}_{t=0}^{\infty}$, $\{K_{t+1}^*\}_{t=0}^{\infty}$, $\{p_t\}_{t=0}^{\infty}$, $\{p_t w_t\}_{t=0}^{\infty}$, $\{p_t r_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*\}_{t=0}^{\infty}$, $\{\iota_{i,t}^*\}_{t=0}^{\infty}$, $\{\ell_{i,t}^*\}_{t=0}^{\infty}$ solve
+		\[
+		\max_{\{c_t, \iota_t, \ell_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t [u(c_t) - v(\ell_t)]
+		\]
+		 \[
+		 \text{s.t.} \quad \sum_{t=0}^{\infty} p_t(c_t + \iota_t) = \sum_{t=0}^{\infty} p_t(r_t k_t + w_t e_i \ell_t)
+		\]
+		where $k_{t+1} = (1-\delta) k_t + \iota_t$, $k_0 = k_{i,0}$
+		
+		\item $\{L_t^*\}_{t=0}^{\infty}$, $\{K_t^*\}_{t=0}^{\infty}$ (with $K_0^* = \int_0^1 k_{i,0} \, di$) solve
+		\[
+		\max_{\{K_t, L_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \left\{ p_t A_t K_t^{\alpha} L_t^{1-\alpha} - p_t r_t K_t - p_t w_t L_t \right\}
+		\]
+		
+		\item $\int_0^1 e_i \ell_{i,t}^* \, di = L_t^*$, $\int_0^1 k_{i,t}^* \, di = K_t^*$, $\int_0^1 (c_{i,t}^* + \iota_{i,t}^*) \, di = A_t (K_t^*)^{\alpha}(L_t^*)^{1-\alpha}$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Optimality Conditions for Definition 4}
+	\textbf{Consumption and labor} (same structure as before):
+	\[
+	\beta^t u'(c_{i,t}) = \lambda_i p_t, \qquad v'(\ell_{i,t}) = e_i w_t u'(c_{i,t})
+	\]
+	
+	\textbf{Investment} (new): the household's FOC for $\iota_{i,t}$ yields
+	\[
+	p_t = p_{t+1} r_{t+1} + (1-\delta) p_{t+1} = p_{t+1}[r_{t+1} + 1 - \delta]
+	\]
+	Cost of one unit of capital today $=$ rental revenue $+$ undepreciated value tomorrow.
+	
+	\bigskip
+	\textbf{Firm FOCs}: $r_t = \alpha A_t K_t^{\alpha-1} L_t^{1-\alpha}$, $w_t = (1-\alpha) A_t K_t^{\alpha} L_t^{-\alpha}$. CRS $\Rightarrow$ zero profits.
+\end{frame}
+
+\begin{frame}{Equivalence with the Planner}
+	With identical agents ($e_i = 1$, $k_{i,0} = K_0$) ad log utility, the aggregate equilibrium conditions become:
+	\[
+	\frac{C_{t+1}}{C_t} = \beta[1 - \delta + \alpha A_{t+1} K_{t+1}^{\alpha-1} L_{t+1}^{1-\alpha}]
+	\]
+	\[
+	v'(L_t) = \frac{(1-\alpha) A_t K_t^{\alpha} L_t^{-\alpha}}{C_t}
+	\]
+	\[
+	C_t + K_{t+1} = A_t K_t^{\alpha} L_t^{1-\alpha} + (1-\delta) K_t
+	\]
+	
+	These are identical to the FOCs of the social planner from Chapter 4 $\Rightarrow$ \textbf{First Welfare Theorem}.
+\end{frame}
+
+% ============================================================
+\section{Sequential Equilibrium}
+% ============================================================
+
+\begin{frame}{Sequential Trading: Setup}
+	\begin{itemize}
+		\item Trades occur period by period; bond price $q_t$ (pay $q_t$ today, receive 1 tomorrow)
+		\item Gross interest rate: 
+		$$
+		1 + r_{t+1} = 1/q_t
+		$$
+		\item Period budget: 
+		$$
+		c_{i,t} + q_t a_{i,t+1} = y_{i,t} + a_{i,t}
+		$$
+		\item Need a no-Ponzi-game condition to rule out infinite borrowing
+		\item Initial assets: 
+		$$
+		\int_0^1 a_{i,0} \, di = 0
+		$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 5}
+	A sequential CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$, $\{a_{i,t+1}^*\}_{t=0}^{\infty}$ for each $i \in [0,1]$, and $\{q_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*\}_{t=0}^{\infty}$ and $\{a_{i,t+1}^*\}_{t=0}^{\infty}$ solve
+		\[
+		\max_{\{c_t, a_{t+1}\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t)
+		\]
+		s.t. $c_t + q_t a_{t+1} = a_t + y_{i,t}$ for all $t$, with $a_0 = a_{i,0}$,
+		\[
+		\lim_{t \to \infty} \left(\prod_{s=0}^{t} q_s\right) a_{t+1} \geq 0 \quad \text{(nPg)}
+		\]
+		
+		\item for all $t$, 
+		$$
+		\int_0^1 c_{i,t}^* \, di = \int_0^1 y_{i,t} \, di \text{ and } \int_0^1 a_{i,t+1}^* \, di = 0
+		$$
+	\end{enumerate}
+	
+	\medskip
+	The second clearing condition says aggregate assets net out to zero. By Walras' Law, only one clearing condition is needed.
+\end{frame}
+
+\begin{frame}{Sequential FOCs}
+	FOCs from the Lagrangian with period-by-period budget constraints:
+	\[
+	\beta^t u'(c_{i,t}) = \lambda_{i,t}, \qquad q_t \lambda_{i,t} = \lambda_{i,t+1}
+	\]
+	
+	Unlike the AD case, $\lambda_{i,t}$ now depends on $t$ (one multiplier per period budget).
+	
+	\bigskip
+	Eliminating multipliers: 
+	$$
+	q_t = \beta \frac{u'(c_{i,t+1})}{u'(c_{i,t})}
+	$$
+\end{frame}
+
+\begin{frame}{Equivalence: Sequential $\Leftrightarrow$ Arrow-Debreu}
+	Chaining from $0$ to $t-1$:
+	\[
+	\prod_{s=0}^{t-1} q_s = \beta^t \frac{u'(c_{i,t})}{u'(c_{i,0})} = p_t
+	\]
+	
+	The product of sequential bond prices equals the Arrow-Debreu price. Also: $p_{t-1}/p_t = 1/q_{t-1} = 1 + r_t$.
+	
+	\bigskip
+	Consolidating period budgets forward and using TVC (so the asset term vanishes):
+	\[
+	\sum_{t=0}^{\infty} p_t c_{i,t} = a_{i,0} + \sum_{t=0}^{\infty} p_t y_{i,t}
+	\]
+	
+	Same lifetime budget $\Rightarrow$ same allocations.
+\end{frame}
+
+\begin{frame}{Definition 6 (Sequential CE, NGM)}
+	\small
+	A sequential CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$, $\{k_{i,t+1}^*\}_{t=0}^{\infty}$ for each $i \in [0,1]$, $\{r_t\}_{t=0}^{\infty}$, $\{w_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*\}_{t=0}^{\infty}$ and $\{k_{i,t+1}^*\}_{t=0}^{\infty}$ solve
+		\[
+		\max_{\{c_t, k_{t+1}\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t)
+		\]
+		s.t. $c_t + k_{t+1} = (1-\delta+r_t) k_t + w_t e_i$ for all $t$, with $k_0 = k_{i,0}$,
+		\[
+		\lim_{t \to \infty} \frac{k_{t+1}}{\prod_{s=0}^{t}(1-\delta+r_{s+1})} \geq 0 \quad \text{(nPg)}
+		\]
+		
+		\item for each $t$, $(K_t, 1)$ solves $\max_{K,L} A_t K^{\alpha} L^{1-\alpha} - r_t K - w_t L$, with $K_t = \int_0^1 k_{i,t}^* \, di$
+		
+		\item for each $t$, $C_t + K_{t+1} = A_t K_t^{\alpha} + (1-\delta) K_t$, where $C_t = \int_0^1 c_{i,t}^* \, di$
+	\end{enumerate}
+	
+	\normalsize
+	\medskip
+	By Walras' Law, condition 3 is redundant given condition 2
+\end{frame}
+
+% ============================================================
+\section{Recursive Equilibrium}
+% ============================================================
+
+\begin{frame}{Recursive Methods: Overview}
+	Express equilibrium as \textbf{functions} of state variables, not sequences indexed by time.
+	
+	\bigskip
+	A state variable must be both \textbf{relevant} (determines prices) and \textbf{predetermined}.
+	
+	\bigskip
+	Two steps:
+	\begin{enumerate}
+		\item \textbf{Steady-state} recursive equilibria: aggregate variables constant; functions specify that agents \emph{choose} to remain at constant levels
+		\item \textbf{Dynamic} recursive equilibria: aggregates change with the state $K$; agents use $K$ to forecast future prices via $r(K)$, $w(K)$, $K' = G(K)$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Definition 7 (Steady-State CE, Endowment Economy)}
+	With constant endowments $y_i$ for each $i$. A recursive steady-state CE is a $q$ and a set of functions $V_i^*(a)$ and $g_i^*(a)$, and asset values $a_i^*$, for each $i \in [0,1]$, such that
+	
+	\begin{enumerate}
+		\item for each $i$, $V_i^*(a)$ solves
+		\[
+		V_i(a) = \max_{a'} \left\{ u(a + y_i - q a') + \beta V_i(a') \right\} \quad \forall a
+		\]
+		with $g_i^*(a)$ attaining the max for all $a$
+		
+		\item for each $i$, $g_i^*(a_i^*) = a_i^*$ \quad (stationarity)
+		
+		\item $\int_0^1 g_i^*(a_i^*) \, di = 0$ \quad (asset market clearing)
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Characterization of Definition 7}
+	The functional Euler equation (FOC $+$ Envelope Theorem), for all $i$:
+	\[
+	q u'(a + y_i - q g_i(a)) = \beta u'(g_i(a) + y_i - q g_i(g_i(a)))
+	\]
+	
+	Evaluating at $a = a_i^*$ with stationarity ($g_i^*(a_i^*) = a_i^*$):
+	\[
+	q = \beta
+	\]
+	
+	\textbf{Policy}: $g_i^*(a) = a$ for all $i$ (permanent-income result in recursive form).
+	
+	\textbf{Value}: $V_i^*(a) = u(a(1-q) + y_i)/(1-\beta)$.
+	
+	\bigskip
+	The asset distribution $\{a_i^*\}$ is indeterminate subject to $\int_0^1 a_i^* \, di = 0$. This model has no predictions for long-run wealth distributions (Chapter 21 addresses this).
+\end{frame}
+
+\begin{frame}{Definition 8 (Steady-State CE, NGM)}
+	A recursive steady-state CE consists of scalars $r$ and $w$ and a set of functions $V_i^*(k)$ and $g_i^*(k)$, and capital holdings $k_i^*$, for each $i \in [0,1]$, such that
+	
+	\begin{enumerate}
+		\item for each $i$, $V_i^*(k)$ solves
+		\[
+		V_i(k) = \max_{k'} \left\{ u((1-\delta+r)k + we_i - k') + \beta V_i(k') \right\} \quad \forall k
+		\]
+		with $g_i^*(k)$ attaining the max for all $k$
+		
+		\item $(K^*, 1)$ solves 
+		$$
+		\max_{K,L} F(K,L) - rK - wL, \text{ where }\int_0^1 k_i^* \, di = K^*
+		$$
+		
+		\item for each $i$, $g_i^*(k_i^*) = k_i^*$ \quad (stationarity)
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Characterization of Definition 8}
+	From the Euler equation at stationarity: 
+	$$
+	\beta = 1/(1-\delta+r),
+	$$
+	which pins down $r$.
+	
+	\bigskip
+	Then $r = F_1(K^*,1)$ determines $K^*$, and $w = F_2(K^*,1)$ determines $w$.
+	
+	\bigskip
+	Policies: $g_i^*(k) = k$ and
+	$$
+	V_i^*(k) = u(k(r-\delta) + we_i)/(1-\beta)
+	$$
+
+	
+	\bigskip
+	The distribution of capital is indeterminate, subject to 
+	$$
+	\int_0^1 k_i^* \, di = K^*.
+	$$
+\end{frame}
+
+\begin{frame}{Dynamic Recursive CE: Setup}
+	Out of steady state: prices depend on aggregate capital $K$ (relevant and predetermined).
+	
+	\bigskip
+	Agent takes as given: price functions $r(K)$, $w(K)$, and a law of motion $K' = G(K)$.
+	
+	\bigskip
+	Individual Bellman equation (must allow $k \neq K$):
+	\[
+	V(k, K) = \max_{k'} \left\{ u((1-\delta+r(K))k + w(K) - k') + \beta V(k', G(K)) \right\}
+	\]
+	for all $(k, K)$. Agent tracks $K$ because prices depend on it.
+\end{frame}
+
+\begin{frame}{Definition 9 (Recursive CE, NGM)}
+	A recursive CE consists of functions $r(K)$, $w(K)$, $G^*(K)$, $V^*(k,K)$, and $g^*(k,K)$ such that
+	
+	\begin{enumerate}
+		\item $V^*(k,K)$ solves
+		\[
+\hspace{-10pt}		V(k,K) = \max_{k'} \left\{ u((1\!-\!\delta\!+\!r(K))k + w(K) - k') + \beta V(k', G^*(K)) \right\}
+		\]
+		for all $(k,K)$, with $g^*(k,K)$ attaining the max
+		
+		\item $r(K) = F_1(K,1)$ and $w(K) = F_2(K,1)$ for all $K$
+		
+		\item $G^*(K) = g^*(K,K)$ for all $K$ \quad (consistency)
+	\end{enumerate}
+	
+	\medskip
+	Consistency: aggregate capital evolves according to individual choices when each agent holds $k = K$. The resource constraint is automatically satisfied.
+\end{frame}
+
+\begin{frame}{Functional Euler Equation and Equivalence}
+	FOC $+$ Envelope Theorem, evaluated at $k = K$:
+	\[
+	\begin{array}{l}
+	u'(F(K,1) + (1\!-\!\delta)K - G(K)) =\\
+	\quad\beta u'(F(G(K),1) + (1\!-\!\delta)G(K) - G(G(K))) \cdot [1\!-\!\delta+F_1(G(K),1)]
+	\end{array}
+	\]
+	
+	This functional equation in $G$ coincides with the planner's functional Euler equation from Chapter 4. Must be solved numerically unless $u = \log$, $F$ Cobb-Douglas, $\delta = 1$.
+\end{frame}
+
+\begin{frame}{Aggregation}
+	With power utility, individual saving takes the form:
+	\[
+	g(k, K) = \mu(K) + \lambda(K) k
+	\]
+	
+	\begin{itemize}
+		\item Saving is linear in own capital; slope $\lambda(K)$ is independent of $k$
+		\item Wealth distribution does not affect aggregate saving $\Rightarrow$ not restrictive to use a representative agent
+		\item With heterogeneous $e_i$: $g_i(k,K) = \mu_i(K) + \lambda(K) k$ (intercept varies, slope does not)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 10 (Recursive CE with Valued Leisure)}
+	\small
+	A recursive CE consists of $r(K)$, $w(K)$, $G^*(K)$, $H^*(K)$, $V^*(k,K)$, $g^*(k,K)$, $h^*(k,K)$ such that
+	
+	\begin{enumerate}
+		\item $V^*(k,K)$ solves
+		\[
+		\hspace{-40pt} V(k,K) = \max_{k', \ell} \left\{ u((1\!-\!\delta\!+\!r(K))k + w(K)\ell - k') - v(\ell) + \beta V(k', G^*(K)) \right\}
+		\]
+		for all $(k,K)$, with $g^*$, $h^*$ attaining the max
+		
+		\item $r(K) = F_1(K, H^*(K))$ and $w(K) = F_2(K, H^*(K))$ for all $K$
+		
+		\item $G^*(K) = g^*(K,K)$ and $H^*(K) = h^*(K,K)$ for all $K$
+	\end{enumerate}
+	
+	\normalsize
+	\medskip
+	The agent does not use $H^*$ directly; $G^*$ suffices because $r$ and $w$ capture how labor input changes with $K$. Aggregation breaks unless $k_{i,0}/e_i$ is equalized across agents.
+\end{frame}
+
+% ============================================================
+\section{Overlapping Generations}
+% ============================================================
+
+\begin{frame}{OLG: Setup}
+	\begin{itemize}
+		\item Agents live two periods ($y$ = young, $o$ = old); no altruism, no bequests
+		\item Cohort $t$ utility: $u_t(c_y, c_o) = u(c_y) + \beta u(c_o)$
+		\item Initial old ($t = -1$): $u_{-1}(c) = u(c)$
+		\item Endowments: $(\omega_{y,t}, \omega_{o,t+1})$ for cohort $t$
+	\end{itemize}
+	
+	\bigskip
+	Key differences from dynastic models:
+	\begin{itemize}
+		\item Simpler maximization (finite horizon)
+		\item First-order dynamics (not second-order)
+		\item Equilibria can be Pareto inefficient
+		\item Negative real interest rates possible
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 11 (Sequential CE, OLG Endowment)}
+	A sequential CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$ for each $i \in \{y, o\}$, $\{a_{t+1}^*\}_{t=0}^{\infty}$, and $\{q_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $t > 0$, $(c_{y,t}^*, c_{o,t+1}^*, a_{t+1}^*)$ solves
+		\[
+		\max_{c_y, c_o, a'} u(c_y) + \beta u(c_o)
+		\]
+		s.t. $c_y + q_t a' = \omega_{y,t}$ and $c_o = \omega_{o,t+1} + a'$
+		
+		and $c_{o,0}^* = \omega_{o,0}$
+		
+		\item for all $t \geq 0$, $c_{y,t}^* + c_{o,t}^* = \omega_{y,t} + \omega_{o,t}$
+	\end{enumerate}
+	
+	\medskip
+	Goods market clearing $\Leftrightarrow$ $a_{t+1}^* = 0$ for all $t$: any saving by the young requires someone on the other side, but the old are in their last period and the next cohort is unborn.
+\end{frame}
+
+\begin{frame}{Characterization of Definition 11}
+	Since $a_{t+1}^* = 0$: \textbf{autarky}, $(c_{y,t}^*, c_{o,t}^*) = (\omega_{y,t}, \omega_{o,t})$.
+	
+	\bigskip
+	Equilibrium price from the Euler equation at autarky (CRRA utility):
+	\[
+	q_t = \beta \left(\frac{\omega_{y,t}}{\omega_{o,t+1}}\right)^{\sigma}
+	\]
+	
+	If $\omega_y > \omega_o$ (income declines over the life cycle): $q > 1$ possible $\Rightarrow$ \textbf{negative real interest rate}. Cannot happen in the dynastic model (unless aggregate endowments decline).
+	
+	\bigskip
+	\textbf{Intuition}: No smoothing feasible (old cannot trade with unborn). Transferring from young to old (e.g. PAYG pension) can make all generations better off $\Rightarrow$ market outcome is inefficient. Chapter 6 analyzes this.
+\end{frame}
+
+\begin{frame}{Definition 12 (Sequential CE, OLG Growth Economy)}
+	\small
+	Labor productivities $e_y$, $e_o$ with $e_y + e_o = 1$; stationary $F(k, \ell)$.
+	
+	\medskip
+	A sequential CE is $\{c_{i,t}^*\}_{t=0}^{\infty}$ for each $i \in \{y,o\}$, $\{k_{t+1}^*\}_{t=0}^{\infty}$, $\{r_t\}_{t=0}^{\infty}$, $\{w_t\}_{t=0}^{\infty}$ such that
+	
+	\begin{enumerate}
+		\item for each $t > 0$, $(c_{y,t}^*, c_{o,t+1}^*, k_{t+1}^*)$ solves
+		\[
+		\max_{c_y, c_o, k'} u(c_y) + \beta u(c_o)
+		\]
+		s.t. $c_y + k' = w_t e_y$ and $c_o = w_{t+1} e_o + (1\!-\!\delta\!+\!r_{t+1}) k'$
+		
+		and $c_{o,0}^* = w_0 e_o + (1\!-\!\delta\!+\!r_0) k_0$
+		
+		\item for all $t$, $r_t = F_1(k_t^*, 1)$ and $w_t = F_2(k_t^*, 1)$, with $k_0^* \equiv k_0$
+		
+		\item for all $t \geq 0$, $c_{y,t}^* + c_{o,t}^* + k_{t+1}^* = F(k_t^*, 1) + (1\!-\!\delta)k_t^*$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{OLG Euler Equation and Dynamics}
+	Substituting prices as functions of capital:
+	\[
+	\begin{array}{l}
+		u'(e_y F_2(k_t,1) - k_{t+1}) =\\
+	\quad	\beta u'(e_o F_2(k_{t+1},1) + (1\!-\!\delta\!+\!F_1(k_{t+1},1))k_{t+1}) \cdot (1\!-\!\delta\!+\!F_1(k_{t+1},1))
+		\end{array}
+	\]
+	
+	\begin{itemize}
+		\item \textbf{First-order} difference equation: given $k_t$, solve for $k_{t+1}$ and iterate forward
+		\item Dynastic model: second-order (needs two boundary conditions)
+		\item In general, $\beta(1-\delta+F_1(\bar{k},1)) \neq 1$: the interest rate depends on life-cycle income
+		\item No immediate connection to a planner's problem $\Rightarrow$ uniqueness not guaranteed
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{OLG: Example}
+	With $u = \log$, $e_y = 1$, $e_o = 0$, $F = K^{\alpha}L^{1-\alpha}$, $\delta = 1$:
+	\[
+	k_{t+1} = \frac{\beta}{1+\beta}(1-\alpha)(k_t)^{\alpha}
+	\]
+	
+	\begin{itemize}
+		\item Log-linear dynamics, monotonic convergence to steady state
+		\item Steady-state gross interest rate: $\alpha(1+\beta)/(1-\alpha)$, which can be $< 1$ if $\alpha$ is low enough
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{OLG Extensions}
+	\textbf{Perpetual youth}: All individuals face a constant probability of death each period. As survival probability $\to 1$: approaches the dynastic model.
+	
+	\bigskip
+	\textbf{Warm glow}: $u(c_y) + \beta u(c_o) + \varphi(b')$, where $\varphi$ is utility from the act of giving (behavioral model).
+	
+	\bigskip
+	\textbf{Pure altruism}: Parent values child's utility as the child does:
+	\[
+	\varphi(b) = \max_{c_y, c_o, a', b'} \left\{ u(c_y) + \beta u(c_o) + \tilde{\beta} \varphi(b') \right\}
+	\]
+	subject to budget constraints. Recursive structure $\Rightarrow$ dynastic life-cycle model with long-run interest rate $= 1/\tilde{\beta}$.
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Three formulations}: Arrow-Debreu (Defs 1--4), sequential (Defs 5--6, 11--12), recursive (Defs 7--10). All yield the same allocations in dynastic economies.
+		
+		\item \textbf{First Welfare Theorem}: With identical agents and no frictions, CE $=$ planner's solution.
+		
+		\item \textbf{Aggregation}: Power utility $\Rightarrow$ $g(k,K) = \mu(K) + \lambda(K)k$ $\Rightarrow$ wealth distribution irrelevant. Breaks with valued leisure.
+		
+		\item \textbf{Investment optimality}: $p_t = p_{t+1}[r_{t+1} + 1-\delta]$.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{4}
+		\item \textbf{OLG}: First-order dynamics; interest rate depends on life-cycle income; negative rates possible; can be Pareto inefficient.
+		
+		\item \textbf{Pure altruism}: OLG $\to$ dynasty as special case; long-run $r = 1/\tilde{\beta}$.
+		
+		\item \textbf{Departures from perfect competition} (frictions, monopoly, incomplete markets) $\Rightarrow$ CE $\neq$ planner's solution. Chapters 6 and beyond.
+	\end{enumerate}
+\end{frame}
+\end{document}
+

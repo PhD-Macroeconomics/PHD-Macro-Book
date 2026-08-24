@@ -1,0 +1,653 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+\title[Chapter2]{Chapter 2: A Framework for Macroeconomics}
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction and Goals}
+% ============================================================
+
+\begin{frame}{Three Goals of the Chapter}
+	\begin{enumerate}
+		\item Review major macroeconomic time series with a focus on \textbf{long-run behavior}, primarily using US data
+		\item Gradually introduce the \textbf{basic framework}---the neoclassical growth model---that will be the core tool throughout the textbook
+		\begin{itemize}
+			\item Each graph interpreted from the perspective of this framework
+			\item Hard, if not impossible, to account for the data without it
+		\end{itemize}
+		\item Serve as a \textbf{stepping stone} into the rest of the text: preview of topics and chapters
+	\end{enumerate}
+\end{frame}	
+\begin{frame}{Three Goals of the Chapter}
+	\textbf{Key features of the framework}:
+	\begin{itemize}
+		\item Goes back to Solow's growth model, then adds conscious choices (saving, labor supply, technology development)
+		\item Microeconomic approach: explicit optimization, cross-sectional data
+		\item No presumption of perfect markets: emphasis on identifying specific frictions
+		\item \textbf{Quantitative}: account for magnitudes, not just qualitative features
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Output Grows Steadily}
+% ============================================================
+
+\begin{frame}{Fact 1: Output Per Capita Grows at a Roughly Constant Rate}
+	GDP per capita in the US (log scale), 1840--2018
+		\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter2/fig1_gdppc2024_USA}
+	\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Almost constant growth over more than a century ($\approx 1.86\%$/year; $R^2 > 0.98$)
+		\item Swings (including the Great Recession) are barely visible from a bird's-eye view
+	\end{itemize}
+		
+	\textbf{Goal}: ``Account'' for output growth by examining the production side---how basic inputs and their prices have evolved.
+\end{frame}
+
+% ============================================================
+\section{Resources Behind Output---and Their Prices}
+% ============================================================
+
+\begin{frame}{Fact 2: The Capital-Output Ratio Is Roughly Constant}
+	Capital-output ratio in the US, 1929--2022
+		\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter2/fig2_KtoY_USA}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Clear stability at a value of around 3
+		\item Jaggedness during the Great Depression, but stable thereafter
+		\item This had puzzled economists: seemed to suggest a rigid technology with no role for labor
+		\item Solow (1956) showed this constancy is natural in a neoclassical framework
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Wealth-Output Ratio}
+	Wealth-output ratio in the US
+			\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter2/fig3_WtoY_USA_Piketty+WID}
+	\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Broader interpretation of capital: wealth (includes land, housing)
+		\item Also shows marked stability, though total is 4--5 rather than 3
+		\item Large changes in \textbf{composition}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Fact 3: The Return on Capital Is Roughly Constant}
+	Return on capital---annualized stock market returns, three periods
+	\vspace{-8pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter2/fig4_SPreturns_USA}
+	\end{figure}
+		\vspace{-18pt}
+	\begin{itemize}
+		\item Under competitive markets: stock-market returns $\approx$ marginal cost of investment $=$ price of capital
+		\item No strong trend across three long periods 
+		\item Short-run fluctuations are large (due to asset valuations), so longer-run averages are more appropriate
+	\end{itemize}
+	\textbf{User cost of capital} (Hall and Jorgenson, 1969): interest rate $+$ depreciation $+$ fall in value. Also stationary.
+\end{frame}
+
+\begin{frame}{Fact 4: Hours Worked Per Capita Are Roughly Constant (Postwar)}
+	Average weekly hours worked in the US (age 14+)
+			\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter2/fig5_WklyHours_USA}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Since the beginning of the 20th century: hours fell from $\sim$28 to $\sim$23 hours/week
+		\item Since the end of WWII: hours look  stable 
+		\item ``US hours are stationary'' is accurate for the \textbf{postwar} period
+		\item Large departures during Great Depression and WWII 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Fact 5: Wages Have Risen at or above Output Growth Rate}
+	Average weekly hours worked in US manufacturing, and real wages, 1830--2023
+\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter2/fig6_HoursWorked_WageIndex_USA}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Clear downward trend in hours over the long time period
+		\item Wages have risen dramatically
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{A Neoclassical Picture Emerges}
+% ============================================================
+
+\begin{frame}{Solow's Interpretation}
+	The data on capital and output had puzzled economists. Solow (1956) noted:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Steady rise in output; equally steady rise in capital; stationary (or declining) hours
+		\item Price of capital stationary; wages trending upward
+		\item \textbf{Natural interpretation}: Labor has become more expensive relative to capital $\Rightarrow$ firms use less labor relative to capital
+		\item Capital-labor ratio has risen at the rate of output growth
+	\end{itemize}
+	\textbf{Why hasn't the return to capital fallen?} Technological change directed toward labor (making labor more productive) would increase the value of capital on the margin. But a \textbf{neoclassical} production function (decreasing marginal returns) ensures that as $K/L$ rises, the marginal value of capital falls back. These two forces offset, keeping the return to capital stationary.
+\end{frame}
+
+\begin{frame}{The Aggregate Production Function}
+	Solow posited that aggregate output is generated by:
+	\[
+	y_t = F_t(k_t, \ell_t)
+	\]
+		\vspace{-27pt}
+	\begin{itemize}
+		\item $k_t$: aggregate capital per capita; $\ell_t$: hours worked per capita
+		\item $F_t$: production function that may shift over time (technological progress)
+		\item CRS: doubling inputs doubles output
+		\item Neoclassical: decreasing marginal returns to each input
+	\end{itemize}
+	
+	\textbf{The Cambridge Capital Controversy} (1950s): Joan Robinson and Piero Sraffa (Cambridge, UK) vs.\ Samuelson and Solow (MIT). Whether an aggregate production function can exist rigorously when output aggregates many goods. Existence conditions are knife-edge. But \textbf{usefulness} of the aggregate production function is well-established empirically---Cambridge, Mass.\ ``won'' on pragmatic grounds.
+\end{frame}
+
+% ============================================================
+\section{Growth Accounting}
+% ============================================================
+
+\begin{frame}{Solow's Growth Accounting: Derivation}
+	Assumptions: (i) $y(t) = F(k(t), \ell(t), t)$, CRS, neoclassical; (ii) perfect competition for inputs.
+	
+	\bigskip
+	Differentiating:
+	\[
+	dy = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial k}dk + \frac{\partial F}{\partial \ell}d\ell
+	\]
+	
+	Dividing by $y$, using profit maximization ($r = \partial F/\partial k$, $w = \partial F/\partial \ell$), and letting $1 - \alpha$ denote labor's share, $\alpha$ capital's share (from CRS $\Rightarrow$ zero pure profits):
+	
+	\[
+	\frac{dy}{y} = \underbrace{\frac{\partial F}{\partial t}\frac{dt}{F}}_{\text{Solow residual}} + \alpha \frac{dk}{k} + (1-\alpha)\frac{d\ell}{\ell}
+	\]
+	
+	Output growth $=$ weighted sum of input growth rates $+$ residual.
+\end{frame}
+
+\begin{frame}{TFP and Labor-Augmenting Technology}
+	\textbf{Hicks-neutral (TFP)}: $F(k,\ell,t) = z F(k,\ell)$
+	\[
+	\frac{dy}{y} = \frac{dz}{z} + \alpha\frac{dk}{k} + (1-\alpha)\frac{d\ell}{\ell}
+	\]
+	
+	$z$ is total factor productivity: a common factor multiplying both inputs.
+	
+	\bigskip
+	\textbf{Labor-augmenting (Harrod-neutral)}: $F(k,\ell,t) = F(k, z\ell)$
+	\[
+	\frac{dy}{y} = (1-\alpha)\frac{dz}{z} + \alpha\frac{dk}{k} + (1-\alpha)\frac{d\ell}{\ell}
+	\]
+	
+	\bigskip
+	\textbf{Key result} (Uzawa, 1961): For balanced growth in a model with a limited input (labor hours constant), technological change \textbf{must} be labor-augmenting. This is not a choice but a \textbf{necessity}.
+\end{frame}
+
+\begin{frame}{Labor Productivity}
+	Labor productivity in the US, sub-periods
+\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter2/fig7_LaborProductivityGrowth_USA}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Average growth rate: a little below 2\% per year
+		\item Significant ups and downs across sub-periods
+		\item Currently in a ``down'' period
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Labor Productivity: Cross-Country}
+	Labor productivity for a selection of countries (HP-filtered)
+				\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter2/fig8_LaborProductivityGrowth_Xcountry}
+	\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Stable, positive labor productivity growth across countries
+		\item Hovering around 2--2.5\% per year
+		\item Similar patterns across advanced economies
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Total Factor Productivity}
+	TFP in the US, two measures
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{FigsChapter2/fig9_TFPGrowth_USA_annual_Fernald_Penn}
+	\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item TFP growth at a little below 2\% per year
+		\item Significant movements up and down
+	\end{itemize}
+\end{frame}
+\begin{frame}{Total Factor Productivity}
+Historical TFP for a broader set of countries (HP-filtered)
+	\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter2/fig10_TFPGrowth_Xcountry}
+\end{figure}
+\vspace{-15pt}
+\begin{itemize}
+	\item Similar patterns across countries
+	\item Smoothed data shows long-run trends more clearly
+\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{The Dynamic System}
+% ============================================================
+
+\begin{frame}{Capital Accumulation}
+	Tomorrow's capital = today's capital $+$ investment $-$ depreciation:
+	\[
+	k_{t+1} = (1 - \delta)k_t + i_t
+	\]
+	
+	Dividing by $y_{t+1}$, letting $\gamma_t$ denote net growth rate of output:
+	\[
+	\frac{k_{t+1}}{y_{t+1}}(1+\gamma_t) = (1-\delta)\frac{k_t}{y_t} + \frac{i_t}{y_t}
+	\]
+	
+	\textbf{Balanced growth path}: If $k$, $i$, $y$ all grow at the same constant rate $\gamma$ and $i_t/y_t = s$ (constant):
+	\[
+	\frac{k}{y} = \frac{s}{\gamma + \delta}
+	\]
+	
+	\textbf{Numerical check}: $\delta \approx 0.08$, $\gamma \approx 0.02$, $s \approx 0.30$ $\Rightarrow$ $k/y = 3$ $\checkmark$
+\end{frame}
+
+\begin{frame}{The Consumption-Output Ratio}
+	Ratio of total consumption to output
+	\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter2/fig11_totalCtoY_USA}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Large movements early in the 20th century
+		\item Thereafter: small movements
+		\item $1 - c/y \approx$ investment-output ratio (net exports $\approx 0$ for US)
+		\item Overall: assumption of a \textbf{constant saving rate} is a good first approximation
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The Solow Model: Convergence}
+	Solow's dynamic system (with labor-augmenting technology, constant $\ell$, constant saving rate $s$):
+	\[
+	k_{t+1} = sF(k_t, (1+\gamma)^t \ell) + (1-\delta)k_t
+	\]
+	\textbf{Variable transformation}: $\tilde{k}_t \equiv k_t/(1+\gamma)^t$ (stationary if $k$ grows at rate $\gamma$):
+	\[
+	(1+\gamma)\tilde{k}_{t+1} = sF(\tilde{k}_t, \ell) + (1-\delta)\tilde{k}_t
+	\]
+	
+	\textbf{Unique steady state}: $\bar{\tilde{k}}$ solves $(1+\gamma)\bar{\tilde{k}} = sF(\bar{\tilde{k}}, \ell) + (1-\delta)\bar{\tilde{k}}$.
+	
+	\textbf{Convergence}: Under neoclassical conditions, for \emph{any} initial $k_0$, the economy converges to the balanced growth path.
+	\begin{itemize}
+		\item When $k$ low: high marginal productivity $\Rightarrow$ fast accumulation
+		\item When $k$ high: low marginal productivity $\Rightarrow$ slow accumulation
+		\item This {de-mystifies} why $k/y \approx 3$: deviations are self-correcting
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{From Solow to the Workhorse Model}
+	The convergence property makes this framework the \textbf{workhorse model} for macroeconomics:
+	\begin{itemize}
+		\item Business cycles: add stochastic shocks to the dynamic system
+		\item Supply shocks or demand shocks---propagation differs, but all paths eventually return toward balanced growth
+		\item Convergence is ensured by the neoclassical production function
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Unresolved issue}: Some assumptions are mere mechanical descriptions:
+	\begin{itemize}
+		\item Investment is a constant fraction $s$ of output
+		\item Hours worked are constant at $\ell$
+	\end{itemize}
+	
+	These should be the results of \textbf{conscious choices} by households. We need to ``rationalize'' $s$ and $\ell$ based on utility maximization.
+\end{frame}
+
+
+% ============================================================
+\section{Factor Shares}
+% ============================================================
+
+\begin{frame}{Fact 6: Factor Shares Are Roughly Constant}
+	
+	US factor shares over time
+		\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{FigsChapter2/fig12_FactorShares_USA_NIPA}
+	\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item On balanced growth: $rk$ grows at the rate of output ($r$ constant, $k$ grows at $\gamma$); $w\ell$ grows at the rate of output ($w$ grows at $\gamma$, $\ell$ constant)
+		\item Therefore shares should be constant $\Rightarrow$ confirmed by the data
+		\item Remarkable constancy over the full sample
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Recent Decline in the Labor Share}
+	Labor share for US, Japan, France, Germany
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter2/fig13_LaborShare_Xcountry}
+\end{figure}
+\end{frame}
+\begin{frame}{The Recent Decline in the Labor Share}
+Global labor share	
+		\vspace{-5pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.38]{FigsChapter2/fig14_GlobalLaborShare}
+\end{figure}
+\vspace{-10pt}
+	\begin{itemize}
+		\item Restricting the time interval: noticeable \textbf{downward trend} in recent decades
+		\item Observed in US, Japan, France, Germany, and globally
+		\item Subject to much scrutiny and research
+		\item For now: maintain stylized fact as ``close to constant over time''
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Cobb-Douglas Production Function}
+	Virtually all applied macro studies use:
+	\[
+	F(k, \ell) = Ak^\alpha \ell^{1-\alpha}
+	\]
+	
+	\begin{itemize}
+		\item $\alpha$: constant capital share; $1-\alpha$: constant labor share
+		\item Under perfect competition: $F_k k / F = \alpha$ (independent of $k$ and $\ell$)
+		\item Factor shares constant regardless of business-cycle position
+		\item Although shares are not literally constant, movements are relatively minor
+		\item Cobb-Douglas generates a decent approximation---hence its wide use
+	\end{itemize}
+\end{frame}
+% ============================================================
+\section{Summing Up the Stylized Facts}
+% ============================================================
+
+\begin{frame}{The Seven Kaldor Facts}
+	\begin{enumerate}
+		\item Output per capita has grown at a \textbf{roughly constant rate}
+		\item The capital-output ratio has remained \textbf{roughly constant}
+		\item The consumption-output ratio has been \textbf{roughly constant}
+		\item The wage rate has grown at a roughly constant rate \textbf{equal to the growth rate of output}
+		\item The real interest rate has been \textbf{roughly constant} (over longer periods)
+		\item Labor share of output has remained \textbf{roughly constant}
+		\item Hours worked per capita have been \textbf{roughly constant} (postwar)
+	\end{enumerate}
+	These facts are consistent with a neoclassical framework: CRS production function with labor-augmenting technical change, decreasing marginal products, constant labor supply, constant depreciation rate, constant saving ratio.
+\end{frame}
+% ============================================================
+\section{Rationalizing Saving and Labor Supply}
+% ============================================================
+
+\begin{frame}{Time and People}
+	\textbf{Time}: Discrete (mostly) or continuous; infinite horizon (finite $T$ creates non-stationarity; $T$ is virtually irrelevant for decisions far from $T$).
+	
+	\bigskip
+	\textbf{People}: Utility-maximizing agents.
+	\begin{itemize}
+		\item ``Rationalize'' observed choices as optimal given well-defined problems
+		\item Allows welfare statements and normative policy comparisons
+		\item Baseline: \textbf{representative agent, dynastic} (lives forever = cares about offspring)
+		\item Also common: life-cycle models, overlapping generations, heterogeneous agents
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}{The Euler Equation}
+		\textbf{Preferences}: Time-additive: $u(c_t) + \beta u(c_{t+1})$
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Same $u$ in both periods $\Rightarrow$ consumption in both periods are normal goods
+		\item Concavity $\Rightarrow$ consumption smoothing
+		\item $\beta < 1$: impatience (or probability of death)
+	\end{itemize}
+	Setting MRS $=$ relative price (gross real interest rate $R_{t+1}$):
+	\[
+	\frac{u'(c_t)}{\beta u'(c_{t+1})} = R_{t+1}
+	\]
+	Equivalently:
+	\[
+	u'(c_t) = \beta R_{t+1} u'(c_{t+1})
+	\]
+	\textbf{Interpretation}: Marginal utility loss of saving one unit today $=$ discounted marginal utility gain from consuming $R_{t+1}$ units tomorrow.
+
+\end{frame}
+
+
+
+\begin{frame}{Balanced Growth Requires Power Utility}
+		
+	\textbf{Key question}: Can balanced growth (constant consumption growth, constant $R$) be consistent with the Euler equation?
+	
+	
+	\textbf{Result}: Balanced growth arises in equilibrium \textbf{if and only if} the utility function is a power function:
+	\[
+	u(c) = \frac{c^{1-\sigma} - 1}{1-\sigma}, \qquad \sigma > 0
+	\]
+	The case $\sigma \to 1$ yields $u(c) = \log c$.
+	
+	\textbf{Why?} With power utility: $u'(c_t)/u'((1+\gamma)c_t)$ is constant. So a constant $R$ is consistent with constant consumption growth.
+
+
+	\textbf{``Only if''}: For any other $u$, saving rates would go to 0 or 1 over time as the economy grows. Balanced growth as observed in the data would not be possible. 
+	
+	$\Rightarrow$ Power utility (CRRA) is used in almost all applications.
+\end{frame}
+
+
+\begin{frame}{Labor vs.\ Leisure}
+	Add leisure to utility: $u(c, 1-\ell)$ where $\ell + l = 1$.
+	
+	\bigskip
+	MRS $=$ wage: $u_2(c_t, 1-\ell_t)/u_1(c_t, 1-\ell_t) = w_t$.
+	
+	\bigskip
+	\textbf{Requirement}: Constant hours along balanced growth path where $c$ and $w$ grow at rate $\gamma$.
+	
+	\bigskip
+	\textbf{Result}: Balanced growth with constant hours \textbf{if and only if}:
+	\[
+	u(c, 1-\ell) = \frac{(c \cdot v(1-\ell))^{1-\sigma} - 1}{1-\sigma}
+	\]
+	where $v(l)$ is strictly increasing and $c \cdot v(l)$ is strictly quasiconcave.
+	
+	\bigskip
+	\textbf{Intuition}: At higher wages, the substitution effect (work more) exactly cancels the income effect (enjoy more leisure).
+\end{frame}
+
+\begin{frame}{Allowing for Declining Hours}
+	The longer-run data (and cross-country evidence) suggest hours fall slowly ($\sim$1/3 \% per year).
+	
+	\bigskip
+	\textbf{Result}: Balanced growth with hours declining at a constant rate \textbf{if and only if}:
+	\[
+	u(c, 1-\ell) = \frac{(c^{1-\nu} g(c^\nu \ell))^{1-\sigma} - 1}{1-\sigma}
+	\]
+	with $\nu > 0$ and $g(\cdot)$ decreasing.
+	
+	\bigskip
+	\begin{itemize}
+		\item Hours grow at $(1+\gamma)^{-\nu}$; consumption at $(1+\gamma)^{1-\nu}$
+		\item $\nu = 0$: collapses to the constant-hours case
+		\item $\nu > 0$: income effect slightly dominates substitution effect
+		\item Interpretation: at lower income, people work more because consumption is more important
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Preview: The Rest of the Text}
+% ============================================================
+
+\begin{frame}{Part I: Core Methods (Chapters 3--10)}
+	\begin{itemize}
+		\item \textbf{Chapter 3}: The Solow model in detail; convergence
+		\item \textbf{Chapter 4}: Dynamic optimization (Lagrangian, Bellman, contraction mapping)
+		\item \textbf{Chapter 5}: Dynamic competitive equilibrium; welfare theorems
+		\item \textbf{Chapter 6}: Welfare analysis; CES price index
+		\item \textbf{Chapter 7}: Uncertainty; stochastic dynamic programming
+		\item \textbf{Chapter 8}: Empirical strategies (calibration, estimation, VARs, identification)
+		\item \textbf{Chapter 9}: Continuous-time analytical techniques
+		\item \textbf{Chapter 10}: Computational tools (VFI, linearization, Blanchard-Kahn)
+	\end{itemize}
+	These methods are core material used repeatedly throughout the applied chapters.
+\end{frame}
+
+\begin{frame}{Part II: Applied Chapters (11--25)}
+	\begin{itemize}
+		\item \textbf{Ch 11}: Consumption (MPC, incomplete markets, heterogeneous agents)
+		\item \textbf{Ch 12}: Labor supply (intensive/extensive margins, wage elasticities)
+		\item \textbf{Ch 13}: Growth (cross-country, endogenous growth, innovation)
+		\item \textbf{Ch 14}: Real business cycles (Kydland-Prescott, DSGE)
+		\item \textbf{Ch 15}: Government (taxation, optimal policy, time consistency)
+		\item \textbf{Ch 16}: Asset prices (consumption CAPM, equity premium puzzle)
+		\item \textbf{Ch 17}: Money (fiat money, inflation, exchange rates)
+		\item \textbf{Ch 18}: Nominal frictions (New Keynesian model, monetary policy)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Part II: Applied Chapters (continued)}
+	\begin{itemize}
+		\item \textbf{Ch 19}: Credit market frictions (financial accelerator, Great Recession)
+		\item \textbf{Ch 20}: Frictional labor markets (DMP model, Shimer puzzle)
+		\item \textbf{Ch 21}: Inequality (wages, wealth, HANK model)
+		\item \textbf{Ch 22}: Heterogeneous firms (misallocation, granularity, markups)
+		\item \textbf{Ch 23}: International macroeconomics (open-economy business cycles)
+		\item \textbf{Ch 24}: Sovereign debt and default risk
+		\item \textbf{Ch 25}: Sustainability (climate change, integrated assessment, energy)
+	\end{itemize}
+	Virtually every chapter builds directly on the market version of the neoclassical growth model developed in this chapter and formalized in Chapters 3--5.
+\end{frame}
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways}
+	\begin{enumerate}
+		\item The Kaldor facts (constant growth rate, constant $k/y$, constant $c/y$, rising wages, stable $r$, stable factor shares, stable hours) motivate the \textbf{neoclassical growth framework}
+		
+		\item \textbf{Growth accounting}: Solow residual is the dominant source of growth
+		
+	
+		\item \textbf{Convergence}: neoclassical production function ensures the economy returns to its balanced growth path
+		
+		\item \textbf{CRRA utility} is the unique preference specification consistent with balanced growth (constant saving rate, constant or slowly declining hours)
+		
+		\item The \textbf{Euler equation} is the central optimality condition connecting consumption, saving, and interest rates
+		
+		\item The recent \textbf{decline in the labor share} is an active area of research and a departure from the classic Kaldor facts
+	\end{enumerate}
+\end{frame}
+\end{document}
+

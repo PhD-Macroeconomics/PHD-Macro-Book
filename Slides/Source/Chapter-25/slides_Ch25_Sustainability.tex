@@ -1,0 +1,726 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter25]{Chapter 25: Sustainability}
+\author[John Hassler, Per Krusell, and Conny Olovsson]{Chapter authors: John Hassler, Per Krusell, and Conny Olovsson}
+
+\date[August 2026]{August 2026}
+
+
+
+
+\begin{document}
+
+% ============================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction: The Economy and the Environment}
+% ============================================================
+
+\begin{frame}{Why Climate Change Is a Macro Topic}
+\begin{itemize}
+    \item Climate change is \textbf{global}: caused by aggregate CO$_2$ emissions, a byproduct of fossil energy --- our dominant energy source
+    \item Energy services cost roughly \textbf{5\% of global GDP}; sharp energy-use reductions can cause recessions (1970s oil shocks)
+    \item Climate change is a \textbf{long-run} issue with no direct evidence on long-run policy effects $\Rightarrow$ macroeconomic \emph{modeling} is the laboratory
+    \item Minor departures from the standard growth model suffice
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Why Climate Change Is a Macro Topic (cont.)}
+\bigskip
+Broader \textbf{sustainability} questions: do present and future humans have enough? Should we economize on natural resources? Is ``de-growth'' warranted?
+
+\bigskip
+\textbf{Chapter plan}: economy vs.\ environment; natural-science background; Integrated Assessment Models (IAMs); finite natural resources (Hotelling, directed technical change).
+\end{frame}
+
+\begin{frame}{The Economy and the Environment}
+The economy and the environment --- landmass, finite resources, climate, water, plants/animals/people, minerals; darker shades $=$ higher degree of property rights
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.44]{FigsChapter25/fig1}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{The Economy and the Environment (cont.)}
+\begin{itemize}
+    \item \textbf{Landmass}: highest degree of property rights
+    \item \textbf{Finite resources} (fossils, minerals): largely owned --- Coasean management by owners is possible, so overconsumption is not obvious at the outset
+    \item \textbf{Climate}: \emph{no} property rights possible --- emissions mix globally within days; the concentration is the same everywhere
+    \item Water, biodiversity, land quality: endogenous to human activity and to the climate
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{The Economy and the Environment (cont.)}
+IAMs consist of three interacting blocks: economy $\to$ carbon circulation $\to$ climate $\to$ (damages) economy
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{FigsChapter25/fig2}
+\end{figure}
+\vspace{-10pt}
+\end{frame}
+
+% ============================================================
+\section{Natural-Science Background}
+% ============================================================
+
+\begin{frame}{The Greenhouse Effect and the Energy Balance}
+CO$_2$ does not affect incoming solar radiation but \textbf{obstructs outgoing heat radiation}: a CO$_2$ increase creates an energy-balance surplus and the temperature rises (the \textbf{greenhouse effect}). Without greenhouse gases: $-20^{\circ}$C instead of $+15^{\circ}$C.
+
+\medskip
+Let $T$ = surface temperature deviation from pre-industrial. With forcing $f$ (reduced outflow), heat radiation proportional to $T$ (coefficient $\kappa$, embodying uncertain feedbacks: ice-albedo, clouds):
+\[
+\frac{dT(t)}{dt} = \sigma\left(f(t) - \kappa T(t)\right)
+\]
+
+Steady state after constant forcing $f$: $T = f/\kappa$.
+
+\end{frame}
+
+\begin{frame}{The Greenhouse Effect and the Energy Balance (cont.)}
+\bigskip
+\textbf{Arrhenius greenhouse law} (1896): forcing is logarithmic in the atmospheric carbon stock $S$ relative to pre-industrial $S_0$:
+\[
+f_{CO_2} = \frac{\eta}{\log 2}\log\frac{S}{S_0}, \qquad \eta \approx 3.7
+\]
+
+CO$_2$: about two thirds of greenhouse-gas forcing; up $\sim$50\% since the Industrial Revolution.
+\end{frame}
+
+\begin{frame}{Climate Sensitivity and Ocean Dynamics}
+Combining the steady state with the Arrhenius law:
+\[
+T(f(S)) = \frac{\eta}{\kappa}\frac{1}{\log 2}\log\left(\frac{S}{S_0}\right)
+\]
+
+$\eta/\kappa$ is the \textbf{equilibrium climate sensitivity (ECS)}: the long-run warming from a \emph{doubling} of CO$_2$. IPCC 6th report: ``likely'' between $2.5^{\circ}$C and $4^{\circ}$C, best estimate $3^{\circ}$C (90\% interval $2$--$5^{\circ}$C).
+
+\end{frame}
+
+\begin{frame}{Climate Sensitivity and Ocean Dynamics (cont.)}
+\bigskip
+\textbf{Two-layer system with oceans} (ocean temperature $T^L$, slow to warm):
+\[
+T_t = T_{t-1} + \sigma_1\left[\frac{\eta}{\log 2}\log\left(\frac{S_{t-1}}{S_0}\right) - \kappa T_{t-1} - \sigma_2\left(T_{t-1} - T^L_{t-1}\right)\right]
+\]
+\[
+T^L_t = T^L_{t-1} + \sigma_3\left(T_{t-1} - T^L_{t-1}\right)
+\]
+
+Same steady state, but $\sigma_3 \ll \sigma_1$ makes convergence much slower --- the ocean exerts a long-lasting (but not permanent) cooling drag.
+\end{frame}
+
+\begin{frame}{The Carbon Cycle}
+Carbon circulates between three reservoirs: atmosphere $S$, surface oceans/biosphere $S^U$, deep oceans $S^L$. Linear system (Nordhaus RICE):
+\[
+S_t - S_{t-1} = \phi_{12}S_{t-1} + \phi_{21}S^U_{t-1} + E_{t-1}
+\]
+\[
+S^U_t - S^U_{t-1} = \phi_{12}S_{t-1} - (\phi_{21} + \phi_{23})S^U_{t-1} + \phi_{32}S^L_{t-1}
+\]
+\[
+S^L_t - S^L_{t-1} = \phi_{23}S^U_{t-1} + \phi_{32}S^L_{t-1}
+\]
+
+Folini et al.\ (2021): closely replicates CMIP5 Earth System Models with $\phi_{12} = 0.053$, $\phi_{21} = 0.0536$, $\phi_{23} = 0.0042$, $\phi_{32} = 0.001422$ (annual). Units: 1 kg carbon $\approx$ 3.67 kg CO$_2$.
+
+\end{frame}
+
+\begin{frame}{The Carbon Cycle (cont.)}
+\bigskip
+\textbf{Reduced form} (Golosov-Hassler-Krusell-Tsyvinski, 2014) for excess atmospheric carbon:
+\[
+S_t - S_0 = \sum_{s=0}^{\infty}(1 - d_s)E_{t-s}, \qquad 1 - d_s = \phi_L + (1-\phi_L)\phi_0(1-\phi)^s
+\]
+
+Matching IPCC/Archer: $\sim$20--25\% of emissions stay for millennia ($\phi_L = 0.2$); $\sim$50\% leave within decades ($1 - \phi_0$); the rest decays geometrically ($\phi = 0.0228$, decadal; $\phi_0 = 0.393$).
+\end{frame}
+
+\begin{frame}{The Constant Carbon-Climate Response (CCR)}
+A key emergent property of the combined system: temperature is approximately \textbf{proportional to cumulative emissions}:
+\[
+T_t \approx \sigma_{CCR}\sum_{s=0}^{t}E_s
+\]
+
+IPCC 6th report: $\sigma_{CCR}$ ``likely'' between $1.0$ and $2.3^{\circ}$C per 1,000 GtC. Two offsetting effects: CO$_2$ slowly leaves the atmosphere (less forcing) while oceans slowly warm (less cooling) --- balancing on a centennial scale.
+
+\end{frame}
+
+\begin{frame}{The Constant Carbon-Climate Response (CCR) (cont.)}
+Cumulative emissions vs.\ global mean temperature; solid: data 1850--2022; dashed: high/low CCR forecasts
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter25/fig3}
+\end{figure}
+\vspace{-10pt}
+\end{frame}
+
+\begin{frame}{Implications of a Constant CCR}
+\begin{enumerate}
+    \item \textbf{Irreversibility}: temperature depends on \emph{total past} emissions --- there is effectively no depreciation in the emissions-to-temperature map. To stop warming, emissions must stop.
+
+    \item \textbf{Carbon budget}: a temperature target translates into a total emissions budget. By 2022 we had burnt $\approx$650 GtC; with CCR $= 1$, that is $0.65^{\circ}$C of warming, leaving 850 GtC for the $1.5^{\circ}$C target ($\approx$85 years at current rates); with CCR $= 2.3$, the $1.5^{\circ}$C budget is \emph{already exhausted}.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Implications of a Constant CCR (cont.)}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Path multiplicity}: many emission paths meet a given budget --- front-loaded or back-loaded reductions --- but they are \emph{not} welfare-equivalent, which a date-target alone ignores. Evaluating them requires the climate-economy interaction (the IAM below).
+
+    \item \textbf{Linearity}: a constant CCR rules out non-linearities such as \textbf{tipping points}.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{The Fossil Energy Supply}
+\textbf{Reserves}: recoverable with reasonable certainty under existing conditions. \textbf{Resources}: best guess including deposits unprofitable today.
+
+\end{frame}
+
+\begin{frame}{The Fossil Energy Supply (cont.)}
+World crude oil reserves --- OPEC 1,190 billion barrels ($\approx$80\%), non-OPEC 308
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter25/fig4}
+\end{figure}
+\vspace{-10pt}
+
+\textbf{Conventional} oil flows on its own: marginal cost a fraction of price (Hotelling rents); \textbf{unconventional} oil costs near or above price. Expect all conventional oil to be burnt.
+
+\end{frame}
+
+\begin{frame}{The Fossil Energy Supply (cont.)}
+\bigskip
+Warming from burning the reserves (constant CCR, 0.27--0.63$^{\circ}$C per 1,000 GtCO$_2$):
+\begin{itemize}
+    \item Oil: 1,190bn barrels $= (1{,}190/7.33)\times 0.85\times 3.67 = 500$ GtCO$_2$ $\Rightarrow$ \textbf{0.13--0.33$^{\circ}$C}
+    \item Coal: 1,074 GtC $\times 0.70\times 3.67 = 2{,}759$ GtCO$_2$ $\Rightarrow$ \textbf{0.75--1.73$^{\circ}$C}
+    \item Gas: 190 trillion m$^3$ $\Rightarrow$ less than $0.1^{\circ}$C
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reserves vs.\ Resources}
+Reserves and resources in GtC
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+ & Reserves & Resources (Rogner) & Resources (BGR) \\
+\midrule
+Oil (conv$+$unconv) & 173 & $\approx$400--2,200 & $\approx$500 \\
+Coal & 1,074 & $\approx$6,200 & $\approx$11,500 \\
+Gas & 100 & $\approx$350 & $\approx$365 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-5pt}
+{\small Sources: Rogner (1997); BGR (2020).}
+
+\end{frame}
+
+\begin{frame}{Reserves vs.\ Resources (cont.)}
+\bigskip
+Coal \textbf{resources} are an order of magnitude larger than reserves (proven coal reserves are likely underestimated: coal is not very profitable, so search incentives are weak).
+
+\bigskip
+Burning all the coal resources implies \textbf{$10^{\circ}$C or more} of warming via the constant CCR. The binding constraint on warming is therefore \emph{not} the fossil supply --- it must come from policy or economics.
+\end{frame}
+
+\begin{frame}{Damages: Externalities and Measurement Approaches}
+Warming effects are classical \textbf{externalities}: unpriced welfare consequences of emissions. Since emissions mix globally, the externality per unit is \textbf{location-independent} $\Rightarrow$ the Pigou prescription is a \emph{uniform global} tax on emissions at marginal damage. (Stern Review 2007; Nordhaus.)
+
+\bigskip
+\textbf{Bottom-up}: identify all damages (agriculture, sea level, health, amenities, catastrophes), value them, add up $\to$ a damage function $D(T)$. Nordhaus: modest aggregates --- $2^{\circ}$C costs under 1\% of global GDP. PESETA (EU): similar magnitudes; the north may gain, the Mediterranean loses.
+
+\end{frame}
+
+\begin{frame}{Damages: Externalities and Measurement Approaches (cont.)}
+\bigskip
+\textbf{Top-down}: relate aggregates to climate variation.
+\begin{itemize}
+    \item Time series: $+1^{\circ}$C $\Rightarrow$ $-1$pp output \emph{growth} in poor countries, none in rich (Dell-Jones-Olken); $+4^{\circ}$C $\Rightarrow$ global GDP $-7\%$ by 2100 (Kahn et al.); mortality cost of $5^{\circ}$C scenario: 3.2\% of GDP (Carleton et al.)
+    \item Cross section: strong negative output-temperature correlation; U-shaped productivity with a ``sweet spot'' around $11^{\circ}$C annual average (Cruz--Rossi-Hansberg; Krusell-Smith)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Damage Functions, Adaptation, Discounting}
+Meta studies of climate damages: Nordhaus--Moffat (2017) and Howard--Sterner (2017)
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{FigsChapter25/fig5}
+\end{figure}
+\vspace{-10pt}
+{\small Low average costs at 1--2$^{\circ}$C; convex in temperature.}
+
+\end{frame}
+
+\begin{frame}{Damage Functions, Adaptation, Discounting (cont.)}
+\textbf{Nordhaus damage function} (share of GDP lost):
+\[
+D(T) = 1 - \frac{1}{1 + 0.00267T^2} \approx 0.024\left(\frac{T}{3}\right)^2
+\]
+i.e., 2.4\% of output lost at $3^{\circ}$C. \textbf{GHKT}: mapping $S \to T \to D$ is well approximated by the TFP factor $e^{-\gamma S}$ --- damages exponential in atmospheric carbon directly.
+
+\end{frame}
+
+\begin{frame}{Damage Functions, Adaptation, Discounting (cont.)}
+\bigskip
+\textbf{Adaptation}: with damages $(T-a)^x/x + a$ and linear adaptation costs, optimizing over $a$ yields a \emph{linear} reduced-form $D(T) = T + (1-x)/x$ regardless of $x$: adaptation flattens convexity.
+
+\medskip
+\textbf{Discounting}: revealed preference (Euler equation, interest rates) gives $\beta \approx 0.985$ (Nordhaus); the Stern Review argues for $\beta \approx 0.999$ on ethical grounds --- the choice matters enormously for largely irreversible damages, but is philosophy more than economics.
+\end{frame}
+
+% ============================================================
+\section{Integrated Assessment Models}
+% ============================================================
+
+\begin{frame}{A Static One-Region IAM}
+Three competitive sectors; energy services one-for-one from coal at constant marginal cost $p$. With $K = L = 1$:
+\[
+Y = AE^{\nu}
+\]
+
+\textbf{Private economy} with coal tax $\tau$:
+\[
+\pi_e = \max_E AE^{\nu} - (p + \tau)E \qquad \Rightarrow \qquad \nu AE^{\nu - 1} = p + \tau
+\]
+so $E = \left[\nu A/(p+\tau)\right]^{1/(1-\nu)}$: coal use decreasing in the tax.
+
+\end{frame}
+
+\begin{frame}{A Static One-Region IAM (cont.)}
+\bigskip
+\textbf{Damages} (from the $E \to S \to T$ mapping, quadratic): $D(E) = \gamma E^2$, additively separable:
+\[
+C = AE^{\nu} - pE - \gamma E^2
+\]
+
+\textbf{Planner}: $\nu AE^{\nu-1} = p + 2\gamma E$. Laissez-faire ($\tau = 0$) overuses coal whenever $\gamma > 0$.
+
+\bigskip
+\textbf{Pigou tax}: $\tau = 2\gamma E^*$ implements the first best --- tax the externality at marginal damage. Near $\tau = 0$ the private objective is flat (smooth maximum): a modest tax has \textbf{negligible private cost but potentially large welfare benefits}.
+\end{frame}
+
+\begin{frame}{Prices vs.\ Quantities}
+In practice politicians often prefer \textbf{quantity restrictions}: e.g., the EU Emission Trading System (cap-and-trade, 2005). Each unit of coal burnt requires an \textbf{emission right}; rights (price $\lambda$) handed to the coal producer and traded.
+
+\end{frame}
+
+\begin{frame}{Prices vs.\ Quantities (cont.)}
+\bigskip
+With cap $E \leq E^*$, the final-good firm's FOC is:
+\[
+\nu AE^{\nu - 1} = p + \lambda
+\]
+
+$\lambda = \tau = 2\gamma E^*$ clears the market: \textbf{price and quantity regulation are equivalent} (Weitzman: equivalence can break under uncertainty). A cap above laissez-faire use: $\lambda = 0$; a tighter cap: $\lambda$ read off the FOC.
+
+\end{frame}
+
+\begin{frame}{Prices vs.\ Quantities (cont.)}
+\bigskip
+\textbf{Firm heterogeneity} ($\nu_1 \neq \nu_2$): the planner's FOCs are $\nu_i A E_i^{\nu_i - 1} = 2\gamma(E_1 + E_2)$. A single tax $\tau = 2\gamma(E_1^* + E_2^*)$ --- or a single \emph{total} cap with tradable rights --- delivers the optimum: facing the same price, firms equate marginal products, allocating energy efficiently. No firm-specific quantities needed: exactly how the EU ETS works.
+\end{frame}
+
+\begin{frame}{A Dynamic IAM (GHKT): Setup}
+Two regions: an \textbf{oil producer} (endowed with finite conventional oil $R$, costless extraction) and an \textbf{oil consumer}. Log utility $\sum_{t=0}^{\infty}\beta^t\log(C_t)$ in each region.
+
+\bigskip
+\textbf{Production with damages} ($S$ from the GHKT carbon cycle):
+\[
+Y_t = \underbrace{\exp(z_t - \gamma S_t)}_{\equiv A_t}L_t^{1-\alpha-\nu}K_t^{\alpha}E_t^{\nu}
+\]
+
+\end{frame}
+
+\begin{frame}{A Dynamic IAM (GHKT): Setup (cont.)}
+\textbf{Energy services} (CES over oil, coal, green; coal and green produced linearly at costs $p_c$, $p_g$):
+\[
+E_t = \left[\lambda_o e_{o,t}^{\rho} + \lambda_c e_{c,t}^{\rho} + \lambda_g e_{g,t}^{\rho}\right]^{1/\rho}, \qquad \lambda_o + \lambda_c + \lambda_g = 1
+\]
+
+\textbf{Resource constraint} (full depreciation; period $=$ 10 years):
+\[
+C_t + K_{t+1} = A_tL_t^{1-\alpha-\nu}K_t^{\alpha}E_t^{\nu} - p_{o,t}e_{o,t} - p_{c,t}e_{c,t} - p_{g,t}e_{g,t}
+\]
+
+Emissions $M_t = e_{o,t} + e_{c,t}$; oil stock $R_{t+1} = R_t - e_{o,t} \geq 0$. Carbon tax $\tau_t$ rebated lump-sum within the period.
+\end{frame}
+
+\begin{frame}{Dynamic IAM: Closed-Form Equilibrium}
+\textbf{Oil supplier}: maximizing $\sum_{t=0}^{\infty}\beta^t\log(C_{o,t})$ with $C_{o,t} = p_{o,t}e_{o,t}$ gives
+\[
+e_{o,t} = (1-\beta)R_t \qquad \Rightarrow \qquad R_{t+1} = \beta R_t
+\]
+
+\textbf{Energy demands} (CES cost minimization, price index $P_t$):
+\begin{gather*}
+e_{\kappa,t} = E_t\left(\frac{P_t\lambda_\kappa}{p_{\kappa,t}}\right)^{\frac{1}{1-\rho}}, \quad \kappa \in \{o, c, g\} \\
+E_t = \left(\nu\frac{A_tL_t^{1-\alpha-\nu}K_t^{\alpha}}{P_t}\right)^{\frac{1}{1-\nu}}
+\end{gather*}
+
+\end{frame}
+
+\begin{frame}{Dynamic IAM: Closed-Form Equilibrium (cont.)}
+\textbf{Constant saving rate}: with log utility, Cobb-Douglas, full depreciation, and rebates, the Euler equation delivers
+\[
+s_t = \frac{\alpha\beta}{1-\nu} \equiv s \quad \forall t, \qquad K_{t+1} = s(1+\Gamma_t)\hat{Y}_t
+\]
+
+The allocation is determined \textbf{sequentially with no forward-looking terms}: only the oil price needs solving each period (supply is predetermined at $(1-\beta)R_t$) --- the model solves in under a second even with many regions.
+\end{frame}
+
+\begin{frame}{The Optimal Carbon Tax}
+The marginal damage externality of energy source $\kappa$:
+\[
+\Lambda^{\kappa}_t = \E_t\sum_{j=0}^{\infty}\beta^j\frac{U'(C_{t+j})}{U'(C_t)}\frac{\partial F_{t+j}}{\partial S_{t+j}}\frac{\partial S_{t+j}}{\partial e_{\kappa,t}}
+\]
+
+With $e^{-\gamma S}$ damages, $\frac{\partial F_t}{\partial S_t}\frac{1}{Y_t} = -\gamma$ (constant \emph{percentage} loss per carbon unit); log utility gives $U'(C) = 1/C$; the carbon cycle gives $\partial S_{t+j}/\partial e_{\kappa,t} = 1 - d_j$. The \textbf{optimal (Pigou) tax} becomes:
+\[
+\tau_t = Y_t \E_t\left[\sum_{j=0}^{\infty}\beta^j\gamma(1 - d_j)\right]
+\]
+
+\end{frame}
+
+\begin{frame}{The Optimal Carbon Tax (cont.)}
+Proportional to GDP, and depending only on \textbf{three ``d's''}:
+\begin{enumerate}
+    \item \textbf{depreciation} of atmospheric carbon ($d_j$): the longer carbon stays, the higher the tax
+    \item \textbf{damages} ($\gamma$)
+    \item \textbf{discounting} ($\beta$): more weight on the future, higher tax
+\end{enumerate}
+No other parameter --- not even how fossil fuel is produced --- enters.
+\end{frame}
+
+\begin{frame}{Simulation: The Power of the Carbon Tax}
+Calibration follows GHKT and Hassler et al.: standard long-run targets, energy parameters from observed prices and shares, energy substitution elasticity 2, Nordhaus damages. Optimal tax $\approx$ \textbf{US\$25 per ton CO$_2$} ($\approx$ \$90/tC); moderate tax $=$ one third $\approx$ \$8/ton.
+
+\end{frame}
+
+\begin{frame}{Simulation: The Power of the Carbon Tax (cont.)}
+Global temperature under no tax, moderate tax, optimal tax, 2020--2200
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.55]{FigsChapter25/fig6}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Simulation: The Power of the Carbon Tax (cont.)}
+\begin{itemize}
+    \item \textbf{No tax}: $+9^{\circ}$C by 2200
+    \item \textbf{Optimal tax}: contained around $+2^{\circ}$C
+    \item Even the \textbf{moderate} tax achieves a large share of the containment
+\end{itemize}
+
+\bigskip
+The carbon tax is a remarkably potent mitigation instrument; the sensitivity of the \$25 figure to the three ``d's'' (especially discounting) should be kept in mind.
+\end{frame}
+
+% ============================================================
+\section{Natural Resources in Finite Supply}
+% ============================================================
+
+\begin{frame}{Data: Quantities and Prices}
+US energy consumption by source, 1800--2020 --- strong upward trends; potential peaks for oil and coal
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.32]{FigsChapter25/fig7}
+\end{figure}
+\vspace{-10pt}
+
+Per capita, oil use peaked in the 1970s in the US and the world.
+
+\end{frame}
+
+\begin{frame}{Data: Quantities and Prices (cont.)}
+Crude oil price, 1860--2020 (2020 dollars) --- enormous volatility; no long-run trend, possibly positive postwar trend
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter25/fig8}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Data: Quantities and Prices (cont.)}
+Inflation-adjusted prices of coal, lead, zinc, copper --- stationary; metals show no postwar upward trend
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.28]{FigsChapter25/fig9}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Data: Quantities and Prices (cont.)}
+\textbf{Summary}: price swings of stock-market magnitude with weak trends; quantities rising strongly, with fossil-fuel slowdowns late in the sample. A challenge for the theory.
+\end{frame}
+
+\begin{frame}{Cake Eating and the Hotelling Rule}
+\textbf{Planner} (Hotelling 1931; Gale 1967): $\max\sum_{t=0}^{\infty}\beta^t\log c_t$ subject to $\sum_{t=0}^{\infty}c_t = R_0$:
+\[
+c_t = (1-\beta)R_t = (1-\beta)\beta^tR_0
+\]
+Utility is bounded despite $c_t \to 0$; consumption is front-loaded purely by discounting.
+
+\end{frame}
+
+\begin{frame}{Cake Eating and the Hotelling Rule (cont.)}
+\bigskip
+\textbf{Market outcome}: Arrow-Debreu prices satisfy $\hat{p}^o_t = \hat{p}^o_{t+1}$ (zero marginal cost $\Rightarrow$ indifference about when to sell) $\Rightarrow$ market replicates the planner. In \textbf{spot} terms:
+\[
+p^o_t = \frac{p_{t+1}}{p_t}p^o_{t+1},
+\]
+i.e.\ the resource price grows at the real interest rate
+--- the \textbf{Hotelling rule}.
+
+\end{frame}
+
+\begin{frame}{Cake Eating and the Hotelling Rule (cont.)}
+\bigskip
+\textbf{Hotelling rents}: $p^o_t > 0$ despite zero production cost and perfect competition: scarcity itself commands a rent.
+
+\bigskip
+\textbf{With extraction costs}: indifference requires $p^o_t - mc_t = (p^o_{t+1} - mc_{t+1})/(1+r_t)$ --- the \emph{net} price grows at the interest rate; $mc$ is a broad concept including dynamic depletion effects.
+\end{frame}
+
+\begin{frame}{The Dasgupta-Heal Production Economy}
+The resource as a production input (Cobb-Douglas, $\delta = 1$, fixed labor):
+\[
+\max\sum_{t=0}^{\infty}\beta^t\log c_t \quad \text{s.t.} \quad c_t + k_{t+1} = Az_tk_t^{\alpha}e_t^{\nu}, \qquad \sum_{t=0}^{\infty}e_t = R
+\]
+
+Cobb-Douglas justified by roughly trendless (if volatile) energy cost shares in the long run.
+
+\end{frame}
+
+\begin{frame}{The Dasgupta-Heal Production Economy (cont.)}
+\bigskip
+\textbf{Solution}: extraction as in cake eating, $e_t = (1-\beta)\beta^tR_0$; saving $k_{t+1} = \alpha\beta Az_tk_t^{\alpha}e_t^{\nu}$; long-run gross growth with $z$ growing at $\gamma_z$:
+\[
+g = \left(\gamma_z\beta^{\nu}\right)^{\frac{1}{1-\alpha}}
+\]
+
+Technology growth can deliver positive output growth \emph{despite} resource depletion ($g > 1$ for $\gamma_z$ large enough).
+
+\bigskip
+\textbf{Prices}: $1 + r = g/\beta$ and $p_t = \nu y_t/e_t$ grows at $g/\beta = 1+r$: the Hotelling rule again. With $r > 0$, the resource price should rise \emph{exponentially} --- hard to see in postwar data, though unobservable marginal costs and the choice of interest rate complicate the test.
+\end{frame}
+
+\begin{frame}{Capital-Energy Complementarity}
+The simple model cannot explain the strong \textbf{upward trend in resource use}. Alternative: in the short run, energy is highly \emph{complementary} with capital and labor. Extreme case (Leontief):
+\[
+y_t = \min\{Ak_t^{\alpha}, e_t\}
+\]
+
+At the Industrial Revolution: $k_0 \approx 0$, $A$ low, $R_0$ huge relative to $Ak_0^{\alpha}$. Optimal path: accumulate capital, with $e_t = Ak_t^{\alpha}$ \textbf{rising} for a long time --- then eventually declining as finiteness binds. Matches the rise-then-peak pattern in the data.
+
+\end{frame}
+
+\begin{frame}{Capital-Energy Complementarity (cont.)}
+\bigskip
+\textbf{General CES}:
+\[
+y_t = \left[(1-\nu)\left(A_tk_t^{\alpha}l_t^{1-\alpha}\right)^{\frac{\varepsilon-1}{\varepsilon}} + \nu\left(A_{e}{}_{,t}e_t\right)^{\frac{\varepsilon-1}{\varepsilon}}\right]^{\frac{\varepsilon}{\varepsilon-1}}
+\]
+
+Given $\alpha$, $\nu$, $\varepsilon$, the factor-specific technologies can be \textbf{backed out} from FOCs and observed cost shares:
+\[
+A_t = \frac{y_t}{k_t^{\alpha}l_t^{1-\alpha}}\left(\frac{l_t^{share}}{1-\alpha}\right)^{\frac{\varepsilon}{\varepsilon-1}}, \qquad A_{e,t} = \frac{y_t}{e_t}\left(e_t^{share}\right)^{\frac{\varepsilon}{\varepsilon-1}}
+\]
+\end{frame}
+
+\begin{frame}{Evidence: Directed, Endogenous Technical Change}
+Price of fossil energy and its cost share, US 1970--2020 --- the cost share tracks the price closely
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter25/fig10}
+\end{figure}
+\vspace{-10pt}
+
+A rising price raising the cost \emph{share} implies $\varepsilon \approx 0$ (near-Leontief): with Cobb-Douglas ($\varepsilon = 1$) the share would be constant; with $\varepsilon > 1$ it would fall.
+
+\end{frame}
+
+\begin{frame}{Evidence: Directed, Endogenous Technical Change (cont.)}
+US output per worker, energy per worker, and backed-out $A$ and $A_e$, 1949--2020
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.32]{FigsChapter25/fig11}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Evidence: Directed, Endogenous Technical Change (cont.)}
+\begin{itemize}
+    \item 1949--1973: $e/l$ tracks $y/l$; energy-saving technical change $A_e$ \textbf{flat}
+    \item Post-1973 (oil shocks): $A_e$ accelerates sharply while $e/l$ falls; energy in \emph{efficiency units} $A_ee/l$ keeps rising; capital/labor-augmenting $A$ slows
+\end{itemize}
+
+$\Rightarrow$ technology is \textbf{endogenous and directed}: innovation shifts toward saving on the input that became expensive (cf.\ Chapter 13; Romer variety or Aghion-Howitt quality interpretations of $(A, A_e)$).
+\end{frame}
+
+\begin{frame}{The Technology Menu and Long-Run Substitutability}
+Hassler et al.\ (2021): firms freely pick next-period factor-saving technologies from a \textbf{menu}
+\[
+G\left(\frac{A_{t+1}}{A_t}, \frac{A_{e,t+1}}{A_{e,t}}\right) = 0
+\]
+with $G$ increasing in both arguments (a trade-off frontier), taking economy-wide averages as given.
+
+\end{frame}
+
+\begin{frame}{The Technology Menu and Long-Run Substitutability (cont.)}
+\bigskip
+\textbf{Key result}: if production is CES with short-run elasticity below 1 and $G$ is CES, the \emph{reduced-form} production function (after optimal technology choice) is CES with a \textbf{higher elasticity of substitution} (Le\'on-Ledesma and Satchi, 2019).
+
+\bigskip
+$\Rightarrow$ Substitutability is low in the short run, high in the long run: a sharp rise in the energy cost share after a price hike \textbf{erodes over time} as technology redirects --- fossil fuel is hard to replace today, much less so over decades.
+\end{frame}
+
+\begin{frame}{Taking Stock on Finite Resources}
+\begin{itemize}
+    \item The data show rising resource use with late-sample slowdowns --- qualitatively consistent with depletion theory \emph{plus} time-varying, input-specific technology
+
+    \item The wildly volatile, weakly-trending \textbf{prices} remain a challenge to explain quantitatively
+
+    \item With \textbf{property rights}, the basic market outcome is efficient: owners internalize scarcity via Hotelling rents --- no obvious case for intervention (beyond standard R\&D externalities under endogenous directed technical change)
+
+    \item This contrasts sharply with the \textbf{climate}, where property rights are impossible and a Pigou tax is required
+\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+\small
+\begin{enumerate}
+    \item \textbf{IAMs} integrate three blocks: economy, carbon cycle, climate. Climate is the environmental category with \emph{no} property rights --- emissions are a global externality.
+
+    \item \textbf{Climate science}: energy balance $dT/dt = \sigma(f - \kappa T)$; Arrhenius forcing $f = \frac{\eta}{\log 2}\log(S/S_0)$; ECS $= \eta/\kappa \approx 3^{\circ}$C per CO$_2$ doubling; two-layer ocean system slows convergence; three-reservoir linear carbon cycle; GHKT reduced form $1 - d_s = \phi_L + (1-\phi_L)\phi_0(1-\phi)^s$ (20\% of emissions effectively permanent).
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Constant CCR}: $T_t \approx \sigma_{CCR}\sum_s E_s$, 1.0--2.3$^{\circ}$C per 1,000 GtC $\Rightarrow$ irreversibility (stopping warming requires stopping emissions), carbon budgets (650 GtC spent; the 1.5$^{\circ}$C budget may already be exhausted at high CCR), and no tipping points by construction.
+
+    \item \textbf{Fossil supply}: conventional oil ($\approx$0.13--0.33$^{\circ}$C if all burnt) and gas are small; \textbf{coal} dominates (reserves: 0.75--1.73$^{\circ}$C; resources: $10^{\circ}$C+). Supply does not constrain warming.
+
+    \item \textbf{Damages}: bottom-up (Nordhaus: $<$1\% of GDP at 2$^{\circ}$C) and top-down (growth effects in poor countries; 11$^{\circ}$C productivity sweet spot); $D(T) = 1 - 1/(1+0.00267T^2)$; GHKT $e^{-\gamma S}$; adaptation linearizes convex damages; discounting ($\beta$ 0.985 vs.\ 0.999) is decisive and partly philosophical.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (III)}
+\footnotesize
+\begin{enumerate}
+    \setcounter{enumi}{5}
+    \item \textbf{Static IAM}: market FOC $\nu AE^{\nu-1} = p + \tau$ vs.\ planner $\nu AE^{\nu-1} = p + 2\gamma E$; Pigou tax $\tau = 2\gamma E^*$; near-zero private cost of a modest tax; \textbf{prices and quantities are equivalent} (cap-and-trade $\lambda = \tau$); one total cap suffices under heterogeneity (EU ETS logic).
+
+    \item \textbf{Dynamic GHKT IAM}: log utility $+$ Cobb-Douglas $+$ full depreciation $\Rightarrow$ closed forms --- $e_{o,t} = (1-\beta)R_t$, saving rate $s = \alpha\beta/(1-\nu)$, sequential solution; optimal tax $\tau_t = Y_t\E\left[\sum_{j=0}^{\infty}\beta^j\gamma(1-d_j)\right]$ --- only the three ``d's'' matter. Calibrated: $\approx$\$25/tCO$_2$; no tax $\Rightarrow$ $+9^{\circ}$C by 2200, optimal tax $\Rightarrow$ $\approx+2^{\circ}$C.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (IV)}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Hotelling}: cake eating gives $c_t = (1-\beta)\beta^tR_0$; resource prices (net of marginal cost) grow at the real interest rate; scarcity rents exist under perfect competition; Dasgupta-Heal: $g = (\gamma_z\beta^{\nu})^{1/(1-\alpha)}$ --- growth despite depletion; exponential price growth is hard to see in the data.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (V)}
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item \textbf{Complementarity and directed technology}: near-Leontief short-run production (cost share tracks price) explains rising-then-peaking resource use; post-1973 acceleration of energy-saving $A_e$ shows technology is endogenous and \textbf{directed}; the technology menu raises long-run substitutability above short-run.
+
+    \item \textbf{Policy contrast}: the climate requires intervention (Pigou tax) because property rights are impossible; owned finite resources are managed efficiently by markets under ideal conditions.
+\end{enumerate}
+\end{frame}
+
+\end{document}

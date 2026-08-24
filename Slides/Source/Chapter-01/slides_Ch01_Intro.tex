@@ -1,0 +1,722 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+\title[Chapter1]{Chapter 1: The Subject Matter}
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{What Is Macroeconomics?}
+% ============================================================
+
+\begin{frame}{Defining the Field}
+	Several definitions of macroeconomics, each with caveats:
+	\vspace{-5pt}
+	\begin{enumerate}
+		\item \textbf{Study of aggregates}: GDP, inflation, unemployment, interest rates
+		\begin{itemize}
+			\item But: macroeconomics today is deeply concerned with \emph{distributions} (income, wealth), not just aggregates
+		\end{itemize}
+		\item \textbf{Quantitative study of general equilibrium}
+		\begin{itemize}
+			\item But: full GE is not always necessary; single-country analysis is inherently partial
+			\item Key insight: behavior of consumers and firms given prices often matters more than market clearing
+		\end{itemize}
+		\item \textbf{Study of dynamics}: investment, expectations, transitions
+		\begin{itemize}
+			\item But: static analysis can shed fundamental light too
+		\end{itemize}
+	\end{enumerate}
+		\vspace{-5pt}
+	\textbf{Additionally}: Macroeconomics tracks current events---the field follows the major issues of the time (Great Recession, COVID-19, 2025 tariffs).
+\end{frame}
+
+\begin{frame}{Goals of This Chapter}
+	Two main goals:
+	
+	\bigskip
+	\begin{enumerate}
+		\item Introduce the \textbf{central questions} that macroeconomists study
+		\item Emphasize a key theme: macroeconomics is fundamentally an \textbf{empirical} field
+		\begin{itemize}
+			\item \textbf{Measurement} and \textbf{theory} are intertwined
+			\item They have evolved in tandem: new data inspires new theory, and new theory creates demand for new data
+		\end{itemize}
+	\end{enumerate}
+	
+	\bigskip
+	\textbf{Approach}: Walk through important events in the development of the field, illustrating how measurement and theory responded to the major needs of the time.
+	
+	\bigskip
+	The chapter also motivates the empirical and theoretical {methods} used throughout the textbook.
+\end{frame}
+
+
+% ============================================================
+\section{The Great Depression: What Is Going On?}
+% ============================================================
+
+\begin{frame}{The Birth of National Accounts}
+	About 100 years ago: macroeconomists had virtually \textbf{no systematic data}---only scattered accounts of production figures and prices.
+	
+	\textbf{The Great Depression} made systematic measurement urgent:
+	\begin{itemize}
+		\item National income and product accounts began in the 1920s
+		\item Major research achievements: Colin Clark, Simon Kuznets, Richard Stone
+		\item Newly available data helped Keynes and others analyze the macroeconomy
+	\end{itemize}
+	\textbf{Keynes}: Emphasized market imperfections (sluggish wages and prices), leaving room for demand declines to affect production. Simple theories connecting output, consumption, and investment were developed and remain influential today.
+\end{frame}
+
+
+\begin{frame}{What Do We Measure? GDP and Price Indices}
+	\textbf{GDP}: Measure of how much the market economy is producing.
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Does not count leisure, amenities, illegal transactions
+		\item Can be measured three ways: sum of final expenditures, sum of incomes, sum of value added
+		\item Income splits into labor income (wages/salaries) and capital income (profits, interest, dividends)
+	\end{itemize}
+	\vspace{-6pt}
+	\textbf{Price indices}: Needed to separate nominal changes into quantities and prices.
+		\vspace{-5pt}
+	\begin{itemize}
+		\item Weighted averages of prices. Weights = expenditure shares
+		\item Choices: arithmetic vs.\ geometric; base-year vs.\ evolving weights (e.g., T\"ornqvist)
+		\item Often guided by microeconomic theory 
+	\end{itemize}
+	
+	\vspace{-5pt}
+	\textbf{Capital treatment}: Expenditures on capital are final expenditures (counted in GDP), though capital is in some sense an intermediate good used in future production.
+\end{frame}
+
+\begin{frame}{The Pandemic: ``What Is Going On?'' Redux}
+	A parallel to the Great Depression occurred during {COVID-19}:
+	\begin{itemize}
+		\item Economies changed massively overnight
+		\item Economists needed \textbf{high-frequency, real-time} measures of activity
+		\item Used transaction and commercial data (e.g., credit card spending patterns)
+		\item Credit card data also valuable for measuring marginal propensities to consume out of government transfers
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Lesson}: ``What is going on?'' is a question that recurs whenever the economy is hit by unprecedented shocks. New data needs arise each time.
+\end{frame}
+
+% ============================================================
+\section{Long-Run Growth}
+% ============================================================
+
+\begin{frame}{Solow and Growth Accounting}
+	By the mid-1950s: enough data to analyze growth performance.
+	
+
+	\textbf{Solow's two papers}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item 1956: The neoclassical growth model
+		\item 1957: Growth accounting---decompose aggregate growth into contributions of each input plus a residual (``Solow residual'' = technical change)
+	\end{itemize}
+	
+
+	\textbf{Key finding}: Technical change is of great, and direct, importance for US growth.
+	
+
+	\textbf{Reaction}: Was the residual overstated?
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Workers' skills improving (schooling, on-the-job learning)
+		\item Mincer (1958): one more year of schooling $\approx$ 10\% higher wage $\Rightarrow$ ``human capital''
+		\item Hall and Jorgenson (1969): user cost of capital---measuring the year-by-year price of capital
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Cross-Country Comparisons and Endogenous Growth}
+	\textbf{Measurement across countries}:
+	\begin{itemize}
+		\item Kravis, Summers, and Heston (1978): comparable data for 100 countries $\Rightarrow$ Penn World Tables
+		\item Maddison: GDP estimates going back to early 19th century
+		\item PPP adjustment: purchasing power varies across countries
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Key question}: What makes some countries grow fast and others stagnate?
+	
+	\bigskip
+	\textbf{Endogenous growth literature} (late 1980s--1990s):
+	\begin{itemize}
+		\item Endogenous nature of technological change (incentives to innovate)
+		\item Human capital accumulation
+		\item Patent data: Who becomes an inventor?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Structural Change}
+	\textbf{Structural change}: Some sectors shrink, others grow.
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Typical development: agriculture $\to$ manufacturing $\to$ services
+		\item Agriculture: $\sim$1\% of US workforce vs.\ 80\% in poorest countries
+		\item Manufacturing overtaken by services
+	\end{itemize}
+
+	\textbf{Current concerns}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Automation and AI: implications for performance, inequality, firm competition
+		\item Women's labor-force participation: steady rise in US postwar 
+		\item Government sector size and role
+		\item International trade patterns
+	\end{itemize}
+	
+
+	These are slow-moving trends, never causing immediate media attention, but crucial for economic welfare. Research on growth has come in waves.
+\end{frame}
+
+% ============================================================
+\section{The 1970s: Stagflation and the Lucas Critique}
+% ============================================================
+
+\begin{frame}{The 1970s: An ``Oops''}
+	Post-war period to early 1970s: steady growth, Keynesian ``fine tuning.''
+	
+	\bigskip
+	\textbf{Then}: The 1973 oil crisis (OPEC) and a sharp recession.
+	\begin{itemize}
+		\item \textbf{Productivity slowdown}: appeared permanent to many
+		\item \textbf{Rising inequality}: different expressions in different countries
+		\begin{itemize}
+			\item US and UK: sharply rising wage inequality
+			\item EU countries: very high and persistent unemployment
+		\end{itemize}
+		\item Expansionary monetary policy $\Rightarrow$ limited success; high inflation (10--20\%)
+		\item \textbf{Stagflation}: simultaneous stagnation and inflation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Search Theory and the Lucas Critique}
+	\textbf{Search models} (McCall, 1970; Mortensen, 1972):
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Developed in early 1970s, before the crisis
+		\item Became cornerstone of unemployment theory (Chapter 20)
+		\item Generated new data needs (e.g., time spent job searching, JOLTS)
+	\end{itemize}
+
+	\textbf{The Lucas Critique}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Reduced-form relationships between aggregates can \textbf{break down} if policy changes
+		\item Case in point: the \textbf{Phillips curve} ($u$ vs.\ $\pi$)
+		\item Lucas (1972): exploiting this trade-off with monetary policy would make the relationship itself break down
+		\item When it did break down in the 1970s, Lucas's critique gained added force
+		\item Marked a clear break in the development of macroeconomics
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Labor Market Data}
+	Much of our labor market information comes from \textbf{surveys}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item \textbf{CPS} (Current Population Survey): monthly, BLS + Census Bureau; measures employment, unemployment, hours, wages; limited panel feature
+		\item \textbf{PSID} (Panel Study of Income Dynamics): University of Michigan since 1968; follows individuals over time
+		\item \textbf{NLS, SIPP}: other individual panel datasets (BLS, Census Bureau)
+		\item \textbf{JOLTS} (Job Openings and Labor Turnover Survey): BLS; data on labor market flows (vacancies, hires, separations); invaluable for search models
+		\item \textbf{ATUS} (American Time Use Survey): BLS since 2003; detailed daily activities including job search time
+		\item \textbf{Firm-level surveys}: Annual Survey of Manufactures (Census Bureau); report work hours for employees
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The 2021--2022 Inflation Echo}
+	\textbf{2021--2022}: Sharp rise in inflation, amplified by Russia-Ukraine war energy shock. Fears of a new stagflation period.
+	
+	\bigskip
+	\textbf{Response}: Central banks raised interest rates sharply (2022--2023).
+	
+	\bigskip
+	\textbf{Outcome}: Inflation fell back (energy costs eased, supply bottlenecks decompressed), labor markets stayed tight. Feared stagflation did not materialize.
+	
+	\bigskip
+	\textbf{Lesson}: Macroeconomists are better equipped today, but every challenge has unique properties.
+\end{frame}
+
+
+% ============================================================
+\section{Kydland and Prescott: Quantitative Theory}
+% ============================================================
+
+\begin{frame}{Kydland and Prescott (1982)}
+	Lucas's critique was not just destructive---he suggested building on \textbf{microeconomic theory}.
+	
+	\bigskip
+	\textbf{Kydland and Prescott (1982)} showed how to do this with \textbf{quantitative theory}:
+	\begin{itemize}
+		\item Base microeconomics on empirical studies in applied fields (labor economics, consumption)
+		\item Import parameter values from empirical microeconomic literatures
+		\item Compare model output systematically with data
+		\item Data must be \textbf{filtered} before comparison (separate trend from cycle)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Result}: An explosion in macroeconomic studies.
+\end{frame}
+\begin{frame}{Filtering}
+	Macroeconomic models define stochastic processes. To compare with data, must extract the aspect of the data under study.
+	
+	\bigskip
+	\begin{itemize}
+		\item Stochastic processes can be thought of as sums of sub-processes at different frequencies
+		\item Business cycles: periodicities of $\sim$1.5--8 years
+		\item \textbf{Band-pass filters}: remove frequencies outside a specified range
+		\item Kydland and Prescott used the \textbf{Hodrick-Prescott (HP) filter}---intuitive, widely used
+		\item Medium/long-run studies: remove high frequencies, retain low/medium
+		\item Financial economics: retain only very high frequencies
+	\end{itemize}
+\end{frame}
+\begin{frame}{From Perfectly Working Markets to New Keynesian Models}
+	\textbf{First wave}: perfectly working markets, no monetary policy (``real business cycle'' models).
+	
+	\textbf{Subsequent enrichments}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Added frictions: virtually no practical macro model today is free of market imperfections
+		\item Key friction: \textbf{price stickiness} (firms face costs in adjusting prices, adjust infrequently)
+		\item Makes monetary policy have direct effects on the economy
+		\item $\Rightarrow$ \textbf{New Keynesian framework}: microfounded + sticky prices (and/or sticky wages)
+	\end{itemize}
+	
+
+	\textbf{Measurement response}: Bils and Klenow (2004) studied CPI survey data, recorded the frequency of price adjustments $\Rightarrow$ parameterized adjustment-cost models.
+\end{frame}
+
+% ============================================================
+\section{Waves of Macroeconometrics}
+% ============================================================
+
+\begin{frame}{Comparing Models to Data: A Methodological Challenge}
+	\textbf{``All models are wrong but some can be useful.''}
+	
+	\bigskip
+	A useful model bridges the gap from observable data to the question we want to answer. Knowing which data are important to match is ``often argued to be an art. But art, too, can be taught.''
+	
+	\bigskip
+	\textbf{Evolution of methods}:
+	\begin{itemize}
+		\item \textbf{Keynesian era}: Large estimated systems with ad-hoc dynamics, lags for better fit
+		\item \textbf{Post-Lucas critique}: Back to the drawing board
+		\begin{itemize}
+			\item Structural estimation: maximum likelihood, Bayesian techniques
+			\item Generalized Method of Moments (GMM)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Calibration}
+	\textbf{Calibration} (Kydland and Prescott): Select model parameters based on moments of the data \emph{other} than those in focus.
+	
+
+	Two sources of parameter values:
+	\vspace{-6pt}
+	\begin{enumerate}
+		\item \textbf{Micro data}: risk aversion, intertemporal substitution
+		\item \textbf{Long-run facts}: low-frequency data not in focus for high-frequency questions
+	\end{enumerate}
+	
+	Then derive the model's predictions for the phenomenon of interest.
+
+	\textbf{Spirit}: Parameters are not chosen to match the target moments. Broad patterns matter more than precise fit. Can the model ``at all account for the phenomenon, or are the magnitudes severely off?''
+	
+	\textbf{Limitation}: Does not lend itself to formal hypothesis testing (shared with Bayesian analysis).
+\end{frame}
+
+\begin{frame}{VARs and Natural Experiments}
+	\textbf{VARs} (Sims, 1980): A much less structural approach.
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Focus on identifying causal effects in aggregate data
+		\item Observe plausibly exogenous shocks 
+		\item Trace out impulse response functions
+		\item Very common tool in macroeconomics
+	\end{itemize}
+	
+	\textbf{Natural experiments}: Increasingly used to identify causal relationships at the micro level.
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Johnson, Parker, and Souleles (2006): random timing of US tax rebates $\Rightarrow$ measure MPC
+		\item Acemoglu, Johnson, and Robinson (2001): colonial-era institutions $\Rightarrow$ long-run growth
+		\item Romer and Romer (1989): narrative approach to monetary policy (Fed meeting minutes)
+		\item Big-data tools and text analysis entering the field
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Intuition vs.\ Quantitative Use}
+	Kydland and Prescott also changed how macroeconomists build models:
+	
+	\bigskip
+	\begin{itemize}
+		\item \textbf{Before}: Models aimed at building intuitive understanding of mechanisms (e.g., Lucas 1972)
+		\item \textbf{After}: Larger, parameterized models delivering quantitative output
+		\begin{itemize}
+			\item Aggregate across many mechanisms within a single model
+			\item Often nonlinear, impossible with pencil and paper
+			\item Solve numerically, simulate, compare model output (Chapter 10)
+		\end{itemize}
+	\end{itemize}
+	
+	\bigskip
+	Has \textbf{not} replaced the need for small models to build intuition. But the aim is to ultimately have both intuitive understanding \emph{and} quantitative assessments.
+\end{frame}
+
+% ============================================================
+\section{Macroeconomics and Inequality}
+% ============================================================
+
+\begin{frame}{Wage and Income Inequality}
+	Late 1970s: sharply rising wage inequality, continuing (with varying intensity) to the present.
+	
+
+	\textbf{Candidate explanations}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Technological change (skill-biased, automation, AI)
+		\item Increased exposure to trade
+		\item Changes in unionization
+	\end{itemize}
+	
+
+	\textbf{Labor share}: Remarkably stable during postwar US, but has trended downward in recent decades (also in other countries). Hypotheses: structural change, technological change, changes in competition.
+	
+
+	\textbf{Additional dimensions}: Gender wage gaps, racial and ethnic gaps, relative hours worked across groups.
+\end{frame}
+
+
+\begin{frame}{Wealth Inequality and Heterogeneous-Agent Models}
+	\textbf{Why macroeconomists care about wealth inequality}:
+		\vspace{-6pt}
+	\begin{enumerate}
+		\item \textbf{Intrinsic interest}: inequality is undesirable; political stability concerns (Piketty, 2014)
+		\item \textbf{Heterogeneity matters for policy}: cash-constrained households spend tax rebates; rich households save them $\Rightarrow$ distributional data determines efficacy of interventions
+	\end{enumerate}
+	
+	\textbf{Heterogeneous-agent models} (began 1990s):
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Response to both reasons above
+		\item Now a major workhorse for business cycles, inequality, and government policy
+		\item Generated a very large literature
+	\end{itemize}
+	
+	
+	\textbf{Data}: Various sources indicate significant increase in US wealth inequality since late 1970s. Similar trends documented in other countries.
+\end{frame}
+
+\begin{frame}{Microeconomic and Administrative Data}
+	\begin{itemize}
+		\item \textbf{Survey data}: CPS, PSID, SCF---long the main source of micro data
+		\item \textbf{Administrative data} (tax records, government programs):
+		\begin{itemize}
+			\item More accurate than self-reported surveys
+			\item Often much larger (sometimes entire population)
+			\item But narrow in scope and tightly controlled for privacy
+		\end{itemize}
+		\item \textbf{Business data}: payroll companies (e.g., Grigsby, Hurst, Yildirmaz, 2021), custom surveys
+		\item \textbf{Matched employer-employee data}: which firms match with which workers; how wages are set
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Firm data}: Census Bureau, BLS, commercial vendors (Compustat, Orbis, NETS). Includes entry/exit dynamics, R\&D expenditures, patent data.
+\end{frame}
+
+\begin{frame}{Measuring Individual Wealth}
+	\begin{itemize}
+		\item US does not tax wealth $\Rightarrow$ no direct administrative data
+		\item \textbf{Survey of Consumer Finances (SCF)}: Federal Reserve Board, every 3 years since 1983; voluntary but efforts at representativeness
+		\item \textbf{Capitalization method}: Use IRS capital income data + assumed rate of return to estimate wealth
+		\item \textbf{World Inequality Lab}: Combines national accounts, balance sheets, surveys, tax data, and ``rich lists'' (\url{https://wid.world/})
+		\item Small set of countries have taxed wealth and therefore have administrative data
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Taxes, Government, and Time Consistency}
+% ============================================================
+
+\begin{frame}{Taxes and Government Activities}
+	Many western countries have experienced slow, long-run increases in the role of government:
+			\vspace{-6pt}
+	\begin{itemize}
+		\item Share of GDP, employment, and transfers (Social Security, welfare)
+		\item US marginal tax rates peaked before Reagan, then progressivity lowered; corporate tax rates have also changed
+	\end{itemize}
+	
+
+	\textbf{Key questions}:
+			\vspace{-6pt}
+	\begin{itemize}
+		\item How have tax changes affected hours worked, economic activity, and inequality?
+		\item Choice between different tax bases: capital income, labor income, corporate, sales, property, seignorage
+		\item Intersection of macroeconomics and public finance
+		\item Public debt: crowding out of private investment, debt sustainability, sovereign stress
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Time Inconsistency}
+	\textbf{Tax policy}: Efficient to levy taxes on already-installed capital (non-distorting). But if investors know future capital will be taxed, current investment is distorted.
+	
+	
+	$\Rightarrow$ Government would like to promise not to tax future capital, but ex post wants to change its mind: \textbf{time inconsistency problem} (Kydland and Prescott, 1977).
+	
+
+	\textbf{Monetary policy}: Similar tensions---promise to be tough on inflation to shape expectations, but temptation to renege.
+	
+
+	$\Rightarrow$ \textbf{Central bank independence} and inflation-targeting strategies designed to enhance commitment power. Shaped by lessons of the 1970s--80s.
+	
+	
+	More broadly: interaction between macroeconomics and politics is an active sub-field.
+\end{frame}
+
+% ============================================================
+\section{The Great Recession}
+% ============================================================
+
+\begin{frame}{The Great Moderation and Its End}
+	\begin{itemize}
+		\item 1979: Volcker's tight monetary policy $\Rightarrow$ recessions in early 1980s, but inflation came down
+		\item 1999: Euro created (ten currencies replaced)
+		\item Mid-1980s to 2008: The \textbf{Great Moderation}---healthy growth, low volatility
+		\begin{itemize}
+			\item Attributed to: transparent Fed policy, changes in technological shocks, New Keynesian framework at central banks
+		\end{itemize}
+	\end{itemize}
+	
+	\textbf{Then, 2007}: A severe, worldwide economic downturn.
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Not as deep as the Great Depression, but: unemployment rose sharply, recovered very slowly
+		\item 2009: Eurozone debt crisis (Greece, Cyprus, Ireland, Portugal, Spain)
+		\item Significant uncertainty about government policy paths
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Causes and Consequences}
+	\textbf{Consensus}: Combination of excessive risk-taking in housing markets + severe frictions in financial markets.
+	
+	\textbf{Research response}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Research on financial markets, institutions, and regulation
+		\item Asset markets, debt buildups, and risk-taking intricately intertwined with macroeconomy
+		\item Downward trend in real interest rates $\to$ more severe asset-price fluctuations, bubbles, cryptocurrency
+		\item Financial frictions now play a prominent role in macro models
+	\end{itemize}
+	
+
+	\textbf{Basic framework not abandoned}, but enriched in the direction of financial frictions.
+	
+
+	\textbf{``The next recession will rarely have the same characteristics as the most recent one''}---theories grow richer, rather than cycling back and forth.
+\end{frame}
+
+\begin{frame}{Financial Data}
+	\begin{itemize}
+		\item \textbf{Key question}: Financial stability---domino effects from interdependencies in portfolios and liabilities
+		\item The Great Recession: small mortgage-market shock had outsized effects due to opaque packaging and distribution of mortgage liabilities
+		\item \textbf{Flow of Funds} (Federal Reserve Board): quarterly Financial Accounts of the US---assets and liabilities of households, businesses, governments, financial institutions
+		\begin{itemize}
+			\item Aggregate data; useful for tracking indebtedness trends
+			\item Not quite sufficient for detecting inter-institution interdependencies
+		\end{itemize}
+		\item Asset prices for publicly traded firms: widely available
+		\item Non-traded firms: much harder (private equity, venture capital increasingly important)
+		\item Individual portfolio decisions: limited to surveys (e.g., SCF)
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Global Interactions}
+% ============================================================
+
+\begin{frame}{International Transmission and Sovereign Default}
+	\textbf{The Great Recession was global}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Stresses from US housing/banking spread through funding markets, cross-border exposures, trade collapse
+		\item Highlighted importance of open-economy models
+		\item Shocks propagate via capital flows and relative price movements (terms of trade, real exchange rates)
+	\end{itemize}
+	
+
+	\textbf{European sovereign-debt crisis (2011--12)}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Exposed fragilities in euro-area financial system
+		\item Greece, Cyprus restructured debt; Ireland, Portugal, Spain saw spreads spike
+		\item Brought sovereign-default models (originally for Latin American crises of the 1980s) back to center stage
+	\end{itemize}
+	
+
+	\textbf{Post-pandemic}: Rising public debt ratios worldwide keep these topics salient.
+\end{frame}
+
+% ============================================================
+\section{Climate Change and Energy Economics}
+% ============================================================
+
+\begin{frame}{Climate Change and Energy}
+	\textbf{Climate change}: Intersection of macroeconomics and environmental economics was near-empty until late 20th century.
+	
+	\textbf{Macroeconomists' contributions}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item \textbf{Damage measurement}: studying how aggregates react to weather and climate
+		\item \textbf{Integrated assessment models}: examining how different policies influence both economic and climate outcomes jointly
+		\item Upsurge in quantitatively oriented modeling of global macro-climate interactions
+	\end{itemize}
+	
+
+	\textbf{Energy economics}: Attention from the 1970s oil shocks, underscored by recent events (Ukraine war).
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Nature of energy supply; how the economy reacts to shortages
+		\item Potential for technological change in energy
+		\item Research result communication to policymakers is valuable
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Where Do We Stand?}
+% ============================================================
+
+\begin{frame}{Self-Criticism and Progress}
+	\textbf{Question}: Are macroeconomists better positioned today to meet the next challenge?
+	
+	\begin{itemize}
+		\item Macroeconomists {do} admit mistakes---multiple changes in thinking described above
+		\item Sometimes theories lacked relevant features $\Rightarrow$ added as swiftly as possible
+		\item Sometimes surprised by non-economic shocks that generated economic downturns
+	\end{itemize}
+	
+
+	Guided by research, macroeconomic policy has been {increasingly successful} over time.
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Responses to the Great Recession and 2020 pandemic benefited in major ways from macroeconomic research
+		\item Lessons from one recession are typically useful in the future
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Combining Insights, Not Cycling}
+	\textbf{We do not cycle back and forth between models.} Rather, we combine insights as they arrive.
+	
+
+	\textbf{Example}: Keynes's insights were crucial, but the 1970s brought a break in foundations. Keynesian insights have since been \textbf{added back} into newer, more sophisticated models. These models are clearer on the circumstances under which Keynes's ideas apply.
+	
+
+	\textbf{Ongoing developments}:
+		\vspace{-6pt}
+	\begin{itemize}
+		\item Rational expectations may evolve as we get more data on how forecasts are actually made
+		\item Financial frictions are now recognized as potentially critical
+		\item How to identify key frictions and prevent crises is still open
+		\item Rich models are not an end in themselves---simplification for communication and teaching remains essential (IS-LM, RBC models can still build understanding)
+	\end{itemize}
+\end{frame}
+\begin{frame}{Looking Ahead}
+	\textbf{Next}: Chapter 2 dives into macroeconomic data and introduces Solow's framework.
+	
+
+	The \textbf{neoclassical growth framework} is the core setting used in macroeconomics:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Precisely motivated by long-run facts that are hard to explain without this theory
+		\item Parameters Solow treated as exogenous (saving rates, hours) are better understood as conscious choices in a market environment
+	\end{itemize}
+	
+
+	Virtually every subsequent chapter builds directly on the market version of the neoclassical growth model:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Growth, business cycles, asset prices, labor markets, inequality, fiscal and monetary policy, international macro, climate\ldots
+	\end{itemize}
+	
+
+\end{frame}
+
+\end{document}
+

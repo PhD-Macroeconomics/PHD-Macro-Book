@@ -1,0 +1,607 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\title[Chapter4]{Chapter 4: Dynamic Optimization}
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\begin{frame}{Motivation}
+	\textbf{Solow model}: saving rate $s$ is exogenous. \textbf{This chapter}: endogenize saving via optimization.
+	
+	\bigskip
+	\textbf{Cass (1965) and Koopmans (1963)}: Added microeconomic foundations to the Solow model $\Rightarrow$ the \textbf{optimizing neoclassical growth model (NGM)}.
+	\begin{itemize}
+		\item Same long-run implications as Solow, but explicit utility $\Rightarrow$ welfare analysis
+		\item Forward-looking decisions $\Rightarrow$ richer policy implications
+		\item With stochastic shocks: foundation of real business cycle theory (Chapter 14)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Friedman (1957)}: Individuals are forward-looking---decisions depend on expected future income, not just current income.
+\end{frame}
+\begin{frame}{Motivation}
+	\textbf{Two solution methods}:
+	\begin{enumerate}
+		\item \textbf{Sequential methods}: maximize over sequences
+		\item \textbf{Recursive methods} (dynamic programming): solve functional equations
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{The Generic Problem}
+% ============================================================
+
+\begin{frame}{The Dynamic Optimization Problem}
+	\[
+	\max_{\{y_t, x_{t+1}\}_{t=0}^T} \sum_{t=0}^T \beta^t \hat{F}(y_t) \quad \text{s.t.} \quad x_{t+1} = h(x_t, y_t), \quad x_{t+1} \in \Gamma(x_t)
+	\]
+	
+	\begin{itemize}
+		\item $y_t$: \textbf{control variables} (consumption, hours, investment)
+		\item $x_t$: \textbf{state variables} (capital, debt, housing stock)
+		\item $\hat{F}$: per-period objective (utility or profit)
+		\item $\beta$: discount factor; $1/\beta - 1$: discount rate
+		\item $h$: law of motion linking states and controls
+		\item $\Gamma(x_t)$: feasibility set
+		\item $x_0$: given (exogenous initial condition)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Existence}: Weierstrass theorem requires $\hat{F}$ continuous, $\Gamma$ nonempty, closed, bounded.
+\end{frame}
+
+\begin{frame}{Application 1: The Consumption-Saving Model}
+	Agent lives $T$ periods, maximizes $\sum_{t=0}^T \beta^t u(c_t)$.
+	
+	\medskip
+	Assumptions on $u$: strictly increasing, strictly concave, $\lim_{c \to 0} u'(c) = \infty$.
+	
+	\medskip
+	\textbf{Budget constraint}: $c_t = w_t + (1+r_t)a_t - a_{t+1}$
+	
+	\textbf{Borrowing limit}: $a_{t+1} \geq \underline{a}$, \quad $a_{T+1} \geq 0$
+	
+	\bigskip
+	\textbf{Mapping to generic form}:
+	\begin{itemize}
+		\item Control: $c_t$; State: $a_t$
+		\item $h(a_t, c_t) = w_t + (1+r_t)a_t - c_t$
+		\item $\Gamma(a_t) = [\underline{a},\; w_t + (1+r_t)a_t]$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Application 2: The Neoclassical Growth Model}
+	Same utility. Production: $y_t = f(k_t)$. Capital accumulation:
+	\[
+	k_{t+1} = (1-\delta)k_t + i_t
+	\]
+	
+	Resource constraint (closed economy, $i_t = y_t - c_t$):
+	\[
+	c_t + k_{t+1} \leq f(k_t) + (1-\delta)k_t
+	\]
+	
+	\textbf{Planner's problem}:
+	\[
+	\max_{\{c_t, k_{t+1}\}_{t=0}^T} \sum_{t=0}^T \beta^t u(c_t) \quad \text{s.t.} \quad c_t + k_{t+1} \leq f(k_t) + (1-\delta)k_t, \quad c_t, k_{t+1} \geq 0
+	\]
+	
+	\textbf{Mapping}: Control: $c_t$; State: $k_t$; $\Gamma(k_t) = [0, f(k_t) + (1-\delta)k_t]$.
+	
+	\bigskip
+	Chapter 6: Under perfect competition, the competitive equilibrium solves this planning problem (welfare theorems).
+\end{frame}
+
+
+% ============================================================
+\section{Sequential Methods: Finite Horizon}
+% ============================================================
+
+\begin{frame}{Two-Period Consumption-Saving Model}
+	$T = 2$, $a_0 = 0$, $\underline{a} = 0$, constant $r$. Budget constraints combine into the \textbf{lifetime budget constraint}:
+	\[
+	c_0 + \frac{c_1}{1+r} = w_0 + \frac{w_1}{1+r}
+	\]
+	
+	\textbf{Lagrangian}: $\mathcal{L} = u(c_0) + \beta u(c_1) + \mu[\text{LBC}] + \lambda[w_0 - c_0]$
+	
+
+	Interior solution ($\lambda = 0$) yields the \textbf{Euler equation}:
+	\[
+	u'(c_0) = \beta(1+r) u'(c_1)
+	\]
+	
+	\begin{itemize}
+		\item LHS: marginal cost of saving one unit (less consumption today)
+		\item RHS: discounted marginal benefit ($(1+r)$ units tomorrow, valued at $\beta u'(c_1)$ each)
+		\item When $\beta(1+r) = 1$: full smoothing, $c_0 = c_1 = (w_0 + \beta w_1)/(1+\beta)$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Generic $T$-Period Model: Result 1}
+	Substitute the constraint into the objective: $F(x_t, x_{t+1}) \equiv \hat{F}(\hat{h}(x_t, x_{t+1}))$.
+
+	\textbf{Result 1}: If $F$ is jointly concave in $(x_t, x_{t+1})$, increasing in $x_t$, decreasing in $x_{t+1}$, and the interior conditions hold, then the optimum satisfies:
+	
+	\textbf{Euler equation}:
+	\[
+	F_2(x_t^*, x_{t+1}^*) + \beta F_1(x_{t+1}^*, x_{t+2}^*) = 0 \qquad \forall t < T
+	\]
+	
+	\textbf{Terminal condition}: $x_{T+1}^* = \underline{x}$
+	
+	
+	\begin{itemize}
+		\item $T+2$ equations (Euler $+$ initial $+$ terminal), $T+2$ unknowns
+		\item Second-order difference equation in the state variable
+		\item ``Variational'' condition: given $x_t$ and $x_{t+2}$, vary $x_{t+1}$ to achieve the best outcome
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Finite-Horizon NGM: Euler Equation}
+	Substituting the resource constraint into utility:
+	
+	\textbf{Lagrangian}: $\mathcal{L} = \sum_{t=0}^T \beta^t \{u(f(k_t) + (1-\delta)k_t - k_{t+1}) + \mu_t k_{t+1}\}$
+	
+	\bigskip
+	\textbf{FOC} ($t = 0, \ldots, T-1$):
+	\[
+	u'(c_t) = \beta u'(c_{t+1})[f'(k_{t+1}) + 1 - \delta] + \mu_t
+	\]
+	
+	\textbf{Terminal period}: $u'(c_T) = \mu_T > 0$ $\Rightarrow$ $k_{T+1} = 0$.
+	
+	\bigskip
+	\textbf{Interior Euler equation} (Inada $\Rightarrow$ $k_{t+1} > 0$ for $t < T$, so $\mu_t = 0$):
+	\[
+	u'(c_t) = \beta u'(c_{t+1})[f'(k_{t+1}) + 1 - \delta]
+	\]
+	
+	Three components: marginal cost of investment $=$ utility per unit of return $\times$ return on investment.
+\end{frame}
+
+\begin{frame}{Solving by Backward Induction (Example 4.1)}
+	Log utility, Cobb-Douglas $f(k) = Ak^\alpha$, full depreciation $\delta = 1$.
+	
+	\bigskip
+	Start from $k_{T+1} = 0$, use Euler equation backwards:
+	\[
+	k_{T} = \frac{\alpha\beta}{1+\alpha\beta} Ak_{T-1}^\alpha, \quad k_{T-1} = \frac{\alpha\beta(1+\alpha\beta)}{1+\alpha\beta+(\alpha\beta)^2} Ak_{T-2}^\alpha, \quad \ldots
+	\]
+	
+	\textbf{General solution}:
+	\[
+	k_{t+1} = \alpha\beta \cdot \frac{1-(\alpha\beta)^{T-t}}{1-(\alpha\beta)^{T-t+1}} \cdot Ak_t^\alpha
+	\]
+	
+	\textbf{Saving rate}: $s_t = \alpha\beta \cdot \frac{1-(\alpha\beta)^{T-t}}{1-(\alpha\beta)^{T-t+1}}$ --- depends on time (distance to $T$), but not on $k_t$.
+\end{frame}
+
+\begin{frame}{CRRA Utility and the EIS}
+	\textbf{Constant Relative Risk Aversion (CRRA) utility}: 
+	$$
+	u(c) = \frac{c^{1-\sigma} - 1}{1-\sigma},
+	$$
+	$\sigma > 0$, $\sigma \neq 1$. Special cases: $\sigma = 0$ (linear), $\sigma \to 1$ (log), $\sigma \to \infty$ (Leontief).
+	
+	\textbf{Elasticity of Intertemporal Substitution (EIS)}: How does $c_{t+s}/c_t$ respond to a change in the return $R_{t,t+s}$?
+	
+	With CRRA and linear production $f_t(k) = R_t k$:
+	\[
+	\frac{c_{t+s}}{c_t} = (\beta^s)^{1/\sigma}(R_{t,t+s})^{1/\sigma} \qquad \Rightarrow \qquad \text{EIS} = \frac{\partial \log(c_{t+s}/c_t)}{\partial \log R_{t,t+s}} = \frac{1}{\sigma}
+	\]
+	\vspace{-20pt}
+	\begin{itemize}
+		\item $\sigma < 1$: substitution effect dominates; investment rises with returns
+		\item $\sigma > 1$: income effect dominates; investment falls with returns
+		\item $\sigma = 1$ (log): income and substitution effects exactly cancel
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Sequential Methods: Infinite Horizon}
+% ============================================================
+
+\begin{frame}{Moving to Infinite Horizon}
+	\textbf{Advantage}: Problem becomes \textbf{stationary}---the maximization at $t$ is the same as at $t+1$ for the same capital level.
+	
+	\bigskip
+	\textbf{Dynastic interpretation}: $\beta^t$ = weight on descendants $t$ generations ahead. $\beta < 1$: care more about self than offspring.
+	
+	\bigskip
+	\textbf{Mathematical complications}:
+	\begin{enumerate}
+		\item \textbf{Unbounded utility}: Need $\beta < 1$, and with growth at rate $\gamma$, need $\beta(1+\gamma)^{1-\sigma} < 1$
+		\item \textbf{Constraint sets ``too large''}: Need borrowing limits to prevent infinite debt accumulation
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{The No-Ponzi-Game Condition}
+	Without a terminal period, need to rule out schemes where agent borrows and never repays.
+	
+	Consider an example with the period budget constraint $c_t+a_{t+1}=(1+r)a_t$.
+	
+
+	\textbf{No-Ponzi-game (nPg) condition}:
+	\[
+	\lim_{t \to \infty} \frac{a_{t+1}}{(1+r)^t} \geq 0
+	\]
+		Agent cannot have positive debt (in present value) at infinity.
+	
+
+	\textbf{Lifetime budget constraint} 
+	\[
+	\sum_{t=0}^\infty \frac{c_t}{(1+r)^t} \leq a_0(1+r)
+	\]
+	The nPg condition and the lifetime budget constraint (and the natural borrowing limit, in this case $a_t\geq 0$ for all $t$) are equivalent.
+	
+\end{frame}
+
+\begin{frame}{The Transversality Condition}
+	\textbf{The transversality condition (TVC)}: 
+	$$
+	\lim_{t \to \infty} \frac{a_{t+1}}{(1+r)^t} \leq 0
+	$$
+	\textbf{Interpretation}: It is never optimal to hold positive assets (in present value) at infinity---better to consume them.
+
+	\textbf{nPg vs.\ TVC}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item \textbf{nPg}: Externally imposed. Prevents over-\emph{borrowing}.
+		\item \textbf{TVC}: Self-imposed optimality condition. 
+	\end{itemize}
+	
+	\bigskip
+	In the NGM, the TVC takes the form:
+	\[
+	\lim_{t \to \infty} \beta^t u'(c_t)[f'(k_t) + 1-\delta] k_t = 0
+	\]
+	If the economy converges to a steady state with $\beta < 1$: TVC satisfied automatically.
+\end{frame}
+
+\begin{frame}{Sufficiency: Proposition 4.4}
+	\textbf{Proposition}: If $F(x_t, x_{t+1})$ is jointly concave, $\Gamma$ is convex, and $x_t^*$ satisfies:
+	
+	\medskip
+	(i) Euler equation: $F_2(x_t^*, x_{t+1}^*) + \beta F_1(x_{t+1}^*, x_{t+2}^*) = 0$ for all $t$
+	
+	\medskip
+	(ii) TVC: $\lim_{t \to \infty} \beta^t F_1(x_t^*, x_{t+1}^*) x_t^* = 0$
+	
+	\medskip
+	then $\{x_t^*\}$ maximizes the objective.
+	
+	\bigskip
+	\textbf{Proof strategy} (Appendix 4.A.3): Use the Euler equation repeatedly plus the definition of concavity ($f(x) \leq f(x^*) + f'(x^*)(x - x^*)$) to show that any alternative feasible sequence gives a lower objective value---provided the TVC holds.
+\end{frame}
+
+\begin{frame}{Solving the Infinite-Horizon NGM (Example 4.5)}
+	Log utility, $f(k) = Ak^\alpha$, $\delta = 1$. Take the limit of the finite-horizon solution as $T \to \infty$:
+	\[
+	k_{t+1} = \lim_{T \to \infty} \alpha\beta \cdot \frac{1-(\alpha\beta)^{T-t}}{1-(\alpha\beta)^{T-t+1}} \cdot Ak_t^\alpha = \alpha\beta A k_t^\alpha
+	\]
+	
+	\begin{itemize}
+		\item Saving rate $s = \alpha\beta$ (constant---no longer depends on time!)
+		\item Stationarity: infinite horizon $\Rightarrow$ same problem every period
+		\item TVC: $\lim_{t \to \infty} \beta^t \alpha/(1-\alpha\beta) = 0$ since $\beta < 1$ $\checkmark$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Steady state}: $\bar{k} = (\beta\alpha A)^{1/(1-\alpha)}$ --- identical to Solow with $s = \alpha\beta$ and $\delta = 1$.
+	
+	\bigskip
+	\textbf{Guess and verify} (Example 4.6): Guess $k_{t+1} = sAk_t^\alpha$, substitute into Euler equation $\Rightarrow$ $s = \alpha\beta$.
+\end{frame}
+
+\begin{frame}{Steady State and Balanced Growth}
+	\textbf{Steady state} (no growth): From the Euler equation with $c_t = c_{t+1}$:
+	\[
+	1 = \beta(f'(\bar{k}) + 1 - \delta)
+	\]
+	Unique solution under Inada conditions. This is the \textbf{modified golden rule}: $f'(\bar{k}) = 1/\beta - 1 + \delta$.
+
+	\textbf{Balanced growth}: With $Y_t = F(K_t, A_t L_t)$, CRRA utility, define $\tilde{k}_t = K_t/(A_t L_t)$.
+	
+	Adjusted discount factor: $\tilde{\beta} \equiv \beta(1+n)(1+\gamma)^{1-\sigma}$
+	
+
+	Euler equation on BGP:
+	\[
+	(1+n)(1+\gamma) = \tilde{\beta}[f'(\bar{\tilde{k}}) + 1 - \delta]
+	\]
+	
+	\textbf{CRRA is the only utility consistent with balanced growth}.
+\end{frame}
+
+
+% ============================================================
+\section{Recursive Methods: Dynamic Programming}
+% ============================================================
+
+\begin{frame}{The Bellman Equation}
+	\textbf{Key idea}: Break the infinite-dimensional problem into a sequence of identical small problems.
+	
+
+	Define the \textbf{value function}:
+	\[
+	V(x_0) = \max_{\{x_{t+1} \in \Gamma(x_t)\}} \sum_{t=0}^\infty \beta^t F(x_t, x_{t+1})
+	\]
+	
+	Stationarity allows us to write:
+	\[
+	V(x) = \max_{x' \in \Gamma(x)} \{F(x, x') + \beta V(x')\}
+	\]
+	
+	This is the \textbf{Bellman equation}---a functional equation (unknown is $V$, a function).
+	
+
+	\textbf{Policy function}: $g(x) = \arg\max_{x' \in \Gamma(x)} \{F(x, x') + \beta V(x')\}$
+	
+	$\Rightarrow$ $x' = g(x)$: stationary decision rule.
+\end{frame}
+
+\begin{frame}{The NGM in Recursive Form}
+	The standard NGM:
+	\[
+	V(k) = \max_{k' \in [0, f(k)+(1-\delta)k]} \{u(f(k) + (1-\delta)k - k') + \beta V(k')\}
+	\]
+	\textbf{State}: $k$ (current capital). \textbf{Control}: $k'$ (or equivalently $c$).
+	
+	\bigskip
+	Other examples:
+	\vspace{-6pt}
+	\begin{itemize}
+	\item \textbf{Periodic NGM} (alternating TFP $A_h, A_l$): Two value functions $V_h(k), V_l(k)$.
+	\item \textbf{Delayed depreciation NGM} (capital depreciates after two periods): Two state variables $(i_{-1}, i_{-2})$.
+	\end{itemize}
+	
+	\textbf{Key lesson}: Choosing state variables appropriately is essential for writing the problem recursively.
+\end{frame}
+
+
+\begin{frame}{Properties of the Value Function}
+	Under standard assumptions ($F$ continuous, concave; $\Gamma$ nonempty, compact, convex; $\beta < 1$):
+	
+	\begin{enumerate}
+		\item \textbf{Contraction mapping}: Starting from \emph{any} $V_0$, iterating $V_{n+1}(x) = \max_{x'}\{F(x,x') + \beta V_n(x')\}$ converges to $V$. Rate: $\|V_{n+1} - V\| \leq \beta\|V_n - V\|$.
+		
+		\item \textbf{$V$ is strictly increasing} (if $F$ increasing in first argument and $\Gamma$ monotone)
+		
+		\item \textbf{$V$ is strictly concave} (if $F$ jointly strictly concave and $\Gamma$ convex) $\Rightarrow$ policy $g$ is unique
+		
+		\item \textbf{$V$ is differentiable} at interior solutions (if $F$ is $C^1$)
+		
+		\item \textbf{$g$ is strictly increasing} (under all above conditions)
+	\end{enumerate}
+	
+	\bigskip
+	Property 1 is crucial for numerical computation (value function iteration, Chapter 10).
+\end{frame}
+
+
+\begin{frame}{Solving the Bellman Equation (Example 4.7)}
+	Log utility, $f(k) = Ak^\alpha$, $\delta = 1$. Start from $V_0(k) = 0$:
+	
+	\medskip
+	$V_1(k) = \max_{k'} \log(Ak^\alpha - k') = \log A + \alpha\log k$ (optimal: $k' = 0$)
+	
+	\medskip
+	$V_2(k) = \max_{k'} \{\log(Ak^\alpha - k') + \beta[\log A + \alpha\log k']\}$
+	
+	$\Rightarrow$ $k' = \alpha\beta Ak^\alpha/(1+\alpha\beta)$
+	
+	\bigskip
+	Pattern: $V_n(k) = a_n + b_n\log k$ for all $n$.
+	
+	\bigskip
+	\textbf{Guess and verify}: Guess $V(k) = a + b\log k$. Solution:
+	\[
+	b = \frac{\alpha}{1-\alpha\beta}, \qquad a = \frac{1}{1-\beta}\frac{1}{1-\alpha\beta}\left[\log A + \log(1-\alpha\beta)^{1-\alpha\beta}(\alpha\beta)^{\alpha\beta}\right]
+	\]
+	
+	Policy: $k' = \alpha\beta Ak^\alpha$ --- same answer as sequential methods.
+\end{frame}
+\begin{frame}{The Functional Euler Equation and the Envelope Theorem}
+	FOC of Bellman equation: $-F_2(x, g(x)) = \beta V'(g(x))$
+
+	\textbf{Envelope Theorem}: $V'(x) = F_1(x, g(x))$ (indirect effect through optimal $x'$ vanishes at optimum)
+	
+	Updating: $V'(g(x)) = F_1(g(x), g(g(x)))$
+
+	\textbf{Functional Euler equation}:
+	\[
+	F_2(x, g(x)) + \beta F_1(g(x), g(g(x))) = 0 \qquad \forall x
+	\]
+	
+	\begin{itemize}
+		\item Same as the sequential Euler equation, but written as a \textbf{functional equation} in $g$
+		\item Unknown is the function $g$ (not a sequence)
+		\item Necessary condition only (may have multiple solutions); the Bellman equation selects the correct one
+		\item Useful for numerical computation and for proving convergence
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Global Convergence in the NGM}
+% ============================================================
+
+\begin{frame}{Proof of Global Convergence}
+	\textbf{Goal}: Show that $k_t \to \bar{k}$ from any $k_0 > 0$.
+	
+	Use strict concavity of $V$ $\Rightarrow$ $[V'(k) - V'(g(k))][k - g(k)] \leq 0$ for all $k$.
+	
+	\textbf{Envelope Theorem}: $V'(k) = u'(c)[f'(k) + 1 - \delta]$
+	
+	\textbf{FOC}: $V'(g(k)) = u'(c)/\beta$
+	
+	Substituting:
+	\[
+	u'(c)\left[f'(k) + 1 - \delta - \frac{1}{\beta}\right][k - g(k)] \leq 0
+	\]
+	\vspace{-17pt}
+	\begin{itemize}
+		\item $k = \bar{k}$: $f'(\bar{k}) + 1 - \delta = 1/\beta$ and $g(\bar{k}) = \bar{k}$ $\checkmark$
+		\item $k > \bar{k}$: $f'(k) + 1 - \delta < 1/\beta$ $\Rightarrow$ $g(k) < k$ (capital falls)
+		\item $k < \bar{k}$: $f'(k) + 1 - \delta > 1/\beta$ $\Rightarrow$ $g(k) > k$ (capital rises)
+	\end{itemize}
+	
+	Combined with $g$ strictly increasing: \textbf{global, monotonic convergence} to $\bar{k}$.
+\end{frame}
+\begin{frame}{Local Approximation of the Policy Function}
+	Approximate $g(k) \approx a_0 + a_1 k$ near $\bar{k}$.
+	
+
+	From $g(\bar{k}) = \bar{k}$: $a_0 = \bar{k}(1 - a_1)$.
+	
+
+	Differentiate the functional Euler equation w.r.t.\ $k$, evaluate at $\bar{k}$:
+	\[
+	u''(\bar{c})[1 - \beta a_1] = u''(\bar{c})[a_1 - \beta a_1^2] + \beta^2 u'(\bar{c})f''(\bar{k})a_1
+	\]
+	
+	Define $\Theta \equiv \beta^2 u'(\bar{c}) f''(\bar{k})/u''(\bar{c}) > 0$. Solving the quadratic:
+	\[
+	a_1 = \frac{1 + \beta + \Theta - \sqrt{(1+\beta+\Theta)^2 - 4\beta}}{2\beta}
+	\]
+	\vspace{-20pt}
+	\begin{itemize}
+		\item $a_1 \in (0, 1]$: the correct root (monotone convergence)
+		\item $a_1$ decreasing in $\Theta$ (faster convergence when $\Theta$ is large)
+		\item $\sigma$ large (unwilling to change $c$) $\Rightarrow$ $\Theta$ small $\Rightarrow$ $a_1$ close to 1 $\Rightarrow$ slow convergence
+		\item $\sigma = 0$ (linear utility) $\Rightarrow$ $\Theta \to \infty$ $\Rightarrow$ $a_1 \to 0$ $\Rightarrow$ immediate convergence
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Calibration: The Role of $\sigma$}
+	With CRRA $u(c) = (c^{1-\sigma}-1)/(1-\sigma)$ and Cobb-Douglas $f(k) = k^\alpha$:
+	\[
+	\Theta = \frac{\beta^2(1-\alpha)}{\sigma}\left(\frac{1}{\beta} - 1 + \delta\right)\left(\frac{1}{\alpha}\left(\frac{1}{\beta} - 1 + \delta\right) - \delta\right)
+	\]
+	
+	$\Theta$ is positive, decreasing in $\sigma$, decreasing in $\alpha$, increasing in $\delta$.
+
+	\textbf{Empirical estimates of $1/\sigma$ (EIS)}:
+	\vspace{-6pt}
+	\begin{itemize}
+		\item Hall (1988), aggregate data: $1/\sigma \approx 0.1$
+		\item Attanasio and Weber (1993, 1995), micro data: $1/\sigma \in [0.3, 0.8]$
+		\item Most applied macro: $\sigma = 1$ (log) or $\sigma = 2$
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Result}: Convergence in the NGM is qualitatively like Solow but quantitatively different---the endogenous saving rate depends on $k$ through $\sigma$.
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Generic problem}: Controls $y_t$, states $x_t$, discount factor $\beta$, feasibility $\Gamma$
+		
+		\item \textbf{Euler equation}: $F_2(x_t, x_{t+1}) + \beta F_1(x_{t+1}, x_{t+2}) = 0$ --- marginal cost of saving = marginal benefit
+		
+		\item \textbf{Terminal condition} (finite horizon): $x_{T+1} = \underline{x}$ (consume everything)
+		
+		\item \textbf{nPg condition} (infinite horizon): $\lim a_{t+1}/(1+r)^t \geq 0$ (no exploding debt)
+		
+		\item \textbf{TVC}: $\lim \beta^t F_1 x_t = 0$ (no over-accumulation); self-imposed optimality condition
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item \textbf{CRRA utility}: EIS $= 1/\sigma$; the only utility consistent with balanced growth
+		
+		\item \textbf{Bellman equation}: $V(x) = \max_{x'}\{F(x,x') + \beta V(x')\}$; contraction mapping $\Rightarrow$ unique $V$, can be found by iteration
+		
+		\item \textbf{Properties of $V$}: increasing, strictly concave, differentiable at interior; policy $g$ unique and increasing
+		
+		\item \textbf{Functional Euler equation}: $F_2(x, g(x)) + \beta F_1(g(x), g(g(x))) = 0$; necessary condition from Envelope Theorem
+		
+		\item \textbf{Global convergence}: Proved using strict concavity of $V$ + Envelope Theorem; speed depends on $\sigma$ (curvature of utility) and $\alpha$ (curvature of production)
+		
+		\item \textbf{Local approximation}: $g(k) \approx a_0 + a_1 k$; $a_1$ solved from a quadratic; $a_1 \in (0,1)$ for the stable root
+	\end{enumerate}
+\end{frame}
+
+\end{document}
+

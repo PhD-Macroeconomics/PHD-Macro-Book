@@ -1,0 +1,1251 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter13]{Chapter 13: Growth}
+\author[Timo Boppart and Peter J. Klenow]{Chapter authors: Timo Boppart and Peter J. Klenow}
+
+\date[April 2026]{April 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Motivation}
+% ============================================================
+
+\begin{frame}{Why Study Growth?}
+	\begin{itemize}
+		\item U.S.\ GDP per capita has grown at $\approx 1.5\%$ per year for \textbf{200 years}
+		\item Process transformed living standards far beyond what economic indicators reveal
+		\item Standards of living improved not only in advanced economies but also in developing ones---at differing rates
+		\item Understanding growth is ``of first-order importance to human welfare''
+	\end{itemize}
+	
+	\medskip
+	\textbf{Lucas (1988)}: ``Is there some action a government of India could take that would lead the Indian economy to grow like Indonesia's or Egypt's? If so, what, exactly? \ldots\ The consequences for human welfare involved in questions like these are simply staggering: Once one starts to think about them, it is hard to think about anything else.''
+\end{frame}
+
+
+\begin{frame}{Chapter Roadmap}
+	\begin{enumerate}
+		\item Empirical patterns: stylized facts about growth and development
+		\item Growth and development accounting
+		\item Neoclassical growth model with investment-specific technical change (ISTC)
+		\item Confronting the ISTC model with cross-country and time-series data
+		\item Endogenous growth theory
+		\begin{itemize}
+			\item AK model
+			\item Expanding varieties (Romer, 1990)
+			\item Semi-endogenous growth (Jones, 1995)
+			\item Quality ladders and creative destruction (Aghion and Howitt, 1992)
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{Empirical Patterns}
+% ============================================================
+
+\begin{frame}{US Real GDP Per Capita}
+	
+	
+	US Real GDP per Capita
+	\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.45]{FigsChapter13/fig1}
+\end{figure}
+\vspace{-20pt}
+	
+	\bigskip
+	\begin{itemize}
+		\item Straight line on log scale $=$ constant growth rate
+		\item Sustained growth began slowly $\sim$1,000 years ago, then accelerated after the Industrial Revolution 
+		\item Should not take such growth for granted
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Cross-Country Growth: Regional Patterns}
+	PPP GDP per Worker (US = 1), 1960-2019
+		\vspace{-10pt}
+		\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{FigsChapter13/fig2}
+	\end{figure}
+
+		\vspace{-15pt}
+	\begin{itemize}
+		\item \textbf{Europe}: converged toward US (1960-1990), then parallel
+		\item \textbf{Latin America}: mostly moved sideways
+		\item \textbf{East Asia} (China, Japan, Korea): rose from $1/16$ to $\approx 1/4$ 
+		\item \textbf{Sub-Saharan Africa}: grew with US until 1980, fell behind (from $1/8$ to $1/16$), then stabilized
+		\item \textbf{South Asia} (led by India): tracked at $1/16$ until mid-1970s, surged to over $1/8$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Cross-Country Growth: Country-Level}
+	PPP GDP per Capita in 1960 and 2019 (US = 1)
+			\vspace{-10pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.27]{FigsChapter13/fig3}
+	\end{figure}
+	
+	\vspace{-15pt}
+	\begin{itemize}
+		\item Countries on the 45$^\circ$ line: same growth rate as U.S.\ --- the ``typical'' pattern
+		\item Growth miracles: South Korea, Singapore
+		\item Growth disasters: Congo, Burundi
+		\item Rich countries: clustered near U.S.\ growth rate
+		\item Developing countries: much more dispersion
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Convergence?}
+	\begin{itemize}
+		\item The previous figure displays \textbf{neither strong divergence nor strong convergence}
+		\item Two concepts:
+		\begin{itemize}
+			\item \textbf{Beta convergence}: initially richer countries grow more slowly
+			\item \textbf{Sigma convergence}: narrowing of income dispersion over time
+		\end{itemize}
+		\item The data show a lack of \emph{both} unconditional beta and sigma convergence
+		\item Absence of divergence is consistent with a common trend (e.g., technology that gradually diffuses across countries)
+		\item Nath, Ramey and Klenow (2023): country \emph{income differences} are persistent, whereas country \emph{growth differences} are largely transitory
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{World Income Distribution}
+
+	
+	\begin{itemize}
+		\item Distribution shifts to the right over time (rapid growth in China and India)
+		\item Left-skewed, but decreasingly so over time
+		\item When each country is weighted equally, the distribution is less skewed
+	\end{itemize}
+	
+	\bigskip
+
+	\begin{itemize}
+		\item Income differs by a factor of \textbf{64} between the Congo and the US
+		\item China $\approx 1/4$; India $\approx 1/8$ of US per capita income
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Growth and Development Accounting}
+% ============================================================
+
+\begin{frame}{Production Function Framework}
+	Cobb-Douglas aggregate production function:
+	\[
+	Y_{it} = K_{it}^\alpha (A_{it} H_{it})^{1-\alpha}
+	\]
+	
+	\begin{itemize}
+		\item $Y$: real output, $K$: physical capital, $H = hL$: total human capital (efficiency units summed across workers)
+		\item $A$: residual labor-augmenting TFP, $\alpha$: capital elasticity
+		\item Human capital tied to Mincerian wage returns to schooling (Klenow and Rodriguez-Clare, 1997; Hall and Jones, 1999; Bils and Klenow, 2000)
+	\end{itemize}
+	
+	\bigskip
+	Dividing by $L$ and rearranging:
+	\[
+	\frac{Y_{it}}{L_{it}} = \left(\frac{K_{it}}{Y_{it}}\right)^{\frac{\alpha}{1-\alpha}} \frac{H_{it}}{L_{it}}  A_{it} 
+	\]
+\end{frame}
+
+\begin{frame}{Why Use $K/Y$ Instead of $K/L$?}
+	\begin{itemize}
+		\item BGP of neoclassical model: \textbf{stable $K/Y$} that does not depend on levels of $A$ or $H/L$
+		\item Mankiw, Romer and Weil (1992) model: stationary level of $H/L$ that does not depend on $A$ or $K/Y$
+		\item In the data: substantial persistence in $K/Y$ within countries 
+		\item Countries do \emph{not} converge to a common $K/Y$
+		\item Using $K/Y$ decomposition attributes a \textbf{larger role to TFP and HC} relative to physical capital
+		\item $\alpha$ approximated by physical capital's \textbf{cost share} (not income share, to avoid markup bias)
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Growth Accounting: Methodology}
+	Taking logs and differentiating with respect to time:
+	\[
+	\Delta \log\left(\frac{Y_i}{L_i}\right) = \frac{\alpha}{1-\alpha}\, \Delta \log\left(\frac{K_i}{Y_i}\right) + \Delta \log\left(\frac{H_i}{L_i}\right) + \Delta \log(A_i) 
+	\]
+	
+	\begin{itemize}
+		\item Average the RHS components over time
+		\item Back out TFP growth $\Delta\log(A)$ as a residual
+		\item Compare contributions to LHS $\Delta\log(Y/L)$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Growth Accounting for the US}
+	Growth accounting (annual \%). $\alpha = 0.34$
+	\begin{table}
+		\centering
+		\small
+		\begin{tabular}{lcccc}
+			\toprule
+			& \multicolumn{4}{c}{Contributions from} \\
+			\cmidrule(lr){2-5}
+			Period & $Y/L$ & $K/Y$ & $H/L$ & $A$ \\
+			\midrule
+			1948--2020 & 2.37 & 0.21 & 0.38 & \textbf{1.79} \\
+			1948--1973 & 3.28 & $-$0.18 & 0.27 & \textbf{3.19} \\
+			1973--1995 & 1.54 & 0.46 & 0.36 & \textbf{0.72} \\
+			1995--2007 & 2.80 & 0.32 & 0.40 & \textbf{2.08} \\
+			2007--2020 & 1.64 & 0.43 & 0.59 & \textbf{0.63} \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\begin{itemize}
+		\item $K/Y$: modest contribution ($< 1/10$ of average growth)
+		\item $H/L$: twice as much (primarily rising years of education)
+		\item TFP $A$: $\approx\mathbf{75\%}$ of growth --- echoes Solow (1957)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{TFP Drives Medium-Run Growth Shifts}
+	\begin{itemize}
+		\item 1948--1973: high TFP growth (3.19\%)
+		\item 1973--1995: ``productivity slowdown'' (0.72\%)
+		\item 1995--2007: TFP revival (2.08\%)
+		\begin{itemize}
+			\item Jorgenson, Ho, and Stiroh (2008): ICT contribution, both directly (ICT-producing sector) and downstream (ICT-using sectors like retail)
+			\item Resolved the \textbf{Solow Paradox}: ``you can see the computer age everywhere but in the productivity statistics'' (Solow, 1987)
+		\end{itemize}
+		\item 2007--2020: another slowdown (0.63\%)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Takeaway}: When growth is high or low, it is primarily due to the pace of TFP growth.
+\end{frame}
+
+\begin{frame}{Development Accounting Across Countries (2019)}
+	Development accounting, 117 countries
+		\vspace{-5pt}
+	\begin{table}
+		\centering
+		\begin{tabular}{lcccc}
+			\toprule
+			& \multicolumn{4}{c}{Contributions from} \\
+			\cmidrule(lr){2-5}
+			Statistic & $Y/L$ & $K/Y$ & $H/L$ & $A$ \\
+			\midrule
+			Variance of log & 1.00 & 0.14 & 0.08 & 0.57 \\
+			Elasticity wrt $Y/L$ & --- & 0.14 & 0.22 & \textbf{0.64} \\
+			90/10 ratio & 12.00 & 1.40 & 1.74 & 4.92 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\begin{itemize}
+		\item Development accounting: the same equation, but level instead of growth rate
+		\item Elasticities add up to 1 by construction (covariance split equally)
+		\item Capital intensity:  \textbf{14\%}; human capital: \textbf{22\%}; residual TFP: \textbf{64\%}
+		\item 90/10 ratio check: $\log(4.92)/\log(12) \approx 0.64$ --- consistent
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Improving Human Capital Measurement}
+	\begin{itemize}
+		\item Schoellman (2012): incorporating differences in the \textbf{quality} of schooling
+		\item Lagakos, Moll, Porzio, Qian \& Schoellman (2018): human capital accumulated \textbf{on the job}
+		\item Result: HC contribution rises to $\approx 50\%$, TFP contribution winnows to $\approx 40\%$
+	\end{itemize}
+	
+	\bigskip
+Elasticities broadly similar in 1960 and 2019, though:
+	\begin{itemize}
+		\item HC importance has diminished over time
+		\item Role of capital intensity fell from 1990 to 2010 before rising
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Neoclassical Growth with Investment-Specific Technical Change}
+% ============================================================
+
+\begin{frame}{Motivation: Declining Relative Price of Investment}
+	
+	Relative price of equipment and investment in the US
+\vspace{-10pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter13/fig4}
+\end{figure}
+
+\vspace{-15pt}
+	
+	\begin{itemize}
+		\item Relative price of \textbf{investment}: fell at $\approx 1.3\%$/year since 1970
+		\item \textbf{Equipment}: fell at $\approx 2.5\%$/year
+		\item \textbf{Structures}: nearly doubled ($+1.2\%$/year relative to consumption)
+	\end{itemize}
+	$\Rightarrow$ Motivates \textbf{investment-specific technical change} (ISTC): Greenwood, Hercowitz, and Krusell (1997).
+\end{frame}
+
+\begin{frame}{Cross-Country Relative Prices of Investment}
+	Price of investment relative to consumption across countries, 2019
+\vspace{-10pt}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{FigsChapter13/fig5}
+\end{figure}
+
+\vspace{-15pt}
+	
+	\begin{itemize}
+		\item Poorest countries: investment is $\approx 2\times$ more expensive
+		\item Poorest countries particularly inefficient at producing investment goods (Hsieh and Klenow, 2007)
+		\item Consequence: richer countries with the same nominal saving rate arrive at a higher real $K/Y$
+		\item This has implications for development accounting
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model: Preferences}
+	Representative household, continuous time, abstracting from endogenous labor supply:
+	\[
+	\max_{\{a(t), c(t)\}} \int_0^\infty e^{-(\rho - n)t} \frac{c(t)^{1-\sigma} - 1}{1-\sigma} dt 
+	\]
+	subject to
+	\[
+	\dot{a}(t) = (r(t) - n) a(t) + w(t)h - c(t), \quad a(0) \text{ given}
+	\]
+	and the no-Ponzi game condition:
+	$$\lim_{T\to\infty} e^{-\int_0^T (r(\tau)-n) d\tau} a(T) \geq 0.
+	$$
+	
+	\begin{itemize}
+		\item $\rho$: discount rate, $n$: population growth, $\sigma$: CRRA parameter
+		\item $h$: human capital per worker (constant), $c$: per-capita consumption
+		\item Price of consumption good normalized to 1
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model: Return Condition}
+	Household converts savings into investment good at price $P_x$ (one unit of consumption good $a$ becomes $1/P_x$ units of investment good $K$) and rents capital to firms.  
+
+	\textbf{Return condition}, which can be viewed as the asset-pricing equation for one unit of capital (whose value is $P_x(t)$), links the return per one unit of $a(t)$ to the rental rate $R(t)$, depreciation, and capital gains:
+	\[
+	 r(t)P_x(t) = R(t) - \delta P_x(t) + \dot{P}_x(t).
+	\]
+	{\footnotesize Note: This equation can also be derived from the consumer's capital accumulation equation $\dot K(t)=I(t)/P_x(t)-\delta K(t)$,
+where the investment $I(t)=R(t)K(t)+w(t)he^{nt}-c(t)e^{nt}$. This capital accumulation equation can be rewritten as, using $K(t)=a(t)e^{nt}/P_x(t)$,
+$$
+\dot a(t)=\left( \frac{R(t)}{P_x(t)} - \delta + \frac{\dot{P}_x(t)}{P_x(t)}-n\right)a(t)+w(t)h-c(t).
+$$
+The first term inside the parenthesis corresponds to $r(t)$.
+}
+\end{frame}
+
+
+	\begin{frame}{Model: Technology}
+		\textbf{Final output} (competitive, Cobb-Douglas):
+		\[
+		Y(t) = K(t)^\alpha \bigl(A_y e^{\gamma_y t} L(t)\bigr)^{1-\alpha} 
+		\]
+		
+		\begin{itemize}
+			\item $\alpha \in (0,1)$: output elasticity of capital
+			\item $A_y e^{\gamma_y t}$: Harrod-neutral (labor-augmenting) technical change
+			\item $\gamma_x \geq 0$: \textbf{investment-specific} technical change
+		\end{itemize}
+		
+		Output $Y$ can be transformed:
+		\begin{itemize}
+			\item 1-for-1 into consumption goods
+			\item 1-for-$A_x e^{\gamma_x t}$ into investment goods
+		\end{itemize}
+		
+		Both technologies linear $\Rightarrow$ $P_c(t) = 1$ and $P_x(t) = e^{-\gamma_x t}/A_x$.
+		
+		$Y$ is measured in consumption units (GDP deflated by consumption price).
+	\end{frame}
+
+\begin{frame}{Model: Firm Problem and Equilibrium Definition}
+	Firm solves a static profit maximization:
+	\[
+	\pi(t) = \max_{K,L}\left\{ K^\alpha \bigl(A_y e^{\gamma_y t} L\bigr)^{1-\alpha} - R(t)K - w(t)L \right\} 
+	\]
+	
+	A competitive equilibrium is a path of prices and quantities satisfying:
+	\begin{enumerate}
+		\item Solves household problem and firm problem 
+		\item Market clearing: $K(t)\, e^{-\gamma_x t}/A_x = a(t)\, e^{nt}$ and $L(t) = e^{nt} h$
+		\item Return condition: $r(t) = R(t)\, A_x\, e^{\gamma_x t} - \delta - \gamma_x$
+	\end{enumerate}
+	
+	\textbf{Boundedness condition} (utility is finite):
+	\[
+	n - \rho + \frac{\alpha(1-\sigma)}{1-\alpha}\,\gamma_x + (1-\sigma)\gamma_y < 0 
+	\]
+	This is because the per capita consumption grows at the rate $\alpha\gamma_x/(1-\alpha)+\gamma_y$, as we will see later.
+\end{frame}
+
+\begin{frame}{Equilibrium Dynamics}
+	Equilibrium reduces to two ODEs in $K(t)$ and $c(t)$:
+	
+	\textbf{Consumption Euler equation}:
+	\[
+	\frac{\dot{c}(t)}{c(t)} = \frac{\alpha A_x e^{\gamma_xt}\left(\frac{A_y\, e^{(\gamma_y+n)t} h}{K(t)}\right)^{\!1-\alpha} - \delta - \gamma_x - \rho}{\sigma} 
+	\]
+	
+	\textbf{Capital accumulation}:
+	\[
+	\frac{\dot{K}(t)}{K(t)} = A_x\left( \left(\frac{e^{(\gamma_x/(1-\alpha)+\gamma_y+n)t}A_y h}{K(t)}\right)^{\!1-\alpha} - \frac{e^{(\gamma_x+n)t} c(t)}{K(t)}\right) - \delta
+	\]
+	
+	Initial condition: $K(0)$ given. Terminal condition: transversality condition
+	$$
+	\lim_{T\rightarrow\infty}\left\{\frac{K(T)}{A_x}e^{-(\gamma_x +\rho)T}c(T)^{-\sigma}\right\}=0
+	$$
+\end{frame}
+
+\begin{frame}{Balanced Growth Path: Growth Rates}
+	A balanced growth path: all prices and quantities grow at constant rates.
+	
+	\medskip
+	Can the RHS of $\dot{K}/K$ equation be constant? The standard candidate $\dot{K}/K = \gamma_y + n$ does \emph{not} work. Instead:
+	
+	\[
+	g_K \equiv \frac{\dot{K}}{K} = \frac{\gamma_x}{1-\alpha} + \gamma_y + n
+	\]
+	
+	\[
+	g_c \equiv \frac{\dot{c}}{c} = \frac{\alpha\gamma_x}{1-\alpha} + \gamma_y
+	\]
+	
+	\begin{itemize}
+		\item Capital grows faster than in the standard case because investment gets cheaper
+		\item Cobb-Douglas is \textbf{essential} for a BGP with ISTC (relates to Uzawa's theorem)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Balanced Growth Path: Detrended System}
+	
+	Define $\tilde{c}(t) \equiv c(t)/e^{g_c t}$ and $\tilde{k}(t) \equiv K(t)/e^{g_K t}$. The detrended system:
+	$$
+		\frac{\dot{\tilde{c}}}{\tilde{c}} = \frac{\alpha A_x\!\left(\frac{A_y h}{\tilde{k}}\right)^{1-\alpha} - \delta - \gamma_x - \rho}{\sigma} - \frac{\alpha\gamma_x}{1-\alpha} - \gamma_y 
+	$$
+	$$
+		\frac{\dot{\tilde{k}}}{\tilde{k}} = A_x\left(\left(\frac{A_y h}{\tilde{k}}\right)^{1-\alpha}-\frac{\tilde{c}(t)}{\tilde{k}(t)}\right) - \delta - \frac{\gamma_x}{1-\alpha} - \gamma_y - n - \frac{\tilde{c}}{\tilde{k}} 
+		$$
+	
+	Admits a stationary point $(\tilde{c}^*, \tilde{k}^*)$. The terminal condition is fulfilled under our assumption.
+\end{frame}
+
+\begin{frame}{Balanced Growth Path: Steady-State Values}
+	Setting $\dot{\tilde{k}} = \dot{\tilde{c}} = 0$:
+	
+	\[
+	\tilde{k}^* = A_x^{\frac{1}{1-\alpha}}A_y h \left(\frac{\alpha}{\frac{\alpha\sigma\gamma_x}{1-\alpha} + \gamma_x + \sigma\gamma_y + \delta + \rho}\right)^{\!\frac{1}{1-\alpha}} 
+	\]
+	
+	\[
+	\tilde{c}^* = (\tilde{k}^*)^\alpha (A_y h)^{1-\alpha} - (g_K + \delta)\,\frac{\tilde{k}^*}{A_x} 
+	\]
+	
+	\textbf{Endogenous saving rate}: $s^* = \alpha(g_K + \delta)/(\sigma g_c + \gamma_x + \delta + \rho)$, constant on BGP.
+	
+	\textbf{Golden Rule}: $\tilde{k}^{gold}$ maximizes $\tilde{c}^*$, achieved when $s^{gold} = \alpha$. Since our assumption ensures $\sigma g_c + \gamma_x + \delta + \rho > g_K + \delta$:
+	\[
+	\tilde{k}^* < \tilde{k}^{gold} \quad \text{(no dynamic inefficiency)}
+	\]
+\end{frame}
+
+
+\begin{frame}{BGP: Predictions for Prices and Quantities}
+	Along the balanced growth path:
+	\begin{itemize}
+		\item \textbf{Wage} $w$: grows at rate $g_c$
+		\item \textbf{Interest rate}: $r^* = \sigma g_c + \rho$ --- \textbf{constant}
+		\item \textbf{Rental rate} $R$: falls at rate $\gamma_x$ (investing one unit of capital gets cheaper in consumption units)
+		\item \textbf{Nominal capital-output ratio} $P_x K / Y=s^*/(g_K + \delta)$: constant
+		\item \textbf{Real capital-output ratio} $K/Y$: grows at rate $(1-s^*)\gamma_x$
+	\end{itemize}
+	
+	\bigskip
+	GDP deflator growth rate (defined as $(\dot P_x/P_x)^{s^*}(\dot P_c/P_c)^{1-s^*}$): $-(1-s^*)\gamma_x$ (investment share pushes deflator down).
+\end{frame}
+
+
+\begin{frame}{Transitional Dynamics}
+	\begin{itemize}
+		\item Similar to the standard neoclassical model
+		\item If $\tilde{k}(0) < \tilde{k}^*$: capital accumulates faster, $\tilde{k}$ increases until reaching $\tilde{k}^*$
+		\item \textbf{Special case} $\sigma = \alpha$: closed-form consumption rule exists
+		\item General case can be solved by linearizing around the steady state 
+		\item Simple calibration: \textbf{half-life $\approx 5.5$ years} (fast convergence)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Discussion of the Framework}
+	\begin{itemize}
+		\item \textbf{Closed economy}: justified for the world; trade small for large economies
+		\item \textbf{Representative household}: CRRA $\Rightarrow$ homothetic utility $\Rightarrow$ aggregation holds with heterogeneity
+		\item \textbf{CRRA}: key for constant long-run saving rate (with growth)
+		\item \textbf{No endogenous labor supply}: can be added, reconciled with BGP (Boppart and Krusell, 2020)
+		\item \textbf{Constant $h$}: model can study transitional changes; sustained $h$ growth would change dynamics fundamentally
+		\item \textbf{Structural change}: along BGP, nominal investment share is constant $\Rightarrow$ no sectoral reallocation. Can be reconciled with aggregate BGP (Kongsamut et al., 2001; Ngai and Pissarides, 2007; Boppart, 2014)
+		\item \textbf{Energy, natural resources}: see Chapter 25
+	\end{itemize}
+\end{frame}
+
+
+% ============================================================
+\section{Confronting the Model with Data}
+% ============================================================
+
+\begin{frame}{Income Decomposition in Consumption Units}
+	Output per worker (in consumption units) along the BGP:
+	\[
+	\frac{Y(t)}{e^{nt}} = \left(\frac{P_k(t)K(t)}{Y(t)}\right)^{\!\frac{\alpha}{1-\alpha}} \cdot h \cdot \underbrace{A_y A_x^{\frac{\alpha}{1-\alpha}}}_{= A} \cdot e^{(\gamma_y + \gamma_x \frac{\alpha}{1-\alpha})t} 
+	\]
+	where $P_k(t) = A_x^{-1} e^{-\gamma_x t}$.
+	
+	\bigskip
+	The nominal $K/Y$ ratio is constant on the BGP and \textbf{independent} of levels of $h$, $A_y$, or $A_x$.
+	
+	\bigskip
+	\textbf{Key}: This decomposition is theory-consistent---uses nominal $K/Y$ rather than a ``real'' measure.
+\end{frame}
+
+\begin{frame}{Two-Sector Development Accounting}
+	Results:
+	\begin{itemize}
+		\item Residual TFP $A$: \textbf{72\%} of income differences (vs.\ 64\% in the earlier dev accounting)
+		\item Physical capital: only \textbf{7\%} (vs.\ 14\%)
+		\item Human capital: \textbf{22\%} (unchanged)
+	\end{itemize}
+	
+	The message that most income differences are unaccounted for by physical and human capital is \textbf{reinforced} because the relative price of capital is higher in poorer countries.
+	
+	\bigskip
+	\textbf{Decomposing $A$}: Using relative prices $P_x/P_c$ series:
+	\begin{itemize}
+		\item Elasticity of $A_x^{\alpha/(1-\alpha)}$ with respect to $(P_YY)/(P_C L)$: 0.10
+		\item $\Rightarrow$ About \textbf{14\% of the $A$ differences} are due to investment-specific TFP $A_x$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Can Transitional Dynamics Explain Growth Miracles?}
+	\textbf{Japan}: GDP per capita rose from $\sim$20\% to $\sim$80\% of U.S.\ (1950--1990).
+	
+	\bigskip
+	If purely capital accumulation:
+	\begin{itemize}
+		\item Need $(k^{JP}/k^{US})^\alpha = 0.2$ in 1950
+		\item Implied rental rate ratio: $R^{JP}/R^{US} = 0.2^{-(1-\alpha)/\alpha}$
+		\item With $\alpha = 1/3$: Japan's rental rate would be \textbf{25 times} the U.S.\ rate in 1950!
+		\item By 1990: ratio should have declined to $< 2$ 
+		\item Such a dramatic decline was \textbf{not observed}
+	\end{itemize}
+	
+	\bigskip
+	$\Rightarrow$ Capital deepening alone \textbf{cannot} explain growth miracles.
+	
+	$\Rightarrow$ More realistic: episodes of fast catch-up growth reflect transitional changes in $A_y$ or $A_x$.
+\end{frame}
+
+\begin{frame}{U.S.\ Growth Decomposition in Consumption Units}
+
+	\begin{itemize}
+		\item U.S.\ \textbf{nominal} $K/Y$: remarkably stable over the post-war period
+		\item Modest capital deepening in \textbf{real} $K/Y$ (especially since 1970s)
+		\item Human capital contribution largely unchanged
+		\item Clear majority from TFP residual $A$
+	\end{itemize}
+	\bigskip
+	\textbf{Decomposing U.S.\ TFP growth}:
+	\begin{itemize}
+		\item Per-capita consumption growth: $2.07\%$/year $= \gamma_y + \gamma_x \frac{\alpha}{1-\alpha}$
+		\item $\gamma_x = 0.013$
+		\item With $\alpha \approx 1/3$: $\gamma_y = 0.014$
+		\item $\Rightarrow$ $\approx$ \textbf{31\% of per-capita consumption growth} from ISTC
+	\end{itemize}
+	\end{frame}
+	
+% ============================================================
+\section{Endogenous Growth}
+% ============================================================
+
+\subsection{AK Model}
+
+\begin{frame}{The AK Model: Setup}
+	Simplest endogenous growth theory. Set $\alpha = 1$, $A_x = 1$, $\gamma_y = \gamma_x = 0$:
+	\[
+	Y(t) = AK(t)
+	\]
+	
+	\textbf{Planner's problem}:
+	\[
+	\max \int_0^\infty e^{-(\rho-n)t} \frac{c(t)^{1-\sigma}-1}{1-\sigma}dt 
+	\]
+	subject to $\dot{K} \leq AK - e^{nt} c - \delta K$ and $K(t) \geq 0$.
+	
+	\bigskip
+	Requires $\sigma(A - \delta - n) > A - \delta - \rho$ for bounded utility.
+\end{frame}
+	
+	
+	\begin{frame}{The AK Model: Solution and Properties}
+		\textbf{Euler equation}:
+		\[
+		\frac{\dot{c}}{c} = \frac{A - \delta - \rho}{\sigma} 
+		\]
+		
+		\begin{itemize}
+			\item Growth rate is \textbf{constant} irrespective of initial $K$ --- \textbf{no transition dynamics}
+			\item Consumption rule: 
+			$$
+			c(t) = (A - \delta - n - (A-\delta-\rho)/\sigma)e^{-nt}K(t)
+			$$
+			\item Capital grows at rate $n + (A-\delta-\rho)/\sigma$
+			\item Transversality condition selects the unique value of $c(0)$
+			\item Can be decentralized with competitive markets
+		\end{itemize}
+		
+		\bigskip
+		\textbf{Endogenous growth}: rate depends on preferences ($\rho, \sigma$), technology ($A$), \textbf{and policy} (e.g., capital income tax $\tau$ monotonically reduces growth).
+	\end{frame}
+	
+	\begin{frame}{The AK Model: Critique}
+		\begin{itemize}
+			\item $\alpha = 1$: no role for labor (labor earns $\sim$2/3 of all income!)
+			\item Would need massive IRS (Romer, 1986) to reconcile with empirical $\alpha \approx 1/3$
+			\item \textbf{AK as reduced form}: $Y = F(K, H)$ with CRS in $K$ and $H$ combined
+			\begin{itemize}
+				\item But does $H$ grow at a steady rate? Requires increasing investment per person (rising schooling)
+				\item Mincerian returns to education/experience: no secular trend
+				\item Bils and Klenow (2000): schooling has a \textbf{level effect}, not a \textbf{growth effect}
+				\item Klenow and Rodriguez-Clare (2005): schooling levels correlate with income \emph{levels}, not growth \emph{rates}
+			\end{itemize}
+			\item Entirely factor-accumulation based $\Rightarrow$ zero TFP growth if inputs properly measured
+			\item Predicts elastic growth response to taxes/subsidies---not seen in data (Stokey \& Rebelo, 1995)
+			\item No role for patents, R\&D expenditures, ideas, or purposeful innovation
+		\end{itemize}
+	\end{frame}
+	
+	
+	\subsection{Expanding Varieties (Romer, 1990)}
+	
+	\begin{frame}{Romer (1990): Aggregate Production Function}
+		\[
+		Y(t) = \frac{A}{1-\phi}\, L_y(t)^\phi \int_0^{N(t)} x(\nu, t)^{1-\phi}\, d\nu 
+		\]
+		
+		\begin{itemize}
+			\item $L_y$: labor in final good production
+			\item $x(\nu)$: quantity of machine variety $\nu$ \item $N$: number of varieties (knowledge stock)
+			\item $\phi \in (0,1)$
+			\item CRS in $(L_y, \{x(\nu)\})$, but \textbf{IRS including $N$} (love-of-variety)
+			\item Can be viewed as Cobb-Douglas over $L_y$ and a CES machine composite with $\epsilon = 1/\phi$
+			\item Machines depreciate fully after use (like materials)
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Romer (1990): Final Good Producer}
+		Final good is competitively produced. The representative firm solves:
+		\[
+		\max_{L_y, \{x(\nu)\}} \left\{ \frac{A}{1-\phi}\, L_y^\phi \int_0^N x(\nu)^{1-\phi}\, d\nu - wL_y - \int_0^N p(\nu)x(\nu)\, d\nu \right\} 
+		\]
+		
+		First-order conditions:
+		$$
+			w = \phi\, Y / L_y  
+			$$
+			$$
+			p(\nu) = A\, L_y^\phi\, x(\nu)^{-\phi}, \quad \forall\nu 
+		$$
+	\end{frame}
+	
+	\begin{frame}{Romer (1990): Machine Producers}
+		Each variety $\nu$ produced by one monopolist. Marginal cost: $\psi$ units of final output.
+		\[
+		\max_{p(\nu), x(\nu)}\; p(\nu)\, x(\nu) - \psi\, x(\nu) \quad \text{s.t. the demand $p(\nu) = A L_y^\phi x(\nu)^{-\phi}$} 
+		\]
+		
+		\textbf{Optimal price} (constant markup over marginal cost):
+		\[
+		p(\nu) = \frac{\psi}{1-\phi}, \quad \forall\nu
+		\]
+
+		\textbf{Optimal quantity}:
+		\[
+		x(\nu) = \left(\frac{A(1-\phi)}{\psi}\right)^{1/\phi} L_y, \quad \forall\nu 
+		\]
+		
+		\textbf{Profit}: 
+		$$
+		\pi(\nu) = \phi A\!\left(\frac{A(1-\phi)}{\psi}\right)^{1/\phi - 1} L_y
+		$$
+		Increasing in market size $L_y$.
+	\end{frame}
+	\begin{frame}{Romer (1990): Innovation and Entry}
+		\textbf{Ideas production function} (hiring $1/(\eta N)$ labor invents one variety):
+		\[
+		\dot{N}(t) = \eta\, N(t)\, L_r(t), \quad N(0) > 0 
+		\]
+		$N$ term: \textbf{proportional knowledge spillover}---more varieties make R\&D more productive.
+		
+		\bigskip
+		Inventor receives a \textbf{perpetual patent}. Patent value:
+		\[
+		V(t) = \int_t^\infty e^{-\int_t^s r(\tau)\, d\tau}\, \pi(s)\, ds
+		\]
+		
+		HJB: $V(t)\, r(t) = \pi(t) + \dot{V}(t)$.
+		
+		\textbf{Free entry in R\&D}
+		\[
+		V(t) = \frac{w(t)}{\eta\, N(t)} 
+		\]
+	\end{frame}
+	
+	
+	\begin{frame}{Romer (1990): Household}
+		No population growth. Representative household:
+		\[
+		\max \int_0^\infty e^{-\rho t} \frac{c(t)^{1-\sigma} - 1}{1-\sigma}\, dt 
+		\]
+		subject to $\dot{a} = ra + wL - c$ and no-Ponzi game condition.
+		
+		Wealth: $a(t) = \int_0^{N(t)} V(\nu, t)\, d\nu$ (owns all firms).
+		
+		\textbf{Euler equation}:
+		\[
+		\frac{\dot{c}}{c} = \frac{r - \rho}{\sigma}
+		\]
+		
+		\textbf{Boundedness of utility}: 
+		$$
+		\rho > (1-\sigma)\frac{(1-\phi)\eta L - \rho}{1-\phi+\sigma}
+		$$
+		\textbf{Positive growth}:
+		$$
+		\rho < (1-\phi)\eta L
+		$$
+	\end{frame}
+	
+	\begin{frame}{Romer (1990): Aggregation}
+		Using symmetry ($x, p$ same for all $\nu$):
+		
+		\textbf{Output}: 
+		$$
+		Y(t) = \frac{A}{1-\phi}\left(\frac{A(1-\phi)}{\psi}\right)^{\frac{1-\phi}{\phi}} L_y(t) N(t)
+		$$
+		\textbf{Wage}: 
+		$$
+		w(t) = \frac{\phi A}{1-\phi}\!\left(\frac{A(1-\phi)}{\psi}\right)^{\frac{1-\phi}{\phi}} N(t)
+		$$
+		\textbf{Value of a product}:
+		\[
+		V(t) = \frac{\phi A}{\eta(1-\phi)}\!\left(\frac{A(1-\phi)}{\psi}\right)^{\frac{1-\phi}{\phi}} 
+		\]
+		\textbf{Interest rate} from HJB:
+		\[
+		r(t) = \frac{\pi(t)}{V(t)} = \eta(1-\phi)\, L_y(t)
+		\]
+	\end{frame}
+	
+	\begin{frame}{Romer (1990): Balanced Growth Path}
+		System reduces to a single ODE in $L_y$:
+		\[
+		\frac{\dot{L}_y}{L_y} = \frac{\eta(1-\phi+\sigma)L_y - \rho}{\sigma} - \eta L 
+		\]
+		\textbf{No transition dynamics} (from the boundary conditions)\\ Unique constant solution:
+		\[
+		L_y^* = \frac{\sigma L + \rho/\eta}{1-\phi+\sigma}, \qquad L_r^* = \frac{(1-\phi)L - \rho/\eta}{1-\phi+\sigma}
+		\]
+		\textbf{Endogenous growth rate}:
+		\[
+		g^* = \frac{\dot{N}}{N} = \frac{\dot{Y}}{Y} = \frac{\dot{c}}{c} = \frac{\dot{a}}{a} = \frac{(1-\phi)\eta L - \rho}{1-\phi+\sigma}
+		\]
+		\textbf{Interest rate}: 
+		$$r^* = (1-\phi)\frac{\eta\sigma L + \rho}{1-\phi+\sigma}
+		$$
+	\end{frame}
+	
+	\begin{frame}{Romer (1990): Scale Effect and Policy Implications}
+		\textbf{Comparative statics of $g^*$}:
+		\begin{itemize}
+			\item Increasing in $L$ $\Rightarrow$ \textbf{strong scale effect}: bigger countries grow faster, higher R\&D intensity
+			\item Increasing in $\eta$ (R\&D efficiency)
+			\item Decreasing in $\rho$ (impatience) and $\sigma$ (curvature)
+		\end{itemize}
+		
+		\textbf{Problem}: Scale effect is \textbf{counterfactual}:
+		\begin{itemize}
+			\item Cross-section: bigger countries do not grow faster
+			\item Time series: R\&D investment trends up, but growth rate does not
+		\end{itemize}
+		
+		\textbf{Policy}: Taxing profits, lowering markups via antitrust, or expiring patents all monotonically \textbf{lower} growth. Policy implications are stark.
+	\end{frame}
+	
+	
+	\begin{frame}{Romer (1990): Social Planner}
+		Planner maximizes utility subject to resource constraint and $\dot{N} = \eta N(L - L_y)$.
+		
+		\textbf{Planner's growth rate}:
+		\[
+		g^{SP} = \frac{\eta L - \rho}{\sigma} 
+		\]
+		
+		\textbf{Two sources of inefficiency}:
+		\begin{enumerate}
+			\item \textbf{Monopoly distortion}: machines underused by factor $(1-\phi)^{1/\phi} < 1$
+			
+			\item \textbf{Knowledge externality}: spillovers in $\dot{N} = \eta N L_r$ not internalized by innovators (R\&D effort determined only by discounted profits)
+	
+		\end{enumerate}
+		
+		In general: $g^{DE} < g^{SP}$ (too little R\&D).
+	\end{frame}
+	
+	\subsection{Semi-Endogenous Growth (Jones, 1995)}
+	
+	\begin{frame}{Semi-Endogenous Growth: Setup}
+		\textbf{Two modifications} to the Romer model (Jones, 1995):
+		
+		\textbf{1.\ Less-than-proportional knowledge spillovers}:
+		\[
+		\dot{N}(t) = \eta\, N(t)^\epsilon\, L_r(t), \quad N(0) > 0 
+		\]
+		\begin{itemize}
+			\item $0 < \epsilon < 1$: positive but limited spillovers
+			\item $\epsilon < 0$: ``fishing out'' effect
+			\item $\epsilon = 0$: no spillovers; $\epsilon = 1$: back to Romer
+		\end{itemize}
+		
+		\textbf{2.\ Population growth}: $L(t) = Le^{nt}$, $n > 0$
+		
+		\bigskip
+		Boundedness of utility: $\rho - n > n/(1-\epsilon)$.
+	\end{frame}
+	
+	\begin{frame}{Semi-Endogenous Growth: Balanced Growth Path}
+		Along BGP, $L_y$ and $L_r$ both grow at rate $n$ (otherwise shares can't be constant).
+		
+		BGP requires
+		\[
+		\frac{\dot{N}}{N} =  \frac{n}{1-\epsilon}
+		\]
+		\begin{itemize}
+			\item Growth determined by $n$ and $\epsilon$ \textbf{only}
+			\item Without population growth, \textbf{no sustained long-run growth}
+			\item DRS in ideas production: only way to sustain growth is growing number of researchers
+			\item Long-run growth rate is \textbf{efficient} (planner gets same rate)
+			\item No role for policy on the long-run growth rate
+			\item Consistent with stable U.S.\ growth rate + growing researcher population
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Semi-Endogenous Growth: Transition and Level Effects}
+		\textbf{Transition dynamics}:
+		\[
+		\frac{n}{\eta(1-\epsilon)} = N(t)^{\epsilon-1}(Le^{nt} - L_y(t)) 
+		\]
+		Together with free entry, pins down $N(t)$ supporting BGP. If initial $N$ deviates: transitional dynamics. Can be \textbf{slow} (if $\epsilon$ close to 1; Bloom, Jones and Van Reenen, 2020: $\epsilon \approx 0.8$ in semiconductors).
+		
+		\bigskip
+		\textbf{Level effect of policy}: Along BGP:
+		\[
+		\frac{Y(t)}{L_y(t)} = \bar{A}\, \left(\frac{L_r(t)}{L(t)}\right)^{\!\frac{1}{1-\epsilon}} L(t)^{\frac{1}{1-\epsilon}} 
+		\]
+		
+		\begin{itemize}
+			\item No scale effect on growth, but scale effect on \textbf{levels}
+			\item Policy can affect R\&D intensity $\Rightarrow$ affects long-run income level
+		\end{itemize}
+		\end{frame}
+		
+		
+		\subsection{Quality Ladders and Creative Destruction}
+		
+		\begin{frame}{Motivation: Firm Exit and Job Reallocation}
+			
+			 Firm exit rates in the U.S., 1980--2022, by size category
+						\vspace{-10pt}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.33]{FigsChapter13/fig6}
+			\end{figure}
+			\vspace{-10pt}
+			
+			Job reallocation in the U.S., 1980--2019 (5-year periods)
+						\vspace{-10pt}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.33]{FigsChapter13/fig7}
+			\end{figure}
+		\end{frame}
+		
+		
+		\begin{frame}{More Facts on Firm Dynamics}
+			Average employment by firm age category, 1988--2022
+			\vspace{-10pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.33]{FigsChapter13/fig8}
+		\end{figure}
+		\vspace{-10pt}		
+		Entrant employment share, 1980--2019
+				\vspace{-10pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.33]{FigsChapter13/fig9}
+		\end{figure}
+		\end{frame}
+		
+		
+				
+		\begin{frame}{More Facts on Firm Dynamics}
+Exiting firm employment share, 1980--2019
+		\vspace{-10pt}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.33]{FigsChapter13/fig10}
+			\end{figure}
+					\vspace{-10pt}
+			\begin{itemize}
+				\item ``Declining business dynamism'': Decker, Haltiwanger, Jarmin and Miranda (2016); Akcigit and Ates (2023)
+			\end{itemize}
+		\end{frame}
+		
+		
+		
+		\begin{frame}{Growth and Exit Rates}
+			Sector productivity growth vs.\ firm exit rate, 1988--2022
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.4]{FigsChapter13/fig11}
+		\end{figure}
+		\vspace{-10pt}
+			
+			\begin{itemize}
+				\item Consistent with creative destruction: industries with \textbf{high exit rates} tend to exhibit \textbf{faster productivity growth}
+			
+			\end{itemize}
+		\end{frame}
+		
+		
+		
+		\begin{frame}{Quality Ladders: Setup}
+			\textbf{Final good} (competitive, fixed measure 1 of varieties):
+			\[
+			Y(t) = \frac{A}{1-\phi}\, L(t)^\phi \int_0^1 q(\nu,t)\, x(\nu,t)^{1-\phi}\, d\nu 
+			\]
+			
+			Quality evolves in discrete steps:
+			\[
+			q(\nu,t) = \lambda^{m(\nu,t)}\, q(\nu,0), \qquad \lambda > 1
+			\]
+			
+		\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.8]{FigsChapter13/fig2_ladder}
+	\end{figure}
+	\vspace{-10pt}
+		
+		\end{frame}
+		
+		
+			\begin{frame}{Quality Ladders: Setup}
+	
+			
+			\textbf{Resource constraint}: 
+			$$
+			Y = C + X + Z
+			$$
+			\begin{itemize}
+				\item intermediate goods
+				$$
+				X = \int_0^1 \psi\, q(\nu,t)\, x(\nu,t)\, d\nu
+				$$ 
+				\item aggregate research effort (``lab equipment'' model)
+				$$
+				Z = \int_0^1 Z(\nu,t)\, d\nu
+				$$
+
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}{Quality Ladders: Innovation Technology}
+			Innovation rate on product line $\nu$:
+			\[
+			z(\nu,t) = \eta\, \frac{Z(\nu,t)}{q(\nu,t)}
+			\]
+			
+			\begin{itemize}
+				\item $\eta > 0$: R\&D efficiency
+				\item Cost of innovating \textbf{scales with quality}: harder to improve better products
+				\item Each innovation: quality jumps by factor $\lambda > 1$
+				\item New innovator \textbf{takes over} the product line (creative destruction)
+			\end{itemize}
+			
+			\textbf{Preferences}:
+			$$
+			U(0) = \int_0^\infty e^{-\rho t} \frac{C(t)^{1-\sigma}-1}{1-\sigma}\, dt
+			$$
+			
+			Fixed labor supply
+			$$
+			L(t) = L.
+			$$
+		\end{frame}
+		
+		\begin{frame}{Quality Ladders: Final Good Producer}
+			Final good producer maximizes:
+			\[
+			\Pi = \frac{A}{1-\phi}\, L^\phi \int_0^1 q(\nu)\, x(\nu)^{1-\phi}\, d\nu - \int_0^1 p(\nu)\, x(\nu)\, d\nu - wL
+			\]
+			
+			First-order conditions:
+			$$
+				w = \phi\, Y / L 
+			$$
+			$$
+				x(\nu,t) = \left(\frac{A\, q(\nu,t)}{p(\nu,t)}\right)^{1/\phi} L 
+				$$
+			
+			Intermediate demand: inversely related to quality-adjusted price, increasing in $L$.
+		\end{frame}
+		
+		\begin{frame}{Quality Ladders: Intermediate Good Monopolists}
+			Assume \textbf{drastic innovations}: $\lambda \geq \left(\frac{1}{1-\phi}\right)^{(1-\phi)/\phi}$\\
+			$\Rightarrow$ Monopolist not constrained by lower-quality competitors. (as opposed to limit pricing with incremental innovations.)
+			
+	\bigskip
+			\textbf{Profit-maximizing price}:
+			$$
+			p(\nu,t) = \frac{\psi}{1-\phi}\, q(\nu,t)
+			$$
+			
+			\textbf{Input demand} (independent of $\nu$ and $t$!):
+			\[
+			x(\nu,t) = \left(\frac{A(1-\phi)}{\psi}\right)^{1/\phi} L, \quad \forall\nu,t
+			\]
+			
+			\textbf{Profit} (proportional to quality):
+			\[
+			\pi(\nu,t) = \phi A\!\left(\frac{A(1-\phi)}{\psi}\right)^{\!\frac{1-\phi}{\phi}} q(\nu,t)\, L 
+			\]
+		\end{frame}
+		
+		
+		\begin{frame}{Quality Ladders: Research Firms}
+			Free entry into research. Research firm chooses effort for each variety:
+			\[
+			\max_{Z(\nu,t)}\; \frac{\eta\, Z(\nu,t)}{q(\nu,t)}\, \lambda\, V(\nu,t) - Z(\nu,t)
+			\]
+			
+			Innovator takes over entire profit stream (creative destruction) and earns profits scaled up by $\lambda$.
+			
+			\textbf{Free entry condition}:
+			$$
+			\frac{\eta}{q(\nu,t)}\, \lambda\, V(\nu,t) = 1
+			$$
+		\end{frame}
+		
+		\begin{frame}{Quality Ladders: Arrow Replacement Effect}
+			\textbf{Would incumbents invest to improve their own products?}
+			
+			\bigskip
+			Incumbent gains only the \emph{increment} to value:
+			\[
+			\frac{\eta}{q(\nu,t)}\, (\lambda - 1)\, V(\nu,t) < \frac{\eta}{q(\nu,t)}\, \lambda\, V(\nu,t) = 1
+			\]
+			
+			$\Rightarrow$ Incumbents have \textbf{less incentive} to innovate than entrants ($\lambda - 1 < \lambda$).
+			
+			This is the \textbf{Arrow Replacement Effect}.
+			
+			\bigskip
+			To explain the reality that incumbents \emph{do} improve their own products: could allow lower incumbent innovation costs. With convex costs: both incumbent and entrant innovation in equilibrium.
+		\end{frame}
+		\begin{frame}{Quality Ladders: Patent Value}
+			\[
+			V(\nu,t) = \int_t^\infty e^{-\int_t^s r(s')\, ds'}\, e^{-\int_t^s z(\nu,s')\, ds'}\, \pi(\nu,s)\, ds
+			\]
+			
+			Discounted by \textbf{both} the interest rate \textbf{and} the probability of creative destruction.
+			
+			\bigskip
+			Free entry $\Rightarrow$ $V(\nu,t)/q(\nu,t) = 1/(\lambda\eta)$ for all $\nu$, $t$.
+			
+			No transition dynamics ($r$ constant) and $\pi$ proportional to $q$ $\Rightarrow$ Constant $V/q$ means $z(\nu,t) = z^*$ for all $\nu$, $t$ (common, constant rate).
+			
+			\bigskip
+			\textbf{Household}: standard Euler equation $\dot{c}/c = (r - \rho)/\sigma$ and transversality condition. Assets $= \int_0^1 V(\nu,t)\, d\nu$.
+		\end{frame}
+		
+		
+		\begin{frame}{Quality Ladders: Balanced Growth Path}
+		 Average quality $Q(t) = \int_0^1 q(\nu,t)\, d\nu$ grows at a smooth rate despite stochastic individual $q(\nu,t)$:
+			\[
+			\frac{\dot{Q}}{Q} = (\lambda - 1)\, z^* \equiv g^*
+			\]
+			(Uses a version of the Law of Large Numbers: integral of continuum of i.i.d.\ random variables equals the expectation.)
+			
+			\bigskip
+			\textbf{Three BGP equations}:
+			\begin{align*}
+				r^* &= \sigma g^* + \rho \\
+				r^* + z^* &= \lambda\eta\phi A\!\left(\frac{A(1-\phi)}{\psi}\right)^{\!\frac{1-\phi}{\phi}} L \\
+				g^* &= (\lambda - 1)\, z^*
+			\end{align*}
+		\end{frame}
+		\begin{frame}{Quality Ladders: Growth Rate}
+			Solving the three equations:
+			\[
+			{g^* = \frac{\lambda\eta\phi A\!\left(\frac{A(1-\phi)}{\psi}\right)^{\!\frac{1-\phi}{\phi}} L - \rho}{\sigma + 1/(\lambda - 1)}} 
+			\]
+			
+			\textbf{Comparative statics}: The growth rate is
+			\begin{itemize}
+				\item increasing in $\lambda$ (step size), $\eta$ (R\&D efficiency), $L$ (\textbf{strong scale effect})
+				\item decreasing in $\rho$, $\sigma$, $\psi$
+			\end{itemize}
+			Same strong scale effect as Romer; could make semi-endogenous with DRS in innovation
+		\end{frame}
+		
+		
+		\begin{frame}{Quality Ladders: Social Planner}
+			\textbf{Planner growth rate}:
+			\[
+			g^{SP} = \frac{(\lambda-1)\eta\phi A(1-\phi)^{-1}(A/\psi)^{\frac{1-\phi}{\phi}} L - \rho}{\sigma}
+			\]
+
+			\begin{enumerate}
+				\item \textbf{Business stealing}: Private innovators reap full $\lambda$; social gain only $\lambda - 1$
+				\begin{itemize}
+					\item Force for $g^{SP} < g^{DE}$ (too much private R\&D)
+				\end{itemize}
+				\item \textbf{Markup distortion}: Planner uses intermediates more intensively (no markup)
+				\begin{itemize}
+					\item Force for $g^{SP} > g^{DE}$ (too little private R\&D)
+				\end{itemize}
+				\item \textbf{Knowledge externality}: Planner sees innovation as lasting forever; private profits truncated by creative destruction
+				\begin{itemize}
+					\item Force for $g^{SP} > g^{DE}$ (too little private R\&D)
+				\end{itemize}
+			\end{enumerate}
+			
+			\textbf{Net}: Ambiguous, but calibrations typically find $g^{SP} \gg g^{DE}$
+		\end{frame}
+		
+		% ============================================================
+		\section{Conclusion}
+		% ============================================================
+		
+		\begin{frame}{Key Takeaways}
+			\begin{enumerate}
+				\item \textbf{Empirics}: U.S.\ grew at $\sim$1.5\%/year for 200 years; income differs 64$\times$ across countries; no unconditional convergence
+				
+				\item \textbf{Growth accounting}: TFP $\approx$ 75\% of U.S.\ growth; $\approx$ 64\% of cross-country income differences
+				
+				\item \textbf{Neoclassical + ISTC}: Relative price of investment falling; $\sim$31\% of per-capita growth from ISTC; capital deepening alone cannot explain growth miracles
+				
+				\item \textbf{AK model}: Endogenous growth but knife-edge
+				
+				\item \textbf{Romer}: R\&D-driven expanding varieties; $g^{DE} < g^{SP}$; counterfactual scale effect
+				
+				\item \textbf{Semi-endogenous}: $g = n/(1-\epsilon)$; no scale effect on growth; slow transitions
+				
+				\item \textbf{Quality ladders}: Creative destruction; business stealing vs.\ knowledge externalities; more nuanced policy trade-offs than Romer
+			\end{enumerate}
+		\end{frame}
+		
+		\begin{frame}{Open Questions and Frontier}
+			\begin{itemize}
+				\item Connecting aggregate growth to \textbf{firm dynamics} (entry, exit, life-cycle growth) and \textbf{market structure} (concentration, market power)
+				\item \textbf{Markups}: source of misallocation \emph{and} incentive for innovation (Chapter 22)
+				\item Mapping endogenous growth theories to microeconomic data on firms and products
+				\item \textbf{Structural change}: reconciling unbalanced sectoral growth with balanced aggregates
+				\item International technology diffusion and adoption
+				\item Role of energy, natural resources, and climate (Chapter 25)
+			\end{itemize}
+		\end{frame}
+	
+\end{document}
+

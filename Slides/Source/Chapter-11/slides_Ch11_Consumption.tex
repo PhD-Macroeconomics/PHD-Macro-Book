@@ -1,0 +1,827 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+	\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter11]{Chapter 11: Consumption}
+\author[Giovanni L. Violante]{Chapter author: Giovanni L. Violante}
+
+\date[August 2026]{August 2026}
+
+
+
+
+\begin{document}
+	\frame
+	{
+		\titlepage
+	}
+	
+	
+	% ============================================================
+	% OUTLINE
+	% ============================================================
+	\begin{frame}{Outline}
+		\tableofcontents
+	\end{frame}
+	
+	% ============================================================
+	\section{Introduction}
+	% ============================================================
+	
+	\begin{frame}{Motivation}
+		Household consumption is a key determinant of welfare:
+		\begin{itemize}
+			\item Growth of per-capita consumption $=$ rising prosperity
+			\item Consumption fluctuations are costly $\Rightarrow$ stabilization policy
+			\item Consumption distribution measures inequality in living standards better than income
+			\item Consumption choices determine stochastic discount factors $\Rightarrow$ asset prices
+		\end{itemize}
+		
+	\end{frame}
+	
+	\begin{frame}{Roadmap}
+		\begin{enumerate}
+			\item Two extreme market structures: autarky vs.\ complete markets; empirical tests
+			\item The income fluctuation problem (bond economy): PIH, borrowing constraints, precautionary saving
+			\item Heterogeneous-agent incomplete-market equilibrium (Huggett, Bewley, Aiyagari)
+		\end{enumerate}
+		
+		\bigskip
+		The organizing question throughout: \emph{how much of an idiosyncratic income shock passes through to consumption?} Autarky says all of it, complete markets say none of it, and the truth lies in between.
+	\end{frame}
+	
+	% ============================================================
+	\section{Autarky and Full Insurance}
+	% ============================================================
+	
+	\begin{frame}{Setup}
+		Endowment economy with aggregate uncertainty. Histories $\omega^t = \{\omega_0, \ldots, \omega_t\} \in \Omega^t$ with probability $\pi(\omega^t)$. Continuum of households $i$ with stochastic income $y_{i,t}(\omega^t)$ such that
+		\[
+		\int_0^1 y_{i,t}(\omega^t) \, di = Y_t(\omega^t).
+		\]
+		
+		Expected utility with $u' > 0$, $u'' < 0$. Aggregate feasibility: $C_t(\omega^t) = Y_t(\omega^t)$ for all $t$, $\omega^t$.
+		
+		\bigskip
+		\textbf{Autarky}: no insurance markets, no storage. Budget constraint:
+		\[
+		c_{i,t}(\omega^t) = y_{i,t}(\omega^t) \quad \text{for all } t, \omega^t.
+		\]
+		
+		Full pass-through of income shocks to consumption: no smoothing whatsoever.
+	\end{frame}
+	
+	\begin{frame}{Complete Markets: Full Risk Sharing}
+		Households trade a complete set of Arrow securities subject to the time-zero budget:
+		\[
+		\sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} p_t(\omega^t)\left[c_{i,t}(\omega^t) - y_{i,t}(\omega^t)\right] = 0.
+		\]
+		
+		Equilibrium characterization (from Chapter 7): for any pair $(i,j)$,
+		\[
+		\frac{u'(c_{i,t}(\omega^t))}{u'(c_{j,t}(\omega^t))} = \frac{\lambda_i}{\lambda_j} \quad \text{for all } t, \omega^t.
+		\]
+		
+		The ratio of marginal utilities is \textbf{constant across time and states}.
+	\end{frame}
+	
+	\begin{frame}{Complete Markets: The CRRA Case}
+		With CRRA preferences and common curvature $\sigma$, summing over households and using aggregate feasibility:
+		\[
+		c_{j,t}(\omega^t) = \left[\frac{(\lambda_j)^{-1/\sigma}}{\int_0^1 (\lambda_i)^{-1/\sigma} di}\right] C_t(\omega^t).
+		\]
+		
+		\bigskip
+		Individual consumption is \textbf{proportional to aggregate consumption}:
+		\begin{itemize}
+			\item Independent of own income realization
+			\item Only uninsurable \emph{aggregate} shocks move individual consumption
+			\item The constant of proportionality reflects initial wealth through $\lambda_j$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Full Insurance with Preference Heterogeneity}
+		Two agents with CRRA curvatures $\sigma_1 < \sigma_2$. FOCs and market clearing imply:
+		\[
+		\lambda_2 c_{1,t}(\omega^t)^{-\sigma_1} = \lambda_1 \left[Y_t(\omega^t) - c_{1,t}(\omega^t)\right]^{-\sigma_2}.
+		\]
+		
+		\bigskip
+		Marginal utility ratios are still equalized, but consumption \emph{ratios} are not: it is efficient for the \textbf{least risk-averse} agents to absorb aggregate fluctuations.
+	\end{frame}
+	
+	\begin{frame}{Full Insurance: Determination of $c_{1,t}$}
+		LHS and RHS as functions of $c_{1,t}$
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.42]{FigsChapter11/fig1}
+		\end{figure}
+		\vspace{-12pt}
+		\begin{itemize}
+			\item $\sigma_1 = 0.1$, $\sigma_2 = 5$, $\lambda_1 = \lambda_2 = 1$; endowment rises from $Y^* = 1$ to $Y^{**} = 2$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Empirical Tests of Full Insurance}
+		Encompassing regression:
+		\[
+		\Delta \log c_{i,t} = \beta_1 \Delta \log C_t + \beta_2 \Delta \log y_{i,t} + \varepsilon_{i,t}.
+		\]
+		
+		\begin{itemize}
+			\item \textbf{Autarky}: $\beta_1 = 0$, $\beta_2 = 1$ (consumption tracks own income)
+			\item \textbf{Full insurance}: $\beta_1 = 1$, $\beta_2 = 0$ (aggregate only)
+		\end{itemize}
+		
+		\bigskip
+		\textbf{Evidence}: Mace (1991) rejects $\beta_1 = 1$; Cochrane (1991) rejects $\beta_2 = 0$ using PSID income-loss events; Attanasio and Davis (1996): ``spectacular failure'' across education/cohort groups.
+		
+		\bigskip
+		\textbf{Conclusion}: reality lies between the two benchmarks --- \textbf{partial insurance}.
+	\end{frame}
+	
+	\begin{frame}{Two Approaches to Partial Risk Sharing}
+		\textbf{Endogenous incomplete markets}: model the frictions (limited commitment, private information) that prevent full insurance; the market structure emerges in equilibrium.
+		\begin{itemize}
+			\item Strength: structure responds to primitives and policy
+			\item Weakness: equilibrium contracts are complex and counterfactual (e.g., extreme left-skewness of consumption, Broer 2013)
+		\end{itemize}
+		
+		\bigskip
+		\textbf{Exogenous incomplete markets}: model only the assets observed in reality --- the \textbf{bond economy}.
+		\begin{itemize}
+			\item Strength: easily taken to the data
+			\item Weakness: asset structure does not respond to primitives
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{The Bond Economy}
+		Complete-markets sequential budget, with $a_{i,t+1}(\omega_{t+1}, \omega^t)$ a full set of state-contingent claims:
+		\[
+		c_{i,t} + \sum_{\omega_{t+1} \in \Omega} q_t(\omega_{t+1}, \omega^t) a_{i,t+1}(\omega_{t+1}, \omega^t) = y_{i,t} + a_{i,t}.
+		\]
+		
+		Restrict trade to a single \textbf{non-state-contingent bond}:
+		\[
+		c_{i,t}(\omega^t) + q_t(\omega^t) a_{i,t+1}(\omega^t) = y_{i,t}(\omega^t) + a_{i,t}(\omega^{t-1}).
+		\]
+		
+		With a constant aggregate endowment, $q_t = q$ and $r = 1/q - 1$:
+		\[
+		a_{i,t+1} = (1+r)(y_{i,t} + a_{i,t} - c_{i,t}).
+		\]
+		
+		Saving and dissaving act as \textbf{self-insurance}: trading intertemporally with oneself.
+	\end{frame}
+	
+	% ============================================================
+	\section{Income Fluctuation Problems}
+	% ============================================================
+	
+	\begin{frame}{The Deterministic Problem}
+		\[
+		\max_{\{c_t\}_{t=0}^{\infty}} \sum_{t=0}^{\infty} \beta^t u(c_t) \quad \text{s.t.} \quad a_{t+1} = (1+r)(y_t + a_t - c_t).
+		\]
+		
+		\textbf{Euler equation}:
+		\[
+		\frac{u'(c_t)}{\beta u'(c_{t+1})} = 1 + r, \qquad \text{and with CRRA} \qquad \frac{c_{t+1}}{c_t} = [\beta(1+r)]^{1/\sigma}.
+		\]
+		
+		\bigskip
+		The slope of the consumption path is increasing in $\beta$ and $r$; the strength of the response is governed by the EIS $= 1/\sigma$. Households save when income is high relative to its mean and dissave when it is low.
+	\end{frame}
+	
+	\begin{frame}{Consumption Function and MPC}
+		Iterate the budget constraint forward (using the TVC) and substitute the Euler equation, with $R \equiv 1+r$:
+		\[
+		c_t = \left[1 - R^{-1}(\beta R)^{1/\sigma}\right]\left[a_t + \sum_{j=0}^{\infty}\left(\frac{1}{R}\right)^j y_{t+j}\right].
+		\]
+		
+		Consumption is \textbf{linear} in total wealth $=$ financial wealth $+$ human wealth (Friedman's permanent income hypothesis).
+		
+		\bigskip
+		\textbf{Marginal propensity to consume}:
+		\[
+		MPC = 1 - R^{-1}(\beta R)^{1/\sigma}.
+		\]
+	\end{frame}
+	
+	\begin{frame}{MPC: Special Cases and Permanent Income}
+		\begin{itemize}
+			\item If $\beta R = 1$: $MPC = 1 - \beta \approx \rho$, the discount rate
+			\item If $\sigma = 1$ (log utility): $MPC \approx r$
+		\end{itemize}
+		
+		\bigskip
+		\textbf{MPC out of a permanent income change}: raise $y_{t+j}$ by 1 for all $j \geq 0$ with $\beta R = 1$. Human wealth rises by $1/(1-R^{-1})$, so consumption rises by exactly \textbf{1}.
+		
+		\bigskip
+		Transitory and permanent MPCs differ sharply --- $1 - R^{-1}$ versus $1$. This is one of the key insights of Friedman's theory of consumption.
+	\end{frame}
+	
+	\begin{frame}{Permanent Income Hypothesis: Hall's Martingale}
+		Stochastic income, \textbf{quadratic utility} $u(c) = b_1 c - \frac{1}{2}b_2 c^2$, and $\beta R = 1$. The Euler equation becomes
+		\[
+		c_t = \E_t c_{t+1}.
+		\]
+		
+		\textbf{Consumption is a martingale} (Hall, 1978). By the law of iterated expectations, $\E_t c_{t+j} = c_t$ for all $j \geq 0$: the best forecast of all future consumption is today's consumption.
+		
+		\bigskip
+		Testable implication: no variable dated $t$ or earlier should help predict $\Delta c_{t+1}$.
+	\end{frame}
+	
+	\begin{frame}{PIH: Annuity Value and Certainty Equivalence}
+		Iterating the budget constraint and using the martingale property:
+		\[
+		c_t = \frac{r}{1+r}\left[a_t + \sum_{j=0}^{\infty}\left(\frac{1}{1+r}\right)^j \E_t y_{t+j}\right].
+		\]
+		
+		Consumption equals the \textbf{annuity value of total wealth}.
+		
+		\bigskip
+		\textbf{Certainty equivalence}: only the conditional \emph{mean} of future income matters --- no higher moment of the income process affects consumption. This is a consequence of the linear-quadratic structure, and it rules out precautionary saving by construction.
+	\end{frame}
+	
+	\begin{frame}{Consumption Responds to News}
+		The change in consumption equals the annuitized innovation in permanent income:
+		\[
+		\Delta c_t = \frac{r}{1+r} \sum_{j=0}^{\infty}\left(\frac{1}{1+r}\right)^j (\E_t - \E_{t-1}) y_{t+j}.
+		\]
+		
+		Only \textbf{news} arriving between $t-1$ and $t$ moves consumption. Anticipated income changes have no effect.
+	\end{frame}
+	
+	\begin{frame}{Transitory versus Permanent Shocks}
+		\textbf{Permanent-transitory income process} (Abowd-Card):
+		\[
+		y_t = y_t^p + u_t, \qquad y_t^p = y_{t-1}^p + v_t,
+		\]
+		with $u_t$ and $v_t$ orthogonal i.i.d.\ shocks. Then
+		\[
+		\Delta c_t = \frac{r}{1+r} u_t + v_t.
+		\]
+		
+		\bigskip
+		Households consume the \textbf{annuity value of transitory} shocks and the \textbf{full value of permanent} shocks.
+		
+		\bigskip
+		$\Rightarrow$ The bond economy is close to full insurance against transitory shocks, but offers essentially no insurance against permanent ones.
+	\end{frame}
+	
+	\begin{frame}{Application: Inequality Decomposition}
+		\textbf{Blundell and Preston (1998)}: with $r \approx 0$, within-cohort moments satisfy
+		\[
+		\Delta \text{Var}_{k,t}(c) = \Delta \text{Cov}_{k,t}(c, y) \approx \text{Var}_t(v).
+		\]
+		
+		\bigskip
+		The change in \textbf{consumption} inequality identifies the variance of \textbf{permanent} income shocks --- consumption data reveal the nature of income risk.
+		
+		\bigskip
+		Finding: the bulk of the rise in UK income inequality over the 1980s and 1990s was permanent rather than transitory.
+	\end{frame}
+	
+	\begin{frame}{Application: Saving for a Rainy Day}
+		\textbf{Campbell (1987)}: define saving as
+		\[
+		s_t = \frac{r}{1+r}a_t + y_t - c_t.
+		\]
+		
+		Substituting the consumption function:
+		\[
+		s_t = -\sum_{j=1}^{\infty}\left(\frac{1}{1+r}\right)^j \E_t \Delta y_{t+j}.
+		\]
+		
+		\bigskip
+		Savings equal the discounted sum of expected income \textbf{declines}: households save in anticipation of rainy days and dissave when they expect sunny days.
+	\end{frame}
+	
+	\begin{frame}{Borrowing Constraints: When Do They Matter?}
+		Impose $a_{t+1} \geq 0$. Whether it binds depends on the income process:
+		\begin{itemize}
+			\item $y_t$ a \textbf{random walk}: $c_t = \frac{r}{1+r}a_t + y_t$, so $a_{t+1} = a_t$ is constant --- the constraint never binds if $a_0 > 0$
+			\item $y_t$ \textbf{i.i.d.}: wealth follows a driftless random walk, so the constraint binds in finite time with positive probability
+		\end{itemize}
+		
+		\bigskip
+		The same preferences can therefore deliver very different behavior depending on the persistence of income.
+	\end{frame}
+	
+	\begin{frame}{The Modified Euler Equation}
+		With multiplier $\lambda_t \geq 0$ on the constraint:
+		\[
+		u'(c_t) \geq \beta R \E_t[u'(c_{t+1})],
+		\]
+		holding with strict inequality when the constraint binds. In that case the household consumes all cash in hand, $c_t = a_t + y_t$.
+		
+		\bigskip
+		\textbf{Two key differences} versus the unconstrained problem:
+		\begin{enumerate}
+			\item The \textbf{timing} of income matters, not just its present value
+			\item Constrained households have $MPC = 1$ out of \emph{both} transitory and permanent shocks
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{The Natural Borrowing Limit}
+		The lowest asset position consistent with non-negative consumption in every state. With lowest income realization $y_{min}$ occurring with positive probability:
+		\[
+		a_{t+1} \geq -\left(\frac{1+r}{r}\right) y_{min}.
+		\]
+		
+		Borrowing to this limit and then drawing $y_t = y_{min}$ forever forces $c_t = 0$.
+		
+		\bigskip
+		$\Rightarrow$ If $u$ satisfies the Inada condition $u(0) = -\infty$, the natural limit \textbf{never binds}: the Euler equation always holds with equality.
+		
+		\bigskip
+		Ad hoc limits tighter than the natural one \emph{do} bind. If $y_{min} = 0$, the no-borrowing constraint coincides with the natural limit.
+	\end{frame}
+	
+	\begin{frame}{Precautionary Saving I: Borrowing Constraints}
+		Quadratic utility (no prudence, $u''' = 0$), $\beta R = 1$, limit $a_{t+1} \geq -\underline{a}$:
+		\[
+		c_t = \min\left\{y_t + a_t + \frac{\underline{a}}{R},\; \E_t c_{t+1}\right\}.
+		\]
+		
+		\bigskip
+		A mean-preserving spread in $y_{t+1}$ makes low realizations --- and hence a binding constraint --- more likely. The expectation of the min falls, so $c_t$ falls and saving rises.
+		
+		\bigskip
+		Precautionary saving arises here \emph{without} any prudence in preferences: the constraint alone generates it.
+	\end{frame}
+	
+	\begin{frame}{The Consumption Function with a Constraint}
+		Decision rule for consumption with a borrowing constraint
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.675]{FigsChapter11/fig2}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item Slope 1 below $a^*$, concave above, asymptoting to $r/(1+r)$
+			\item The two curves are different borrowing limits: tightening shifts consumption down and steepens it
+			\item $MPC \in (r/(1+r), 1)$ --- \textbf{above the PIH value}, larger near the constraint
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Precautionary Saving II: Prudence}
+		Two-period problem (Leland, 1968; Sandmo, 1970): $u'(y_0 - a_1) = \beta R \E_0[u'(Ra_1 + y_1)]$
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.80]{FigsChapter11/fig3}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item A mean-preserving spread in $y_1$ shifts the RHS up when $u'$ is convex, raising $a_1$
+			\item \textbf{Prudence}: $u''' > 0$ ($u'$ convex) --- by Jensen, risk raises $\E_0 u'$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Measuring Prudence}
+		\textbf{Kimball (1990)} coefficients:
+		\[
+		\text{absolute prudence} = -\frac{u'''(c)}{u''(c)}, \qquad \text{relative prudence} = -\frac{u'''(c)c}{u''(c)}.
+		\]
+		
+		\bigskip
+		\textbf{DARA implies prudence}: if absolute risk aversion $\alpha(c)$ is decreasing, $\alpha'(c) < 0$, then
+		\[
+		u'''(c) > \frac{[u''(c)]^2}{u'(c)} > 0.
+		\]
+		
+		CRRA utility is DARA, and hence prudent. Quadratic utility is not: $u''' = 0$.
+	\end{frame}
+	
+	\begin{frame}{The Role of Prudence: Analytical Expression}
+		Blanchard and Mankiw (1988): a second-order approximation of the Euler equation yields
+		\[
+		\E_t\left[\frac{c_{t+1}-c_t}{c_t}\right] \approx EIS(c_t)(r - \rho) + \frac{1}{2} P(c_t) \E_t\left[\left(\frac{c_{t+1}-c_t}{c_t}\right)^2\right],
+		\]
+		where
+		\[
+		EIS(c_t) = -\frac{u'(c_t)}{c_t u''(c_t)}, \qquad P(c_t) = -\frac{u'''(c_t) c_t}{u''(c_t)}.
+		\]
+		
+		Expected consumption growth has two parts: intertemporal smoothing through $r - \rho$, and a \textbf{precautionary term} proportional to relative prudence times consumption growth variability.
+	\end{frame}
+	
+	\begin{frame}{Concavity of the Consumption Function}
+		\textbf{Carroll and Kimball (1996)}: under HARA utility with $u''' > 0$, the consumption function $c(a)$ is concave --- strictly concave in the CRRA case.
+		
+		\bigskip
+		Two knife-edge exceptions within HARA:
+		\begin{itemize}
+			\item \textbf{CARA} ($\kappa = 1$): consumption function is linear
+			\item \textbf{Quadratic} ($\kappa = 0$): consumption function is linear
+		\end{itemize}
+		
+		\bigskip
+		Concavity is what delivers a declining MPC in wealth --- the property that makes the distribution of wealth matter for aggregate consumption dynamics.
+	\end{frame}
+	
+	\begin{frame}{Buffer-Stock Saving}
+		Carroll (1992, 2001): CRRA utility, log income $=$ permanent $+$ transitory shocks, positive probability of zero income (so the natural limit is 0), and \textbf{impatience}, $\rho > r$.
+		
+		\bigskip
+		Single state variable: $x_t =$ cash in hand relative to permanent income. Consumption growth satisfies
+		\[
+		\E_t \Delta\log c_{t+1} \approx \frac{1}{\sigma}(r - \rho) + \frac{\sigma+1}{2}\text{Var}_t(\Delta\log c_{t+1}).
+		\]
+		
+		Impatience pushes consumption growth down; risk pushes it up.
+	\end{frame}
+	
+	\begin{frame}{The Buffer-Stock Target}
+		Consumption dynamics as a function of cash in hand $x$
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.79]{FigsChapter11/fig4}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item Above $x^*$ impatience dominates and households dissave; below $x^*$ they save
+			\item Wealth is \textbf{stationary} at a target buffer above the certainty-equivalent level
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Excess Sensitivity and Liquidity Constraints}
+		PIH prediction: $\Delta c_t$ responds only to date-$t$ news, so past income changes should not matter. This is empirically rejected --- \textbf{excess sensitivity} (Flavin, 1981; Campbell and Mankiw, 1989).
+		
+		\bigskip
+		Zeldes (1989): with a borrowing limit the log-linearized Euler equation becomes
+		\[
+		\small
+		\Delta\log c_{t+1} = \frac{1}{\sigma}(r - \delta) + \frac{\sigma+1}{2}\text{Var}_t(\Delta\log c_{t+1}) + \frac{1}{\sigma}\log(1+\lambda_t) + \varepsilon_{t+1}.
+		\]
+		
+		The unobserved multiplier $\lambda_t$ is an omitted variable: high lagged income relaxes the constraint, generating a negative coefficient on lagged income for constrained households. Splitting the PSID by wealth confirms that constraints bind for the \textbf{low-wealth} subgroup only.
+	\end{frame}
+	
+	\begin{frame}{Comparative Statics of the Consumption Function}
+		Comparative statics of the optimal consumption function
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.355]{FigsChapter11/fig5}
+		\end{figure}
+		\vspace{-12pt}
+		
+		{\small CRRA $\sigma = 2$, $\beta = 0.95$, $R = 1.02$, zero borrowing limit, two-state Markov income $\{0.5, 1.5\}$ with persistence 0.8.}
+	\end{frame}
+	
+	\begin{frame}{Comparative Statics: Panels (A)--(C)}
+		\begin{itemize}
+			\item[(A)] \textbf{Income}: low-$y$ households consume less --- fewer resources and a stronger precautionary motive; slopes converge at high wealth
+			\item[(B)] \textbf{Discounting}: impatient households consume more, with a higher MPC
+			\item[(C)] \textbf{IES}: with $\beta R < 1$, high-IES households consume more
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Comparative Statics (continued)}
+		\begin{itemize}
+			\item[(D)] \textbf{Return}: a higher $R$ induces more accumulation and less consumption at any given wealth level
+			\item[(E)] \textbf{Income risk}: a mean-preserving spread lowers consumption at every wealth level --- more precautionary saving
+			\item[(F)] \textbf{Credit limit}: a looser constraint reduces precautionary saving, since borrowing capacity substitutes for buffer wealth
+		\end{itemize}
+		
+		\bigskip
+		Panels (E) and (F) make the same point from two directions: what matters is the household's total capacity to absorb a bad shock, whether through accumulated assets or through access to credit.
+	\end{frame}
+	
+	\begin{frame}{Bounds on Wealth Accumulation}
+		For equilibrium existence we need a bounded asset space.
+		
+		\bigskip
+		\textbf{Sufficient condition}: $\beta R < 1$, with i.i.d.\ shocks and DARA utility (Schechtman and Escudero, 1977).
+		
+		\bigskip
+		\textbf{Sketch}: let $x$ denote cash in hand and $\bar{x}' = Ra'(x) + \bar{y}$ the best-case cash next period. The Euler equation gives
+		\[
+		u_c(c(x)) = \beta R \frac{\E[u_c(c(x'))]}{u_c(c(\bar{x}'))} u_c(c(\bar{x}')).
+		\]
+	\end{frame}
+	
+	\begin{frame}{Bounds on Wealth: Completing the Argument}
+		A Taylor expansion of the ratio gives
+		\[
+		\frac{\E[u_c(c(x'))]}{u_c(c(\bar{x}'))} \approx 1 + \alpha(c(\bar{x}'))[\bar{y} - \E(y')] c_x(\bar{x}').
+		\]
+		
+		If $\lim_{x \to \infty} \alpha(c(x)) = 0$, which DARA delivers, the ratio tends to 1. Hence for large $x$,
+		\[
+		u_c(c(x)) < u_c(c(\bar{x}')) \quad \Rightarrow \quad \bar{x}' < x.
+		\]
+		
+		\bigskip
+		Cash in hand cannot grow forever: as wealth rises the precautionary motive vanishes and impatience ($\beta R < 1$) takes over.
+	\end{frame}
+	
+	% ============================================================
+	\section{Heterogeneous-Agent Incomplete-Market Models}
+	% ============================================================
+	
+	\begin{frame}{The Huggett Endowment Economy}
+		Continuum of ex-ante identical households with idiosyncratic endowment $y_t \in Y$ (finite), following a first-order ergodic Markov chain $\pi(y'|y)$ with invariant distribution $\Pi^*(y)$. No aggregate uncertainty.
+		
+		\bigskip
+		\textbf{Recursive household problem}:
+		\[
+		V(a, y) = \max_{c, a'} \left\{u(c) + \beta \sum_{y' \in Y} \pi(y'|y) V(a', y')\right\}
+		\]
+		subject to
+		\[
+		c + a' = Ra + y, \qquad a' \geq -\underline{a}.
+		\]
+		
+		The asset is in \textbf{zero net supply}: pure borrowing and lending among households.
+	\end{frame}
+	
+	\begin{frame}{State Space and Transition Function}
+		State space $S = A \times Y$ with $A = [-\underline{a}, \bar{a}]$, and a distribution $\lambda$ over $(a, y)$.
+		
+		\bigskip
+		The transition function for any measurable set $\mathcal{A} \times \mathcal{Y}$:
+		\[
+		Q((a,y), \mathcal{A} \times \mathcal{Y}) = \mathbb{I}_{\{a'(a,y) \in \mathcal{A}\}} \sum_{y' \in \mathcal{Y}} \pi(y'|y).
+		\]
+		
+		\bigskip
+		The indicator reflects the deterministic asset choice given the state; the sum reflects the stochastic income transition. Together they induce a Markov process on the joint distribution of assets and income.
+	\end{frame}
+	
+	\begin{frame}{Stationary Equilibrium (Huggett)}
+		A recursive stationary competitive equilibrium is a value function $V: S \to \mathbb{R}$, policy functions $a'$ and $c$, an interest rate $r^*$, and a stationary measure $\lambda^*$ such that:
+		
+		\medskip
+		\begin{enumerate}
+			\item Given $r$, the policies $a'$ and $c$ solve the household problem with value function $V$
+			\item The asset market clears at $r^*$:
+			\[
+			\int_{A \times Y} a'(a, y) \, d\lambda^* = 0.
+			\]
+			\item The goods market clears: $\int_{A \times Y} c(a,y) \, d\lambda^* = \sum_{i=1}^{N} y_i \Pi^*(y_i)$
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Stationary Equilibrium: The Invariant Measure}
+		\begin{enumerate}
+			\setcounter{enumi}{3}
+			\item For all $(\mathcal{A} \times \mathcal{Y}) \in \Sigma_s$, the measure reproduces itself:
+			\[
+			\lambda^*(\mathcal{A} \times \mathcal{Y}) = \int_{A \times Y} Q((a,y), \mathcal{A} \times \mathcal{Y}) \, d\lambda^*.
+			\]
+		\end{enumerate}
+		
+		\bigskip
+		The key conceptual point: the \emph{distribution} is constant over time, but \emph{individual households move within it}. There is continuous churning --- households save up, are hit by bad shocks, run down assets --- with no change in the cross-sectional distribution.
+	\end{frame}
+	
+	\begin{frame}{Existence of Equilibrium}
+		Define excess asset demand $A(r) = \int_{A \times Y} a'(a, y; r) \, d\lambda_r^*$.
+		
+		\begin{itemize}
+			\item \textbf{Continuity}: theorem of the maximum makes $a'$ continuous in $r$; Stokey-Lucas-Prescott conditions give existence and uniqueness of $\lambda_r^*$ (compact state space plus a monotone mixing condition)
+			\item As $r \to 1/\beta - 1$: $A(r) \to +\infty$, since accumulation is unbounded when $\beta R = 1$
+			\item At $r = -1$: $A(-1) = -\underline{a}$, everyone borrows to the limit
+		\end{itemize}
+		
+		\bigskip
+		By continuity, $A(r)$ crosses zero at some $r^* \in (-1, 1/\beta - 1)$.
+	\end{frame}
+	
+	\begin{frame}{Equilibrium of the Endowment Economy}
+		Equilibrium of the endowment economy with zero net supply
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.76]{FigsChapter11/fig6}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item $A(r)$ crosses zero at $r^* < r^{CM} = 1/\beta - 1$, so $\beta R^* < 1$ as assumed
+			\item \textbf{Uniqueness} needs $A(r)$ monotone; $\sigma < 1$ suffices (Achdou et al., 2022)
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{The Risk-Free Rate Puzzle}
+		In the complete-markets representative-agent model, a high equity premium requires high risk aversion, hence a low EIS, hence a strong desire to borrow against growing income --- and therefore a counterfactually \textbf{high risk-free rate} (Mehra and Prescott; Weil).
+		
+		\bigskip
+		\textbf{Huggett (1993)}: with uninsurable idiosyncratic risk, the precautionary saving motive pushes the equilibrium risk-free rate \textbf{down}, toward the value observed in the data.
+		
+		\bigskip
+		Incomplete markets thus help resolve the risk-free rate puzzle --- an equilibrium payoff from taking household heterogeneity seriously.
+	\end{frame}
+	
+	\begin{frame}{Assets in Positive Supply (Bewley)}
+		The government issues real bonds $B$, financed by lump-sum taxes:
+		\[
+		rB = T.
+		\]
+		The household budget constraint becomes
+		\[
+		c + a' = Ra + y - T,
+		\]
+		and asset market clearing is
+		\[
+		\int_{A \times Y} a'(a, y; r) \, d\lambda_r^* = B.
+		\]
+		
+		\medskip
+		Same analysis as before, with one extra endogenous variable ($T$) and one extra equation. With production, however, public debt also crowds out capital (Aiyagari and McGrattan, 1998).
+	\end{frame}
+	
+	\begin{frame}{Bewley: Equilibrium with Positive Supply}
+		Equilibrium of the endowment economy where assets are in fixed positive supply
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.67]{FigsChapter11/fig7}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item The same $A(r)$ curve, now crossing $B > 0$: the resulting $r^*$ is closer to $r^{CM}$
+			\item As $B$ rises, more liquidity improves self-insurance and the economy moves toward full insurance
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{The Aiyagari Production Economy}
+		Reinterpret $y$ as efficiency units of labor, supplied inelastically; assets are claims to capital. A representative firm operates CRS technology $F(K, L)$ with depreciation $\delta$. The household budget is $c + a' = Ra + wy$.
+		
+		\bigskip
+		\textbf{Stationary equilibrium}: $V$, policies $(a', c)$, firm choices $(K, L)$, prices $(r^*, w^*)$, and a measure $\lambda^*$ such that:
+		\begin{enumerate}
+			\item Given $(r, w)$, the policies $a'$ and $c$ solve the household problem
+			\item Firm optimality: $r + \delta = F_K(K, L)$ and $w = F_L(K, L)$
+			\item Labor market clears: $L = \sum_{i=1}^{N} y_i \Pi^*(y_i)$
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Aiyagari: Remaining Equilibrium Conditions}
+		\begin{enumerate}
+			\setcounter{enumi}{3}
+			\item Asset market clears: $\int_{A \times Y} a'(a,y) \, d\lambda^* = K$
+			\item Goods market clears: $\int_{A \times Y} c(a,y) \, d\lambda^* + \delta K = F(K, L)$
+			\item $\lambda^*$ is the invariant measure induced by $Q$
+		\end{enumerate}
+		
+		\bigskip
+		Firm capital demand follows from $F_K(K, L) = r + \delta$: it is continuous and strictly decreasing in $r$, with $K \to \infty$ as $r \to -\delta$ and $K \to 0$ as $r \to \infty$.
+		
+		\bigskip
+		Equilibrium is the intersection of an upward-sloping household asset supply and a downward-sloping firm capital demand.
+	\end{frame}
+	
+	\begin{frame}{Equilibrium of the Production Economy}
+		Equilibrium of the production economy
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.78]{FigsChapter11/fig8}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item $A(r)$ crosses $K(r)$ at $(K^*, r^*)$; complete markets give an infinitely elastic supply at $r^{CM} = 1/\beta - 1$, with capital $K^{CM}$
+			\item $K^* - K^{CM}$ is \textbf{precautionary wealth} --- extra capital from uninsurable risk
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Aiyagari: Quantitative Findings}
+		\begin{enumerate}
+			\item \textbf{Self-insurance is effective}: it cuts consumption variability by roughly half relative to autarky
+			\item \textbf{Precautionary saving} adds about 3 percentage points to the aggregate saving rate --- and over 10 with higher risk aversion or income volatility
+			\item \textbf{Wealth distribution}: more positively skewed (mean $>$ median) and more dispersed than income, as in the data --- but with too much accumulation at the bottom and too little concentration at the very top (Chapter 21)
+		\end{enumerate}
+		
+		\bigskip
+		The third finding is the main quantitative failure of the one-asset model, and motivates the extensions discussed in Chapter 21.
+	\end{frame}
+	
+	\begin{frame}{The MPC: Models versus Data}
+		Under the PIH, the quarterly MPC is approximately $r \approx 1\%$, and the MPC out of \emph{anticipated} changes is zero. \textbf{Data}: households spend 15--30\% of fiscal stimulus payments on nondurables within a quarter (Parker et al., 2013) --- up to twenty times the PIH value.
+		\vspace{-5pt}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=0.37]{FigsChapter11/fig9}
+		\end{figure}
+		\vspace{-10pt}
+		\begin{itemize}
+			\item The MPC declines steeply with wealth; the dark bar near zero is the share of \textbf{hand-to-mouth} households
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Reconciling Models and Data}
+		In the calibrated one-asset model the average quarterly MPC reaches only about 5\%: matching aggregate wealth requires a high $\beta$, and optimizing households then stay well away from the constraint.
+		
+		\bigskip
+		\textbf{Two fixes}:
+		\begin{itemize}
+			\item \textbf{Discount-factor heterogeneity}: impatient types hold low wealth and have high MPCs
+			\item \textbf{Two-asset models} with liquid and illiquid assets, generating \emph{wealthy hand-to-mouth} households --- high wealth overall, but little of it liquid (Kaplan and Violante, 2014)
+		\end{itemize}
+	\end{frame}
+	
+	% ============================================================
+	\section{Summary}
+	% ============================================================
+	
+	\begin{frame}{Key Takeaways (I)}
+		\begin{enumerate}
+			\item \textbf{Two benchmarks}: autarky ($c_{i,t} = y_{i,t}$, full pass-through) versus complete markets ($u'(c_i)/u'(c_j) = \lambda_i/\lambda_j$ constant, consumption proportional to aggregate). Tests reject both: \textbf{partial insurance}.
+			
+			\item \textbf{Bond economy}: $a_{t+1} = (1+r)(y_t + a_t - c_t)$; self-insurance through saving and dissaving.
+			
+			\item \textbf{Deterministic case}: Euler equation $u'(c_t)/\beta u'(c_{t+1}) = 1+r$; consumption linear in total wealth; $MPC = 1 - R^{-1}(\beta R)^{1/\sigma} \approx \rho$; MPC out of permanent income $= 1$.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Key Takeaways (II)}
+		\begin{enumerate}
+			\setcounter{enumi}{3}
+			\item \textbf{PIH} (quadratic utility, $\beta R = 1$): $c_t = \E_t c_{t+1}$, a martingale (Hall, 1978); certainty equivalence; $\Delta c_t = \frac{r}{1+r}u_t + v_t$ --- annuity value of transitory shocks, full value of permanent ones.
+			
+			\item \textbf{Blundell-Preston}: $\Delta\text{Var}(c) \approx \text{Var}(v)$ identifies permanent income inequality; \textbf{Campbell}: saving for a rainy day.
+			
+			\item \textbf{Borrowing constraints}: Euler inequality $u'(c_t) \geq \beta R\E_t u'(c_{t+1})$; the timing of income matters; constrained $MPC = 1$. The natural limit $-\frac{1+r}{r}y_{min}$ never binds under Inada.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Key Takeaways (III)}
+		\begin{enumerate}
+			\setcounter{enumi}{6}
+			\item \textbf{Precautionary saving}: two sources --- occasionally binding constraints (Figure 11.2) and prudence $u''' > 0$ (Kimball index $-u'''c/u''$; DARA implies prudence). The consumption function is concave under HARA.
+			
+			\item \textbf{Buffer stock} (Carroll): impatience ($\rho > r$) plus risk gives a target wealth $x^*$, with $\E_t \Delta\log c \approx \frac{1}{\sigma}(r-\rho) + \frac{\sigma+1}{2}\text{Var}_t(\Delta\log c)$.
+			
+			\item \textbf{Bounded wealth}: $\beta R < 1$ with DARA suffices, and holds in equilibrium since $r^* < 1/\beta - 1$.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Key Takeaways (IV)}
+		\begin{enumerate}
+			\setcounter{enumi}{9}
+			\item \textbf{Huggett, Bewley, Aiyagari}: stationary equilibria in which $A(r)$ crosses zero, $B$, or $K(r)$ respectively. Precautionary wealth is $K^* - K^{CM}$.
+			
+			\item \textbf{Payoffs of incomplete markets}: a lower equilibrium risk-free rate (resolving the risk-free rate puzzle), effective self-insurance, and a higher aggregate saving rate.
+			
+			\item \textbf{Remaining gap}: model MPCs are still far too low relative to the data, and top wealth concentration too small --- motivating discount-factor heterogeneity and two-asset models with wealthy hand-to-mouth households.
+		\end{enumerate}
+	\end{frame}
+	
+\end{document}

@@ -1,0 +1,594 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\title[Chapter7]{Chapter 7 Uncertainty}
+
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+%============================================================
+\section{Stochastic Processes}
+%============================================================
+
+\begin{frame}{Properties of Stochastic Processes}
+	A stochastic process $\{X_t : t \in T\}$ is a collection of random variables indexed by time.
+	
+	\begin{itemize}
+		\item \textbf{Conditional expectation}: $\E_t[X_{t+1}]$ conditions on all information available at $t$
+		\item \textbf{Law of iterated expectations}: for $t < s < \tau$, 
+		$$
+		\E_t[\E_s[X_\tau]] = \E_t[X_\tau]
+		$$
+		\item \textbf{Covariance stationarity}: unconditional means and autocovariances do not depend on $t$
+		\item \textbf{Ergodicity}: time averages converge to population moments, $(1/T)\sum_{t=1}^{T} X_t \to \E[X_t]$
+		\item \textbf{Markov}: $\Pr[X_{t+k} = x | X_\tau, \forall \tau \leq t] = \Pr[X_{t+k} = x | X_t]$
+		\item \textbf{Stationary distribution}: $\bar{\pi}(X)$ such that if $X_t \sim \bar{\pi}$, then $X_{t+1} \sim \bar{\pi}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Markov Chains}
+	$x_t$ takes values in $\mathcal{X} = \{\bar{x}^1, \ldots, \bar{x}^N\}$. Transition matrix $P$: $P_{ij} = \Pr[x_{t+1} = \bar{x}^j | x_t = \bar{x}^i]$.
+	
+	\bigskip
+	Each row sums to one. Given initial distribution $\pi_0$ (a $1 \times N$ vector):
+	\[
+	\pi_{t+k} = \pi_t \times P^k
+	\]
+	
+	\textbf{Stationary distribution}: $\bar{\pi} = \bar{\pi} \times P$, i.e., $\bar{\pi}'$ is the eigenvector of $P'$ with unit eigenvalue.
+	
+	\bigskip
+	\textbf{Employment/unemployment example}: $P = \begin{pmatrix} 1-s & s \\ f & 1-f \end{pmatrix}$
+	
+	Steady-state unemployment: $\bar{u} = s/(s+f)$. Convergence from any $u_0$.
+\end{frame}
+
+\begin{frame}{Convergence of Markov Chains}
+	Not all Markov chains converge to a unique stationary distribution.
+
+	\begin{itemize}
+		\item $P = I$ (identity): any distribution is stationary (not unique)
+		\item $P = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$: unique stationary distribution $[1/2, 1/2]$ but distribution oscillates, never converges
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Sufficient conditions for convergence and uniqueness}: State $j$ is \textbf{reachable} from $i$ if $\Pr(x_n = \bar{x}^j | x_0 = \bar{x}^i) > 0$ for some $n$. \textbf{Irreducible}: all states reachable from all others. \textbf{Aperiodic}: for each $i$, $\exists n$ such that $\Pr(x_{n'} = \bar{x}^i | x_n = \bar{x}^i) > 0$ for all $n' \geq n$.
+	
+\medskip
+	An irreducible chain has a unique $\bar{\pi}$. If also aperiodic, $\lim_{t \to \infty} \pi_0 P^t = \bar{\pi}$ for all $\pi_0$.
+\end{frame}
+
+\begin{frame}{AR(1) Process}
+	\[
+	x_t = \rho x_{t-1} + b\varepsilon_t + (1-\rho)\mu
+	\]
+	with $\E_{t-1}[\varepsilon_t] = 0$, $\E_{t-1}[\varepsilon_t^2] = 1$, $\E_{t-1}[\varepsilon_t \varepsilon_{t+s}] = 0$ for $s > 0$.
+	
+	\bigskip
+	If $|\rho| < 1$: stationary. Moving-average representation: $x_t = \mu + b\sum_{s=0}^{\infty} \rho^s \varepsilon_{t-s}$.
+	
+	\bigskip
+	\textbf{Moments}:
+	\begin{itemize}
+		\item $\E[x_t] = \mu$
+		\item $\text{Var}(x_t) = b^2/(1 - \rho^2)$
+		\item $\text{Corr}(x_t, x_{t+j}) = \rho^j$
+	\end{itemize}
+	
+	$\mu$ controls the level, $b$ the volatility, $\rho$ the persistence.
+\end{frame}
+
+\begin{frame}{Vector Linear Stochastic Difference Equations}
+	$x_t \in \mathbb{R}^n$, $\varepsilon_t \in \mathbb{R}^m$ with $\E_t[\varepsilon_{t+1}] = 0$, $\E_t[\varepsilon_{t+1}\varepsilon_{t+1}'] = I$:
+	\[
+	x_t = Ax_{t-1} + B\varepsilon_t + C
+	\]
+	
+	\begin{itemize}
+		\item Stationary if all eigenvalues of $A$ are $< 1$ in absolute value
+		\item Unconditional mean: $\mu = (I - A)^{-1}C$
+		\item Unconditional covariance: $\Gamma(0) = A\Gamma(0)A' + BB'$ (Lyapunov equation)
+	\end{itemize}
+	
+	\textbf{Impulse response function}: Effect of shock $\varepsilon$ at $t$ on $x_{t+h}$ (no further shocks):
+	\[
+	x_{t+h} - \mu = A^{h+1}(x_{t-1} - \mu) + A^h B\varepsilon_t
+	\]
+	
+	$F(h) = A^h B\varepsilon$ is the IRF of $x$ to $\varepsilon$.
+\end{frame}
+
+% ============================================================
+\section{Choice Under Uncertainty}
+% ============================================================
+
+\begin{frame}{Stochastic Events and Event Trees}
+	Example event tree
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.38]{FigsChapter7/RiskSharing_EventTree_v2}
+	\end{figure}
+	\vspace{-13pt}
+	\begin{itemize}
+		\item $\omega_t \in \Omega_t$: stochastic event at date $t$
+		\item $\omega^t = \{\omega_0, \omega_1, \ldots, \omega_t\} \in \Omega^t$: history of events up to date $t$
+		\item $\pi_t(\omega^t)$: date-0 probability of history $\omega^t$
+		\item $\pi_t(\omega^t | \omega^\tau)$: conditional probability of $\omega^t$ given $\omega^\tau$ ($t > \tau$)
+		\item Outcomes at $t$ are functions of the full history: e.g., $a_t(\omega^t)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Expected Utility and Risk Aversion}
+	Consumption process $\{c_t(\omega^t)\}$ ranked by:
+	\[
+	\sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} \pi_t(\omega^t) \beta^t u(c_t(\omega^t)) = \E_0 \sum_{t=0}^{\infty} \beta^t u(c_t)
+	\]
+	
+	\textbf{Risk aversion}: $u$ concave $\Rightarrow$ less risky stream preferred (Jensen's inequality).
+	
+	\bigskip
+	\textbf{Absolute risk aversion}: $-u''(c)/u'(c)$.\\ CARA: $u(c) = -\exp(-\alpha c)$, coefficient $= \alpha$.
+	
+	\bigskip
+	\textbf{Relative risk aversion}: $-cu''(c)/u'(c)$.\\ CRRA: $u(c) = (c^{1-\sigma}-1)/(1-\sigma)$, coefficient $= \sigma$.
+	
+	\bigskip
+	With CRRA, the EIS $= 1/\sigma$. A single parameter $\sigma$ governs both risk aversion and intertemporal substitution.
+\end{frame}
+
+\begin{frame}{Portfolio Choice: CRRA vs.\ CARA}
+	Investor allocates $W$ between risk-free ($R_f$) and risky ($Z$) assets. Let $A$ = risky investment.
+	
+
+	\textbf{CRRA} ($u(c) = c^{1-\sigma}/(1-\sigma)$): FOC becomes
+	\[
+	\E_0\left[\left(R_f\left(1 - \frac{A}{W}\right) + Z\frac{A}{W}\right)^{-\sigma}(Z - R_f)\right] = 0
+	\]
+	Solution for $A/W$ does not depend on $W$: rich and poor choose the \textbf{same risky share}.
+	
+	\textbf{CARA} ($u(c) = -\exp(-\alpha c)$): FOC becomes
+	\[
+	\E_0\left[\exp\left(-\alpha(Z - R_f)A\right)(Z - R_f)\right] = 0
+	\]
+	Solution for $A$ does not depend on $W$: rich have a \textbf{lower risky share}.
+	
+	Data: rich hold higher risky share $\Rightarrow$ neither model fully matches, but CRRA is closer.
+\end{frame}
+
+% ============================================================
+\section{The Stochastic Growth Model}
+% ============================================================
+
+\begin{frame}{Two-Period Economy: Setup}
+	Period 0: TFP known. Period 1: TFP $A_1(\omega_1)$ is random with probability $\pi_1(\omega_1)$.
+	
+	\bigskip
+	\textbf{Preferences}: 
+	$$
+	U = u(C_0) + \beta \sum_{\omega_1 \in \Omega_1} \pi_1(\omega_1) u(C_1(\omega_1))
+	$$
+	
+	\bigskip
+	\textbf{Resource constraints}:
+	\[
+	K_1 + C_0 = K_0^\alpha + (1-\delta)K_0
+	\]
+	\[
+	C_1(\omega_1) = A_1(\omega_1) K_1^\alpha + (1-\delta)K_1 \qquad \forall \omega_1
+	\]
+	
+	The planner chooses $C_0$, $K_1$, and $\{C_1(\omega_1) : \forall \omega_1\}$---a \textbf{contingent plan}.
+\end{frame}
+
+\begin{frame}{Two-Period Economy: Euler Equation}
+	Lagrangian with multipliers $\lambda_0$ and $\lambda_1(\omega_1)$. FOCs:
+	\[
+	u'(C_0) = \lambda_0
+	\]
+	\[
+	\lambda_0 = \sum_{\omega_1 \in \Omega_1} \lambda_1(\omega_1)(\alpha A_1(\omega_1) K_1^{\alpha-1} + 1 - \delta)
+	\]
+	\[
+	\beta \pi_1(\omega_1) u'(C_1(\omega_1)) = \lambda_1(\omega_1) \qquad \forall \omega_1
+	\]
+	
+	Combining:
+	\[
+	u'(C_0) = \beta \sum_{\omega_1 \in \Omega_1} \pi_1(\omega_1) u'(C_1(\omega_1))(\alpha A_1(\omega_1) K_1^{\alpha-1} + 1 - \delta)
+	\]
+	
+	\textbf{Stochastic Euler equation}: marginal utility loss from saving $=$ expected marginal utility gain, weighted by state-contingent returns.
+\end{frame}
+
+\begin{frame}{Infinite-Horizon Economy: Preferences and Constraints}
+	\textbf{Preferences}:
+	\[
+	U = \sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} \pi_t(\omega^t) \beta^t u(C_t(\omega^t))
+	\]
+	
+	\textbf{Production}: $Y_t(\omega^t) = A_t(\omega^t) F(K_t(\omega^{t-1}), L_t(\omega^t))$
+	
+	Note: $K_t$ depends on $\omega^{t-1}$ (chosen before $\omega_t$ realized).
+	
+	\bigskip
+	\textbf{Resource constraint}:
+	\[
+	K_{t+1}(\omega^t) + C_t(\omega^t) = f(A_t(\omega^t), K_t(\omega^{t-1}))
+	\]
+	where $f(A,K) \equiv AF(K,1) + (1-\delta)K$, for all $t$ and $\omega^t$.
+\end{frame}
+
+\begin{frame}{Infinite-Horizon Euler Equation}
+	FOC for $K_{t+1}(\omega^t)$ (affects production at $t+1$ for all $\omega^{t+1}$ extending $\omega^t$):
+	\[
+	\lambda_t(\omega^t) = \sum_{\{\omega^{t+1} | \omega^t\}} \lambda_{t+1}(\omega^{t+1}) f_2(A_{t+1}(\omega^{t+1}), K_{t+1}(\omega^t))
+	\]
+	
+	FOC for $C_t(\omega^t)$: $\pi_t(\omega^t) \beta^t u'(C_t(\omega^t)) = \lambda_t(\omega^t)$
+	
+	\bigskip
+	\textbf{Euler equation}:
+	\[
+	\hspace{-28pt} u'(C_t(\omega^t)) = \beta \sum_{\{\omega^{t+1} | \omega^t\}} \pi_{t+1}(\omega^{t+1} | \omega^t) u'(C_{t+1}(\omega^{t+1})) f_2(A_{t+1}(\omega^{t+1}), K_{t+1}(\omega^t))
+	\]
+	
+	Compact notation:
+	\[
+	u'(C_t) = \beta \E_t[u'(C_{t+1}) f_2(A_{t+1}, K_{t+1})]
+	\]
+\end{frame}
+
+\begin{frame}{Recursive Formulation}
+	Assume $A$ follows a first-order Markov process with $\pi(A'|A)$. Bellman equation:
+	\[
+	V(A, K) = \max_{C, K' \geq 0} \left\{ u(C) + \beta \sum_{A'} \pi(A'|A) V(A', K') \right\}
+	\]
+	subject to $K' + C = f(A, K)$.
+	
+	\bigskip
+	FOC: $u'(C) = \beta \sum_{A'} \pi(A'|A) V_2(A', K')$
+	
+	Envelope: $V_2(A,K) = u'(C) f_2(A,K)$
+	
+	\bigskip
+	\textbf{Functional Euler equation} (with $K' = g(A,K)$):
+	\[
+	\begin{array}{l}
+		u'(f(A,K) - g(A,K)) =\\
+		\quad \beta \sum_{A'} \pi(A'|A) u'(f(A', g(A,K)) - g(A', g(A,K))) f_2(A', g(A,K))
+		\end{array}
+	\]
+	
+	Must hold for all $(A,K)$.
+\end{frame}
+
+\begin{frame}{Solving via Linearization}
+	$A' = \rho A + (1-\rho)\bar{A} + \varepsilon'$, $\E[\varepsilon'] = 0$. Linearize around deterministic steady state $(\bar{A}, \bar{K})$. Let $\hat{X}_t \equiv X_t - \bar{X}$.
+	
+
+	Linearize the functional Euler equation and matching coefficients on $\hat{K}$ yields a quadratic equation in the coefficient $g_K$:
+	\[
+	g_K^2 - \left(1+\beta^{-1} + \frac{u'}{u''} \frac{f_{KK}}{f_K}\right) g_K + \beta^{-1} = 0
+	\]
+	Quadratic equation to determine $g_K$
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.6]{FigsChapter7/Linearizing_quadratic}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Linearized Solution}
+	The linearized policy rule is:
+	\[
+	K' = \bar{K} + g_K(K - \bar{K}) + g_A(A - \bar{A})
+	\]
+	
+	$g_A$ can be solved similarly to $g_K$, using the linearized functional Euler equation. Together with $A' = \bar{A} + \rho(A - \bar{A}) + \varepsilon'$: a system of two linear stochastic difference equations, analyzed using the tools of Section 7.1.
+	
+	\bigskip
+	\textbf{Certainty equivalence}: After linearization, only $\E[\varepsilon']$ matters, not $\text{Var}[\varepsilon']$. It is as if there is no uncertainty and $A'$ equals its conditional expectation.
+\end{frame}
+
+\begin{frame}{Numerical Illustration}
+	Parameters: $f(A,K) = AK^\alpha + (1-\delta)K$, $\alpha = 0.3$, $\delta = 0.02$, $\rho = 0.95$, $\text{SD}(\varepsilon) = 0.005$, $\bar{A} = 1$, $u = \log$, $\beta = 0.99$.
+	
+	\vspace{-5pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.2]{FigsChapter7/fig3}
+	\end{figure}
+	\vspace{-10pt}
+	
+	\begin{itemize}
+		\item TFP and $Y$: high-frequency variation. $K$ and $C$: smooth 
+		\item On impact: $Y$ jumps with $A$ ($K$ predetermined). $C$ increases less than $Y$ (saving)
+		\item Policy rules shift with $A$; $K$ fluctuates between their intersections with the 45-degree line
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Competitive Equilibrium Under Uncertainty}
+% ============================================================
+
+\begin{frame}{Complete vs.\ Incomplete Markets}
+	\textbf{Complete markets}: For each $(t, \omega^t)$, a contract delivers one unit of good at that date-history and zero otherwise (\textbf{Arrow securities}). Any risk can be insured.
+	
+	\bigskip
+	\textbf{Incomplete markets}: Some contracts unavailable. Some risks cannot be insured.
+	
+	\bigskip
+	Setup: Households $i \in I$ with expected utility $\sum_{t=0}^{\infty} \sum_{\omega^t} \pi_t(\omega^t) \beta^t u(c_{i,t}(\omega^t))$. Stochastic endowments $y_{i,t}(\omega^t)$. Arrow-Debreu prices $p_t(\omega^t)$.
+\end{frame}
+
+\begin{frame}{Definition 13 (AD CE Under Uncertainty)}
+	An AD CE is $\{c_{i,t}^*(\omega^t) : \forall t, \omega^t\}$ for each $i \in I$, and $\{p_t(\omega^t) : \forall t, \omega^t\}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*(\omega^t)\}$ solves
+		\[
+		\max_{\{c_t(\omega^t)\}} \sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} \beta^t \pi_t(\omega^t) u(c_t(\omega^t))
+		\]
+		subject to
+		\[
+		\sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} p_t(\omega^t) c_t(\omega^t) = \sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} p_t(\omega^t) y_{i,t}(\omega^t)
+		\]
+		
+		\item $\sum_{i \in I} c_{i,t}^*(\omega^t) = \sum_{i \in I} y_{i,t}(\omega^t)$ for all $(t, \omega^t)$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Characterization: Insurance and Risk Sharing}
+	FOC: $\beta^t \pi_t(\omega^t) u'(c_{i,t}(\omega^t)) = \lambda_i p_t(\omega^t)$
+	
+	\bigskip
+	\textbf{Insurance}: If prices are actuarially fair ($p_t(\omega^t) = \bar{p}_t \pi_t(\omega^t)$), then $u'(c_{i,t}(\omega^t)) = u'(c_{i,t}((\omega^t)'))$ for all $\omega^t, (\omega^t)'$ $\Rightarrow$ \textbf{full insurance}: $c_{i,t}$ independent of $\omega^t$.
+	
+	\bigskip
+	\textbf{Risk sharing}: Take the ratio of FOCs for households $i$ and $j$:
+	\[
+	\frac{u'(c_{i,t}(\omega^t))}{u'(c_{j,t}(\omega^t))} = \frac{\lambda_i}{\lambda_j}
+	\]
+	
+	$\lambda_i/\lambda_j$ is constant across time and states $\Rightarrow$ $c_{i,t}$ depends only on \textbf{aggregate} endowment, not on $y_{i,t}$. All idiosyncratic risk is insured away.
+\end{frame}
+
+\begin{frame}{Sequential Trading: Arrow Securities}
+	For each $\omega_{t+1}$, an asset traded at $t$ pays 1 unit at $t+1$ if $\omega_{t+1}$ occurs. Price: $q_t(\omega_{t+1} | \omega^t)$.
+	
+	\bigskip
+	Budget constraint:
+	\[
+	c_{i,t}(\omega^t) + \sum_{\omega_{t+1}} q_t(\omega_{t+1} | \omega^t) a_{i,t+1}(\omega_{t+1}) \leq y_{i,t}(\omega^t) + a_{i,t}(\omega^t)
+	\]
+	
+	\textbf{nPg}: $a_{i,t}(\omega^t) \geq -\sum_{\tau=t}^{\infty} \sum_{\omega^\tau} \tilde{q}_\tau^t(\omega^\tau) y_{i,\tau}(\omega^\tau)$
+	
+	where $\tilde{q}_{\tau+1}^t(\omega^{\tau+1}) = q_\tau(\omega_{\tau+1} | \omega^\tau) \tilde{q}_\tau^t(\omega^\tau)$ with $\tilde{q}_t^t(\omega^t) = 1$.
+\end{frame}
+
+\begin{frame}{Definition 14 (Sequential CE Under Uncertainty)}
+	\small
+	A sequential CE is $\{c_{i,t}^*(\omega^t)\}$, $\{a_{i,t+1}^*(\omega^t)\}$ for each $i$, and $\{q_t(\omega^t)\}$ such that
+	
+	\begin{enumerate}
+		\item for each $i$, $\{c_{i,t}^*(\omega^t)\}$ and $\{a_{i,t+1}^*(\omega^t)\}$ solve
+		\[
+		\max_{\{c_t(\omega^t), a_{t+1}(\omega^t)\}} \sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} \beta^t \pi(\omega^t) u(c_t(\omega^t))
+		\]
+		subject to
+		\[
+		c_{i,t}(\omega^t) + \sum_{\omega_{t+1}} q_t(\omega_{t+1}|\omega^t) a_{i,t+1}(\omega_{t+1}) = y_{i,t}(\omega^t) + a_{i,t}(\omega^t)
+		\]
+		and the nPg condition, with $a_{i,0} = 0$
+		
+		\item $\sum_{i} (c_{i,t}^*(\omega^t) - y_{i,t}(\omega^t)) = 0$ and $\sum_{i} a_{i,t+1}^*(\omega^t) = 0$ for all $(t, \omega^t)$
+	\end{enumerate}
+	
+	\normalsize
+	\medskip
+	The sequential and AD equilibria deliver the same allocations (same consolidation argument as Chapter 5).
+\end{frame}
+
+\begin{frame}{Spanning and Complete Markets}
+	$S$ states, $N$ assets. Payoff matrix $D$ ($S \times N$). Portfolio $\theta \in \mathbb{R}^N$. Payoff vector: $D\theta$.
+	
+	\bigskip
+	\textbf{Market span}: $\mathcal{M} \equiv \{z \in \mathbb{R}^S : z = D\theta \text{ for some } \theta \in \mathbb{R}^N\}$
+	
+	Markets are complete if $\mathcal{M} = \mathbb{R}^S$, i.e., $\text{rank}(D) = S$.
+	
+	\bigskip
+	If complete: $\exists$ portfolios $\{\theta_j^A\}_{j=1}^S$ such that $D\theta_j^A = e_j$ (Arrow securities).
+	
+	\bigskip
+	Real-world assets pay off in multiple states, but completeness only requires that Arrow securities can be \textbf{replicated} by portfolios.
+\end{frame}
+
+% ============================================================
+\section{Competitive Equilibrium in the Stochastic Growth Model}
+% ============================================================
+
+\begin{frame}{Setup}
+	Representative household with $k_0$ units of capital, one unit of labor (inelastic).
+	
+
+	\textbf{Production}: $$
+	y_t(\omega^t) = A_t(\omega^t) F(k_t(\omega^{t-1}), 1)
+	$$
+	\textbf{Factor prices}: 
+	$$r_t(\omega^t) = A_t(\omega^t) F_1(k_t(\omega^{t-1}), 1),$$ 
+	$$
+	w_t(\omega^t) = A_t(\omega^t) F_2(k_t(\omega^{t-1}), 1)
+	$$
+	\textbf{Budget}: 
+	$$
+	c_t(\omega^t) + k_{t+1}(\omega^t) = (r_t(\omega^t) + 1-\delta)k_t(\omega^{t-1}) + w_t(\omega^t)
+	$$
+	
+
+	Household Euler equation:
+	\[
+	u'(c_t(\omega^t)) = \E_t[\beta u'(c_{t+1}(\omega^{t+1}))(r_{t+1}(\omega^{t+1}) + 1 - \delta)]
+	\]
+\end{frame}
+
+\begin{frame}{Definition 15 (Sequential CE, Stochastic Growth Model)}
+	\small
+	A sequential CE is $\{c_t^*(\omega^t)\}$, $\{k_{t+1}^*(\omega^t)\}$, $\{r_t(\omega^t), w_t(\omega^t)\}$ for all $(t, \omega^t)$ such that
+	
+	\begin{enumerate}
+		\item $\{c_t^*(\omega^t)\}$ and $\{k_{t+1}^*(\omega^t)\}$ solve
+		\[
+		\max_{\{c_t(\omega^t), k_{t+1}(\omega^t)\}} \sum_{t=0}^{\infty} \sum_{\omega^t \in \Omega^t} \beta^t \pi(\omega^t) u(c_t(\omega^t))
+		\]
+		\[
+		\text{subject to } c_t(\omega^t) + k_{t+1}(\omega^t) = (r_t(\omega^t) + 1-\delta) k_t(\omega^{t-1}) + w_t(\omega^t)
+		\]
+		\quad\quad\quad\quad and the nPg condition
+		
+		\item $r_t(\omega^t) = A_t(\omega^t) F_1(k_t^*(\omega^{t-1}), 1)$ and $w_t(\omega^t) = A_t(\omega^t) F_2(k_t^*(\omega^{t-1}), 1)$
+		
+		\item $k_{t+1}^*(\omega^t) + c_t^*(\omega^t) = (1-\delta)k_t^*(\omega^{t-1}) + A_t(\omega^t) F(k_t^*(\omega^{t-1}), 1)$
+	\end{enumerate}
+	
+	\normalsize
+	Condition 3 is redundant (Walras' Law with CRS). The CE allocation coincides with the planner's solution; welfare theorems apply with goods indexed by $(t, \omega^t)$.
+\end{frame}
+
+% ============================================================
+\section{Incomplete Markets}
+% ============================================================
+
+\begin{frame}{Incomplete-Market Consumption-Saving Problem}
+	Consumer with stochastic income $y_t$ (Markov), single asset with gross return $1+r$:
+	\[
+	V(a, y) = \max_{a' \geq \underline{a}} \left\{ u(a + y - qa') + \beta \E[V(a', y') | y] \right\}
+	\]
+	where $q = 1/(1+r)$.
+	
+	\bigskip
+	\textbf{Euler equation}: $u'(c) = (1+r)\beta \E[u'(c') | y]$
+	
+	\bigskip
+	Single asset cannot insure against income risk $\Rightarrow$ consumption fluctuates with $y_t$.
+	
+	\bigskip
+	\textbf{Partial self-insurance}: Accumulate savings to spend down during low-income periods. Fully smooth consumption is not optimal (would require consuming at the worst-case level forever).
+\end{frame}
+
+\begin{frame}{Decision Rules and Stationary Distribution}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter7/fig4}
+\end{figure}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item High income: accumulate savings up to $\bar{a}$ (upper line crosses 45-degree)
+		\item Low income: spend down savings to $\underline{a}$ (borrowing constraint)
+		\item Ergodic set: $[\underline{a}, \bar{a}]$; within it, assets drift up or down
+		\item Stationary distribution: reflects accumulated luck/misfortune across consumers
+		\item Contrast with complete markets: in the deterministic steady state of Chapter 5, $g(a) = a$ (45-degree line)
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Stochastic processes}: Markov chains ($\pi_{t+k} = \pi_t P^k$), AR(1) ($\rho$ persistence, $b$ volatility), vector LSDE ($x_t = Ax_{t-1} + B\varepsilon_t + C$, IRF $= A^h B\varepsilon$)
+		
+		\item \textbf{Expected utility}: $\E_0 \sum_{t=0}^{\infty} \beta^t u(c_t)$; risk aversion from concavity; CRRA ties together RRA and EIS via $\sigma$
+		
+		\item \textbf{Portfolio choice}: CRRA $\Rightarrow$ constant risky share; CARA $\Rightarrow$ constant risky amount
+		
+		\item \textbf{Stochastic Euler equation}: $u'(C_t) = \beta \E_t[u'(C_{t+1}) f_2(A_{t+1}, K_{t+1})]$; returns weighted by state-contingent marginal utilities
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{4}
+		\item \textbf{Linearization}: Quadratic in $g_K$ (one stable root $< 1$); certainty equivalence (only $\E[\varepsilon']$ matters, not $\text{Var}[\varepsilon']$)
+		
+		\item \textbf{Complete markets} (Def 13--14): Full risk sharing; idiosyncratic risk insured; $c_{i,t}$ depends only on aggregate endowment. Markets complete iff $\text{rank}(D) = S$.
+		
+		\item \textbf{Stochastic CE of NGM} (Def 15): Same as planner's solution; welfare theorems hold with goods indexed by $(t, \omega^t)$
+		
+		\item \textbf{Incomplete markets}: Single asset, Euler inequality at borrowing constraint; partial self-insurance; stationary wealth distribution emerges from accumulated idiosyncratic shocks
+	\end{enumerate}
+\end{frame}
+
+\end{document}
+

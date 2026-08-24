@@ -1,0 +1,496 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter18]{Chapter 18: Nominal Frictions and Business Cycles}
+\author[Alisdair McKay and Morten Ravn]{Chapter authors: Alisdair McKay and Morten Ravn}
+
+\date[August 2026]{August 2026}
+
+
+
+
+\begin{document}
+
+% ============================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction and Empirical Evidence on Price Rigidity}
+% ============================================================
+
+\begin{frame}{Introduction}
+Two core ideas of Keynesian economics:
+\begin{enumerate}
+    \item Productive factors may not be used at the optimal level
+    \item The level of nominal demand influences the level of production
+\end{enumerate}
+
+\bigskip
+This chapter:
+\begin{itemize}
+    \item Reviews micro evidence that prices adjust infrequently
+    \item Presents the \textbf{New Keynesian (NK) model}: microfounded sticky-price DSGE
+    \item Explains why nominal rigidity gives monetary policy real effects
+    \item Discusses optimal monetary policy
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Micro Evidence on Price Rigidity}
+BLS surveys: $\sim$85,000 individual items across 300 goods categories.
+
+\bigskip
+If a price changes with probability $1-\theta$ each month, expected duration $= \theta/(1-\theta)$.
+
+\bigskip
+\end{frame}
+
+\begin{frame}{Micro Evidence: Estimates}
+\textbf{Estimates} (Klenow and Malin, 2010):
+\begin{itemize}
+    \item Including sales: mean 6.2 months, median 3.4 months
+    \item Excluding sales: mean 8.0 months, median 6.9 months
+    \item Excluding sales and product substitutions: mean 10.1 months, median 8.3 months
+\end{itemize}
+
+\bigskip
+Median absolute price change $\approx 11.5\%$ (Klenow and Kryvtsov, 2008): most price changes reflect sector-specific, not aggregate, conditions. Boivin, Giannoni, and Mihov (2009): disaggregated prices are sticky in response to macro shocks.
+\end{frame}
+
+% ============================================================
+\section{The New Keynesian Model}
+% ============================================================
+
+\begin{frame}{Environment}
+\textbf{Household}: preferences over consumption $C_t$ and labor $L_t$:
+\[
+U_0 = \E_0 \sum_{t=0}^{\infty} \beta^t \left[\frac{C_t^{1-\sigma}}{1-\sigma} - \frac{L_t^{1+\psi}}{1+\psi}\right]
+\]
+
+\textbf{Final good}: CES over intermediate varieties $j \in [0,1]$:
+\[
+Y_t = \left(\int_0^1 y_{j,t}^{(\varepsilon-1)/\varepsilon} \, dj\right)^{\varepsilon/(\varepsilon-1)}, \qquad \varepsilon > 1
+\]
+
+\textbf{Intermediate good $j$}: $y_{j,t} = A_t \ell_{j,t}$
+
+\textbf{Demand for variety $j$}: $y_{j,t} = (P_{j,t}/P_t)^{-\varepsilon} Y_t$
+
+\textbf{Price index}: $P_t = \left(\int_0^1 P_{j,t}^{1-\varepsilon} \, dj\right)^{1/(1-\varepsilon)}$
+\end{frame}
+
+\begin{frame}{Calvo Pricing}
+Each period, a firm can reset its price with probability $1-\theta$ (i.i.d.\ across firms and time). Otherwise, the nominal price remains fixed.
+
+\bigskip
+\begin{itemize}
+    \item Monopolistic competition: firms set prices, stand ready to serve demand
+    \item Output is \textbf{demand-determined} in the short run
+    \item Cashless-limit argument (Chapter 17): money is the unit of account but not explicitly present
+    \item Government sets nominal interest rate $i_t$ (Taylor rule)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Household Optimality Conditions}
+\textbf{Euler equation}:
+\[
+C_t^{-\sigma} = \beta \E_t\left[\frac{1+i_t}{1+\pi_{t+1}} C_{t+1}^{-\sigma}\right]
+\]
+
+\textbf{Intratemporal labor supply}:
+\[
+C_t^{-\sigma} w_t = L_t^{\psi}
+\]
+
+The Euler equation determines the intertemporal path of consumption via the \textbf{real interest rate} $(1+i_t)/(1+\pi_{t+1})$. Nominal rigidities affect these conditions only through equilibrium changes in $w_t$ and $r_t$.
+\end{frame}
+
+\begin{frame}{Firm's Price-Setting Problem}
+A firm resetting at $t$ chooses $P_t^R$ to maximize expected discounted profits over the (random) duration of the price. The optimal reset price satisfies:
+\[
+p_t^R = \frac{p_t^N}{p_t^D}
+\]
+where (with $p_t^R \equiv P_t^R/P_t$):
+\[
+p_t^N = \frac{\varepsilon}{\varepsilon-1} \frac{w_t}{A_t} u'(C_t) Y_t + \theta \beta \E_t[(1+\pi_{t+1})^{1+\varepsilon} p_{t+1}^N]
+\]
+\[
+p_t^D = u'(C_t) Y_t + \theta \beta \E_t[(1+\pi_{t+1})^{\varepsilon} p_{t+1}^D]
+\]
+
+With flexible prices ($\theta = 0$): $p_t^R = \mu \cdot w_t/A_t$ where $\mu = \varepsilon/(\varepsilon-1)$ is the constant markup.
+\end{frame}
+
+\begin{frame}{Aggregation and Price Dispersion}
+\textbf{Price level evolution}:
+\[
+P_t = \left[\theta P_{t-1}^{1-\varepsilon} + (1-\theta)(P_t^R)^{1-\varepsilon}\right]^{1/(1-\varepsilon)}
+\]
+
+\textbf{Inflation and the reset price}:
+\[
+1 + \pi_t = \left[\frac{1-(1-\theta)(p_t^R)^{1-\varepsilon}}{\theta}\right]^{1/(\varepsilon-1)}
+\]
+
+\textbf{Price dispersion}: $D_t \equiv \int_0^1 (P_{j,t}/P_t)^{-\varepsilon} dj \geq 1$
+\[
+D_t = (1-\theta)(p_t^R)^{-\varepsilon} + \theta(1+\pi_t)^{\varepsilon} D_{t-1}
+\]
+
+Aggregate production: $Y_t = A_t L_t / D_t$. Price dispersion reduces effective productivity.
+\end{frame}
+
+\begin{frame}{Flexible-Price Equilibrium and Output Gap}
+With $\theta = 0$: all firms set $p^R = 1$, $D = 1$, $w^n/A = 1/\mu$. Natural output:
+\[
+Y_t^n = \mu^{-1/(\sigma+\psi)} A_t^{(1+\psi)/(\sigma+\psi)}
+\]
+
+Monopoly power ($\mu > 1$) reduces output below the efficient level $Y_t^* = A_t^{(1+\psi)/(\sigma+\psi)}$.
+
+\bigskip
+\textbf{Output gap}: $x_t \equiv \log Y_t - \log Y_t^n$
+
+\textbf{Welfare-relevant gap}: $x_t^w \equiv \log Y_t - \log Y_t^* = x_t - \frac{1}{\sigma+\psi}\log\mu$
+\end{frame}
+
+\begin{frame}{The Three-Equation Model}
+Log-linearization around a zero-inflation steady state yields:
+
+\bigskip
+\textbf{IS curve} (demand):
+\[
+x_t = \E_t x_{t+1} - \frac{1}{\sigma}(\hat{\imath}_t - \E_t \pi_{t+1} - r_t^n)
+\]
+
+where $r_t^n = -\log\beta + \sigma\frac{1+\psi}{\sigma+\psi}(\E_t \hat{A}_{t+1} - \hat{A}_t)$ is the natural rate of interest.
+
+\bigskip
+\textbf{New Keynesian Phillips curve} (supply):
+\[
+\pi_t = \kappa x_t + \beta \E_t[\pi_{t+1}]
+\]
+
+where $\kappa \equiv (1-\theta)(1-\beta\theta)(\sigma+\psi)/\theta$.
+
+\bigskip
+\end{frame}
+
+\begin{frame}{The Three-Equation Model: Policy Rule}
+\textbf{Interest rate rule} (Taylor rule):
+\[
+\hat{\imath}_t = \phi_\pi(\pi_t - \pi^*) + \phi_x x_t + \omega_t
+\]
+\end{frame}
+
+\begin{frame}{Determinacy: The Taylor Principle}
+The three-equation model has a unique equilibrium if and only if:
+\[
+(1-\beta)\phi_x + \kappa(\phi_\pi - 1) > 0
+\]
+
+$\phi_\pi > 1$ is sufficient (and necessary if $\phi_x = 0$): the central bank must raise the nominal rate \textbf{more than one-for-one} with inflation to stabilize the economy.
+
+\bigskip
+\textbf{Intuition}: If $\phi_\pi < 1$, elevated inflation expectations $\Rightarrow$ lower real rate $\Rightarrow$ positive output gap $\Rightarrow$ higher inflation $\Rightarrow$ self-fulfilling. Multiple equilibria.
+\end{frame}
+
+\begin{frame}{The Classical Dichotomy Breaks Down}
+With flexible prices: $\pi_t$ depends only on expected future output gaps (zero if policy is right). Nominal variables have no real effects.
+
+\bigskip
+With sticky prices: a lower path for $i_t$ (expansionary monetary policy) does \emph{not} produce an immediate offsetting fall in $\E_t[\pi_{t+1}]$. Instead:
+\begin{itemize}
+    \item Real interest rate falls $\Rightarrow$ positive output gap (IS curve)
+    \item Positive output gap $\Rightarrow$ rising inflation (NKPC)
+    \item Rising inflation can reinforce the decline in real rates
+\end{itemize}
+
+\bigskip
+$\Rightarrow$ Nominal demand affects real output. The monetary policy rule matters.
+\end{frame}
+
+% ============================================================
+\section{Monetary Policy Strategies}
+% ============================================================
+
+\begin{frame}{Policy Objectives}
+The planner's efficient output: $Y_t^* = A_t^{(1+\psi)/(\sigma+\psi)}$
+
+\bigskip
+Two sources of inefficiency:
+\begin{enumerate}
+    \item Aggregate output $\neq$ efficient level (monopoly distortion $+$ sticky-price markup variation)
+    \item Price dispersion ($D_t > 1$): misallocation of labor across varieties
+\end{enumerate}
+
+\bigskip
+\end{frame}
+
+\begin{frame}{Policy Objectives: Welfare Loss}
+\textbf{Welfare loss} (second-order approximation around zero-inflation steady state with subsidy correcting monopoly distortion):
+\[
+U \approx -\E_0 \sum_{t=0}^{\infty} \beta^t \left[\pi_t^2 + \frac{\kappa}{\varepsilon} x_t^2\right]
+\]
+
+$\Rightarrow$ Minimize squared inflation (price dispersion) and squared output gap.
+\end{frame}
+
+\begin{frame}{The Divine Coincidence}
+From the NKPC: if $x_t = 0$ for all $t$, then $\pi_t = 0$ for all $t$.
+
+\bigskip
+$\Rightarrow$ No trade-off between output gap stabilization and inflation stabilization in the baseline model.
+
+\bigskip
+\textbf{Breaking the divine coincidence}: need a time-varying wedge between $Y_t^n$ and $Y_t^*$. Example: \textbf{cost-push shocks} $\eta_t$ (from time-varying elasticity of substitution):
+\[
+\pi_t = \kappa x_t + \beta \E_t[\pi_{t+1}] + \eta_t
+\]
+
+Now $x_t = 0$ does not imply $\pi_t = 0$ $\Rightarrow$ meaningful policy trade-off.
+\end{frame}
+
+\begin{frame}{Commitment vs.\ Discretion}
+Response of output and inflation to a transitory cost-push shock
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.42]{FigsChapter18/fig1}
+\end{figure}
+\vspace{-10pt}
+{\small Parameters: $\beta = 0.99$, $\kappa = 0.2$, $\varepsilon = 3$.}
+
+\medskip
+\end{frame}
+
+\begin{frame}{Commitment vs.\ Discretion: Policy Paths}
+\textbf{Discretion}: Raise $i$ at $t = 0$, return to steady state at $t = 1$. $\pi_0 > 0$, then $\pi_t = 0$.
+
+\textbf{Commitment}: Raise $i$ less at $t = 0$, keep rates high for several periods. $\pi_0$ lower; $\pi_t < 0$ for $t \geq 1$ (price level returns to target).
+
+\bigskip
+Commitment dominates at $t = 0$ but is time-inconsistent: at $t = 1$, the central bank wants to switch to discretion.
+\end{frame}
+
+\begin{frame}{Inflation Targeting vs.\ Price-Level Targeting}
+\textbf{Flexible inflation targeting}: minimize $\E_0 \sum_{t=0}^{\infty} \beta^t [(\pi_t - \pi^*)^2 + \lambda x_t^2]$
+
+\bigskip
+\textbf{Price-level targeting}: $i_t = \bar{\imath} + \phi_P(P_t - P_t^*) + \phi_x x_t$
+
+\begin{itemize}
+    \item Returns the price level to a target path after shocks
+    \item Provides greater certainty about long-run price level (good for long-term nominal contracts)
+    \item Automatically commits to undoing unwanted price-level changes
+\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Aggregate Evidence}
+% ============================================================
+
+\begin{frame}{Identifying Monetary Policy Shocks}
+\textbf{Challenge}: Monetary policy responds endogenously to the economy. Need exogenous variation.
+
+\bigskip
+\textbf{High-frequency identification} (Kuttner, 2001; G\"urkaynak, Sack, Swanson, 2005): Changes in financial market rates in a narrow window around policy announcements. Forecast $=$ systematic component; surprise $=$ shock.
+
+\bigskip
+\textbf{Narrative approach} (Romer and Romer, 2004): Regress interest rate changes on central bank forecasts. Residual $=$ shock (deviation from systematic response to the outlook).
+\end{frame}
+
+\begin{frame}{Responses to a Monetary Policy Shock}
+Empirical and simulated responses to a monetary policy shock
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{FigsChapter18/fig2}
+\end{figure}
+\vspace{-10pt}
+{\small Left: nominal interest rate. Center: output. Right: inflation. Empirical (Romer--Romer), baseline NK model, and sticky-wage model.}
+
+\medskip
+\end{frame}
+
+\begin{frame}{Monetary Policy Shock: Model vs.\ Data}
+\textbf{Qualitatively}: Model matches data---higher $i$ $\Rightarrow$ higher $r$ $\Rightarrow$ lower output $\Rightarrow$ lower inflation.
+
+\textbf{Quantitatively}: Baseline model predicts immediate responses; data shows delayed, hump-shaped responses. Sticky-wage model improves the fit.
+\end{frame}
+
+\begin{frame}{Estimating the Phillips Curve}
+Gal\'{\i} and Gertler (1999): Real marginal cost $\approx$ labor share $s_t^L = w_t L_t/Y_t$.
+\[
+\pi_t = \kappa \hat{s}_t^L + \beta \pi_{t+1} + \zeta_t
+\]
+
+Estimate via GMM with lagged instruments (valid if $\E_{t-1}[\eta_t] = 0$). Implied average price duration: 3--6 quarters (longer than micro evidence suggests).
+
+\end{frame}
+
+\begin{frame}{Labor Share and Inflation}
+Correlation between the labor share at $t$ and inflation at $t+i$
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.50]{FigsChapter18/fig3}
+\end{figure}
+\vspace{-10pt}
+{\small Dynamic correlation between the labor share and lags and leads of inflation; data are HP-filtered. Positive in the early sample (1960:1--1997:4); weaker or negative post-1998.}
+
+\medskip
+\end{frame}
+
+\begin{frame}{Labor Share and Inflation: Implication}
+The weakening labor share--inflation correlation poses a challenge for the NKPC.
+\end{frame}
+
+% ============================================================
+\section{Extensions}
+% ============================================================
+
+\begin{frame}{Sticky Wages}
+Wages set by monopolistically competitive unions, Calvo-style ($1-\theta_w$ update probability). With both sticky prices and sticky wages, three equations replace the single NKPC:
+
+\[
+\pi_t = \beta \E_t[\pi_{t+1}] + \xi_p(\hat{w}_t - \hat{A}_t)
+\]
+\[
+\pi_t^w = \beta \E_t[\pi_{t+1}^w] - \xi_w(\hat{w}_t - \hat{A}_t) + \kappa_w x_t
+\]
+\[
+\hat{w}_t = \hat{w}_{t-1} + \pi_t^w - \pi_t
+\]
+\end{frame}
+
+\begin{frame}{Sticky Wages: Dynamics}
+Price inflation depends on real wages relative to productivity; wage inflation depends on MRS relative to wages. The real wage is an endogenous state variable $\Rightarrow$ richer dynamics.
+
+\bigskip
+Figure 18.2 shows that layering wage and price rigidities generates more persistent, hump-shaped responses, improving the fit to data.
+\end{frame}
+
+\begin{frame}{Habit Formation}
+Replace standard preferences with:
+\[
+\E_0 \sum_{t=0}^{\infty} \beta^t \left[\frac{(C_t - \gamma C_{t-1})^{1-\sigma}}{1-\sigma} - \frac{L_t^{1+\psi}}{1+\psi}\right], \qquad \gamma \in [0,1)
+\]
+
+Households smooth both the \emph{level} and the \emph{growth rate} of consumption $\Rightarrow$ gradual, hump-shaped adjustment to shocks.
+\end{frame}
+
+\begin{frame}{Capital, Investment, and Adjustment Costs}
+Add Cobb-Douglas production: $y_{j,t} = A_t k_{j,t}^\alpha \ell_{j,t}^{1-\alpha}$
+
+\bigskip
+Capital accumulation with adjustment costs:
+\[
+K_{t+1} = (1-\delta)K_t + \xi(I_t/K_t) K_t
+\]
+
+$\xi$ increasing and concave $\Rightarrow$ costly to vary the investment rate $\Rightarrow$ gradual investment adjustment.
+
+\bigskip
+\end{frame}
+
+\begin{frame}{Capital: Why Adjustment Costs Matter}
+Without adjustment costs: small changes in $i_t$ produce extreme investment volatility (small $\delta$ means $I \ll K$, so small $\%\Delta K \Rightarrow$ large $\%\Delta I$).
+
+\bigskip
+Variable capacity utilization ($u_t K_t$ as effective capital) provides an additional margin, helping reconcile the slope of the NKPC with micro evidence.
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+\begin{enumerate}
+    \item \textbf{Micro evidence}: Prices adjust every 6--11 months on average (US CPI data); considerable heterogeneity across goods; most price changes reflect sector-specific conditions.
+
+    \item \textbf{NK model}: CES production with Calvo pricing. Household Euler + labor supply; firm's optimal reset price balances current and expected future marginal costs weighted by $(\beta\theta)^{\tau-t}$.
+
+    \item \textbf{Three-equation model}: IS curve ($x_t$ forward-looking, decreasing in real rate), NKPC ($\pi_t = \kappa x_t + \beta \E_t[\pi_{t+1}]$, $\kappa = (1-\theta)(1-\beta\theta)(\sigma+\psi)/\theta$), Taylor rule.
+
+    \item \textbf{Taylor principle}: Unique equilibrium iff $(1-\beta)\phi_x + \kappa(\phi_\pi - 1) > 0$. Nominal rate must respond more than one-for-one to inflation.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item \textbf{Welfare}: Loss $\propto \E[\pi_t^2 + (\kappa/\varepsilon)x_t^2]$. Two inefficiencies: markup variation (wrong output level) and price dispersion (misallocation).
+
+    \item \textbf{Divine coincidence}: $x_t = 0 \Rightarrow \pi_t = 0$ in baseline. Broken by cost-push shocks $\eta_t$ $\Rightarrow$ meaningful inflation-output trade-off.
+
+    \item \textbf{Commitment vs.\ discretion}: Commitment to future tight policy reduces $\pi_0$ with less output cost. Time-inconsistent: central bank wants to renege at $t = 1$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (III)}
+\begin{enumerate}
+    \setcounter{enumi}{7}
+    \item \textbf{Aggregate evidence}: Contractionary monetary shocks raise real rates, lower output and inflation. Baseline NK matches qualitatively; sticky wages + habits + adjustment costs needed for hump-shaped dynamics.
+
+    \item \textbf{Phillips curve estimation}: Labor share as marginal cost proxy. Positive correlation with inflation weakens post-1998.
+\end{enumerate}
+\end{frame}
+
+\end{document}

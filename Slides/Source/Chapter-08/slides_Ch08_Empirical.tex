@@ -1,0 +1,486 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+\title[Chapter8]{Chapter 8 Empirical Strategies}
+
+\author[]{}
+
+\date[May 2026]{May 2026}
+
+
+
+
+
+\begin{document}
+  \frame
+  {
+    \titlepage
+  }
+
+
+% ============================================================
+% OUTLINE
+% ============================================================
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+
+% ============================================================
+\section{Introduction and the Identification Challenge}
+% ============================================================
+
+\begin{frame}{Introduction}
+	Macroeconomic questions often require quantitative answers: Can a theory explain observed growth or volatility? How do the benefits of a policy compare to its costs?
+	
+	\textbf{Key challenge}: We cannot perform experiments on the economy. We must estimate causal effects from equilibrium data where many variables are jointly determined.
+	
+	\textbf{Four empirical strategies}, organized by increasing reliance on theory:
+	\vspace{-4pt}
+	\begin{enumerate}
+		\item \textbf{Natural experiments}: find plausibly exogenous variation
+		\item \textbf{Structural VARs}: identify causal effects from time series
+		\item \textbf{Structural estimation}: treat the model as the data-generating process
+		\item \textbf{Calibration}: use external evidence to set parameters, then compare model to data
+	\end{enumerate}
+	
+	Running example: the \textbf{fiscal multiplier} (causal effect of $G_t$ on $y_t$).
+\end{frame}
+
+\begin{frame}{A Simple Model of Fiscal Policy}
+	Representative household with preferences:
+	\[
+	U_t = \log c_t - \frac{\ell_t^{1+\psi}}{1+\psi} + \gamma \eta_t \log G_t
+	\]
+	
+	Production: $y_t = A_t \ell_t$. Resource constraint: $y_t = c_t + G_t$.
+	
+	\bigskip
+	A planner choosing $\{c_t, \ell_t, G_t\}$ to maximize $U_t$ subject to the resource constraint obtains:
+	
+	\textbf{Supply curve}:
+	\[
+	y_t = A_t \left(1 - \frac{G_t}{y_t}\right)^{-\frac{1}{1+\psi}}
+	\]
+	
+	\textbf{Fiscal rule}:
+	\[
+	G_t = \frac{\gamma \eta_t}{1 + \gamma \eta_t} y_t
+	\]
+\end{frame}
+
+\begin{frame}{The Identification Challenge}
+	Equilibrium of supply curve and fiscal rule in $(G, y)$ space
+		
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{FigsChapter8/ID_diagram}
+\end{figure}
+
+	\textbf{Fiscal multiplier}: $dy/dG$ when $G$ changes exogenously (= slope of supply curve).
+\end{frame}	
+\begin{frame}{The Identification Challenge}
+	\textbf{Problem}: Data on $(G_t, y_t)$ reflect movements in \emph{both} $A_t$ and $\eta_t$. The empirical relationship between $y$ and $G$ does not reveal the slope of either curve.
+	
+	\bigskip
+	To estimate the multiplier, we must isolate shifts in the fiscal rule that move the economy \textbf{along} the supply curve. All four strategies confront this challenge.
+\end{frame}
+
+\begin{frame}{Defining the Multiplier in a Dynamic Economy}
+	In a dynamic setting, the multiplier is not a single number:
+	\begin{itemize}
+		\item Persistence of $G_t$ matters for the economy's response
+		\item $y_t$ responds on impact and at subsequent dates $\Rightarrow$ an impulse response
+	\end{itemize}
+	
+	\bigskip
+	Common summary measures:
+	\begin{itemize}
+		\item \textbf{Blanchard-Perotti}: ratio of peak output response to peak spending response
+		\item \textbf{Mountford-Uhlig}: cumulative multiplier $= \int \text{IRF of } y \,/\, \int \text{IRF of } G$
+	\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Natural Experiments}
+% ============================================================
+
+\begin{frame}{Military Spending as a Natural Experiment}
+	Wars are arguably not caused by economic conditions $\Rightarrow$ war spending is plausibly exogenous to $A_t$.
+	
+	\bigskip
+	\textbf{Challenge}: Spending may have been anticipated before it occurs. If wealth effects matter, the economic impact is felt when agents \emph{learn} about the spending, not when it occurs.
+	\end{frame}
+\begin{frame}{Military Spending as a Natural Experiment}
+	\textbf{Ramey (2011)}: Measures the change in expected present value of defense spending each quarter by reading historical newspaper articles.
+	
+	\bigskip
+	Change in expected present value of military spending (Ramey, 2011)
+	\vspace{-10pt}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{FigsChapter8/fig2RameyNews}
+	\end{figure}
+		\vspace{-5pt}
+	Estimated multiplier $\approx 1$ (with WWII), $\approx 0.7$ (excluding WWII).
+\end{frame}
+
+\begin{frame}{Local Projections}
+	Let $z_t$ be exogenous military news. Regress $y_{t+h}$ on $z_t$ for each horizon $h$:
+	\[
+	y_{i,t+h} = \beta_{i,h} y_{1,t} + \sum_{j=1}^{J} A_{i,j} y_{t-j} + \varepsilon_{i,h}
+	\]
+	
+	Varying $h$ traces out an impulse response $\{\beta_{i,h}\}_{h=0}^{H}$. This is a \textbf{Jord\`{a} (2005) projection}.
+	
+	\bigskip
+	\textbf{Cross-sectional approach}: Nakamura and Steinsson (2014) exploit geographic variation in military spending across US states. Estimated multiplier $\approx 1.5$.
+	
+	\bigskip
+	\textbf{Caveat}: Regional multiplier $\neq$ national multiplier (common effects like taxes and interest rates wash out across states).
+\end{frame}
+
+% ============================================================
+\section{Structural Vector Autoregressions}
+% ============================================================
+
+\begin{frame}{The Structural VAR}
+	\[
+	B_0 Y_t = B_1 Y_{t-1} + B_2 Y_{t-2} + \cdots + B_J Y_{t-J} + \varepsilon_t
+	\]
+	
+	\begin{itemize}
+		\item $Y_t \in \mathbb{R}^n$: observed data; $B_j$: $n \times n$ coefficient matrices
+		\item $\varepsilon_t$: structural shocks with causal interpretation, $\text{Var}(\varepsilon_t) = I$
+		\item Each equation represents a structural relationship (e.g., production function, fiscal rule)
+	\end{itemize}
+	
+	\bigskip
+	\textbf{Log-linearized example} (from the fiscal model, $\bar{\eta} = 1$):
+	\[
+	\hat{y}_t = \frac{1}{1+\chi} \hat{G}_t + \frac{\chi}{1+\chi} \hat{A}_t, \qquad \hat{G}_t = \hat{y}_t + \frac{1}{1+\gamma} \hat{\eta}_t
+	\]
+	where $\chi \equiv \frac{\bar{G}/\bar{y}}{(1+\psi)(1-\bar{G}/\bar{y})}$. Endogeneity: $G_t$ is correlated with $A_t$ through the system.
+\end{frame}
+
+\begin{frame}{From Structural to Reduced Form}
+	Premultiply by $B_0^{-1}$:
+	\[
+	Y_t = \underbrace{B_0^{-1} B_1}_{A_1} Y_{t-1} + \cdots + \underbrace{B_0^{-1} B_J}_{A_J} Y_{t-J} + \underbrace{B_0^{-1} \varepsilon_t}_{u_t}
+	\]
+	
+	\begin{itemize}
+		\item Reduced-form VAR: can estimate $A_j$ by OLS (no contemporaneous variables)
+		\item Reduced-form residuals $u_t$ are linear combinations of structural shocks
+		\item $\text{Var}(u_t) = B_0^{-1} B_0^{-1\prime}$: gives $n(n+1)/2$ restrictions on $B_0$
+		\item $B_0$ has $n^2$ unknowns $\Rightarrow$ need $n^2 - n(n+1)/2 = n(n-1)/2$ additional restrictions
+	\end{itemize}
+	
+	These additional restrictions are \textbf{identifying assumptions}.
+\end{frame}
+
+\begin{frame}{Identification Strategies}
+	\textbf{Recursive (Cholesky) identification}: Order variables so that the first does not depend on any contemporaneous variable, the second may depend on the first only, etc. Then $B_0^{-1}$ is lower-triangular $=$ Cholesky decomposition of $\text{Var}(u_t)$.
+	
+	\bigskip
+	\textbf{Example}: Define $\hat{g}_t \equiv \hat{G}_t - \hat{y}_t$. Then $\hat{g}_t = \hat{\eta}_t/(1+\gamma)$ is exogenous, and $\hat{y}_t = \chi \hat{g}_t + \hat{A}_t$. No endogeneity problem.
+	
+	\bigskip
+	\textbf{Blanchard and Perotti (2002)}: Timing restriction---fiscal policy cannot respond to GDP within a quarter (data lag + legislative lag). Multipliers $\approx 1$.
+	
+	\bigskip
+	\textbf{Other approaches}: Sign restrictions (Uhlig, 2005), long-run restrictions (Blanchard-Quah, 1989), external instruments.
+\end{frame}
+
+\begin{frame}{Limitations of SVARs}
+	\textbf{Invertibility assumption}: Reduced-form innovations $u_t$ are linear combinations of structural shocks $\varepsilon_t$ \emph{at the same date}. Requires that $Y_t$ and its lags summarize all relevant information.
+	
+	\bigskip
+	If the VAR omits useful information: forecast surprises arise from imperfect information, not structural shocks $\Rightarrow$ mis-identification.
+	
+	\bigskip
+	\textbf{Tension}: Richer information set $\Leftrightarrow$ more parameters $\Leftrightarrow$ overfitting.
+	
+	\bigskip
+	\textbf{Appeal of SVARs}: Few assumptions on dynamics. \textbf{Appeal of structural models}: Explicit mechanisms, welfare analysis, connection to micro data.
+\end{frame}
+
+% ============================================================
+\section{VARs vs.\ Local Projections}
+% ============================================================
+
+\begin{frame}{Comparison}
+	\textbf{Local projection} at horizon $h$: regresses $y_{t+h}$ directly on $y_{1,t}$ (and lags). Estimates one horizon at a time. Flexible but noisy at long horizons.
+
+\bigskip
+	\textbf{VAR}: Estimates one-step-ahead dynamics; extrapolates IRFs from $A^h$. Tighter confidence bands but potentially biased if VAR order mis-specified.
+\end{frame}
+\begin{frame}{Comparison}
+	\textbf{Bias-variance tradeoff}:
+	Bias-variance tradeoff in simulated data
+	
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.35]{FigsChapter8/lp_vs_var_simulation}
+	\end{figure}
+	\vspace{-10pt}
+	
+	Plagborg-M{\o}ller and Wolf (2021): reduced-form VAR IRFs can be combined to replicate LP estimand.
+\end{frame}
+
+% ============================================================
+\section{A Structural Model of Fiscal Policy}
+% ============================================================
+
+\begin{frame}{The Model}
+	Production: $y_t = A_t k_t^\alpha \ell_t^{1-\alpha}$
+	
+	Capital accumulation: $k_{t+1} = (1-\delta) k_t + I_t$
+	
+	Resource constraint: $y_t = c_t + k_{t+1} - (1-\delta)k_t + G_t$
+	
+	\bigskip
+	Exogenous processes:
+	\[
+	A_t = (1-\rho_A) + \rho_A A_{t-1} + \varepsilon_{A,t}
+	\]
+	\[
+	\eta_t = (1-\rho_\eta) + \rho_\eta \eta_{t-1} + \varepsilon_{\eta,t}
+	\]
+\end{frame}
+
+\begin{frame}{Equilibrium Conditions}
+	\textbf{Euler equation}:
+	\[
+	\frac{1}{c_t} = \beta \E_t\left[\frac{1}{c_{t+1}}(1 + r_{t+1} - \delta)\right]
+	\]
+	
+	\textbf{Labor supply}: $w_t / c_t = \ell_t^\psi$
+	
+	\textbf{Factor prices}: $r_t = \alpha y_t / k_t$, $w_t = (1-\alpha) y_t / \ell_t$
+	
+	\textbf{Government}: $\gamma \eta_t / G_t = 1/c_t$ (equates marginal benefit and marginal cost of public spending)
+	
+	\textbf{Government budget}: $T_t = G_t$ (lump-sum taxes, non-distortionary)
+	
+	\bigskip
+	An equilibrium is $\{k_t, c_t, y_t, \ell_t, G_t, r_t, w_t, A_t, \eta_t\}$ satisfying all these conditions.
+\end{frame}
+
+\begin{frame}{Intuition for the Fiscal Multiplier}
+	\textbf{Without investment response}: Two ways to finance $G$:
+	\begin{itemize}
+		\item Consume less $\Rightarrow$ multiplier $= 0$
+		\item Work more $\Rightarrow$ multiplier $= 1$
+	\end{itemize}
+	Negative wealth effect from lump-sum taxes $\Rightarrow$ both $\Rightarrow$ multiplier $\in (0, 1)$.
+	
+	\bigskip
+	\textbf{With investment response}: A third channel---invest less to free resources.
+	\begin{itemize}
+		\item Transitory shock: reducing $I$ helps smooth $c$ $\Rightarrow$ less need to work more $\Rightarrow$ lower multiplier
+		\item Persistent shock: ``borrow from the future'' is less effective $\Rightarrow$ higher multiplier
+	\end{itemize}
+	
+	$\Rightarrow$ The fiscal multiplier is \textbf{increasing in the persistence} $\rho_\eta$.
+\end{frame}
+
+% ============================================================
+\section{Structural Estimation}
+% ============================================================
+
+\begin{frame}{Likelihood in the Static Model}
+	Given observables $(y_t, G_t)$, invert the model to recover shocks:
+	\[
+	A_t = y_t \left(1 - \frac{G_t}{y_t}\right)^{\frac{1}{1+\psi}}, \qquad \eta_t = \frac{G_t/y_t}{\gamma(1 - G_t/y_t)}
+	\]
+	
+	Sample likelihood:
+	\[
+	\text{Prob}(\{G_t, y_t\}_{t=1}^{T} | \psi, \gamma) = \prod_{t=1}^{T} p_A(A_t) \times p_\eta(\eta_t)
+	\]
+	
+	Identification comes from the functional form of the fiscal rule: $G/y$ is not affected by TFP shocks $\Rightarrow$ movements in $G/y$ identify fiscal shocks.
+\end{frame}
+
+\begin{frame}{The Kalman Filter}
+	In the dynamic model, states $(k_t, A_t, \eta_t)$ are unobserved. Linearize:
+	\[
+	\hat{X}_{t+1} = A(\theta) \hat{X}_t + B(\theta) \varepsilon_{t+1}
+	\]
+	\[
+	\hat{Y}_t = C(\theta) \hat{X}_t
+	\]
+	
+	where $X_t = (k_t, A_t, \eta_t)'$, $Y_t = (y_t, G_t)'$, $\theta$ = parameter vector.
+	
+	\bigskip
+	With $\varepsilon \sim N(0, I)$: $X_t | Y_{1:t-1} \sim N(X_{t|t-1}, P_{t|t-1})$. Likelihood:
+	\[
+	\text{Prob}(\{Y_t\}_{t=1}^{T} | \theta) = \prod_{t=1}^{T} N\!\left(Y_t \,\big|\, C(\theta) X_{t|t-1},\; C(\theta) P_{t|t-1} C(\theta)'\right)
+	\]
+	
+	The Kalman filter recursively updates $(X_{t|t-1}, P_{t|t-1})$ as new data arrive. Then maximize likelihood (MLE) or use Bayes' rule (Bayesian estimation).
+\end{frame}
+
+% ============================================================
+\section{Calibration}
+% ============================================================
+
+\begin{frame}{Calibration Strategy}
+	Set parameters using evidence \textbf{outside} the data of interest (the fiscal multiplier itself).
+	
+	\bigskip
+	\begin{itemize}
+		\item $\alpha = 1/3$: capital share from NIPA
+		\item $\delta = 0.019$ (quarterly): from $I/K = 0.076/4$
+		\item $\beta = (1 + \alpha \bar{y}/\bar{k} - \delta)^{-1} = 0.994$: from $\bar{k}/\bar{y} = 3.3 \times 4$ (quarterly)
+		\item $\gamma = 0.3$: ratio of public to private consumption
+		\item $\rho_\eta$: report results for a range of values
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Calibrating Labor Supply: $\psi$}
+	$\psi$ = inverse Frisch elasticity of labor supply. Two sources of evidence:
+	
+	\bigskip
+	\textbf{Frisch elasticity}: Tax-rate variation $\Rightarrow$ $1/\psi \approx 1/2$, so $\psi \approx 2$ (Chetty, 2012).
+	
+	\bigskip
+	\textbf{Wealth effects}: Golosov, Graber, Mogstad, and Novgorodsky (2021) use lottery winners. Winning \$100 $\Rightarrow$ \$2.30 drop in annual earnings. From the labor supply FOC:
+	\[
+	\text{change in annual earnings} = -\$2.30 = -\frac{4 w\ell}{\psi c} \cdot \frac{r}{1+r} \cdot \$100
+	\]
+	
+	With $r = 0.01$ (quarterly), $w\ell/c = 1.2$: $\psi = 2.1$.
+	
+	\bigskip
+	Both sources point to $\psi \approx 2$.
+\end{frame}
+
+\begin{frame}{Results}
+	
+	IRFs following a fiscal shock (left); cumulative multiplier over 12 quarters (right)
+	\begin{columns}
+\begin{column}{0.44\textwidth}
+	\includegraphics[width=\textwidth]{FigsChapter8/fiscal_mult_irfs.pdf}
+	\end{column}
+	\begin{column}{0.44\textwidth}
+		\includegraphics[width=\textwidth]{FigsChapter8/fiscal_mult_calibration.pdf}
+	\end{column}
+\end{columns}
+	
+	\textbf{Left panel}: Bulk of adjustment through $\downarrow I$; small $\uparrow \ell$; $y$ initially rises then falls below steady state as $k$ declines. Cumulative multiplier $\approx 0$.\\
+	\textbf{Right panel}: Multiplier increasing in $\rho_\eta$ (persistent shocks limit the investment channel). Multiplier larger when $\psi$ smaller (more elastic labor supply).
+	
+\end{frame}
+
+\begin{frame}{General Principles of Calibration}
+	\begin{enumerate}
+		\item \textbf{Understand the economics}: Know which mechanisms drive the answer; calibrate parameters governing those mechanisms with particular care
+		
+		\item \textbf{Discipline the mechanisms}: Seek evidence that speaks directly to the strength of key channels (micro studies with quasi-experimental variation are especially attractive)
+		
+		\item \textbf{Robustness}: Report sensitivity to parameter values and to the model's assumptions
+		
+		\item \textbf{Model validation}: If additional empirical evidence is available, check whether the calibrated model matches it
+	\end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Comparing the Four Strategies}
+	\textbf{Natural experiments}: Compelling identification; may not generalize. Increasingly used as calibration targets.
+	
+	\bigskip
+	\textbf{Structural VARs}: Few assumptions on dynamics; flexible IRFs. Limited by invertibility and identification.
+	
+	\bigskip
+	\textbf{Structural estimation}: Model $=$ data-generating process. Full likelihood but conclusions depend on the model.
+	
+	\bigskip
+	\textbf{Calibration}: Parameters from external evidence; asks whether model mechanisms can explain the data. Transparent about what the model can and cannot do.
+	
+	\bigskip
+	Researchers often combine methods: natural experiments $\to$ calibration targets $\to$ structural model $\to$ policy counterfactuals.
+\end{frame}
+
+\begin{frame}{Key Takeaways (I)}
+	\begin{enumerate}
+		\item \textbf{Identification challenge}: Equilibrium data reflect multiple simultaneous shocks. Estimating a causal effect requires isolating exogenous variation.
+		
+		\item \textbf{Natural experiments}: Military spending (Ramey, 2011), cross-state variation (Nakamura-Steinsson, 2014), lottery winners (Golosov et al., 2021). Local projections (Jord\`{a}, 2005) trace out IRFs horizon by horizon.
+		
+		\item \textbf{Structural VARs}: $B_0 Y_t = \sum_{j=1}^{J} B_j Y_{t-j} + \varepsilon_t$. Reduced form estimable by OLS; need $n(n-1)/2$ identifying restrictions on $B_0$. Recursive/Cholesky, timing restrictions, sign restrictions, long-run restrictions.
+		
+		\item \textbf{VARs vs.\ local projections}: Bias-variance tradeoff. LP: flexible, wide bands. VAR: tighter bands, potential bias from mis-specification.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+	\begin{enumerate}
+		\setcounter{enumi}{4}
+		\item \textbf{Structural model}: Dynamic fiscal model with capital. Euler equation, labor supply FOC, factor pricing, government optimality. Multiplier depends on persistence $\rho_\eta$ and labor elasticity $1/\psi$.
+		
+		\item \textbf{Structural estimation}: Invert model for shocks $\to$ likelihood. Dynamic models: Kalman filter for unobserved states; linear-Gaussian state-space. MLE or Bayesian.
+		
+		\item \textbf{Calibration}: Set parameters from external evidence ($\alpha$ from factor shares, $\delta$ from $I/K$, $\psi$ from micro studies). Report robustness. Model validation with additional evidence.
+		
+		\item \textbf{Fiscal multiplier}: Wealth effects alone yield multipliers near zero (investment channel absorbs the shock).
+	\end{enumerate}
+\end{frame}
+
+
+\end{document}
+

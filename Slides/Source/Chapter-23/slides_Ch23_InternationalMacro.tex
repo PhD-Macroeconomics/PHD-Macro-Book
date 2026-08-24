@@ -1,0 +1,788 @@
+\documentclass[blue]{beamer}
+\usetheme{metropolis}
+\usepackage{amssymb,latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{darkblue}{rgb}{0,0,.75}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+%\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage{multirow}
+
+\usepackage{lipsum}
+\usefonttheme{professionalfonts}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+%\AtBeginSection{}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+
+%\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+%\usepackage{hyperref}
+
+
+
+\title[Chapter23]{Chapter 23: International Macroeconomics}
+\author[Giancarlo Corsetti, Luca Dedola, and Simon Lloyd]{Chapter authors: Giancarlo Corsetti, Luca Dedola, and Simon Lloyd}
+
+\date[August 2026]{August 2026}
+
+
+
+
+\begin{document}
+
+% ============================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+% ============================================================
+\section{Introduction and Open-Economy Accounting}
+% ============================================================
+
+\begin{frame}{Introduction}
+Previous chapters studied closed economies. In reality, the global economy is deeply interconnected: national business cycles are hit by foreign spillovers; many shocks (the IT revolution, the GFC, Covid-19) are global; openness can also help smooth domestic shocks.
+
+\bigskip
+This chapter: a workhorse \textbf{two-country} model for large advanced economies (committed to repaying debt); the next chapter covers small open economies that may default.
+
+\end{frame}
+
+\begin{frame}{Introduction (cont.)}
+\bigskip
+\textbf{Two stylized facts challenge standard models}:
+\begin{enumerate}
+    \item Net exports and the current account (external saving) are \textbf{countercyclical}: deficits widen in booms
+    \item International relative prices (RER and TOT) tend to \textbf{appreciate} when output is relatively high
+\end{enumerate}
+
+\bigskip
+Key for reconciliation: the degree of \textbf{international risk sharing} (financial market structure) and the \textbf{substitutability} of domestic vs.\ imported goods (the trade elasticity).
+\end{frame}
+
+\begin{frame}{National Accounting and the Balance of Payments}
+GDP identity: $Y = C + I + G + NX$, with $NX = X - M$.
+
+\bigskip
+\textbf{Balance of Payments}: $CA + FA + KA = 0$.
+\begin{itemize}
+    \item \textbf{Current Account}: trade balance plus net factor income and net unilateral transfers: $CA = NX + NFI + NUT$; for the US, $CA \simeq NX$
+    \item \textbf{Financial Account}: changes in cross-border ownership of financial assets (direct, portfolio, other investment)
+    \item \textbf{Capital Account}: capital transfers, non-produced non-financial assets; small, so $CA \simeq -FA$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{National Accounting and the Balance of Payments (cont.)}
+US balance of payments (left); current, capital, and financial accounts (right)
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter23/fig1}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{National Accounting and the Balance of Payments (cont.)}
+National saving: $S = Y - G - C = I + NX$. A CA deficit $=$ a trade deficit financed by capital inflows: the US has imported more than it exported and saved less than it invested. The post-mid-1990s decline spawned the ``global imbalances'' literature and work on the dollar's ``exorbitant privilege.''
+\end{frame}
+
+\begin{frame}{Country Heterogeneity}
+\textbf{Income groups} (IMF): Advanced Economies (2023 GDP per capita $\approx$ \$90,000), Emerging Markets ($\approx$ \$10,000), Low-Income Countries ($<$ \$2,000). Disparities persistent over time.
+
+\bigskip
+\textbf{Size}: India 1.45bn, China 1.41bn, US 340m, Europe 745m, Africa 1.5bn. Low-income countries can carry large global weight through population.
+
+\end{frame}
+
+\begin{frame}{Country Heterogeneity (cont.)}
+\bigskip
+\textbf{Size shapes modeling}:
+\begin{itemize}
+    \item \textbf{Large economies}: market power; their dynamics move world interest rates, TOT, exchange rates $\Rightarrow$ \textbf{two-country models} (this chapter)
+    \item \textbf{Small open economies}: price takers in international markets $\Rightarrow$ next chapter (with default)
+    \item Gal\'{\i}-Monacelli: the small-open-economy model is the limit of this chapter's model as one country becomes infinitesimal --- though specialization preserves monopoly power over its own TOT
+\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{International Business-Cycle Facts}
+% ============================================================
+
+\begin{frame}{Business Cycles Around the World (Table 23.1)}
+HP-filtered business cycles, 96 countries, 1980--2023, population-weighted
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Statistic & US & All & Advanced & Emerging & Low-Income \\
+\midrule
+$\sigma_y$ & 1.96 & 2.89 & 2.13 & 3.10 & 2.41 \\
+$\sigma_c/\sigma_y$ & 0.94 & 1.24 & 1.03 & 1.16 & 2.35 \\
+$\sigma_i/\sigma_y$ & 4.55 & 3.04 & 3.46 & 2.76 & 4.77 \\
+$\sigma_x/\sigma_y$ & 4.11 & 3.91 & 3.43 & 3.55 & 7.87 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Business Cycles Around the World (Table 23.1, cont.)}
+Correlations and averages
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Statistic & US & All & Advanced & Emerging & Low-Income \\
+\midrule
+corr$(c, y)$ & 0.93 & 0.67 & 0.84 & 0.66 & 0.41 \\
+corr$(i, y)$ & 0.65 & 0.70 & 0.76 & 0.71 & 0.47 \\
+corr$(tb/y, y)$ & $-0.59$ & $-0.27$ & $-0.41$ & $-0.27$ & $-0.09$ \\
+corr$(ca/y, y)$ & $-0.53$ & $-0.31$ & $-0.36$ & $-0.32$ & $-0.09$ \\
+autocorr$(y)$ & 0.51 & 0.54 & 0.47 & 0.55 & 0.49 \\
+mean $tb/y$ & $-2.3$ & $-1.0$ & $-0.7$ & $-0.1$ & $-9.2$ \\
+mean $(x+m)/y$ & 22.0 & 28.1 & 32.5 & 26.5 & 35.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Seven Facts}
+\begin{enumerate}
+    \item \textbf{Procyclical demand}: consumption, investment, exports, imports all positively correlated with output
+    \item \textbf{Persistence}: output and components strongly autocorrelated
+    \item \textbf{Volatility ranking}: imports, exports, investment most volatile; then government spending and consumption
+    \item \textbf{Countercyclical trade balances and current accounts}: import more in expansions, surpluses in recessions
+    \item \textbf{EM/LI cycles are more volatile}: $\sigma_y \approx 2\%$ in AEs; about 50\% (EM) and 25\% (LI) higher elsewhere
+    \item \textbf{Less consumption smoothing in LIs}: $\sigma_c/\sigma_y$ near 1 in AEs/EMs (durables explain much), but above 2 in LIs
+    \item \textbf{Cross-border comovement}: output is positively correlated across borders, especially among advanced countries
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Synchronization}
+HP-filtered log GDP per capita: US, Canada, UK, 1970--2023
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.38]{FigsChapter23/fig2}
+\end{figure}
+\vspace{-10pt}
+{\small The three series move closely in tandem.}
+\end{frame}
+
+\begin{frame}{Synchronized Business Cycles (Table 23.2)}
+Correlations of US with ROW, HP-filtered ($\lambda = 1600$)
+\begin{table}
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+Statistic & 1971:Q3--2018:Q2 & 1971:Q3--2007:Q4 \\
+\midrule
+\multicolumn{3}{l}{\emph{Correlations (US vs.\ ROW)}} \\
+GDP & 0.58 & 0.56 \\
+$C$ & 0.46 & 0.44 \\
+$I$ & 0.56 & 0.48 \\
+CPI & 0.62 & 0.57 \\
+\addlinespace
+\multicolumn{3}{l}{\emph{Backus-Smith correlation (US vs.\ ROW)}} \\
+Rel.\ $C$ vs.\ RER & $-0.49$ & $-0.53$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-5pt}
+{\small ROW: Australia, Canada, France, Germany, Ireland, Italy, Japan, Sweden, UK.}
+\end{frame}
+
+\begin{frame}{Synchronization: Implications}
+At the country level, TFP --- a key business-cycle driver --- exhibits a \textbf{low degree of synchronization} (small contemporaneous covariance, moderate delayed spillovers; Backus-Kehoe-Kydland 1992).
+
+\bigskip
+$\Rightarrow$ To match the observed output comovement, quantitative models need a sufficiently strong \textbf{transmission mechanism} for country-specific productivity innovations.
+\end{frame}
+
+\begin{frame}{Four Integration Puzzles}
+\begin{enumerate}
+    \item \textbf{Feldstein-Horioka}: national saving and investment are highly correlated --- under perfect capital mobility, investment should flow to high-return countries regardless of local saving
+
+    \item \textbf{Home bias in equity portfolios}: investors strongly prefer domestic assets despite diversification gains
+
+    \item \textbf{Consumption correlation puzzle}: cross-country consumption is \emph{less} correlated than frictionless risk-sharing predicts (it should be more correlated than output)
+
+    \item \textbf{Home bias in trade}: within-country trade vastly exceeds international trade, even among integrated regions
+\end{enumerate}
+
+\bigskip
+All four point to frictions in international capital mobility, goods trade, and risk sharing (Obstfeld-Rogoff, 2001).
+\end{frame}
+
+\begin{frame}{Exchange Rates and Relative Prices: Definitions}
+\textbf{Nominal exchange rate} $\mathcal{E}_t$: home currency units per unit of foreign currency. An increase $=$ home \textbf{depreciation}.
+
+\bigskip
+\textbf{Law of One Price} (good $i$): $P_{i,t} = \mathcal{E}_t P^*_{i,t}$. Holds well for tradables; fails for non-tradables.
+
+\textbf{Purchasing Power Parity}: $P_t = \mathcal{E}_t P_t^*$ for representative baskets. Fails due to home bias, non-tradables, LOOP violations.
+
+\end{frame}
+
+\begin{frame}{Exchange Rates and Relative Prices: Definitions (cont.)}
+\bigskip
+\textbf{Real exchange rate}:
+\[
+Q_t = \frac{\mathcal{E}_t P_t^*}{P_t}
+\]
+An increase in $Q_t$ is a home \textbf{real depreciation}. Absolute PPP $\Leftrightarrow Q_t = 1$. In changes:
+\[
+\Delta q_t = \Delta e_t + \pi_t^* - \pi_t
+\]
+Relative PPP holds if $\Delta q_t = 0$.
+\end{frame}
+
+\begin{frame}{The Terms of Trade}
+\[
+T_t = \frac{P_{F,t}}{P^*_{H,t}\mathcal{E}_t}
+\]
+
+The relative price of the \textbf{import basket} to the \textbf{export basket}. An increase is a home TOT \textbf{worsening}: imports become relatively more expensive.
+
+\end{frame}
+
+\begin{frame}{The Terms of Trade (cont.)}
+\bigskip
+TOT vs.\ RER: the import basket differs from the consumption basket at home, and the export basket differs from the consumption basket abroad. The RER reflects relative \emph{purchasing power}; the TOT capture actual relative prices of \emph{traded} goods.
+
+\bigskip
+Empirically, the RER and TOT are only weakly correlated, with the TOT less volatile.
+\end{frame}
+
+\begin{frame}{Exchange-Rate Facts and Puzzles}
+Nominal and real US effective exchange rates, levels and changes
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{FigsChapter23/fig3}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Exchange-Rate Facts and Puzzles (cont.)}
+\begin{itemize}
+    \item The RER closely \textbf{tracks the NER}; both more volatile than macro aggregates, less than other financial variables
+    \item \textbf{Exchange-rate disconnect}: no robust contemporaneous correlation with fundamentals; \textbf{Meese-Rogoff}: models cannot beat the random walk out of sample
+    \item \textbf{PPP puzzle}: high persistence, weak mean reversion --- PPP fails in the short run but anchors the long run (RER stationary)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exchange-Rate Facts and Puzzles (cont.)}
+\begin{itemize}
+    \item RER nearly an order of magnitude more volatile than inflation, consumption, output
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Exchange-Rate Facts and Puzzles (cont.)}
+US RER and relative consumption (HP-filtered) --- correlation $\approx -0.5$
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.38]{FigsChapter23/fig4}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Exchange-Rate Facts and Puzzles (cont.)}
+\textbf{Backus-Smith puzzle}: the RER is \emph{negatively} correlated with relative consumption --- when home goods are expensive (appreciation), home consumption is relatively \emph{high}, contrary to scarcity logic. (Also: the \textbf{Mussa puzzle} --- RER volatility jumped after Bretton Woods collapsed in 1973.)
+\end{frame}
+
+\begin{frame}{Empirical Transmission of Productivity Shocks}
+Estimated IRFs to a positive US tradable-sector labor-productivity shock vs.\ G10 (Corsetti-Dedola-Leduc 2014, sign-restricted BVAR, 1973--2004)
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.42]{FigsChapter23/fig5}
+\end{figure}
+\vspace{-10pt}
+
+\end{frame}
+
+\begin{frame}{Empirical Transmission of Productivity Shocks (cont.)}
+A relative US productivity improvement leads to:
+\begin{itemize}
+    \item Higher US tradable output \emph{and} higher relative consumption
+    \item \textbf{Appreciation} of the US real exchange rate and TOT (imports relatively cheaper)
+    \item \textbf{Countercyclical external balances}: NX/GDP and NFA/GDP fall --- the US imports and consumes more today, funded by borrowing
+\end{itemize}
+
+\bigskip
+These conditional responses crystallize the two stylized facts that the theory must match. Related: ``Keynesian supply shocks'' (Guerrieri et al.\ 2022) --- productivity shocks move both supply and demand, and demand effects can dominate.
+\end{frame}
+
+% ============================================================
+\section{The Workhorse Two-Country Model}
+% ============================================================
+
+\begin{frame}{Setup: Preferences and Armington Aggregation}
+Two equal-sized countries, $H$ and $F$; representative households; endowments $Y_{H,t}$ and $Y^*_{F,t}$ of imperfectly substitutable tradables.
+
+\[
+U_t = \E_t\sum_{j=0}^{\infty}\beta^j u(C_{t+j}), \qquad u(C) = \frac{C^{1-\sigma}-1}{1-\sigma}
+\]
+
+\textbf{Armington aggregator}:
+\[
+C_t = \left[a_H^{\frac{1}{\phi}}c_{H,t}^{\frac{\phi-1}{\phi}} + a_F^{\frac{1}{\phi}}c_{F,t}^{\frac{\phi-1}{\phi}}\right]^{\frac{\phi}{\phi-1}}, \qquad a_H + a_F = 1
+\]
+
+$\phi > 0$ is the \textbf{trade elasticity} (substitutes if $\phi > 1$, complements if $\phi < 1$); $a_H \in (0.5, 1]$ captures \textbf{home bias}.
+\end{frame}
+
+\begin{frame}{Intratemporal Demands and the CPI}
+Expenditure minimization subject to the Armington aggregator gives the demand functions:
+\[
+c_{H,t} = a_H\left(\frac{p_{H,t}}{P_t}\right)^{-\phi}C_t, \qquad c_{F,t} = a_F\left(\frac{p_{F,t}}{P_t}\right)^{-\phi}C_t
+\]
+
+and the welfare-based consumer price index:
+\[
+P_t = \left[a_H p_{H,t}^{1-\phi} + a_F p_{F,t}^{1-\phi}\right]^{\frac{1}{1-\phi}}
+\]
+
+The foreign CPI $P_t^*$ is defined analogously (with weights $a_H^*$, $a_F^*$; symmetry: $a_H = a_F^* > a_H^* = a_F$).
+
+\bigskip
+Market clearing for each good: $Y_{H,t} = c_{H,t} + c^*_{H,t}$ and $Y^*_{F,t} = c_{F,t} + c^*_{F,t}$.
+\end{frame}
+
+\begin{frame}{Relative Prices in the Model}
+Normalize $\mathcal{E}_t = 1$ (flexible prices, real analysis) and assume LOOP: $p_{i,t} = p^*_{i,t}$.
+
+\bigskip
+\textbf{Terms of trade}: $T_t = p_{F,t}/p_{H,t}$ (up $=$ home worsening). \textbf{RER}: $Q_t = P_t^*/P_t$ (up $=$ home real depreciation).
+
+\end{frame}
+
+\begin{frame}{Relative Prices in the Model (cont.)}
+\bigskip
+LOOP does \textbf{not} imply PPP: with home bias ($a_H = a_F^* > 1/2$), baskets differ across countries. The RER-TOT link:
+\[
+Q_t^{1-\phi} = \frac{a_H^* + a_F^* T_t^{1-\phi}}{a_H + a_F T_t^{1-\phi}}
+\]
+
+\begin{itemize}
+    \item $a_H > 1/2$: RER and TOT comove \textbf{positively}
+    \item $a_H = 1/2$: PPP holds, $Q_t = 1$ regardless of TOT
+    \item Counterfactually, $Q$ and $T$ are perfectly correlated --- non-tradables and distribution costs break this
+\end{itemize}
+
+\bigskip
+The model is closed by specifying \textbf{international financial markets}, since $C_t$ can deviate from the value of $Y_{H,t}$ through asset trade.
+\end{frame}
+
+\begin{frame}{Three Financial-Market Structures}
+\begin{enumerate}
+    \item \textbf{Complete markets}: all risk traded via Arrow-Debreu securities; the RER is pinned down by the ratio of marginal utilities across borders
+
+    \item \textbf{Financial autarky}: no international asset trade; the RER/TOT adjust to balance trade period by period
+
+    \item \textbf{Riskless bonds only}: trade in a single non-contingent bond; self-insurance; the RER linked to the \textbf{uncovered interest parity} condition
+\end{enumerate}
+
+\bigskip
+Throughout: full commitment to repay (relaxed in Chapter 24).
+\end{frame}
+
+\begin{frame}{Complete Markets: Euler Equations and UIP}
+Home budget with Arrow-Debreu securities $B_{H,t}(s_{t+1})$ at prices $q_t(s_{t+1})$:
+\[
+P_tC_t + \int_{s_{t+1}} q_t(s_{t+1})B_{H,t}(s_{t+1}) ds_{t+1} \leq B_{H,t-1} + p_{H,t}Y_{H,t}
+\]
+
+State-by-state Euler equation:
+\[
+u'(C_t)\frac{q_t(s_{t+1})}{P_t} = \Pr(s_{t+1}|s_t)\beta u'(C_{t+1}(s_{t+1}))\frac{1}{P_{t+1}(s_{t+1})}
+\]
+
+\end{frame}
+
+\begin{frame}{Complete Markets: Euler Equations and UIP (cont.)}
+No-arbitrage between home and foreign riskless bundles gives the \textbf{real UIP condition}:
+\[
+1 = \beta R_t \E_t\left[\frac{u'(C_{t+1})}{u'(C_t)}\right] = \beta R_t^* \E_t\left[\frac{u'(C_{t+1})}{u'(C_t)}\frac{Q_{t+1}}{Q_t}\right]
+\]
+
+Expected real depreciation is tied to real interest differentials and expected marginal-utility growth.
+\end{frame}
+
+\begin{frame}{Complete Markets: Full Risk Sharing}
+Combining home and foreign state-by-state conditions yields, for every date and state:
+\[
+Q_t = \kappa_0\left(\frac{C_t}{C_t^*}\right)^{\sigma}
+\]
+with $\kappa_0$ fixed by the time-0 wealth distribution (equal to 1 under initial symmetry) and \textbf{constant forever}.
+
+\end{frame}
+
+\begin{frame}{Complete Markets: Full Risk Sharing (cont.)}
+\bigskip
+Home consumption can rise relative to foreign \emph{only with a home real depreciation}. The model-implied correlation between relative consumption and the RER is $+1$ --- vs.\ roughly $-0.5$ in the data: the \textbf{Backus-Smith puzzle}.
+
+\bigskip
+The ex post contingent transfers supporting this allocation are efficient: a low price signals relative abundance of the home good. Absent other distortions, the complete-markets equilibrium is \textbf{first-best} from the perspective of a global planner.
+\end{frame}
+
+\begin{frame}{Financial Autarky and the Wealth Gap}
+Trade balance in home consumption units:
+\[
+tb_t \equiv \frac{p_{F,t}}{P_t}c_{F,t}\cdot(-1) + \frac{p_{H,t}}{P_t}c^*_{H,t} \qquad \text{(exports minus imports)}
+\]
+
+Under autarky, $tb_t = 0$ every period: $T_t c_{F,t} = c^*_{H,t}$, equivalently $C_t = (p_{H,t}/P_t)Y_{H,t}$ --- a static, period-by-period problem (two-country analog of hand-to-mouth). Real income depends on the TOT:
+\[
+\left(\frac{p_{H,t}}{P_t}\right)^{1-\phi} = \frac{1}{a_H + (1-a_H)T_t^{1-\phi}}
+\]
+
+\end{frame}
+
+\begin{frame}{Financial Autarky and the Wealth Gap (cont.)}
+\bigskip
+\textbf{The wealth gap}: with $\chi_t = u'(C_t)/P_t$ the marginal utility of wealth (Lagrange multiplier),
+\[
+\mathcal{W}_t \equiv \frac{\chi_t^*}{\chi_t} = \left(\frac{C_t}{C_t^*}\right)^{\sigma}\frac{1}{Q_t}
+\]
+
+$\mathcal{W}_t > 1$: home is relatively wealthy. Under complete markets, $\mathcal{W}_t = 1/\kappa_0$ is \textbf{constant}; under incomplete markets it varies with non-traded risk.
+\end{frame}
+
+\begin{frame}{The Bond Economy}
+Trade in one non-contingent bond with price $\mathcal{Q}_t = 1/(1+i_t)$:
+\[
+C_t = \frac{p_{H,t}Y_{H,t} - (\mathcal{Q}_tB_t - B_{t-1})}{P_t}
+\]
+
+\end{frame}
+
+\begin{frame}{The Bond Economy (cont.)}
+Trade balance $= (\mathcal{Q}_tB_t - B_{t-1})/P_t$; current account $ca_t = (B_t - B_{t-1})/P_t$. Euler equation:
+\[
+\mathcal{Q}_t = \beta\E_t\left[\frac{u'(C_{t+1})}{u'(C_t)}\frac{P_t}{P_{t+1}}\right]
+\]
+
+\end{frame}
+
+\begin{frame}{The Bond Economy (cont.)}
+No-arbitrage ($\mathcal{Q}_t = \mathcal{Q}_t^*$) gives UIP in expectation. The ex-post \textbf{marginal-utility wedge}
+\[
+\epsilon_{t+1} \equiv \frac{u'(C_{t+1})}{u'(C_t)}\frac{P_t}{P_{t+1}} - \frac{u'(C^*_{t+1})}{u'(C_t^*)}\frac{P_t^*}{P^*_{t+1}} = \frac{\chi_{t+1}}{\chi_t} - \frac{\chi^*_{t+1}}{\chi_t^*}
+\]
+is zero \textbf{only in expectation} --- not state by state as under complete markets. Relative wealth follows a random walk in the linearized model (the classic \textbf{unit-root problem}); stationarity is restored with Uzawa-style debt-elastic discounting (or small asset-holding costs).
+\end{frame}
+
+\begin{frame}{Log-Linearized Building Blocks}
+Linearize around the symmetric steady state with $Q = T = 1$ and home bias $a_H = a_F^* > 1/2$ (hats: percent deviations).
+
+\bigskip
+\textbf{RER-TOT}:
+\[
+\hat{Q}_t = (2a_H - 1)\hat{T}_t
+\]
+
+\end{frame}
+
+\begin{frame}{Log-Linearized Building Blocks (cont.)}
+\textbf{Wealth gap}:
+\[
+\hat{\mathcal{W}}_t = \sigma(\hat{C}_t - \hat{C}_t^*) - \hat{Q}_t, \qquad \E_t[\hat{\mathcal{W}}_{t+1} - \hat{\mathcal{W}}_t] = 0
+\]
+(zero under complete markets; a driftless martingale in the bond economy).
+
+\bigskip
+\textbf{Global resource constraint} (endowments exogenous):
+\[
+\hat{Y}_{H,t} + \hat{Y}^*_{F,t} = \hat{C}_t + \hat{C}_t^*
+\]
+\end{frame}
+
+\begin{frame}{Relative Demand and Relative Supply}
+Total demands $D_{H,t} = c_{H,t} + c^*_{H,t}$, $D^*_{F,t} = c_{F,t} + c^*_{F,t}$. Combining demand ratios with the RER-TOT link:
+\[
+\hat{D}_{H,t} - \hat{D}^*_{F,t} = (2a_H - 1)(\hat{C}_t - \hat{C}_t^*) + 4a_H(1-a_H)\phi\hat{T}_t
+\]
+
+Substituting the wealth gap:
+\[
+\hat{D}_{H,t} - \hat{D}^*_{F,t} = \sigma^{-1}(2a_H - 1)\hat{\mathcal{W}}_t + \sigma^{-1}\left[4a_H(1-a_H)(\sigma\phi - 1) + 1\right]\hat{T}_t
+\]
+
+\textbf{Two channels}: a \textbf{wealth channel} (scaled by home bias $2a_H - 1$) and a \textbf{substitution channel} (always positive in $\hat{T}$: cheaper home goods raise home demand).
+
+\end{frame}
+
+\begin{frame}{Relative Demand and Relative Supply (cont.)}
+\bigskip
+Substitution is the \emph{only} channel when markets are complete ($\hat{\mathcal{W}}_t = 0$) or with no home bias ($a_H = 1/2$). With home bias and incomplete markets, wealth effects can \textbf{work against} substitution: a TOT worsening cuts imperfectly insured households' purchasing power.
+
+\end{frame}
+
+\begin{frame}{Relative Demand and Relative Supply}
+RD (downward) and RD' (upward) against relative supply (vertical) in $\{Y_H/Y_F,\, 1/\mathcal{T}\}$ space; a productivity shock shifts RS right
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.52]{FigsChapter23/fig6}
+\end{figure}
+\vspace{-10pt}
+\end{frame}
+
+\begin{frame}{Equilibrium TOT: Complete Markets}
+Combining relative demand with relative supply and solving:
+\[
+\hat{T}_t = \frac{\sigma}{4a_H(1-a_H)(\sigma\phi - 1) + 1}\left(\hat{Y}_{H,t} - \hat{Y}^*_{H,t}\right)
+\]
+
+The denominator is positive for $a_H \in (0.5, 1)$: the home TOT \textbf{unambiguously worsen} (and the RER depreciates) with a relative productivity gain. The coefficient vanishes as goods become highly substitutable and is largest as $\phi \to 0$.
+\end{frame}
+
+\begin{frame}{Equilibrium TOT: Financial Autarky and Cole-Obstfeld}
+\[
+\hat{T}_t = \frac{1}{1 - 2a_H(1-\phi)}\left(\hat{Y}_{H,t} - \hat{Y}^*_{H,t}\right)
+\]
+
+The sign now depends on the trade elasticity: the TOT worsen iff
+\[
+\phi > \tilde{\phi}^{FA}_{TOT} \equiv 1 - \frac{1}{2a_H}
+\]
+
+Below the threshold (strong complementarity), a home productivity gain \textbf{strengthens} the TOT and appreciates the RER --- the RD' configuration of Figure 23.6 --- generating the negative RER-relative-consumption correlation of \textbf{Backus-Smith}.
+
+\end{frame}
+
+\begin{frame}{Equilibrium TOT: Financial Autarky and Cole-Obstfeld (cont.)}
+\bigskip
+\textbf{Cole-Obstfeld benchmark} ($\sigma = \phi = 1$): the TOT expressions under complete markets and autarky \textbf{coincide}. TOT move one-for-one with relative output, delivering efficient sharing of productivity risk \emph{without any asset trade}: the value of national output is constant, and both countries' consumption rises.
+\end{frame}
+
+\begin{frame}{Capital Flows and the Marshall-Lerner Condition}
+Under complete markets, track ``notional'' net foreign assets $\hat{B}_t$ (cumulative real net exports):
+\[
+\hat{B}_t - \beta^{-1}\hat{B}_{t-1} = (1-a_H)\sigma^{-1}\left[2a_H(\sigma\phi - 1) + 1 - \sigma\right]\hat{T}_t
+\]
+
+\end{frame}
+
+\begin{frame}{Capital Flows and the Marshall-Lerner Condition (cont.)}
+After a home output boom that worsens the TOT, capital flows \textbf{from home to foreign} (home runs a trade surplus) iff
+\[
+\phi > \frac{1}{\sigma} + \frac{1}{2a_H}\left(1 - \frac{1}{\sigma}\right)
+\]
+--- the general-equilibrium \textbf{Marshall-Lerner condition}. With log utility ($\sigma = 1$): simply $\phi > 1$.
+
+\bigskip
+If violated (gross complements): when home booms, the home marginal utility of \emph{imports} rises; it is efficient for foreign to produce and export more, supported by a sharp home TOT deterioration that raises the value of foreign output. Financial resources flow \textbf{into} the booming country: a \textbf{countercyclical external deficit} --- as in the data.
+\end{frame}
+
+% ============================================================
+\section{The Production Economy}
+% ============================================================
+
+\begin{frame}{Endogenous Labor Supply and Production}
+\[
+U_t = \E_t\sum_{j=0}^{\infty}\beta^j\left[u(C_{t+j}) - \zeta\nu(L_{t+j})\right], \qquad \nu(L) = \frac{L^{1+\eta}}{1+\eta}
+\]
+
+\textbf{Labor supply}: $C_t^{-\sigma}w_t = \zeta L_t^{\eta}$ ($\eta$ = inverse Frisch elasticity).
+
+\textbf{Production} (competitive firms): $Y_{H,t} = Z_tL_t^{\alpha}$, with AR(1) productivity $Z_t = \rho_1 Z_{t-1} + (1-\rho_1)\bar{Z} + \varepsilon_t$.
+
+\textbf{Labor demand}: $w_t = \dfrac{p_{H,t}}{P_t}Z_t L_t^{\alpha-1}$
+
+\bigskip
+Key open-economy feature: labor demand depends on the \textbf{product real wage} $W_t/p_{H,t}$, so the relative price $p_{H,t}/P_t$ shifts labor demand --- a channel for cross-border spillovers.
+\end{frame}
+
+\begin{frame}{Relative Supply with Production}
+Combining labor supply, labor demand, the production function, and the wealth-gap definition:
+\[
+\hat{Y}^S_{H,t} - \hat{Y}^{*S}_{F,t} = \frac{1+\eta}{1-\alpha+\eta}\left(\hat{Z}_t - \hat{Z}_t^*\right) - \frac{\alpha}{1-\alpha+\eta}\left(\hat{\mathcal{W}}_t + \hat{T}_t\right)
+\]
+
+\textbf{Complete markets} ($\hat{\mathcal{W}}_t = 0$): relative supply is \textbf{always increasing} in the relative price of home goods --- a real appreciation lowers relative consumption and raises relative labor supply. The slope is independent of openness.
+\end{frame}
+
+\begin{frame}{Relative Supply under Autarky; Global Output}
+\textbf{Financial autarky} (substituting the autarky wealth gap):
+\[
+\hat{Y}^S_{H,t} - \hat{Y}^{*S}_{F,t} = \frac{1+\eta}{1-\alpha+\eta+\alpha\sigma}\left(\hat{Z}_t - \hat{Z}_t^*\right) + \frac{2\alpha(1-a_H)(\sigma-1)}{1-\alpha+\eta+\alpha\sigma}\hat{T}_t
+\]
+
+The slope's sign depends on $\sigma \gtrless 1$: with $\sigma > 1$, an appreciation raises purchasing power and \textbf{leisure} --- labor supply falls, the opposite of the complete-markets case. Relative supply is independent of the TOT when $\sigma = 1$ (log preferences).
+
+\bigskip
+\textbf{Global output} rises unambiguously with productivity, under any market structure:
+\[
+\hat{Y}_{H,t} + \hat{Y}^*_{F,t} = \hat{C}_t + \hat{C}_t^* = \frac{1+\eta}{1-\alpha+\eta+\alpha\sigma}\left(\hat{Z}_t + \hat{Z}_t^*\right)
+\]
+\end{frame}
+
+% ============================================================
+\section{Quantitative Transmission: Substitution vs.\ Wealth Effects}
+% ============================================================
+
+\begin{frame}{Three Numerical Experiments}
+IRFs to a $+1\%$ home productivity shock: complete markets, financial autarky, bond economy
+\vspace{-5pt}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.34]{FigsChapter23/fig7}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Three Numerical Experiments: Calibration}
+$\beta = 0.99$ (quarterly), $\sigma = 2$, $\eta = 1$, $a_H = 0.7$, $\alpha = 1$, $\bar{Z} = 1$; $\zeta$ set so steady-state labor supply is $1/3$. The bond economy is made stationary with Uzawa-style preferences.
+
+\bigskip
+\begin{itemize}
+    \item (a) and (b): home productivity is an AR(1) with $\rho_1 = 0.97$
+    \item (c): AR(2) with $\rho_1 = 1.7$ and $\rho_2 = -0.703$ (hump-shaped)
+    \item Trade elasticity: (a) $\phi = 1.5$; (b) $\phi = 0.3$; (c) $\phi = 3$. Parameterization is symmetric across countries
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Three Numerical Experiments (cont.)}
+\textbf{(a) Strong substitution effects} ($\phi = 1.5$): TOT deteriorate under all structures; cross-border spillovers \textbf{negative} (counterfactual); complete markets give strongly negative output comovement; autarky moderates it; the bond economy lies in between; capital flows home $\to$ foreign (Marshall-Lerner holds).
+\end{frame}
+
+\begin{frame}{Wealth Effects: Two Routes to the Data}
+\small
+\textbf{(b) Low trade elasticity} ($\phi = 0.3$, complements): under incomplete markets, \textbf{wealth effects dominate}: the home TOT \emph{improve} and the RER \emph{appreciates} with the boom; business cycles are \textbf{positively correlated}; capital flows \textbf{into} the booming home country --- qualitatively matching Figure 23.5. Drawback: consumption becomes counterfactually \emph{more} volatile than output.
+
+\end{frame}
+
+\begin{frame}{Wealth Effects: Two Routes to the Data (cont.)}
+\bigskip
+\textbf{(c) Persistent growth (news) with high elasticity} ($\phi = 3$, hump-shaped AR(2), proxying capital accumulation): anticipations matter \textbf{only in the bond economy} (autarky has no smoothing instrument; complete markets insure future shocks when they arrive). Expecting higher future income, home households \textbf{borrow}, running a current-account deficit; smoothing dampens (even reverses on impact) the TOT deterioration; foreign produces more early on $\Rightarrow$ \textbf{positive transmission}, consumption smoother than output. Later, home runs surpluses to repay.
+
+\medskip
+\textbf{Taking stock}: matching the empirical responses requires output booms to come with a \textbf{demand boom}: incomplete markets plus either a low trade elasticity or persistent-growth shock processes.
+\end{frame}
+
+% ============================================================
+\section{Richer Frameworks}
+% ============================================================
+
+\begin{frame}{Extensions}
+\begin{itemize}
+    \item \textbf{IRBC heritage}: Armington structure from Backus-Kehoe-Kydland; NOEM and two-country New Keynesian models add monopolistic competition and nominal rigidities (Obstfeld-Rogoff 1995; Corsetti-Pesenti 2001); dominant-currency pricing (Gopinath et al.\ 2020)
+
+    \item \textbf{Capital accumulation}: a productivity shock raises output \emph{and} import demand for capital goods --- helping countercyclical current accounts
+
+    \item \textbf{Non-tradables and distribution costs}: a new relative price breaks the RER-TOT proportionality, magnifying RER volatility and wealth effects
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Extensions (cont.)}
+\begin{itemize}
+    \item \textbf{Firm dynamics, trade costs, global value chains}: state-contingent trade elasticities, pricing-to-market (Ghironi-Melitz, Atkeson-Burstein)
+
+    \item \textbf{Financial intermediation frictions} (Gabaix-Maggiori): limited intermediary risk-bearing capacity plus noise trading jointly account for the exchange-rate disconnect, the Mussa puzzle, and UIP/CIP deviations (Itskhoki-Mukhin)
+
+    \item Frontier: trade-macro integration, household and firm heterogeneity, geopolitical fragmentation and strategic policy games
+\end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Summary}
+% ============================================================
+
+\begin{frame}{Key Takeaways (I)}
+\small
+\begin{enumerate}
+    \item \textbf{Accounting}: $CA + FA + KA = 0$; $CA \simeq NX \simeq -FA$; $S = I + NX$ --- trade deficits are financed by capital inflows.
+
+    \item \textbf{Facts} (Table 23.1): demand components procyclical and persistent; imports/exports/investment most volatile; \textbf{trade balances countercyclical}; EM/LI cycles more volatile; LI consumption twice as volatile as output; output comoves positively across borders despite weakly correlated TFP.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (II)}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Puzzles}: Feldstein-Horioka (saving-investment correlation), equity home bias, consumption correlation, trade home bias; exchange-rate disconnect, Meese-Rogoff, PPP puzzle, \textbf{Backus-Smith} (RER vs.\ relative consumption correlation $\approx -0.5$), Mussa.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (III) }
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item \textbf{Relative prices}: LOOP $P_i = \mathcal{E}P_i^*$; PPP $P = \mathcal{E}P^*$; RER $Q = \mathcal{E}P^*/P$ (up $=$ depreciation); TOT $T = P_F/(P_H^*\mathcal{E})$; $\Delta q = \Delta e + \pi^* - \pi$; with Armington home bias, $\hat{Q} = (2a_H - 1)\hat{T}$.
+
+    \item \textbf{Workhorse model}: CES Armington consumption with trade elasticity $\phi$ and home bias $a_H > 1/2$; three financial structures --- complete markets ($Q_t = \kappa_0(C_t/C_t^*)^{\sigma}$, constant wealth gap), financial autarky ($tb_t = 0$ each period), bond economy (UIP in expectation, martingale wealth gap, unit root fixed by Uzawa preferences).
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (IV)}
+\small
+\begin{enumerate}
+    \setcounter{enumi}{5}
+    \item \textbf{Relative demand}: $\hat{D}_H - \hat{D}_F^* = \sigma^{-1}(2a_H-1)\hat{\mathcal{W}} + \sigma^{-1}[4a_H(1-a_H)(\sigma\phi - 1) + 1]\hat{T}$ --- a wealth channel (home bias) and a substitution channel; only substitution survives under complete markets or no home bias.
+
+    \item \textbf{TOT responses}: complete markets --- TOT always worsen with a home productivity gain; autarky --- TOT worsen iff $\phi > 1 - 1/(2a_H)$, otherwise they \emph{improve} (Backus-Smith resolution); Cole-Obstfeld ($\sigma = \phi = 1$): identical allocations under any market structure.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways (V)}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Capital flows}: outflow from the booming country iff $\phi > \frac{1}{\sigma} + \frac{1}{2a_H}(1 - \frac{1}{\sigma})$ (GE Marshall-Lerner; $\phi > 1$ under log utility); violated $\Rightarrow$ countercyclical deficits.
+
+    \item \textbf{Production economy}: labor demand depends on the product real wage; complete-markets relative supply always upward-sloping in relative price; autarky slope flips with $\sigma \gtrless 1$; global output rises with productivity under any structure.
+
+    \item \textbf{Quantitative lessons} (Figure 23.7): matching the data --- positive comovement, RER appreciation in booms, countercyclical external balances --- requires \textbf{incomplete markets} plus either a \textbf{low trade elasticity} (wealth effects dominate) or \textbf{persistent-growth/news shocks} (borrowing against future income in the bond economy).
+\end{enumerate}
+\end{frame}
+
+\end{document}
