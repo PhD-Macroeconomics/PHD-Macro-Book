@@ -1,0 +1,12 @@
+Data
+The main data are from FRED see https://fredaccount.stlouisfed.org/public/datalist/2661
+
+The LPCOM series is the log commodity price index from Valerie Ramey's Handbook chapter
+
+The Romer-Romer shocks are from Wieland and Yang
+
+Some data pre-processing was performed by preprocess.m
+
+To run:
+main_figure_2.m
+
