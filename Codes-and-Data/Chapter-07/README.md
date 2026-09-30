@@ -1,5 +1,7 @@
 # Chapter 7
 
+This folder includes codes to accompany Chapter 7 "Uncertainty" of the book Macroeconomics, by Marina Azzimonti, Per Krusell, Alisdair McKay, and Toshihiko Mukoyama, plus contributing authors (Oxford University Press, 2026).
+
 Julia scripts illustrating the models behind Figures 3 and 4.
 
 - `main_figure_3.jl` solves and simulates the stochastic growth model, plotting sample paths, impulse responses, the distribution of capital, and saving policy rules. The simulated path differs from the book because the sequence of random numbers is different.
